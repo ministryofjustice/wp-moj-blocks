@@ -1,5 +1,5 @@
 {
-  "name": "ministryofjustice/mojblocks",
+  "name": "ministryofjustice/wp-moj-blocks",
   "description": "Plugin for WordPress to add MOJ components to Gutenberg",
   "type": "wordpress-plugin"
 }
