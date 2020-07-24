@@ -6,3 +6,6 @@ vendor/*
 mojblocks.zip
 build/*
 
+
+# Temp ignore build while we are all working on this, remove when done
+build
