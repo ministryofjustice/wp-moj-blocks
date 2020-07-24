@@ -1,9 +1,75 @@
 @charset "UTF-8";
 /*********************************************************************************************
-Plugin Name: MOJ Blocks
-Author:  Ministry of Justice
-License: GNU General Public License v3 or later
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Text Domain: mojblocks
+
+Name: Highlights List
+Author:  Ministry of Justice - Damien Wilson
 
 **********************************************************************************************/
+
+/** Variables */
+$mojuk-color-teal: #336C83;
+$mojuk-color-yellow: #FFDD00;
+$mojuk-color-purple: #912B88;
+$mojuk-color-lime: #B8EA23;
+$mojuk-color-violet: #4C2C92;
+$mojuk-color-mustard: #FFCE21;
+$mojuk-color-dark-blue: #003078;
+$mojuk-color-orange: #FF993C;
+$mojuk-color-black: #0B0C0C;
+$mojuk-color-grey: #6F777B;
+$mojuk-color-mid-grey: #B1B4B6;
+$mojuk-color-light-grey: #F3F2F1;
+$mojuk-color-white: #ffffff;
+
+
+.wp-block-mojblocks-highlights-list {
+    padding: 35px 0 25px 75px;
+
+    &.is-style-default {
+        background-color: $mojuk-color-dark-blue;
+    }
+    &.is-style-judicial-teal {
+        background-color: $mojuk-color-teal;
+    }
+
+    .mojuk-highlights-list {
+
+        &__heading-text {
+            color: $mojuk-color-yellow;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 2.2rem;
+            line-height: 52px;
+        }
+
+        &__content {
+            ul {
+                list-style: none;
+                padding: 0;
+                margin: 40px 0 0;
+                display: grid;
+                grid-template-columns: 33% 33% 33%;
+                grid-template-rows: auto;
+            }
+            li {
+                position:relative;
+                color: $mojuk-color-white;
+                padding: 24px 25% 36px 0;
+                font-style: normal;
+                font-weight: bold;
+                font-size: 1.4rem;
+                line-height: 31px;
+
+                &:before {
+                    content: '';
+                    width: 23%;
+                    height: 8px;
+                    background: $mojuk-color-yellow;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                }
+            }
+        }
+    }
+}
