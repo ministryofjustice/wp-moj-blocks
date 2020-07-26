@@ -7,9 +7,6 @@ Text Domain: mojblocks
 
 **********************************************************************************************/
 
-// https://design-system.service.gov.uk/components/accordion/
-@import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
-
 /** Variables */
 $mojblocks-color-light-blue: #1d70b8;
 $mojblocks-color-teal: #336C83;
@@ -17,21 +14,27 @@ $mojblocks-color-dark-blue: #003078;
 $mojblocks-color-grey: #6F777B;
 $mojblocks-color-light-grey: #CFD7DB;
 
+
+// https://design-system.service.gov.uk/components/accordion/
+@import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
+
 //  SASS modifications to conform GovUK frontent to MoJ block styling
 
 .js-enabled .govuk-accordion__section-header {
     position: relative;
     padding-right: 40px;
-    border-top: 1px solid $mojblocks-color-light-grey;
+    padding-left: 80px;
+    border-top: 1px solid $mojblocks-color-grey;
     color: $mojblocks-color-light-blue;
     cursor: pointer;
+    padding-left: 8px;
 }
 
 .js-enabled .govuk-accordion__icon {
     position: absolute;
     top: 50%;
     right: 0;
-    left: 600px;
+    left: -28px;
     width: 16px;
     height: 16px;
     margin-top: -8px;
@@ -50,10 +53,15 @@ $mojblocks-color-light-grey: #CFD7DB;
 .js-enabled .govuk-accordion {
     border-bottom: none;
     &:last-child {
-        border-bottom: 1px solid $mojblocks-color-light-grey;
+        border-bottom: 1px solid $mojblocks-color-grey;
     }
 }
 
 .govuk-accordion {
     margin-bottom: 0;
+}
+
+.govuk-accordion__section-heading {
+    margin-left: 22px;
+    color: $mojblocks-color-light-blue;
 }
