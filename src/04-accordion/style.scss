@@ -7,7 +7,25 @@ Text Domain: mojblocks
 
 **********************************************************************************************/
 
+// https://design-system.service.gov.uk/components/accordion/
 @import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
+
+/** Variables */
+$mojblocks-color-light-blue: #1d70b8;
+$mojblocks-color-teal: #336C83;
+$mojblocks-color-dark-blue: #003078;
+$mojblocks-color-grey: #6F777B;
+$mojblocks-color-light-grey: #CFD7DB;
+
+//  SASS modifications to conform GovUK frontent to MoJ block styling
+
+.js-enabled .govuk-accordion__section-header {
+    position: relative;
+    padding-right: 40px;
+    border-top: 1px solid $mojblocks-color-light-grey;
+    color: $mojblocks-color-light-blue;
+    cursor: pointer;
+}
 
 .js-enabled .govuk-accordion__icon {
     position: absolute;
@@ -19,14 +37,23 @@ Text Domain: mojblocks
     margin-top: -8px;
 }
 
+// Remove "mustaches" underline caused by NHS styles conflicting with Gov UK
 .govuk-accordion__section-button, .govuk-accordion__open-all {
     box-shadow: none;
 }
 
-.js-enabled .govuk-accordion__section-content {
+// Remove Gov UK control toggles. Currently not required for MoJ block design.
+.js-enabled .govuk-accordion__controls {
     display: none;
 }
 
-.js-enabled .govuk-accordion__controls {
-    display: none;
+.js-enabled .govuk-accordion {
+    border-bottom: none;
+    &:last-child {
+        border-bottom: 1px solid $mojblocks-color-light-grey;
+    }
+}
+
+.govuk-accordion {
+    margin-bottom: 0;
 }

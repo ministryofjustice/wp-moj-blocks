@@ -3,7 +3,7 @@ const { registerBlockType } = wp.blocks;
 const { RichText } = wp.blockEditor;
 
 registerBlockType("mojblocks/accordion", {
-    title: __("Accordion Block", "mojblocks"),
+    title: __("MoJBlocks Accordion", "mojblocks"),
     icon: "list-view",
     category: "mojblocks",
     attributes: {
@@ -90,4 +90,3 @@ registerBlockType("mojblocks/accordion", {
         )
       }
 });
-
