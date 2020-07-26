@@ -108,6 +108,13 @@ function mojblocks_gutenberg_editor_styles()
         '1.1',
         'all'
     );
+
+    wp_enqueue_script('govuk-frontend-js', 
+    plugins_url('govuk-frontend.js', __FILE__), 
+    false, 
+    '1.1', 
+    'all'
+    );
 }
 // Pulls the enqueued file in to standard wp process.
 add_action('enqueue_block_editor_assets', 'mojblocks_gutenberg_editor_styles');
@@ -117,7 +124,9 @@ add_action('enqueue_block_editor_assets', 'mojblocks_gutenberg_editor_styles');
  */
 function mojblocks_register_style()
 {
-    wp_register_style('mojblocks', plugins_url('build/style.min.css', __FILE__));
+    if (!is_admin()) {
+        wp_register_style('mojblocks', plugins_url('build/style.min.css', __FILE__));
+    }
 }
 
 add_action('init', 'mojblocks_register_style'); // Pulls front end styling to standard wp process.
