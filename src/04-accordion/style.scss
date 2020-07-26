@@ -1,9 +1,32 @@
 @charset "UTF-8";
 /*********************************************************************************************
+
 Plugin Name: MOJ Blocks
-Author:  Ministry of Justice
-License: GNU General Public License v3 or later
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Block: Accordion (frontend styles)
 Text Domain: mojblocks
 
 **********************************************************************************************/
+
+@import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
+
+.js-enabled .govuk-accordion__icon {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 600px;
+    width: 16px;
+    height: 16px;
+    margin-top: -8px;
+}
+
+.govuk-accordion__section-button, .govuk-accordion__open-all {
+    box-shadow: none;
+}
+
+.js-enabled .govuk-accordion__section-content {
+    display: none;
+}
+
+.js-enabled .govuk-accordion__controls {
+    display: none;
+}

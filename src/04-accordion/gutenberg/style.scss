@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Plugin Name: MOJ Blocks
+Block: Accordion (Gutenberg editor styles)
+Text Domain: mojblocks
+
+**********************************************************************************************/
+
+@import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
+
+// Gov UK SASS modifications to fit MoJ block styling
+.govuk-accordion__section-header {
+    position: relative;
+    padding-right: 40px;
+    border-top: 1px solid #b1b4b6;
+    color: #1d70b8;
+    cursor: pointer;
+}
+
+.govuk-accordion__section-content {
+    display: block;
+}
