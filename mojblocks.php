@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
@@ -78,9 +79,9 @@ function mojblocks_register_blocks()
     $meta = require_once('build/index.asset.php');
     // Register the block editor script.
     wp_register_script(
-        'mojblocks-editor-script',                        // label.
+        'mojblocks-editor-script',                  // label.
         plugins_url('/build/index.js', __FILE__),   // script file.
-        $meta['dependencies'] ?? [],                      // dependencies.
+        $meta['dependencies'] ?? [],                // dependencies.
         $meta['version'] ?? '20200723',
         true
     );
@@ -108,19 +109,30 @@ function mojblocks_gutenberg_editor_styles()
         '1.1',
         'all'
     );
-
-    wp_enqueue_script('govuk-frontend-js', 
-    plugins_url('govuk-frontend.js', __FILE__), 
-    false, 
-    '1.1', 
-    'all'
-    );
 }
 // Pulls the enqueued file in to standard wp process.
 add_action('enqueue_block_editor_assets', 'mojblocks_gutenberg_editor_styles');
 
 /**
- * Queues up the blocks styling for front end
+ * Queues up the JS requried for Gov UK frontend
+ * Currently only beeing used on the accordion block,
+ * depending on if it is used for other blocks we may want to refactor.
+ */
+function mojblocks_enqueue_frontend_js()
+{
+    wp_enqueue_script(
+        'govuk-frontend-js',
+        plugins_url('govuk-frontend.js', __FILE__),
+        false,
+        '1.0',
+        'all'
+    );
+}
+
+add_action('enqueue_block_assets', 'mojblocks_enqueue_frontend_js');
+
+/**
+ * Queues up the blocks styling for frontend
  */
 function mojblocks_register_style()
 {
@@ -129,7 +141,7 @@ function mojblocks_register_style()
     }
 }
 
-add_action('init', 'mojblocks_register_style'); // Pulls front end styling to standard wp process.
+add_action('init', 'mojblocks_register_style');
 
 function mojblocks_enqueue_style()
 {
@@ -137,6 +149,3 @@ function mojblocks_enqueue_style()
 }
 
 add_action('wp_enqueue_scripts', 'mojblocks_enqueue_style');
-
-
-
