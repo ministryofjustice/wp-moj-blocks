@@ -12,8 +12,7 @@ $mojblocks-color-light-blue: #1d70b8;
 $mojblocks-color-teal: #336C83;
 $mojblocks-color-dark-blue: #003078;
 $mojblocks-color-grey: #6F777B;
-$mojblocks-color-light-grey: #CFD7DB;
-
+$mojblocks-color-light-grey: #C7CDD0;
 
 // https://design-system.service.gov.uk/components/accordion/
 @import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
@@ -21,20 +20,14 @@ $mojblocks-color-light-grey: #CFD7DB;
 //  SASS modifications to conform GovUK frontent to MoJ block styling
 
 .js-enabled .govuk-accordion__section-header {
-    position: relative;
-    padding-right: 40px;
-    padding-left: 80px;
-    border-top: 1px solid $mojblocks-color-grey;
+    padding: 20px 28px 20px 10px;
+    border-top: 1px solid $mojblocks-color-light-grey;
     color: $mojblocks-color-light-blue;
-    cursor: pointer;
-    padding-left: 8px;
 }
 
 .js-enabled .govuk-accordion__icon {
-    position: absolute;
-    top: 50%;
     right: 0;
-    left: -28px;
+    left: -30px;
     width: 16px;
     height: 16px;
     margin-top: -8px;
@@ -45,15 +38,10 @@ $mojblocks-color-light-grey: #CFD7DB;
     box-shadow: none;
 }
 
-// Remove Gov UK control toggles. Currently not required for MoJ block design.
-.js-enabled .govuk-accordion__controls {
-    display: none;
-}
-
 .js-enabled .govuk-accordion {
     border-bottom: none;
     &:last-child {
-        border-bottom: 1px solid $mojblocks-color-grey;
+        border-bottom: 1px solid $mojblocks-color-light-grey;
     }
 }
 
@@ -61,7 +49,25 @@ $mojblocks-color-light-grey: #CFD7DB;
     margin-bottom: 0;
 }
 
+// Remove Gov UK control toggles. Currently not required for MoJ block design.
+.js-enabled .govuk-accordion__controls {
+    display: none;
+}
+
 .govuk-accordion__section-heading {
     margin-left: 22px;
     color: $mojblocks-color-light-blue;
+}
+
+.js-enabled .govuk-accordion__icon::after, 
+.js-enabled .govuk-accordion__icon::before {
+    background-color: $mojblocks-color-light-blue;
+}
+
+.js-enabled .govuk-accordion__section-content {
+    padding-top: 0;
+}
+
+.govuk-body {
+    padding-left: 30px;
 }

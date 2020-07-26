@@ -15,14 +15,14 @@ $mojblocks-color-light-blue: #1d70b8;
 $mojblocks-color-teal: #336C83;
 $mojblocks-color-dark-blue: #003078;
 $mojblocks-color-grey: #6F777B;
-$mojblocks-color-light-grey: #6F777B;
+$mojblocks-color-light-grey: #C7CDD0;
 
 //  SASS modifications to conform GovUK frontent to MoJ block styling
 
 .govuk-accordion__section-header {
     position: relative;
     padding-right: 40px;
-    border-top: 1px solid $mojblocks-color-light-grey;
+    border-top: 1px solid $mojblocks-color-grey;
     color: $mojblocks-color-light-blue;
     cursor: pointer;
 }
