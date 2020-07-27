@@ -1,14 +1,53 @@
-/*
-Block Name: MoJBlocks Accordion
-*/
+/**
+ * MOJBLOCKS: Accordion
+ *
+ * Display content in accordion layout.
+ */
+
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { RichText } = wp.blockEditor;
+const { InnerBlocks } = wp.blockEditor;
 
-registerBlockType("mojblocks/accordion", {
-    title: __("MoJBlocks Accordion", "mojblocks"),
+registerBlockType('mojblocks/accordion', {
+    title: __('MoJBlocks Accordion', 'mojblocks'),
+    description: __( 'Display content in an accordion format.' ),
     icon: "list-view",
+    category: 'mojblocks',
+    keywords: [ __( 'accordion' ), __( 'sections' ), __( 'lists' ) ],
+
+    edit: props => {
+
+        const ALLOWED_BLOCKS = [ 'mojblocks/accordion-section' ];
+  
+        return (
+            <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                <InnerBlocks 
+                    allowedBlocks={ ALLOWED_BLOCKS }
+                />
+            </div>
+        )
+      },
+
+      save: props => {
+
+        return (
+            <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+                <InnerBlocks.Content />
+            </div>
+         )
+      }
+});
+
+/**
+ * MOJBLOCKS: Accordion section
+ *
+ * Inner-block. Displayed only in the parent accordion block.
+ */
+registerBlockType("mojblocks/accordion-section", {
+    title: __("MoJBlocks Accordion Section", "mojblocks"),
     category: "mojblocks",
+    parent: [ 'mojblocks/accordion' ],
     attributes: {
         accordionSectionTitle: {
             type: "string",
@@ -25,7 +64,10 @@ registerBlockType("mojblocks/accordion", {
     edit: props => {
 
         const {
-            attributes: { accordionSectionTitle, accordionSectionTextArea },
+            attributes: { 
+                accordionSectionTitle, 
+                accordionSectionTextArea 
+            },
             setAttributes
         } = props
 
@@ -38,29 +80,27 @@ registerBlockType("mojblocks/accordion", {
           }
   
         return (
-            <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
-                <div className="govuk-accordion__section">
-                    <div className="govuk-accordion__section-header">
-                    <h2 className="govuk-accordion__section-heading">
-                        <span className="govuk-accordion__section-button" id="accordion-default-heading-1">
+            <div className="govuk-accordion__section">
+                <div className="govuk-accordion__section-header">
+                <h2 className="govuk-accordion__section-heading">
+                    <span className="govuk-accordion__section-button" id="accordion-default-heading-1">
+                    <RichText
+                        placeholder={__('Add section title', 'mojblocks')}
+                        value={ accordionSectionTitle }
+                        onChange={ onChangeAccordionSectionTitle }
+                        keepPlaceholderOnFocus={ true }
+                    />
+                    </span>
+                </h2>
+                </div>
+                <div id="accordion-default-content-1" className="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
+                    <div className="govuk-body">
                         <RichText
-                            placeholder={__('Add accordion section title', 'mojblocks')}
-                            value={ accordionSectionTitle }
-                            onChange={ onChangeAccordionSectionTitle }
+                            placeholder={__('Add section content', 'mojblocks')}
+                            value={ accordionSectionTextArea }
+                            onChange={ onChangeAccordionSectionTextArea }
                             keepPlaceholderOnFocus={ true }
                         />
-                        </span>
-                    </h2>
-                    </div>
-                    <div id="accordion-default-content-1" className="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
-                        <div className="govuk-body">
-                            <RichText
-                                placeholder={__('Add accordion content', 'mojblocks')}
-                                value={ accordionSectionTextArea }
-                                onChange={ onChangeAccordionSectionTextArea }
-                                keepPlaceholderOnFocus={ true }
-                            />
-                        </div>
                     </div>
                 </div>
             </div>
@@ -70,26 +110,27 @@ registerBlockType("mojblocks/accordion", {
       save: props => {
 
         const {
-            attributes: { accordionSectionTitle, accordionSectionTextArea }
+            attributes: { 
+                accordionSectionTitle, 
+                accordionSectionTextArea 
+            }
         } = props
 
         return (
-            <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
-                <div className="govuk-accordion__section">
-                    <div className="govuk-accordion__section-header">
-                    <h2 className="govuk-accordion__section-heading">
-                        <span className="govuk-accordion__section-button" id="accordion-default-heading-1">
-                        <RichText.Content value={ accordionSectionTitle } />
-                        </span>
-                    </h2>
-                    </div>
-                    <div id="accordion-default-content-1" className="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
-                        <div className="govuk-body">
-                            <RichText.Content value={ accordionSectionTextArea } />
-                        </div>
+            <div className="govuk-accordion__section">
+                <div className="govuk-accordion__section-header">
+                <h2 className="govuk-accordion__section-heading">
+                    <span className="govuk-accordion__section-button" id="accordion-default-heading-1">
+                    <RichText.Content value={ accordionSectionTitle } />
+                    </span>
+                </h2>
+                </div>
+                <div id="accordion-default-content-1" className="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
+                    <div className="govuk-body">
+                        <RichText.Content value={ accordionSectionTextArea } />
                     </div>
                 </div>
             </div>
-        )
+         )
       }
 });

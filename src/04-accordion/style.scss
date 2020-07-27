@@ -52,11 +52,6 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 .js-enabled .govuk-accordion {
     border-bottom: none;
 
-    // Remove Gov UK control toggles. Currently not required for MoJ block design.
-    .govuk-accordion__controls {
-        display: none;
-    }
-
     &:last-child {
         border-bottom: 1px solid $mojblocks-color-light-grey;
     }
