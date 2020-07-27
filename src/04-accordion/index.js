@@ -39,7 +39,7 @@ registerBlockType("mojblocks/accordion", {
   
         return (
             <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
-                <div className="govuk-accordion__section ">
+                <div className="govuk-accordion__section">
                     <div className="govuk-accordion__section-header">
                     <h2 className="govuk-accordion__section-heading">
                         <span className="govuk-accordion__section-button" id="accordion-default-heading-1">
@@ -75,7 +75,7 @@ registerBlockType("mojblocks/accordion", {
 
         return (
             <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
-                <div className="govuk-accordion__section ">
+                <div className="govuk-accordion__section">
                     <div className="govuk-accordion__section-header">
                     <h2 className="govuk-accordion__section-heading">
                         <span className="govuk-accordion__section-button" id="accordion-default-heading-1">
