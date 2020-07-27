@@ -1,1 +1,6 @@
-.block-editor-block-styles .example,.block-editor-inserter__menu-help-panel .example,.edit-post-visual-editor .example{color:red}
+.edit-post-visual-editor .example,
+.block-editor-block-styles .example,
+.block-editor-inserter__menu-help-panel .example {
+  color: red;
+}
+

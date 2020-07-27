@@ -32,26 +32,26 @@ registerBlockType("mojblocks/example", {
 				const postDate = new Date( savedDate );
 				let formattedDate = format( 'd F Y', postDate );
 
-				if ( lastSaved !== formattedDate ) {					
+				if ( lastSaved !== formattedDate ) {
 
 					if( typeof lastSaved === "undefined" ){
 						setAttributes( { lastSaved: formattedDate } );
 						dispatch( 'core/editor' ).savePost();
 					}else{
 						setAttributes( { lastSaved: formattedDate } );
-					}						                    
+					}
 
 				}
 
 				return (
 					<div className="nhsuk-review-date">
 					  <p className="nhsuk-body-s">
-					    Page last reviewed: <span className="last-saved-date">{ lastSaved }</span>
+					    Pusheen: <span className="last-saved-date">{ lastSaved }</span>
 					  </p>
 					</div>
 				);
 			}
-			
+
 		}),
 	save: props =>{
 
@@ -60,7 +60,7 @@ registerBlockType("mojblocks/example", {
 		return (
 			<div className="nhsuk-review-date">
 			  <p className="nhsuk-body-s">
-			    Page last reviewed: <span className="last-saved-date">{ lastSaved }</span>
+			    Pugsheen : <span className="last-saved-date">{ lastSaved }</span>
 			  </p>
 			</div>
 		);
