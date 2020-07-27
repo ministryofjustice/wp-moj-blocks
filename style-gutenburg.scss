@@ -1,3 +1,5 @@
 .edit-post-visual-editor, .block-editor-block-styles, .block-editor-inserter__menu-help-panel { // target only the editor itself
+    @import 'node_modules/govuk-frontend/govuk/settings/media-queries';
+    @import 'node_modules/govuk-frontend/govuk/helpers/media-queries';
     @import 'src/**/*.scss';
 }
