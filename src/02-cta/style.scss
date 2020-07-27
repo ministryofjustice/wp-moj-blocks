@@ -50,15 +50,19 @@ $mojblocks-color-white: #ffffff;
             color: $mojblocks-color-yellow;
             font-style: normal;
             font-weight: bold;
-            font-size: 1.5rem;
-            line-height: 2rem;
+            font-size: 24px;
+            font-size: govuk-px-to-rem(24);
+            line-height: 32px;
+            line-height: govuk-px-to-rem(32);
 
             @include govuk-media-query($from: tablet) {
-                font-size: 2rem;
+                font-size: 32px;
+                font-size: govuk-px-to-rem(32);
             }
 
             @include govuk-media-query($from: desktop) {
-                font-size: 2.2rem;
+                font-size: 35px;
+                font-size: govuk-px-to-rem(35);
             }
         }
 
@@ -70,10 +74,12 @@ $mojblocks-color-white: #ffffff;
                 color:$mojblocks-color-white;
                 margin-top: 15px;
                 margin-bottom: 15px;
-                font-size: 1.2rem;
+                font-size: 20px;
+                font-size: govuk-px-to-rem(20);
 
                 @include govuk-media-query($from: tablet) {
                     font-size: 1.1rem;
+                    font-size: govuk-px-to-rem(18);
                 }
             }
 
@@ -94,7 +100,8 @@ $mojblocks-color-white: #ffffff;
         box-sizing: border-box;
         cursor: pointer;
         display: block;
-        font-size: 1.5rem;
+        font-size: 24px;
+        font-size: govuk-px-to-rem(24);
         font-weight: 900;
         line-height: 36px;
         margin-top: 15px;
