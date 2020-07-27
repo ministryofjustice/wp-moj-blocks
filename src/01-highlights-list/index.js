@@ -74,7 +74,6 @@ registerBlockType('mojblocks/highlights-list', {
                     <RichText
                         tagName='ul'
                         multiline='li'
-                        className={"govuk-grid-row"}
                         placeholder={__('Highlights item', 'mojblocks')}
                         onChange={onChangeListText}
                         value={listText}
@@ -107,7 +106,6 @@ registerBlockType('mojblocks/highlights-list', {
                     <RichText.Content
                         tagName='ul'
                         multiline='li'
-                        className={"govuk-grid-row"}
                         value={listText}
                     />
                 </div>
