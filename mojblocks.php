@@ -51,7 +51,7 @@ function mojblocks_block_categories($categories, $post)
         array(
             array(
                 'slug' => 'mojblocks',
-                'title' => __('MOJ Frontend Blocks', 'mojblocks'),
+                'title' => __('MOJ Blocks', 'mojblocks'),
                 'icon' => 'screen',
             ),
         )
@@ -114,24 +114,6 @@ function mojblocks_gutenberg_editor_styles()
 add_action('enqueue_block_editor_assets', 'mojblocks_gutenberg_editor_styles');
 
 /**
- * Queues up the JS requried for Gov UK frontend
- * Currently only beeing used on the accordion block,
- * depending on if it is used for other blocks we may want to refactor.
- */
-function mojblocks_enqueue_frontend_js()
-{
-    wp_enqueue_script(
-        'govuk-frontend-js',
-        plugins_url('govuk-frontend.js', __FILE__),
-        false,
-        '1.0',
-        'all'
-    );
-}
-
-add_action('enqueue_block_assets', 'mojblocks_enqueue_frontend_js');
-
-/**
  * Queues up the blocks styling for frontend
  */
 function mojblocks_register_style()
@@ -146,6 +128,14 @@ add_action('init', 'mojblocks_register_style');
 function mojblocks_enqueue_style()
 {
     wp_enqueue_style('mojblocks');
+
+    wp_enqueue_script(
+        'mojblocks-js',
+        plugins_url('build/mojblocks.min.js', __FILE__),
+        false,
+        '1.0',
+        'all'
+    );
 }
 
 add_action('wp_enqueue_scripts', 'mojblocks_enqueue_style');
