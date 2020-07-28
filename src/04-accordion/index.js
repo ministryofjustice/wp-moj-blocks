@@ -3,7 +3,6 @@
  *
  * Display content in accordion layout.
  */
-
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { RichText } = wp.blockEditor;
@@ -18,11 +17,18 @@ registerBlockType('mojblocks/accordion', {
 
     edit: props => {
 
+        // Load allowed blocks on repeater
         const ALLOWED_BLOCKS = [ 'mojblocks/accordion-section' ];
+
+        // Load template/block when block is selected
+        const TEMPLATES = [
+            [ 'mojblocks/accordion-section', {} ]
+        ];
   
         return (
             <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
-                <InnerBlocks 
+                <InnerBlocks
+                    template={ TEMPLATES }
                     allowedBlocks={ ALLOWED_BLOCKS }
                 />
             </div>
@@ -85,7 +91,7 @@ registerBlockType("mojblocks/accordion-section", {
                 <h2 className="govuk-accordion__section-heading">
                     <span className="govuk-accordion__section-button" id="accordion-default-heading-1">
                     <RichText
-                        placeholder={__('Add section title', 'mojblocks')}
+                        placeholder={__('Add title', 'mojblocks')}
                         value={ accordionSectionTitle }
                         onChange={ onChangeAccordionSectionTitle }
                         keepPlaceholderOnFocus={ true }
@@ -96,7 +102,7 @@ registerBlockType("mojblocks/accordion-section", {
                 <div id="accordion-default-content-1" className="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
                     <div className="govuk-body">
                         <RichText
-                            placeholder={__('Add section content', 'mojblocks')}
+                            placeholder={__('Add content', 'mojblocks')}
                             value={ accordionSectionTextArea }
                             onChange={ onChangeAccordionSectionTextArea }
                             keepPlaceholderOnFocus={ true }
