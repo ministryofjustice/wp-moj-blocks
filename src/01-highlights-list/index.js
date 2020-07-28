@@ -20,13 +20,13 @@ registerBlockType('mojblocks/highlights-list', {
         listTitle: {
             type: 'string',
             source: 'html',
-            selector: '.mojuk-highlights-list__heading-text'
+            selector: '.mojblocks-highlights-list__heading-text'
         },
         listText: {
             type: 'array',
             source: 'children',
             multiline: 'li',
-            selector: '.mojuk-highlights-list__content > ul'
+            selector: '.mojblocks-highlights-list__content > ul'
         }
     },
 
@@ -50,14 +50,20 @@ registerBlockType('mojblocks/highlights-list', {
             setAttributes({ listText: newListText });
         };
 
+        // add a class to li
+        let onChangeListTextSetClass = newListText => {
+            setAttributes({ listText: newListText });
+        };
+
         return (
             <div className={`${className}`}>
-                <div className="mojuk-highlights-list__heading-container">
-                    <h3 className="mojuk-highlights-list__heading">
+                <div className="mojblocks-highlights-list__heading-container">
+                    <h3 className="mojblocks-highlights-list__heading">
 				  <span role="text">
-					<span className="mojuk-highlights-list__heading-text">
+					<span className="mojblocks-highlights-list__heading-text">
 					  <RichText
                           placeholder={__('Highlights title', 'mojblocks')}
+                          keepPlaceholderOnFocus
                           value={listTitle}
                           onChange={onChangeListTitle}
                       />
@@ -65,11 +71,12 @@ registerBlockType('mojblocks/highlights-list', {
 				  </span>
                     </h3>
                 </div>
-                <div className={'mojuk-highlights-list__content'}>
+                <div className={'mojblocks-highlights-list__content'}>
                     <RichText
                         tagName='ul'
                         multiline='li'
                         placeholder={__('Highlights item', 'mojblocks')}
+                        keepPlaceholderOnFocus
                         onChange={onChangeListText}
                         value={listText}
                     />
@@ -87,17 +94,17 @@ registerBlockType('mojblocks/highlights-list', {
         } = props;
 
         return (
-            <div className="mojuk-grid-column-width mojuk-highlights-list--type">
-                <div className="mojuk-highlights-list__heading-container">
-                    <h3 className="mojuk-highlights-list__heading">
+            <div className="mojblocks-grid-column-width mojblocks-highlights-list--type">
+                <div className="mojblocks-highlights-list__heading-container">
+                    <h3 className="mojblocks-highlights-list__heading">
 				 <span role="text">
-					<span className="mojuk-highlights-list__heading-text">
+					<span className="mojblocks-highlights-list__heading-text">
 						<RichText.Content value={listTitle}/>
 					</span>
 				  </span>
                     </h3>
                 </div>
-                <div className={'mojuk-highlights-list__content'}>
+                <div className={'mojblocks-highlights-list__content'}>
                     <RichText.Content
                         tagName='ul'
                         multiline='li'

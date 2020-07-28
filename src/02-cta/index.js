@@ -22,22 +22,22 @@ registerBlockType('mojblocks/cta', {
         ctaTitle: {
             type: 'string',
             source: 'html',
-            selector: '.mojuk-cta__heading-text'
+            selector: '.mojblocks-cta__heading-text'
         },
         ctaText: {
             type: 'string',
             source: 'html',
-            selector: '.mojuk-cta__content'
+            selector: '.mojblocks-cta__content'
         },
         buttonLabel: {
             type: 'string',
             source: 'html',
-            selector: '.mojuk-button'
+            selector: '.mojblocks-button'
         },
         buttonLink: {
             type: 'string',
             source: 'attribute',
-            selector: 'a.mojuk-button',
+            selector: 'a.mojblocks-button',
             attribute: 'href'
         },
     },
@@ -76,12 +76,13 @@ registerBlockType('mojblocks/cta', {
 
         return (
             <div className={`${className}`}>
-                <div className="mojuk-cta__heading-container">
-                    <h3 className="mojuk-cta__heading">
+                <div className="mojblocks-cta__heading-container">
+                    <h3 className="mojblocks-cta__heading">
 				  <span role="text">
-					<span className="mojuk-cta__heading-text">
+					<span className="mojblocks-cta__heading-text">
 					  <RichText
                           placeholder={__('A great call-to-action title', 'mojblocks')}
+                          keepPlaceholderOnFocus
                           value={ctaTitle}
                           onChange={onChangeCtaTitle}
                       />
@@ -89,10 +90,11 @@ registerBlockType('mojblocks/cta', {
 				  </span>
                     </h3>
                 </div>
-                <div className={'mojuk-cta__content'}>
+                <div className={'mojblocks-cta__content'}>
                     <RichText
                         multiline="p"
                         placeholder={__('Some compelling text to send the message home!', 'mojblocks')}
+                        keepPlaceholderOnFocus
                         onChange={onChangeCtaText}
                         value={ctaText}
                     />
@@ -104,7 +106,7 @@ registerBlockType('mojblocks/cta', {
                     url={buttonLink}
                 />
                 <RichText
-                    className="mojuk-button"
+                    className="mojblocks-button"
                     value={buttonLabel}
                     onChange={onChangeButtonLabel}
                     placeholder="Button label"
@@ -124,20 +126,20 @@ registerBlockType('mojblocks/cta', {
         } = props;
 
         return (
-            <div className="mojuk-grid-column-width mojuk-cta--type">
-                <div className="mojuk-cta__heading-container">
-                    <h3 className="mojuk-cta__heading">
+            <div className="mojblocks-grid-column-width mojblocks-cta--type">
+                <div className="mojblocks-cta__heading-container">
+                    <h3 className="mojblocks-cta__heading">
 				 <span role="text">
-					<span className="mojuk-cta__heading-text">
+					<span className="mojblocks-cta__heading-text">
 						<RichText.Content value={ctaTitle}/>
 					</span>
 				  </span>
                     </h3>
                 </div>
-                <div className="mojuk-cta__content">
+                <div className="mojblocks-cta__content">
                     <RichText.Content value={ctaText} multiline="p" />
                 </div>
-                <a href={buttonLink} className="mojuk-button">
+                <a href={buttonLink} className="mojblocks-button">
                     <RichText.Content value={buttonLabel}/>
                 </a>
             </div>
