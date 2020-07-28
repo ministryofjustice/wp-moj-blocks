@@ -63,6 +63,7 @@ registerBlockType('mojblocks/highlights-list', {
 					<span className="mojblocks-highlights-list__heading-text">
 					  <RichText
                           placeholder={__('Highlights title', 'mojblocks')}
+                          keepPlaceholderOnFocus
                           value={listTitle}
                           onChange={onChangeListTitle}
                       />
@@ -75,6 +76,7 @@ registerBlockType('mojblocks/highlights-list', {
                         tagName='ul'
                         multiline='li'
                         placeholder={__('Highlights item', 'mojblocks')}
+                        keepPlaceholderOnFocus
                         onChange={onChangeListText}
                         value={listText}
                     />
