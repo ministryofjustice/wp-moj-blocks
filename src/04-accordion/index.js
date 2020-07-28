@@ -1,13 +1,13 @@
-/**
- * MOJBLOCKS: Accordion
- *
- * Display content in accordion layout.
- */
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { RichText } = wp.blockEditor;
 const { InnerBlocks } = wp.blockEditor;
 
+/**
+ * MOJBLOCKS: Accordion
+ *
+ * Display content in accordion layout.
+ */
 registerBlockType('mojblocks/accordion', {
     title: __('MoJBlocks Accordion', 'mojblocks'),
     description: __( 'Display content in an accordion format.' ),

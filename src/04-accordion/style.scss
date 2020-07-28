@@ -23,8 +23,30 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 
 **********************************************************************************************/
 
+.govuk-accordion {
+    border-bottom: none;
+
+    // Reset NHS margin to display no margin on accordion sections
+    margin-bottom: 0;
+
+    // Add a bottom border to accordion sections (on last one)
+    &:last-child {
+        border-bottom: 1px solid $mojblocks-color-light-grey;
+    }
+}
+
+.js-enabled .govuk-accordion__section-content {
+    // Decrease padding causes by NHS styles around accordion content
+    padding-top: 0;
+
+    // Indent in accordion section content to align with title
+    .govuk-body {
+        padding-left: 30px;
+    }
+}
+
 // Change postion and colour of title and arrow to align within section
-.js-enabled .govuk-accordion__section-header {
+.govuk-accordion__section-header {
     padding: 20px 28px 20px 10px;
     color: $mojblocks-color-light-blue;
 }
@@ -33,8 +55,26 @@ SASS modifications to conform GovUK frontent to MoJ block styling
     margin-left: 22px;
 }
 
+// Remove "mustaches" underline caused by NHS styles conflicting with Gov UK
+.govuk-accordion__section-button,
+.govuk-accordion__open-all {
+    box-shadow: none;
+}
+
+// Accordion title - stop NHS theme causing "link bounce" effect when clicked on
+.govuk-accordion__section:active {
+    button:active {
+        top: 0;
+    }
+}
+
+// Open/close button - stop NHS theme causing "link bounce" effect when clicked on
+.js-enabled .govuk-accordion__open-all:active button:active {
+    top: 0;
+}
+
 // Change positon of open/close icon to far left side
-.js-enabled .govuk-accordion__icon {
+.govuk-accordion__icon {
     right: 0;
     left: -30px;
     width: 16px;
@@ -42,71 +82,9 @@ SASS modifications to conform GovUK frontent to MoJ block styling
     margin-top: -8px;
 }
 
-// Remove "mustaches" underline caused by NHS styles conflicting with Gov UK
-.govuk-accordion__section-button,
-.govuk-accordion__open-all {
-    box-shadow: none;
-}
-
-// Add a bottom border to accordion sections (on last one)
-.js-enabled .govuk-accordion {
-    border-bottom: none;
-
-    &:last-child {
-        border-bottom: 1px solid $mojblocks-color-light-grey;
-    }
-}
-
-// Accordion title - stop NHS theme causing "link bounce" effect when clicked on
-.js-enabled .govuk-accordion__section-button:active,
-button:active {
-    top: 0;
-}
-
-// Open/close button - stop NHS theme causing "link bounce" effect when clicked on
-.js-enabled .govuk-accordion__open-all:active,
-button:active {
-    top: 0;
-}
-
-// Reset NHS margin to display no margin on accordion sections
-.govuk-accordion {
-    margin-bottom: 0;
-}
-
 // Replace Gov plus symbol with arrow symbol (when closed)
-.js-enabled .govuk-accordion__icon::before {
-    content: "";
-    position: absolute;
-    top: -1px;
-    bottom: 0;
-    left: 0;
-    margin: auto;
-    display: block;
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-color: transparent;
-    border-left-color: transparent;
-    -webkit-clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-    clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-    border-width: 7px 0 7px 12.124px;
-    border-left-color: inherit;
-    background-color: $mojblocks-color-light-blue;
-}
-
-.govuk-accordion__icon::after {
-    display: none;
-}
-
-// Replace Gov plus symbol with arrow symbol (when open)
-.js-enabled .govuk-accordion__section--expanded {
-
-    .govuk-accordion__icon::before {
-        display: none;
-    }
-
-    .govuk-accordion__icon::after {
+.js-enabled .govuk-accordion__icon {
+    &:before {
         content: "";
         position: absolute;
         top: -1px;
@@ -119,20 +97,47 @@ button:active {
         border-style: solid;
         border-color: transparent;
         border-left-color: transparent;
-        -webkit-clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-        clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-        border-width: 12.124px 7px 0 7px;
+        -webkit-clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+        clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+        border-width: 7px 0 7px 12.124px;
         border-left-color: inherit;
         background-color: $mojblocks-color-light-blue;
     }
 }
 
-// Decrease padding causes by NHS styles around accordion content
-.js-enabled .govuk-accordion__section-content {
-    padding-top: 0;
+.govuk-accordion__icon {
+    &:after {
+        display: none;
+    }
 }
 
-// Indent in accordion section content to align with title
-.govuk-body {
-    padding-left: 30px;
+// Replace Gov plus symbol with arrow symbol (when open)
+.js-enabled .govuk-accordion__section--expanded {
+    .govuk-accordion__icon {
+        &:before {
+            display: none;
+        }
+    }
+
+    .govuk-accordion__icon {
+        &:after {
+            content: "";
+            position: absolute;
+            top: -1px;
+            bottom: 0;
+            left: 0;
+            margin: auto;
+            display: block;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-color: transparent;
+            border-left-color: transparent;
+            -webkit-clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+            clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+            border-width: 12.124px 7px 0 7px;
+            border-left-color: inherit;
+            background-color: $mojblocks-color-light-blue;
+        }
+    }
 }
