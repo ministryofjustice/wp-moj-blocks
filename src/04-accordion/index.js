@@ -18,18 +18,18 @@ registerBlockType('mojblocks/accordion', {
     edit: props => {
 
         // Load allowed blocks on repeater
-        const ALLOWED_BLOCKS = [ 'mojblocks/accordion-section' ];
+        const allowedBlocks = [ 'mojblocks/accordion-section' ];
 
         // Load template/block when block is selected
-        const TEMPLATES = [
+        const templates = [
             [ 'mojblocks/accordion-section', {} ]
         ];
   
         return (
             <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
                 <InnerBlocks
-                    template={ TEMPLATES }
-                    allowedBlocks={ ALLOWED_BLOCKS }
+                    template={ templates }
+                    allowedBlocks={ allowedBlocks }
                 />
             </div>
         )
