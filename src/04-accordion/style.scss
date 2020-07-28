@@ -57,8 +57,14 @@ SASS modifications to conform GovUK frontent to MoJ block styling
     }
 }
 
-// Stop NHS theme causing "link bounce" effect when clicking on it
+// Accordion title - stop NHS theme causing "link bounce" effect when clicked on
 .js-enabled .govuk-accordion__section-button:active,
+button:active {
+    top: 0;
+}
+
+// Open/close button - stop NHS theme causing "link bounce" effect when clicked on
+.js-enabled .govuk-accordion__open-all:active,
 button:active {
     top: 0;
 }
