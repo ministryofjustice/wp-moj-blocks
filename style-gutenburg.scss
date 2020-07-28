@@ -20,6 +20,7 @@ Text Domain: mojblocks
     @import 'src/**/editor.scss';
 }
 
+/// adjust width of editor to match NHS theme
 body.block-editor-page.kt-editor-width-default div.wp-block {
     max-width: 960px;
 }

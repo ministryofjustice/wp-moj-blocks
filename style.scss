@@ -16,3 +16,8 @@ Text Domain: mojblocks
 @import 'node_modules/govuk-frontend/govuk/settings/media-queries';
 @import 'node_modules/govuk-frontend/govuk/helpers/media-queries';
 @import 'src/**/style.scss';
+
+/// hack: prevent a horizontal scrollbar in IE11
+main {
+    overflow-x: hidden;
+}
