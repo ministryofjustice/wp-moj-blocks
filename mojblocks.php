@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
@@ -50,7 +51,7 @@ function mojblocks_block_categories($categories, $post)
         array(
             array(
                 'slug' => 'mojblocks',
-                'title' => __('MOJ Frontend Blocks', 'mojblocks'),
+                'title' => __('MOJ Blocks', 'mojblocks'),
                 'icon' => 'screen',
             ),
         )
@@ -78,9 +79,9 @@ function mojblocks_register_blocks()
     $meta = require_once('build/index.asset.php');
     // Register the block editor script.
     wp_register_script(
-        'mojblocks-editor-script',                        // label.
+        'mojblocks-editor-script',                  // label.
         plugins_url('/build/index.js', __FILE__),   // script file.
-        $meta['dependencies'] ?? [],                      // dependencies.
+        $meta['dependencies'] ?? [],                // dependencies.
         $meta['version'] ?? '20200723',
         true
     );
@@ -113,21 +114,28 @@ function mojblocks_gutenberg_editor_styles()
 add_action('enqueue_block_editor_assets', 'mojblocks_gutenberg_editor_styles');
 
 /**
- * Queues up the blocks styling for front end
+ * Queues up the blocks styling for frontend
  */
 function mojblocks_register_style()
 {
-    wp_register_style('mojblocks', plugins_url('build/style.min.css', __FILE__));
+    if (!is_admin()) {
+        wp_register_style('mojblocks', plugins_url('build/style.min.css', __FILE__));
+    }
 }
 
-add_action('init', 'mojblocks_register_style'); // Pulls front end styling to standard wp process.
+add_action('init', 'mojblocks_register_style');
 
 function mojblocks_enqueue_style()
 {
     wp_enqueue_style('mojblocks');
+
+    wp_enqueue_script(
+        'mojblocks-js',
+        plugins_url('build/mojblocks.min.js', __FILE__),
+        false,
+        '1.0',
+        'all'
+    );
 }
 
 add_action('wp_enqueue_scripts', 'mojblocks_enqueue_style');
-
-
-

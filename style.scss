@@ -9,8 +9,10 @@ Text Domain: mojblocks
 
 **********************************************************************************************/
 
+// Target frontend styles
+
 @import 'node_modules/govuk-frontend/govuk/settings/typography-responsive';
 @import 'node_modules/govuk-frontend/govuk/tools/px-to-rem';
 @import 'node_modules/govuk-frontend/govuk/settings/media-queries';
 @import 'node_modules/govuk-frontend/govuk/helpers/media-queries';
-@import 'src/**/*.scss';
+@import 'src/**/style.scss';

@@ -11,7 +11,9 @@ mix_.webpackConfig({
         ]
     }
 })
-    .setPublicPath('build/')
-    .sass('style.scss', 'style.min.css')
-    .sass('style-gutenburg.scss', 'style-gutenburg.css');
 
+.setPublicPath('build/')
+.sass('style.scss', 'style.min.css')
+.sass('style-gutenburg.scss', 'style-gutenburg.css');
+
+mix_.js('src/**/frontend.js', 'build/mojblocks.min.js');
