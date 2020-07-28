@@ -82,6 +82,7 @@ registerBlockType('mojblocks/cta', {
 					<span className="mojblocks-cta__heading-text">
 					  <RichText
                           placeholder={__('A great call-to-action title', 'mojblocks')}
+                          keepPlaceholderOnFocus
                           value={ctaTitle}
                           onChange={onChangeCtaTitle}
                       />
@@ -93,6 +94,7 @@ registerBlockType('mojblocks/cta', {
                     <RichText
                         multiline="p"
                         placeholder={__('Some compelling text to send the message home!', 'mojblocks')}
+                        keepPlaceholderOnFocus
                         onChange={onChangeCtaText}
                         value={ctaText}
                     />
