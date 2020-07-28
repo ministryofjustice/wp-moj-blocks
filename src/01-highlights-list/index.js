@@ -57,8 +57,9 @@ registerBlockType('mojblocks/highlights-list', {
 
         return (
             <div className={`${className}`}>
-                <div className="mojblocks-highlights-list__heading-container">
-                    <h3 className="mojblocks-highlights-list__heading">
+                <div className={'nhsuk-width-container'}>
+                    <div className="mojblocks-highlights-list__heading-container">
+                        <h3 className="mojblocks-highlights-list__heading">
 				  <span role="text">
 					<span className="mojblocks-highlights-list__heading-text">
 					  <RichText
@@ -69,17 +70,18 @@ registerBlockType('mojblocks/highlights-list', {
                       />
 					</span>
 				  </span>
-                    </h3>
-                </div>
-                <div className={'mojblocks-highlights-list__content'}>
-                    <RichText
-                        tagName='ul'
-                        multiline='li'
-                        placeholder={__('Highlights item', 'mojblocks')}
-                        keepPlaceholderOnFocus
-                        onChange={onChangeListText}
-                        value={listText}
-                    />
+                        </h3>
+                    </div>
+                    <div className={'mojblocks-highlights-list__content'}>
+                        <RichText
+                            tagName='ul'
+                            multiline='li'
+                            placeholder={__('Highlights item', 'mojblocks')}
+                            keepPlaceholderOnFocus
+                            onChange={onChangeListText}
+                            value={listText}
+                        />
+                    </div>
                 </div>
             </div>
         );
@@ -94,22 +96,24 @@ registerBlockType('mojblocks/highlights-list', {
         } = props;
 
         return (
-            <div className="mojblocks-grid-column-width mojblocks-highlights-list--type">
-                <div className="mojblocks-highlights-list__heading-container">
-                    <h3 className="mojblocks-highlights-list__heading">
-				 <span role="text">
-					<span className="mojblocks-highlights-list__heading-text">
-						<RichText.Content value={listTitle}/>
-					</span>
-				  </span>
-                    </h3>
-                </div>
-                <div className={'mojblocks-highlights-list__content'}>
-                    <RichText.Content
-                        tagName='ul'
-                        multiline='li'
-                        value={listText}
-                    />
+            <div className={`mojblocks-highlights-list`}>
+                <div className={'nhsuk-width-container'}>
+                    <div className="mojblocks-highlights-list__heading-container">
+                        <h3 className="mojblocks-highlights-list__heading">
+                             <span role="text">
+                                <span className="mojblocks-highlights-list__heading-text">
+                                    <RichText.Content value={listTitle}/>
+                                </span>
+                              </span>
+                        </h3>
+                    </div>
+                    <div className={'mojblocks-highlights-list__content'}>
+                        <RichText.Content
+                            tagName='ul'
+                            multiline='li'
+                            value={listText}
+                        />
+                    </div>
                 </div>
             </div>
         );

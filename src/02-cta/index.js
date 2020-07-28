@@ -76,8 +76,9 @@ registerBlockType('mojblocks/cta', {
 
         return (
             <div className={`${className}`}>
-                <div className="mojblocks-cta__heading-container">
-                    <h3 className="mojblocks-cta__heading">
+                <div className={'nhsuk-width-container'}>
+                    <div className="mojblocks-cta__heading-container">
+                        <h3 className="mojblocks-cta__heading">
 				  <span role="text">
 					<span className="mojblocks-cta__heading-text">
 					  <RichText
@@ -88,29 +89,30 @@ registerBlockType('mojblocks/cta', {
                       />
 					</span>
 				  </span>
-                    </h3>
-                </div>
-                <div className={'mojblocks-cta__content'}>
+                        </h3>
+                    </div>
+                    <div className={'mojblocks-cta__content'}>
+                        <RichText
+                            multiline="p"
+                            placeholder={__('Some compelling text to send the message home!', 'mojblocks')}
+                            keepPlaceholderOnFocus
+                            onChange={onChangeCtaText}
+                            value={ctaText}
+                        />
+                    </div>
+                    <URLInputButton
+                        className="mojblocks-dropdown__input"
+                        label={__('CTA Link', 'mojblocks')}
+                        onChange={onChangeButtonLink}
+                        url={buttonLink}
+                    />
                     <RichText
-                        multiline="p"
-                        placeholder={__('Some compelling text to send the message home!', 'mojblocks')}
-                        keepPlaceholderOnFocus
-                        onChange={onChangeCtaText}
-                        value={ctaText}
+                        className="mojblocks-button"
+                        value={buttonLabel}
+                        onChange={onChangeButtonLabel}
+                        placeholder="Button label"
                     />
                 </div>
-                <URLInputButton
-                    className="mojblocks-dropdown__input"
-                    label={__('CTA Link', 'mojblocks')}
-                    onChange={onChangeButtonLink}
-                    url={buttonLink}
-                />
-                <RichText
-                    className="mojblocks-button"
-                    value={buttonLabel}
-                    onChange={onChangeButtonLabel}
-                    placeholder="Button label"
-                />
             </div>
         );
     },
@@ -126,22 +128,24 @@ registerBlockType('mojblocks/cta', {
         } = props;
 
         return (
-            <div className="mojblocks-grid-column-width mojblocks-cta--type">
-                <div className="mojblocks-cta__heading-container">
-                    <h3 className="mojblocks-cta__heading">
+            <div className={`mojblocks-cta`}>
+                <div className={'nhsuk-width-container'}>
+                    <div className="mojblocks-cta__heading-container">
+                        <h3 className="mojblocks-cta__heading">
 				 <span role="text">
 					<span className="mojblocks-cta__heading-text">
 						<RichText.Content value={ctaTitle}/>
 					</span>
 				  </span>
-                    </h3>
+                        </h3>
+                    </div>
+                    <div className="mojblocks-cta__content">
+                        <RichText.Content value={ctaText} multiline="p"/>
+                    </div>
+                    <a href={buttonLink} className="mojblocks-button">
+                        <RichText.Content value={buttonLabel}/>
+                    </a>
                 </div>
-                <div className="mojblocks-cta__content">
-                    <RichText.Content value={ctaText} multiline="p" />
-                </div>
-                <a href={buttonLink} className="mojblocks-button">
-                    <RichText.Content value={buttonLabel}/>
-                </a>
             </div>
         );
     }
