@@ -245,42 +245,65 @@ __webpack_require__.r(__webpack_exports__);
 
 var __ = wp.i18n.__;
 var registerBlockType = wp.blocks.registerBlockType;
-var format = wp.date.format;
+var Fragment = wp.element.Fragment;
 var _wp$blockEditor = wp.blockEditor,
     RichText = _wp$blockEditor.RichText,
-    InnerBlocks = _wp$blockEditor.InnerBlocks;
-var _wp$data = wp.data,
-    dispatch = _wp$data.dispatch,
-    subscribe = _wp$data.subscribe,
-    select = _wp$data.select,
-    withSelect = _wp$data.withSelect;
+    MediaUpload = _wp$blockEditor.MediaUpload,
+    InspectorControls = _wp$blockEditor.InspectorControls,
+    URLInputButton = _wp$blockEditor.URLInputButton;
+var ALLOWED_MEDIA_TYPES = ['image'];
 registerBlockType("mojblocks/staggered-block", {
   title: __("Staggered Block", "mojblocks"),
   category: "mojblocks",
-  icon: "admin-post",
+  icon: "admin-page",
   example: {
     attributes: {
+      staggeredBoxTitle: 'title',
       staggeredBoxContent: 'Enter the content you want to see in the box',
-      staggeredBoxImage: 'Upload the image you want next to the text'
+      staggeredBoxButton: 'Button text',
+      staggeredBoxImageURL: ''
     }
   },
   attributes: {
+    staggeredBoxTitle: {
+      type: "string",
+      source: "html",
+      selector: ".mojblocks-staggered-box__title"
+    },
     staggeredBoxContent: {
       type: "string",
       source: "html",
       selector: ".mojblocks-staggered-box__content"
     },
-    staggeredBoxImage: {
+    staggeredBoxButtonText: {
       type: "string",
       source: "html",
-      selector: ".mojblocks-staggered-box__image"
+      selector: ".mojblocks-staggered-box__button"
+    },
+    staggeredBoxButtonLink: {
+      type: 'string',
+      source: 'attribute',
+      attribute: 'href'
+    },
+    staggeredBoxImageURL: {
+      type: "string",
+      default: 'https://pusheen.com/wp-content/themes/pusheen-custom/img/header-pusheen.gif'
     }
   },
   edit: function edit(props) {
     var _props$attributes = props.attributes,
         staggeredBoxContent = _props$attributes.staggeredBoxContent,
-        staggeredBoxImage = _props$attributes.staggeredBoxImage,
+        staggeredBoxImageURL = _props$attributes.staggeredBoxImageURL,
+        staggeredBoxButtonText = _props$attributes.staggeredBoxButtonText,
+        staggeredBoxButtonLink = _props$attributes.staggeredBoxButtonLink,
+        staggeredBoxTitle = _props$attributes.staggeredBoxTitle,
         setAttributes = props.setAttributes;
+
+    var onChangeStaggeredBoxTitle = function onChangeStaggeredBoxTitle(newStaggeredBoxTitle) {
+      setAttributes({
+        staggeredBoxTitle: newStaggeredBoxTitle
+      });
+    };
 
     var onChangeStaggeredBoxContent = function onChangeStaggeredBoxContent(newStaggeredBoxContent) {
       setAttributes({
@@ -288,34 +311,98 @@ registerBlockType("mojblocks/staggered-block", {
       });
     };
 
-    var onChangeStaggeredBoxImage = function onChangeStaggeredBoxImage(newStaggeredBoxImage) {
+    var onChangeStaggeredBoxButtonText = function onChangeStaggeredBoxButtonText(newStaggeredBoxButtonText) {
       setAttributes({
-        staggeredBoxImage: newStaggeredBoxImage
+        staggeredBoxButtonText: newStaggeredBoxButtonText
       });
     };
 
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "nhsuk-review-date"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
-      className: "nhsuk-body-s"
-    }, "Staggered box gutenberg", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+    var onChangeStaggeredBoxButtonLink = function onChangeStaggeredBoxButtonLink(newStaggeredBoxButtonLink) {
+      setAttributes({
+        staggeredBoxButtonLink: newStaggeredBoxButtonLink
+      });
+    };
+
+    var onStaggeredBoxImageSelect = function onStaggeredBoxImageSelect(newStaggeredBoxImageURL) {
+      setAttributes({
+        staggeredBoxImageURL: newStaggeredBoxImageURL.sizes.full.url
+      });
+    };
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
+      onSelect: onStaggeredBoxImageSelect,
+      allowedTypes: ALLOWED_MEDIA_TYPES,
+      type: "image",
+      value: staggeredBoxImageURL,
+      render: function render(_ref) {
+        var open = _ref.open;
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
+          onClick: open
+        }, "Open Media Library");
+      }
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-staggered-block__text-container"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      tagName: "h2",
+      value: staggeredBoxTitle,
+      onChange: onChangeStaggeredBoxTitle,
+      placeholder: __('Add staggered box title', 'mojblocks'),
+      keepPlaceholderOnFocus: true
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      tagName: "p",
       value: staggeredBoxContent,
-      onChange: onChangeStaggeredBoxContent
-    })));
+      onChange: onChangeStaggeredBoxContent,
+      placeholder: __('Add staggered box content', 'mojblocks'),
+      keepPlaceholderOnFocus: true
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(URLInputButton, {
+      label: __('Button link', 'mojblocks'),
+      onChange: onChangeStaggeredBoxButtonLink,
+      url: staggeredBoxButtonLink
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      value: staggeredBoxButtonText,
+      onChange: onChangeStaggeredBoxButtonText,
+      placeholder: __('Add staggered box button', 'mojblocks')
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
+      className: "mojblocks-staggered-block__image",
+      src: staggeredBoxImageURL,
+      alt: ""
+    }));
   },
   save: function save(props) {
     var _props$attributes2 = props.attributes,
+        staggeredBoxTitle = _props$attributes2.staggeredBoxTitle,
         staggeredBoxContent = _props$attributes2.staggeredBoxContent,
-        staggeredBoxImage = _props$attributes2.staggeredBoxImage;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "nhsuk-review-date"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Staggered box front-end"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
+        staggeredBoxButtonText = _props$attributes2.staggeredBoxButtonText,
+        staggeredBoxButtonLink = _props$attributes2.staggeredBoxButtonLink,
+        staggeredBoxImageURL = _props$attributes2.staggeredBoxImageURL;
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-staggered-block__text-container"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
+      tagName: "h2",
+      value: staggeredBoxTitle
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
+      tagName: "p",
       value: staggeredBoxContent
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
-      src: "https://pusheen.com/wp-content/themes/pusheen-custom/img/header-pusheen.gif"
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+      href: staggeredBoxButtonLink
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
+      tagName: "button",
+      value: staggeredBoxButtonText
+    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
+      className: "mojblocks-staggered-block__image",
+      src: staggeredBoxImageURL,
+      alt: ""
     }));
   }
 });
+wp.blocks.registerBlockStyle('mojblocks/staggered-block', [{
+  name: 'default',
+  label: 'Default',
+  isDefault: true
+}, {
+  name: 'staggered-block-image-left',
+  label: 'Image aligned on left'
+}]);
 
 /***/ }),
 

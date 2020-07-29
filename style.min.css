@@ -74,8 +74,25 @@ Text Domain: mojblocks
 
 **********************************************************************************************/
 
-html {
-  color: red;
+.mojblocks-staggered-block__image {
+  display: inline;
+  margin-left: -5rem;
+}
+
+.mojblocks-staggered-block__text-container {
+  z-index: 1;
+  background-color: #6F777B;
+  color: #ffffff;
+  padding: 1rem;
+  width: 20rem;
+  display: inline-block;
+  position: relative;
+}
+
+.is-style-staggered-block-image-left > .mojblocks-staggered-block__image {
+  float: left;
+  margin-right: -5rem;
+  margin-left: 0;
 }
 
 /*********************************************************************************************
