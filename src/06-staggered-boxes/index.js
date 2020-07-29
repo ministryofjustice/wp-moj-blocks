@@ -8,14 +8,17 @@ const ALLOWED_MEDIA_TYPES = ['image'];
 
 registerBlockType("mojblocks/staggered-block", {
   title: __("Staggered Block", "mojblocks"),
+  description: __('Display content on top of a staggered background image'),
   category: "mojblocks",
   icon: "admin-page",
+  keywords: [__('staggered block'), __('photo block')],
   example: {
     attributes: {
-      staggeredBoxTitle: 'title',
-      staggeredBoxContent: 'Enter the content you want to see in the box',
-      staggeredBoxButton: 'Button text',
-      staggeredBoxImageURL: ''
+      staggeredBoxTitle: 'Exciting title',
+      staggeredBoxContent: 'Some exciting text that fits with the title',
+      staggeredBoxButtonLink: 'https://www.google.com/',
+      staggeredBoxButtonText: 'Interesting link',
+      staggeredBoxImageURL: 'https://giphy.com/gifs/xFoV7P0JsHwoZvHXP6'
     },
   },
 
