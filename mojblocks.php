@@ -1,18 +1,28 @@
 <?php
 
 /**
+ *
+ * The file responsible for starting the mojblocks plugin
+ *
+ * These Gutenberg blocks support custom MoJ block functionality we're
+ * not able to incorporate into our theme or third party blocks/plugins.
+ *
+ * @package mojblocks
+ *
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
  * Version:     1.0.0
  * Author:      Ministry of Justice
  * Text domain: mojblocks
- * Author URI:  https://ministryofjustice.github.io/justice-on-the-web/#justice-on-the-web
+ * Author URI:  https://github.com/ministryofjustice
  * License:     MIT License
+ * License URI: https://opensource.org/licenses/MIT
+ * Copyright:   Crown Copyright (c) Ministry of Justice
  **/
 
 defined('ABSPATH') || exit;
-
+ 
 /**
  * Load translations (if any) for the plugin from the /languages/ folder.
  *
@@ -45,7 +55,6 @@ add_filter('block_categories', 'mojblocks_block_categories', 10, 2);
  */
 function mojblocks_block_categories($categories, $post)
 {
-
     return array_merge(
         $categories,
         array(
@@ -76,7 +85,23 @@ function mojblocks_register_blocks()
         return;
     }
 
-    $meta = require_once('build/index.asset.php');
+    // Check if build file hasn't been generated and is missing
+    $file_exists = file_exists(plugin_dir_path(__FILE__) . 'build/index.asset.php');
+
+    if ($file_exists) {
+        $meta = require_once('build/index.asset.php');
+    } else {
+        $meta = [
+            'dependencies' => [],
+            'version' => '20200723'
+        ];
+
+        trigger_error(
+            'Build file does not exist, run NPM run build',
+            E_USER_WARNING
+        );
+    }
+
     // Register the block editor script.
     wp_register_script(
         'mojblocks-editor-script',                  // label.
@@ -95,7 +120,6 @@ function mojblocks_register_blocks()
     );
     register_block_type('mojblocks/example');
 }
-
 
 /**
  * Queues up the gutenberg editor style
