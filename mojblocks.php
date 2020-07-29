@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
@@ -50,7 +51,7 @@ function mojblocks_block_categories($categories, $post)
         array(
             array(
                 'slug' => 'mojblocks',
-                'title' => __('MOJ Frontend Blocks', 'mojblocks'),
+                'title' => __('MOJ Blocks', 'mojblocks'),
                 'icon' => 'screen',
             ),
         )
@@ -70,19 +71,19 @@ add_action('init', 'mojblocks_register_blocks');
  */
 function mojblocks_register_blocks()
 {
-
     // If Block Editor is not active, bail.
     if (!function_exists('register_block_type')) {
         return;
     }
 
-    // Retister the block editor script.
+    $meta = require_once('build/index.asset.php');
+    // Register the block editor script.
     wp_register_script(
-        'mojblocks-editor-script',                                            // label.
-        plugins_url('/build/index.js', __FILE__),                        // script file.
-        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-data'),        // dependencies.
-        '20190829',
-        'in_footer'
+        'mojblocks-editor-script',                  // label.
+        plugins_url('/build/index.js', __FILE__),   // script file.
+        $meta['dependencies'] ?? [],                // dependencies.
+        $meta['version'] ?? '20200723',
+        true
     );
 
     register_block_type(
@@ -101,33 +102,40 @@ function mojblocks_register_blocks()
  */
 function mojblocks_gutenberg_editor_styles()
 {
-
-    wp_enqueue_style('nhsl-block-editor-styles', plugins_url('style-gutenburg.css', __FILE__), false, '1.1', 'all');
-
+    wp_enqueue_style(
+        'nhsl-block-editor-styles',
+        plugins_url('build/style-gutenburg.css', __FILE__),
+        false,
+        '1.1',
+        'all'
+    );
 }
-
-add_action('enqueue_block_editor_assets', 'mojblocks_gutenberg_editor_styles'); // Pulls the enqueued file in to standard wp process.
+// Pulls the enqueued file in to standard wp process.
+add_action('enqueue_block_editor_assets', 'mojblocks_gutenberg_editor_styles');
 
 /**
- * Queues up the blocks styling for front end
+ * Queues up the blocks styling for frontend
  */
 function mojblocks_register_style()
 {
-
-    wp_register_style('mojblocks', plugins_url('style.min.css', __FILE__));
-
+    if (!is_admin()) {
+        wp_register_style('mojblocks', plugins_url('build/style.min.css', __FILE__));
+    }
 }
 
-add_action('init', 'mojblocks_register_style'); // Pulls front end styling to standard wp process.
+add_action('init', 'mojblocks_register_style');
 
 function mojblocks_enqueue_style()
 {
-
     wp_enqueue_style('mojblocks');
 
+    wp_enqueue_script(
+        'mojblocks-js',
+        plugins_url('build/mojblocks.min.js', __FILE__),
+        false,
+        '1.0',
+        'all'
+    );
 }
 
 add_action('wp_enqueue_scripts', 'mojblocks_enqueue_style');
-
-
-

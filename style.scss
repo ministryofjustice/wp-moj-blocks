@@ -1,6 +1,7 @@
 @charset "UTF-8";
 /*********************************************************************************************
-Plugin Name: MOJ Blocks
+
+Plugin Name: MoJ Blocks
 Author:  Ministry of Justice
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -8,6 +9,10 @@ Text Domain: mojblocks
 
 **********************************************************************************************/
 
+// Target frontend styles
 
-
-@import 'src/**/*.scss';
+@import 'node_modules/govuk-frontend/govuk/settings/typography-responsive';
+@import 'node_modules/govuk-frontend/govuk/tools/px-to-rem';
+@import 'node_modules/govuk-frontend/govuk/settings/media-queries';
+@import 'node_modules/govuk-frontend/govuk/helpers/media-queries';
+@import 'src/**/style.scss';

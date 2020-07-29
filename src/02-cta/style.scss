@@ -1,9 +1,121 @@
 @charset "UTF-8";
 /*********************************************************************************************
-Plugin Name: MOJ Blocks
-Author:  Ministry of Justice
-License: GNU General Public License v3 or later
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
-Text Domain: mojblocks
+
+Name: CTA (call to action)
+Author:  Ministry of Justice - Damien Wilson
 
 **********************************************************************************************/
+
+/** Variables */
+$mojblocks-color-teal: #336C83;
+$mojblocks-color-yellow: #FFDD00;
+$mojblocks-color-purple: #912B88;
+$mojblocks-color-lime: #B8EA23;
+$mojblocks-color-violet: #4C2C92;
+$mojblocks-color-mustard: #FFCE21;
+$mojblocks-color-dark-blue: #003078;
+$mojblocks-color-orange: #FF993C;
+$mojblocks-color-black: #0B0C0C;
+$mojblocks-color-grey: #6F777B;
+$mojblocks-color-mid-grey: #B1B4B6;
+$mojblocks-color-light-grey: #F3F2F1;
+$mojblocks-color-white: #ffffff;
+
+
+.wp-block-mojblocks-cta {
+    padding: 15px;
+    margin: auto -15px;
+    background-color: $mojblocks-color-dark-blue;
+
+    &.is-style-judicial-teal {
+        background-color: $mojblocks-color-teal;
+    }
+
+    @include govuk-media-query($from: tablet) {
+        padding: 25px 0 25px 35px;
+    }
+
+    @include govuk-media-query($from: desktop) {
+        padding: 35px 75px 50px 75px;
+    }
+
+    .mojblocks-cta {
+
+        &__heading {
+            margin: 12px 0 15px;
+            padding: 0;
+        }
+
+        &__heading-text {
+            color: $mojblocks-color-yellow;
+            font-style: normal;
+            font-weight: bold;
+            font-size: 24px;
+            font-size: govuk-px-to-rem(24);
+            line-height: 32px;
+            line-height: govuk-px-to-rem(32);
+
+            @include govuk-media-query($from: tablet) {
+                font-size: 32px;
+                font-size: govuk-px-to-rem(32);
+            }
+
+            @include govuk-media-query($from: desktop) {
+                font-size: 35px;
+                font-size: govuk-px-to-rem(35);
+            }
+        }
+
+        &__content {
+            padding-top: 1px;
+            padding-bottom: 1px;
+
+            p {
+                color:$mojblocks-color-white;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                font-size: 20px;
+                font-size: govuk-px-to-rem(20);
+
+                @include govuk-media-query($from: tablet) {
+                    font-size: 1.1rem;
+                    font-size: govuk-px-to-rem(18);
+                }
+            }
+
+            @include govuk-media-query($from: tablet) {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    button.components-button.components-toolbar__control.has-icon {
+        background-color: white;
+    }
+
+    .mojblocks-button, a.mojblocks-button {
+        background-color: $mojblocks-color-yellow;
+        color: $mojblocks-color-black !important;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+        font-size: 24px;
+        font-size: govuk-px-to-rem(24);
+        font-weight: 900;
+        line-height: 36px;
+        line-height: govuk-px-to-rem(36);
+        margin-top: 15px;
+        padding: 4px 22px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: top;
+        width: 100%;
+
+        @include govuk-media-query($from: tablet) {
+            display: inline-block;
+            width: auto;
+        }
+    }
+}
