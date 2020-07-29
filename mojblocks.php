@@ -57,13 +57,13 @@ function mojblocks_block_categories($categories, $post)
 {
     return array_merge(
         $categories,
-        array(
-            array(
+        [
+            [
                 'slug' => 'mojblocks',
                 'title' => __('MOJ Blocks', 'mojblocks'),
                 'icon' => 'screen',
-            ),
-        )
+            ],
+        ]
     );
 }
 
@@ -104,21 +104,18 @@ function mojblocks_register_blocks()
 
     // Register the block editor script.
     wp_register_script(
-        'mojblocks-editor-script',                  // label.
-        plugins_url('/build/index.js', __FILE__),   // script file.
-        $meta['dependencies'] ?? [],                // dependencies.
+        'mojblocks-editor-script',
+        plugins_url('/build/index.js', __FILE__),
+        $meta['dependencies'] ?? [],
         $meta['version'] ?? '20200723',
         true
     );
 
+     // Calls registered script above. Registering one brings all. One block to rule them all.
     register_block_type(
-        'mojblocks/panel1',
-        array(
-            'editor_script' => 'mojblocks-editor-script',
-            // Calls registered script above. Registering one brings all. One block to rule them all.
-        )
+        'mojblocks/blocks',
+        ['editor_script' => 'mojblocks-editor-script']
     );
-    register_block_type('mojblocks/example');
 }
 
 /**
