@@ -5,6 +5,8 @@
 
 // import dependencies
 import { Accordion } from 'govuk-frontend';
+const mojblocksAccordion = document.querySelector('[data-module="govuk-accordion"]');
 
-// initialise components
-new Accordion(document.querySelector('[data-module="govuk-accordion"]')).init();
+if (mojblocksAccordion || null) {
+    new Accordion(mojblocksAccordion).init();
+}
