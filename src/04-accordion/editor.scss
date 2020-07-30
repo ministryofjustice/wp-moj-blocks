@@ -20,9 +20,10 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 .govuk-accordion__section-header {
     border-top: 1px dashed $mojblocks-color-grey;
     color: $mojblocks-color-light-blue;
-        &:before {
-         content: 'Accordion section';
-        }
+
+    &:before {
+        content: 'Accordion section';
+    }
 }
 
 .govuk-accordion__section-content {
