@@ -10,11 +10,6 @@ registerBlockType('mojblocks/intro', {
     title: __('Intro Text', 'mojblocks'),
     icon: 'editor-paragraph',
     category: 'mojblocks',
-    example: {
-        attributes: {
-            introText: 'This is the intro text',
-        },
-    },
     attributes: {
         introText: {
             type: 'string',
