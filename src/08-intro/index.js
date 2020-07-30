@@ -4,7 +4,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { registerBlockType, registerBlockStyle } from '@wordpress/blocks';
-import { RichText, URLInputButton } from '@wordpress/block-editor';
+import { RichText } from '@wordpress/block-editor';
 
 registerBlockType('mojblocks/intro', {
     title: __('Intro Text', 'mojblocks'),
