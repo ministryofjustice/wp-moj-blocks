@@ -7,4 +7,8 @@
 import { Accordion } from 'govuk-frontend';
 
 // initialise components
-new Accordion(document.querySelector('[data-module="govuk-accordion"]')).init();
+const mojblocksAccordion = document.querySelector('[data-module="govuk-accordion"]') || null;
+
+if (mojblocksAccordion) {
+    new Accordion().init();
+}
