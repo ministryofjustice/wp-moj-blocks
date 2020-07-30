@@ -28,6 +28,7 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 
     // Reset NHS margin to display no margin on accordion sections
     margin-bottom: 0;
+    margin-bottom: govuk-px-to-rem(0);
 
     // Add a bottom border to accordion sections (on last one)
     &:last-child {
@@ -38,21 +39,25 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 .js-enabled .govuk-accordion__section-content {
     // Decrease padding causes by NHS styles around accordion content
     padding-top: 0;
+    padding-top: govuk-px-to-rem(0);
 
     // Indent in accordion section content to align with title
     .govuk-body {
         padding-left: 30px;
+        padding-left: govuk-px-to-rem(30);
     }
 }
 
 // Change postion and colour of title and arrow to align within section
 .govuk-accordion__section-header {
-    padding: 20px 28px 20px 10px;
+    padding: 20px 28px 0 10px;
+    padding: govuk-px-to-rem(20) govuk-px-to-rem(28) govuk-px-to-rem(0) govuk-px-to-rem(10);
     color: $mojblocks-color-light-blue;
 }
 
 .govuk-accordion__section-heading {
     margin-left: 22px;
+    margin-left: govuk-px-to-rem(22);
 }
 
 // Remove "mustaches" underline caused by NHS styles conflicting with Gov UK
@@ -84,6 +89,7 @@ SASS modifications to conform GovUK frontent to MoJ block styling
     width: 16px;
     height: 16px;
     margin-top: -8px;
+    margin-top: govuk-px-to-rem(-8);
 }
 
 // Replace Gov plus symbol with arrow symbol (when closed)
