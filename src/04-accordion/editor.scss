@@ -7,15 +7,9 @@ Text Domain: mojblocks
 
 **********************************************************************************************/
 
-// https://design-system.service.gov.uk/components/accordion/
-@import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
-
 /** Variables */
 $mojblocks-color-light-blue: #1d70b8;
-$mojblocks-color-teal: #336C83;
-$mojblocks-color-dark-blue: #003078;
 $mojblocks-color-grey: #6F777B;
-$mojblocks-color-light-grey: #C7CDD0;
 
 /*********************************************************************************************
 
@@ -24,11 +18,12 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 **********************************************************************************************/
 
 .govuk-accordion__section-header {
-    position: relative;
-    padding-right: 40px;
     border-top: 1px dashed $mojblocks-color-grey;
     color: $mojblocks-color-light-blue;
-    cursor: pointer;
+
+    &:before {
+        content: 'Accordion section';
+    }
 }
 
 .govuk-accordion__section-content {
