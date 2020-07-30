@@ -8,7 +8,7 @@ import { RichText } from '@wordpress/block-editor';
 
 registerBlockType('mojblocks/intro', {
     title: __('Intro Text', 'mojblocks'),
-    icon: 'paragraph',
+    icon: 'editor-paragraph',
     category: 'mojblocks',
     example: {
         attributes: {
