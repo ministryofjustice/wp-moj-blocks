@@ -1,6 +1,9 @@
 /**
-This file contains imported styling to support GOV UK Frontend usage in the plugin
- */
-
-/// https://design-system.service.gov.uk/components/accordion/
-/// @import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
+* This file contains imported styling to support GOV UK Frontend usage in the plugin
+*
+* To import styles from govuk-frontend in another block, simply include this file
+* in the block component and add your @imports with an online reference, like this:
+*
+* // https://design-system.service.gov.uk/components/accordion/
+* @import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
+**/
