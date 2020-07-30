@@ -23,9 +23,15 @@ $mojblocks-color-light-grey: #F3F2F1;
 $mojblocks-color-white: #ffffff;
 
 .mojblocks-staggered-block {
-  &__image {
-    display: inline;
-    margin-left: -5rem;
+  margin-top: 1rem;
+
+  &__image-container {
+    padding: 0;
+
+    @include govuk-media-query($from: tablet) {
+      margin-bottom: -7.5rem;
+      float: right;
+    }
   }
 
   &__text-container {
@@ -33,15 +39,28 @@ $mojblocks-color-white: #ffffff;
     background-color: $mojblocks-color-grey;
     color: $mojblocks-color-white;
     padding: 1rem;
-    width: 20rem;
     display: inline-block;
     position: relative;
   }
+
+  &__button {
+    border: 1px solid $mojblocks-color-mustard;
+    color: $mojblocks-color-white;
+    padding: 0.5rem 1rem;
+
+    &:hover, :focus, :active {
+      background-color: $mojblocks-color-mustard;
+      color: $mojblocks-color-black;
+    }
+  }
 }
 
-.is-style-staggered-block-image-left > .mojblocks-staggered-block__image{
+.is-style-staggered-block-image-left {
+  & .mojblocks-staggered-block__image-container {
+    float: left;
+  }
 
-  float: left;
-  margin-right: -5rem;
-  margin-left: 0;
+  & .mojblocks-staggered-block__text-container {
+    float: right;
+  }
 }

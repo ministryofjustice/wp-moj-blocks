@@ -26,17 +26,17 @@ registerBlockType("mojblocks/staggered-block", {
     staggeredBoxTitle: {
       type: "string",
       source: "html",
-      selector: ".mojblocks-staggered-box__title"
+      selector: ".mojblocks-staggered-block__title"
     },
     staggeredBoxContent: {
       type: "string",
       source: "html",
-      selector: ".mojblocks-staggered-box__content"
+      selector: ".mojblocks-staggered-block__content"
     },
     staggeredBoxButtonText: {
       type: "string",
       source: "html",
-      selector: ".mojblocks-staggered-box__button"
+      selector: ".mojblocks-staggered-block__button"
     },
     staggeredBoxButtonLink: {
       type: 'string',
@@ -130,16 +130,27 @@ registerBlockType("mojblocks/staggered-block", {
     } = props;
 
     return (
-      <div>
-        <div className="mojblocks-staggered-block__text-container">
-          <RichText.Content tagName="h2" value = { staggeredBoxTitle } />
-          <RichText.Content tagName="p" value = { staggeredBoxContent } />
-          <a href={staggeredBoxButtonLink}>
-            <RichText.Content tagName="button" value = { staggeredBoxButtonText } />
-          </a>
-        </div>
-        <img className="mojblocks-staggered-block__image" src={staggeredBoxImageURL} alt=""/>
+
+    <div className="mojblocks-staggered-block">
+      <div className="govuk-width-container">
+          <div className="govuk-grid-row">
+
+            <div className="govuk-grid-column-two-thirds mojblocks-staggered-block__image-container">
+              <img src={staggeredBoxImageURL} alt=""/>
+            </div>
+
+            <div className="mojblocks-staggered-block__text-container govuk-grid-column-one-half" >
+              <RichText.Content className="mojblocks-staggered-block__title" tagName="h2" value = { staggeredBoxTitle } />
+              <RichText.Content className="mojblocks-staggered-block__content" tagName="p" value = { staggeredBoxContent } />
+              <a className="mojblocks-staggered-block__button" href={staggeredBoxButtonLink}>
+                <RichText.Content  value = { staggeredBoxButtonText } />
+              </a>
+            </div>
+
+          </div>
       </div>
+    </div>
+
     );
   }
 });
