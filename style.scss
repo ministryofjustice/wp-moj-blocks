@@ -14,10 +14,6 @@ Text Domain: mojblocks
 @import 'node_modules/govuk-frontend/govuk/base';
 @import 'node_modules/govuk-frontend/govuk/core/all';
 @import 'node_modules/govuk-frontend/govuk/objects/all';
-
-/// Individual component styles are pulled in from the blocks.
-@import 'src/**/govuk.scss';
-
 @import 'node_modules/govuk-frontend/govuk/utilities/all';
 @import 'node_modules/govuk-frontend/govuk/overrides/all';
 
