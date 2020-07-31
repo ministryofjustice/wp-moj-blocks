@@ -7,3 +7,40 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: mojblocks
 
 **********************************************************************************************/
+
+.mojblocks-hero {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  &__image {
+    background: #336C83;
+    width: 100vw;
+    min-height: 250px;
+
+    @include govuk-media-query($from: tablet) {
+      min-height: 500px;
+    }
+  }
+
+  &__overlay {
+    padding: 15px 0;
+    float: left;
+    width: 100%;
+    margin-left: -15px;
+
+
+    @include govuk-media-query($from: tablet) {
+      margin-top: -80px;
+      background: #f0f4f5;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+  }
+
+}
