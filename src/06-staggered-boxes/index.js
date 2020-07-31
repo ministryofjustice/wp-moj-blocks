@@ -136,7 +136,7 @@ registerBlockType("mojblocks/staggered-block", {
           <div className="govuk-grid-row">
 
             <div className="govuk-grid-column-two-thirds mojblocks-staggered-block__image-container">
-              <img src={staggeredBoxImageURL} alt=""/>
+              <img className="mojblocks-staggered-block__image" src={staggeredBoxImageURL} alt=""/>
             </div>
 
             <div className="mojblocks-staggered-block__text-container govuk-grid-column-one-half" >
