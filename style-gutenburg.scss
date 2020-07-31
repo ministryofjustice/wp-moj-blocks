@@ -9,13 +9,11 @@ Text Domain: mojblocks
 **********************************************************************************************/
 
 // Target backend (editor) styles
-
 .edit-post-visual-editor,
 .block-editor-block-styles,
 .block-editor-inserter__menu-help-panel {
-    @import 'node_modules/govuk-frontend/govuk/settings/typography-responsive';
-    @import 'node_modules/govuk-frontend/govuk/tools/px-to-rem';
-    @import 'node_modules/govuk-frontend/govuk/settings/media-queries';
-    @import 'node_modules/govuk-frontend/govuk/helpers/media-queries';
+    // include the entire govuk frontend library in the editor
+    @import 'node_modules/govuk-frontend/govuk/all';
+    // load editor specific styles
     @import 'src/**/editor.scss';
 }
