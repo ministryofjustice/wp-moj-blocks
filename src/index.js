@@ -2,7 +2,6 @@
  * Import blocks as components.
  */
 
-import "./00-example";
 import "./01-highlights-list";
 import "./02-cta";
 import "./03-hero";
