@@ -1,6 +1,5 @@
-
 const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+const { registerBlockType, registerBlockStyle } = wp.blocks;
 const { Fragment } = wp.element;
 const { RichText, MediaUpload, InspectorControls, URLInputButton } = wp.blockEditor;
 
@@ -18,7 +17,8 @@ registerBlockType("mojblocks/staggered-block", {
       staggeredBoxContent: 'Some exciting text that fits with the title',
       staggeredBoxButtonLink: 'https://www.google.com/',
       staggeredBoxButtonText: 'Interesting link',
-      staggeredBoxImageURL: 'https://giphy.com/gifs/xFoV7P0JsHwoZvHXP6'
+      staggeredBoxImageURL: 'https://giphy.com/gifs/xFoV7P0JsHwoZvHXP6',
+      staggeredBoxImageCredit: 'Pusheen took this photo'
     },
   },
 
@@ -46,13 +46,23 @@ registerBlockType("mojblocks/staggered-block", {
     staggeredBoxImageURL: {
       type: "string",
       default: 'https://pusheen.com/wp-content/themes/pusheen-custom/img/header-pusheen.gif'
+    },
+    staggeredBoxImageCredit: {
+      type: "string",
+      source: "html",
+      selector: ".mojblocks-staggered-block__image-credit"
+    },
+    staggeredBoxImageAltText: {
+      type: "string",
+      source: "attribute",
+      attribute: "alt"
     }
   },
 
   edit: props => {
 
     const {
-      attributes: { staggeredBoxContent, staggeredBoxImageURL, staggeredBoxButtonText, staggeredBoxButtonLink, staggeredBoxTitle },
+      attributes: { staggeredBoxContent, staggeredBoxImageURL, staggeredBoxButtonText, staggeredBoxButtonLink, staggeredBoxTitle, staggeredBoxImageCredit, staggeredBoxImageAltText, className },
       setAttributes
     } = props
 
@@ -74,11 +84,18 @@ registerBlockType("mojblocks/staggered-block", {
 
     const onStaggeredBoxImageSelect = (newStaggeredBoxImageURL) => {
       setAttributes({ staggeredBoxImageURL: newStaggeredBoxImageURL.sizes.full.url })
+      setAttributes({ staggeredBoxImageAltText: newStaggeredBoxImageURL.alt})
+      console.log(newStaggeredBoxImageURL);
+    }
+
+    const onChangeStaggeredBoxImageCredit = (newStaggeredBoxImageCredit) => {
+      setAttributes({ staggeredBoxImageCredit: newStaggeredBoxImageCredit })
     }
 
 
     return (
-      <div>
+
+      <div >
         <InspectorControls>
           <MediaUpload
             onSelect={onStaggeredBoxImageSelect}
@@ -92,33 +109,60 @@ registerBlockType("mojblocks/staggered-block", {
             )}
           />
         </InspectorControls>
-        <div className="mojblocks-staggered-block__text-container">
-          <RichText
-            tagName = "h2"
-            value = { staggeredBoxTitle }
-            onChange = { onChangeStaggeredBoxTitle }
-            placeholder = {__('Add staggered box title', 'mojblocks')}
-            keepPlaceholderOnFocus = { true }
-          />
-          <RichText
-            tagName = "p"
-            value = { staggeredBoxContent }
-            onChange = { onChangeStaggeredBoxContent }
-            placeholder = {__('Add staggered box content', 'mojblocks')}
-            keepPlaceholderOnFocus = { true }
-          />
-          <URLInputButton
-            label={__('Button link', 'mojblocks')}
-            onChange={ onChangeStaggeredBoxButtonLink }
-            url={ staggeredBoxButtonLink }
-          />
-          <RichText
-            value = { staggeredBoxButtonText }
-            onChange = { onChangeStaggeredBoxButtonText }
-            placeholder = {__('Add staggered box button', 'mojblocks')}
-          />
+
+        <div className={`${className}  mojblocks-staggered-block`}>
+          <div className="govuk-width-container">
+            <div className="govuk-grid-row">
+              <div className="govuk-grid-column-two-thirds mojblocks-staggered-block__image-container">
+                <img className="mojblocks-staggered-block__image" src={staggeredBoxImageURL} alt={staggeredBoxImageAltText} />
+
+                <div className="mojblocks-staggered-block__image-credit-container">
+                  <i className="image-caption" aria-hidden="true"></i>
+                  <RichText
+                    tagName="p"
+                    value={staggeredBoxImageCredit}
+                    onChange={onChangeStaggeredBoxImageCredit}
+                    className="mojblocks-staggered-block__image-credit-text"
+                    placeholder={__('Add staggered box image credit', 'mojblocks')}
+                    keepPlaceholderOnFocus={true}
+                  />
+                </div>
+
+              </div>
+
+              <div className="mojblocks-staggered-block__text-container govuk-grid-column-one-half" >
+                <RichText
+                  tagName="h2"
+                  value={staggeredBoxTitle}
+                  onChange={onChangeStaggeredBoxTitle}
+                  className="mojblocks-staggered-block__title"
+                  placeholder={__('Add staggered box title', 'mojblocks')}
+                  keepPlaceholderOnFocus={true}
+                />
+                <RichText
+                  tagName="p"
+                  value={staggeredBoxContent}
+                  onChange={onChangeStaggeredBoxContent}
+                  className="mojblocks-staggered-block__content"
+                  placeholder={__('Add staggered box content', 'mojblocks')}
+                  keepPlaceholderOnFocus={true}
+                />
+
+                <URLInputButton
+                  label={__('Button link', 'mojblocks')}
+                  onChange={onChangeStaggeredBoxButtonLink}
+                  url={staggeredBoxButtonLink}
+                />
+                <RichText
+                  value={staggeredBoxButtonText}
+                  onChange={onChangeStaggeredBoxButtonText}
+                  className="mojblocks-staggered-block__button"
+                  placeholder={__('Add staggered box button', 'mojblocks')}
+                />
+              </div>
+            </div>
+          </div>
         </div>
-        <img className="mojblocks-staggered-block__image" src={staggeredBoxImageURL} alt="" />
       </div>
     );
   },
@@ -126,7 +170,7 @@ registerBlockType("mojblocks/staggered-block", {
   save: props => {
 
     const {
-      attributes: { staggeredBoxTitle, staggeredBoxContent, staggeredBoxButtonText, staggeredBoxButtonLink, staggeredBoxImageURL }
+      attributes: { staggeredBoxTitle, staggeredBoxContent, staggeredBoxButtonText, staggeredBoxButtonLink, staggeredBoxImageURL, staggeredBoxImageCredit, staggeredBoxImageAltText }
     } = props;
 
     return (
@@ -136,7 +180,11 @@ registerBlockType("mojblocks/staggered-block", {
           <div className="govuk-grid-row">
 
             <div className="govuk-grid-column-two-thirds mojblocks-staggered-block__image-container">
-              <img className="mojblocks-staggered-block__image" src={staggeredBoxImageURL} alt=""/>
+              <img className="mojblocks-staggered-block__image" src={staggeredBoxImageURL} alt={staggeredBoxImageAltText}/>
+              <div className="mojblocks-staggered-block__image-credit-container">
+                <i className="image-caption" aria-hidden="true"></i>
+                <RichText.Content tagName="p" className="mojblocks-staggered-block__image-credit-text" value={staggeredBoxImageCredit} />
+              </div>
             </div>
 
             <div className="mojblocks-staggered-block__text-container govuk-grid-column-one-half" >
@@ -155,17 +203,17 @@ registerBlockType("mojblocks/staggered-block", {
   }
 });
 
-wp.blocks.registerBlockStyle(
-  'mojblocks/staggered-block',
-  [
-    {
-      name: 'default',
-      label: 'Default',
-      isDefault: true,
-    },
-    {
-      name: 'staggered-block-image-left',
-      label: 'Image aligned on left'
-    },
-  ]
+// style variations
+registerBlockStyle('mojblocks/staggered-block',
+  {
+    name: 'image-right',
+    label: 'Image aligned on the right',
+    isDefault: true,
+  }
+);
+registerBlockStyle('mojblocks/staggered-block',
+  {
+    name: 'staggered-block-image-left',
+    label: 'Image aligned on left'
+  }
 );

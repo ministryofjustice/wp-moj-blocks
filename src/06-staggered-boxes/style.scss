@@ -27,11 +27,12 @@ $mojblocks-color-white: #ffffff;
   margin-left: -15px;
 
   @include govuk-media-query($from: tablet) {
-    margin-bottom: 7rem;
+    margin-bottom: 10rem;
   }
 
   &__image-container {
     padding: 0;
+    position: relative;
 
     @include govuk-media-query($from: tablet) {
       margin-bottom: -14.5rem;
@@ -42,6 +43,24 @@ $mojblocks-color-white: #ffffff;
 
   &__image {
     display: block;
+  }
+
+  &__image-credit-container {
+    background-color: $mojblocks-color-black;
+    opacity: 0.9;
+    color: $mojblocks-color-white;
+    width: auto;
+    display: inline-block;
+    padding: 0 0.5rem;
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    margin-bottom: 0;
+  }
+
+  &__image-credit-text {
+    display: inline;
+    margin-left: 0.5rem;
   }
 
   &__text-container {
@@ -114,5 +133,9 @@ $mojblocks-color-white: #ffffff;
 
   & .mojblocks-staggered-block__text-container {
     float: right;
+  }
+
+  & .mojblocks-staggered-block__image-credit-container {
+    text-align: right;
   }
 }

@@ -17,5 +17,9 @@ Text Domain: mojblocks
     @import 'node_modules/govuk-frontend/govuk/tools/px-to-rem';
     @import 'node_modules/govuk-frontend/govuk/settings/media-queries';
     @import 'node_modules/govuk-frontend/govuk/helpers/media-queries';
+    @import 'node_modules/govuk-frontend/govuk/helpers/grid';
+    @import 'node_modules/govuk-frontend/govuk/objects/main-wrapper';
+    @import 'node_modules/govuk-frontend/govuk/objects/grid';
+    @import 'node_modules/govuk-frontend/govuk/objects/width-container';
     @import 'src/**/editor.scss';
 }
