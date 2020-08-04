@@ -7,6 +7,16 @@ Text Domain: mojblocks
 
 **********************************************************************************************/
 
+/**
+* This file contains imported styling to support GOV UK Frontend usage in the plugin
+*
+* To import styles from govuk-frontend, simply include the Gov UK module using
+*  @imports with a URL reference
+**/
+
+// https://design-system.service.gov.uk/components/accordion/
+@import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
+
 /** Variables */
 $mojblocks-color-light-blue: #1d70b8;
 $mojblocks-color-light-grey: #C7CDD0;
