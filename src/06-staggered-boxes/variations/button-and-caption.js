@@ -1,9 +1,7 @@
 const { __ } = wp.i18n;
-const { registerBlockType, registerBlockStyle } = wp.blocks;
+const { registerBlockType } = wp.blocks;
 const { Fragment } = wp.element;
 const { RichText, MediaUpload, InspectorControls, URLInputButton } = wp.blockEditor;
-
-const ALLOWED_MEDIA_TYPES = ['image'];
 
 registerBlockType("mojblocks/staggered-box-button-and-caption", {
   title: __("Staggered Box with button and image caption", "mojblocks"),
@@ -12,7 +10,6 @@ registerBlockType("mojblocks/staggered-box-button-and-caption", {
   icon: "admin-page",
   keywords: [__('staggered box'), __('photo box')],
   parent: 'mojblocks/staggered-box',
-  scope: ["inserter"],
 
   attributes: {
     staggeredBoxTitle: {
@@ -87,7 +84,7 @@ registerBlockType("mojblocks/staggered-box-button-and-caption", {
 
     return (
 
-      <div >
+      <Fragment>
         <InspectorControls>
           <MediaUpload
             onSelect={onStaggeredBoxImageSelect}
@@ -155,7 +152,7 @@ registerBlockType("mojblocks/staggered-box-button-and-caption", {
             </div>
           </div>
         </div>
-      </div>
+      </Fragment>
     );
   },
 
@@ -190,22 +187,6 @@ registerBlockType("mojblocks/staggered-box-button-and-caption", {
           </div>
         </div>
       </div>
-
     );
   }
 });
-
-// style variations
-registerBlockStyle('mojblocks/staggered-box',
-  {
-    name: 'image-right',
-    label: 'Image aligned on the right',
-    isDefault: true,
-  }
-);
-registerBlockStyle('mojblocks/staggered-box',
-  {
-    name: 'staggered-box-image-left',
-    label: 'Image aligned on left'
-  }
-);

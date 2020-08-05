@@ -1,7 +1,6 @@
 const { __ } = wp.i18n;
 const { registerBlockType, registerBlockStyle } = wp.blocks;
-const { Fragment } = wp.element;
-const { RichText, MediaUpload, InspectorControls, URLInputButton, InnerBlocks } = wp.blockEditor;
+const { RichText, InnerBlocks } = wp.blockEditor;
 
 registerBlockType("mojblocks/staggered-box", {
   title: __("Staggered box", "mojblocks"),
@@ -24,9 +23,10 @@ registerBlockType("mojblocks/staggered-box", {
     ];
 
     return (
-      <div className={`${className}  mojbox-staggered-box`}>
+      <div className={`${className}  mojblocks-staggered-box`}>
         <div className="govuk-width-container">
           <div className="govuk-grid-row">
+            <p>Text</p>
             <InnerBlocks
               allowedBlocks={allowedBlocks}
             />
@@ -38,7 +38,7 @@ registerBlockType("mojblocks/staggered-box", {
 
   save: props => {
     return (
-      <div className="mojbox-staggered-box">
+      <div className="mojblocks-staggered-box">
         <div className="govuk-width-container">
             <div className="govuk-grid-row">
               <InnerBlocks.Content />

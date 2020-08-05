@@ -33,7 +33,7 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 
 @import 'style.scss';
 
-.mojblocks-staggered-block {
+.mojblocks-staggered-box {
   &__image-container {
     @include govuk-media-query($from: tablet) {
         margin-bottom: -18.5rem;
@@ -41,9 +41,9 @@ SASS modifications to conform GovUK frontent to MoJ block styling
   }
 }
 
-.is-style-staggered-block-image-left {
+.is-style-staggered-box-image-left {
     margin-bottom: 5rem;
-    & .mojblocks-staggered-block__image-container {
+    & .mojblocks-staggered-box__image-container {
         @include govuk-media-query($from: tablet) {
         margin-bottom: -14.5rem;
     }

@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { registerBlockType, registerBlockStyle } = wp.blocks;
+const { registerBlockType } = wp.blocks;
 const { Fragment } = wp.element;
 const { RichText, MediaUpload, InspectorControls, URLInputButton } = wp.blockEditor;
 
@@ -76,8 +76,7 @@ registerBlockType("mojblocks/staggered-box-button-no-caption", {
     }
 
     return (
-
-      <div >
+      <Fragment >
         <InspectorControls>
           <MediaUpload
             onSelect={onStaggeredBoxImageSelect}
@@ -132,7 +131,7 @@ registerBlockType("mojblocks/staggered-box-button-no-caption", {
             </div>
           </div>
         </div>
-      </div>
+      </Fragment>
     );
   },
 
@@ -167,22 +166,6 @@ registerBlockType("mojblocks/staggered-box-button-no-caption", {
           </div>
         </div>
       </div>
-
     );
   }
 });
-
-// style variations
-registerBlockStyle('mojblocks/staggered-box',
-  {
-    name: 'image-right',
-    label: 'Image aligned on the right',
-    isDefault: true,
-  }
-);
-registerBlockStyle('mojblocks/staggered-box',
-  {
-    name: 'staggered-box-image-left',
-    label: 'Image aligned on left'
-  }
-);
