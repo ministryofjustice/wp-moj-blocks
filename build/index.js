@@ -620,7 +620,7 @@ var InnerBlocks = wp.blockEditor.InnerBlocks;
  */
 
 registerBlockType('mojblocks/accordion', {
-  title: __('MoJBlocks Accordion', 'mojblocks'),
+  title: __('Accordion (MoJ Blocks', 'mojblocks'),
   description: __('Display content in an accordion format.'),
   icon: "list-view",
   category: 'mojblocks',
@@ -629,7 +629,9 @@ registerBlockType('mojblocks/accordion', {
     // Load allowed blocks on repeater
     var allowedBlocks = ['mojblocks/accordion-section']; // Load template/block when block is selected
 
-    var templates = [['mojblocks/accordion-section', {}]];
+    var templates = [['mojblocks/accordion-section', {
+      placeholder: 'Add accordion sections'
+    }]];
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "govuk-accordion",
       "data-module": "govuk-accordion",
