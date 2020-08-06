@@ -610,7 +610,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 
 var __ = wp.i18n.__;
-var registerBlockType = wp.blocks.registerBlockType;
+var _wp$blocks = wp.blocks,
+    registerBlockType = _wp$blocks.registerBlockType,
+    BlockControls = _wp$blocks.BlockControls;
 var RichText = wp.blockEditor.RichText;
 var InnerBlocks = wp.blockEditor.InnerBlocks;
 /**
@@ -629,7 +631,9 @@ registerBlockType('mojblocks/accordion', {
     // Load allowed blocks on repeater
     var allowedBlocks = ['mojblocks/accordion-section']; // Load template/block when block is selected
 
-    var templates = [['mojblocks/accordion-section', {}]];
+    var templates = [['mojblocks/accordion-section', {
+      placeholder: 'Add accordion sections'
+    }]];
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "govuk-accordion",
       "data-module": "govuk-accordion",

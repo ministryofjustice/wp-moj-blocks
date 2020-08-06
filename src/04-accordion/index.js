@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+const { registerBlockType, BlockControls } = wp.blocks;
 const { RichText } = wp.blockEditor;
 const { InnerBlocks } = wp.blockEditor;
 
@@ -22,7 +22,7 @@ registerBlockType('mojblocks/accordion', {
 
         // Load template/block when block is selected
         const templates = [
-            [ 'mojblocks/accordion-section', {} ]
+            [ 'mojblocks/accordion-section', { placeholder:'Add accordion sections' } ]
         ];
   
         return (
