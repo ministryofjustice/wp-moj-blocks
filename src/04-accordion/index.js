@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { registerBlockType, BlockControls } = wp.blocks;
+const { registerBlockType } = wp.blocks;
 const { RichText } = wp.blockEditor;
 const { InnerBlocks } = wp.blockEditor;
 
