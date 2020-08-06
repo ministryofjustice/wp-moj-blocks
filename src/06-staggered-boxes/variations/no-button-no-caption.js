@@ -12,7 +12,6 @@ registerBlockType("mojblocks/staggered-box-no-button-no-caption", {
   icon: "admin-page",
   keywords: [__('staggered box'), __('photo box')],
   parent: 'mojblocks/staggered-box',
-  scope: ["inserter"],
 
   attributes: {
     staggeredBoxTitle: {

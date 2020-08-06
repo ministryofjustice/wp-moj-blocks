@@ -14,21 +14,12 @@ registerBlockType("mojblocks/staggered-box", {
       attributes: { className }
     } = props
 
-    // Load allowed blocks on repeater
-    const allowedBlocks = [
-      'mojblocks/staggered-box-button-and-caption',
-      'mojblocks/staggered-box-button-no-caption',
-      'mojblocks/staggered-box-caption-and-no-button',
-      'mojblocks/staggered-box-no-button-no-caption'
-    ];
-
     return (
       <div className={`${className}  mojblocks-staggered-box`}>
         <div className="govuk-width-container">
           <div className="govuk-grid-row">
             <p>Text</p>
             <InnerBlocks
-              allowedBlocks={allowedBlocks}
             />
           </div>
         </div>
