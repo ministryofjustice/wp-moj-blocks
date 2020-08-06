@@ -620,7 +620,7 @@ var InnerBlocks = wp.blockEditor.InnerBlocks;
  */
 
 registerBlockType('mojblocks/accordion', {
-  title: __('MoJBlocks Accordion', 'mojblocks'),
+  title: __('Accordion (MoJ Blocks', 'mojblocks'),
   description: __('Display content in an accordion format.'),
   icon: "list-view",
   category: 'mojblocks',
