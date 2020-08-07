@@ -1,0 +1,31 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Plugin Name: MOJ Blocks
+Block: Accordion (Gutenberg editor styles)
+Text Domain: mojblocks
+
+**********************************************************************************************/
+
+/** Variables */
+$mojblocks-color-teal: #336C83;
+$mojblocks-color-yellow: #FFDD00;
+$mojblocks-color-purple: #912B88;
+$mojblocks-color-lime: #B8EA23;
+$mojblocks-color-violet: #4C2C92;
+$mojblocks-color-mustard: #FFCE21;
+$mojblocks-color-dark-blue: #003078;
+$mojblocks-color-orange: #FF993C;
+$mojblocks-color-black: #0B0C0C;
+$mojblocks-color-grey: #6F777B;
+$mojblocks-color-mid-grey: #B1B4B6;
+$mojblocks-color-light-grey: #F3F2F1;
+$mojblocks-color-white: #ffffff;
+
+/*********************************************************************************************
+
+SASS modifications to conform GovUK frontent to MoJ block styling
+
+**********************************************************************************************/
+
+@import 'style.scss';

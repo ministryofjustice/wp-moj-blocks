@@ -72,6 +72,27 @@ Block: Accordion (Gutenberg editor styles)
 Text Domain: mojblocks
 
 **********************************************************************************************/
+  /** Variables */
+  /*********************************************************************************************
+
+SASS modifications to conform GovUK frontent to MoJ block styling
+
+**********************************************************************************************/
+  /*********************************************************************************************
+Plugin Name: MOJ Blocks
+Author:  Ministry of Justice
+License: GNU General Public License v3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Text Domain: mojblocks
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Plugin Name: MOJ Blocks
+Block: Accordion (Gutenberg editor styles)
+Text Domain: mojblocks
+
+**********************************************************************************************/
   /*********************************************************************************************
 
 Name: Quotation
@@ -5780,6 +5801,150 @@ Author:  Ministry of Justice
 .block-editor-block-styles .govuk-accordion__section-content,
 .block-editor-inserter__menu-help-panel .govuk-accordion__section-content {
   display: block;
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box,
+.block-editor-block-styles .mojblocks-staggered-box,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box {
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box .govuk-grid-row,
+.block-editor-block-styles .mojblocks-staggered-box .govuk-grid-row,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box .govuk-grid-row {
+  position: relative;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-staggered-box:after,
+  .block-editor-block-styles .mojblocks-staggered-box:after,
+  .block-editor-inserter__menu-help-panel .mojblocks-staggered-box:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__image-container,
+.block-editor-block-styles .mojblocks-staggered-box__image-container,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__image-container {
+  padding: 0;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-staggered-box__image-container,
+  .block-editor-block-styles .mojblocks-staggered-box__image-container,
+  .block-editor-inserter__menu-help-panel .mojblocks-staggered-box__image-container {
+    float: left;
+    position: absolute;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__image,
+.block-editor-block-styles .mojblocks-staggered-box__image,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__image {
+  display: block;
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__text-container,
+.block-editor-block-styles .mojblocks-staggered-box__text-container,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__text-container {
+  z-index: 1;
+  background-color: #6F777B;
+  color: #ffffff;
+  padding: 1rem;
+  position: relative;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-staggered-box__text-container,
+  .block-editor-block-styles .mojblocks-staggered-box__text-container,
+  .block-editor-inserter__menu-help-panel .mojblocks-staggered-box__text-container {
+    padding: 2rem;
+    float: right;
+    margin-top: 12.5%;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__title,
+.block-editor-block-styles .mojblocks-staggered-box__title,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__title {
+  margin-top: 2rem;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-staggered-box__title,
+  .block-editor-block-styles .mojblocks-staggered-box__title,
+  .block-editor-inserter__menu-help-panel .mojblocks-staggered-box__title {
+    margin-top: 2rem;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__title:before,
+.block-editor-block-styles .mojblocks-staggered-box__title:before,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__title:before {
+  content: '';
+  width: 50px;
+  height: 7px;
+  background: #FFDD00;
+  position: absolute;
+  top: 2rem;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-staggered-box__title:before,
+  .block-editor-block-styles .mojblocks-staggered-box__title:before,
+  .block-editor-inserter__menu-help-panel .mojblocks-staggered-box__title:before {
+    content: '';
+    width: 64px;
+    height: 8px;
+    background: #FFDD00;
+    position: absolute;
+    top: 2rem;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__button,
+.block-editor-block-styles .mojblocks-staggered-box__button,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__button {
+  border: 1px solid #FFCE21;
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__button:hover,
+.edit-post-visual-editor .mojblocks-staggered-box__button :focus,
+.edit-post-visual-editor .mojblocks-staggered-box__button :active,
+.block-editor-block-styles .mojblocks-staggered-box__button:hover,
+.block-editor-block-styles .mojblocks-staggered-box__button :focus,
+.block-editor-block-styles .mojblocks-staggered-box__button :active,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__button:hover,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__button :focus,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__button :active {
+  background-color: #FFCE21;
+  color: #0B0C0C;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .is-style-staggered-box-image-right .mojblocks-staggered-box__image-container,
+  .block-editor-block-styles .is-style-staggered-box-image-right .mojblocks-staggered-box__image-container,
+  .block-editor-inserter__menu-help-panel .is-style-staggered-box-image-right .mojblocks-staggered-box__image-container {
+    float: right;
+    margin-top: 20%;
+    margin-left: 33%;
+    position: relative;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .is-style-staggered-box-image-right .mojblocks-staggered-box__text-container,
+  .block-editor-block-styles .is-style-staggered-box-image-right .mojblocks-staggered-box__text-container,
+  .block-editor-inserter__menu-help-panel .is-style-staggered-box-image-right .mojblocks-staggered-box__text-container {
+    float: left;
+    position: absolute;
+    margin-top: 0;
+  }
 }
 
 .edit-post-visual-editor .mojblocks-quote,
