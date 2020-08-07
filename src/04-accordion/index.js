@@ -9,7 +9,7 @@ const { InnerBlocks } = wp.blockEditor;
  * Display content in accordion layout.
  */
 registerBlockType('mojblocks/accordion', {
-    title: __('MoJBlocks Accordion', 'mojblocks'),
+    title: __('Accordion (MoJ Blocks)', 'mojblocks'),
     description: __( 'Display content in an accordion format.' ),
     icon: "list-view",
     category: 'mojblocks',
@@ -22,7 +22,7 @@ registerBlockType('mojblocks/accordion', {
 
         // Load template/block when block is selected
         const templates = [
-            [ 'mojblocks/accordion-section', {} ]
+            [ 'mojblocks/accordion-section', { placeholder:'Add accordion sections' } ]
         ];
   
         return (

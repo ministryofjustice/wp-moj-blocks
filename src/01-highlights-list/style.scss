@@ -14,6 +14,7 @@ $mojblocks-color-lime: #B8EA23;
 $mojblocks-color-violet: #4C2C92;
 $mojblocks-color-mustard: #FFCE21;
 $mojblocks-color-dark-blue: #003078;
+$mojblocks-color-moj-blue: #1d70b8;
 $mojblocks-color-orange: #FF993C;
 $mojblocks-color-black: #0B0C0C;
 $mojblocks-color-grey: #6F777B;
@@ -25,20 +26,14 @@ $mojblocks-color-white: #ffffff;
 .wp-block-mojblocks-highlights-list {
     padding: 15px;
     margin: auto -15px;
+    background-color: $mojblocks-color-moj-blue;
 
     @include govuk-media-query($from: tablet) {
-        padding: 25px 0 25px 35px;
+        padding: 25px 0 25px;
     }
 
     @include govuk-media-query($from: desktop) {
-        padding: 35px 0 25px 75px;
-    }
-
-    &.is-style-default {
-        background-color: $mojblocks-color-dark-blue;
-    }
-    &.is-style-judicial-teal {
-        background-color: $mojblocks-color-teal;
+        padding: 35px 0 25px;
     }
 
     .mojblocks-highlights-list {
@@ -166,6 +161,48 @@ $mojblocks-color-white: #ffffff;
                     }
                 }
             }
+        }
+    }
+
+    &.is-style-judicial-teal {
+        background-color: $mojblocks-color-teal;
+
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+
+        @include govuk-media-query($from: tablet) {
+            padding: 25px 0 25px;
+        }
+
+        @include govuk-media-query($from: desktop) {
+            padding: 35px 0 25px;
+        }
+    }
+
+    &.is-style-moj-blue {
+        .mojblocks-highlights-list {
+            &__heading {
+                margin: 12px -75px 15px;
+                padding: 12px 75px;
+                background-color: $mojblocks-color-black;
+            }
+            &__heading-text {
+                color: $mojblocks-color-white;
+            }
+            &__content {
+            }
+        }
+
+        @include govuk-media-query($from: tablet) {
+            padding: 25px 0 25px 35px;
+        }
+
+        @include govuk-media-query($from: desktop) {
+            padding: 35px 75px 50px 75px;
         }
     }
 }
