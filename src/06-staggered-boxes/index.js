@@ -2,7 +2,6 @@ const { __ } = wp.i18n;
 const { registerBlockType, registerBlockStyle } = wp.blocks;
 const { Fragment } = wp.element;
 const { RichText, MediaUpload, InspectorControls, URLInputButton } = wp.blockEditor;
-
 const ALLOWED_MEDIA_TYPES = ['image'];
 
 registerBlockType("mojblocks/staggered-box", {
@@ -11,15 +10,6 @@ registerBlockType("mojblocks/staggered-box", {
   category: "mojblocks",
   icon: "admin-page",
   keywords: [__('staggered box'), __('photo block')],
-  example: {
-    attributes: {
-      staggeredBoxTitle: 'Exciting title',
-      staggeredBoxContent: 'Some exciting text that fits with the title',
-      staggeredBoxButtonLink: 'https://www.google.com/',
-      staggeredBoxButtonText: 'Interesting link',
-      staggeredBoxImageURL: 'https://giphy.com/gifs/xFoV7P0JsHwoZvHXP6',
-    },
-  },
 
   attributes: {
     staggeredBoxTitle: {
@@ -40,7 +30,8 @@ registerBlockType("mojblocks/staggered-box", {
     staggeredBoxButtonLink: {
       type: 'string',
       source: 'attribute',
-      attribute: 'href'
+      attribute: 'href',
+      selector: 'a.mojblocks-staggered-box__button'
     },
     staggeredBoxImageURL: {
       type: "string",
@@ -54,7 +45,6 @@ registerBlockType("mojblocks/staggered-box", {
   },
 
   edit: props => {
-
     const {
       attributes: { staggeredBoxContent, staggeredBoxImageURL, staggeredBoxButtonText, staggeredBoxButtonLink, staggeredBoxTitle, staggeredBoxImageAltText, className },
       setAttributes
@@ -79,12 +69,9 @@ registerBlockType("mojblocks/staggered-box", {
     const onStaggeredBoxImageSelect = (newStaggeredBoxImageURL) => {
       setAttributes({ staggeredBoxImageURL: newStaggeredBoxImageURL.sizes.full.url })
       setAttributes({ staggeredBoxImageAltText: newStaggeredBoxImageURL.alt})
-      console.log(newStaggeredBoxImageURL);
     }
 
-
     return (
-
       <Fragment >
         <InspectorControls>
           <MediaUpload
@@ -93,18 +80,19 @@ registerBlockType("mojblocks/staggered-box", {
             type="image"
             value={staggeredBoxImageURL}
             render={({ open }) => (
-              <button onClick={open}>
+              <button className="button button-primary button-hero" onClick={open}>
                 Open Media Library
               </button>
             )}
           />
         </InspectorControls>
 
-        <div className={`${className}  mojblocks-staggered-box`}>
+        <div className={`${className} mojblocks-staggered-box`}>
           <div className="govuk-width-container">
             <div className="govuk-grid-row">
-              <div className="govuk-grid-column-two-thirds mojblocks-staggered-box__image-container">
-                <img className="mojblocks-staggered-box__image" src={staggeredBoxImageURL} alt={staggeredBoxImageAltText} />
+
+              <div className="mojblocks-staggered-box__image-container govuk-grid-column-two-thirds ">
+                <img className="mojblocks-staggered-block__image" src={staggeredBoxImageURL} alt={staggeredBoxImageAltText} />
               </div>
 
               <div className="mojblocks-staggered-box__text-container govuk-grid-column-one-half" >
@@ -124,7 +112,6 @@ registerBlockType("mojblocks/staggered-box", {
                   placeholder={__('Add staggered box content', 'mojblocks')}
                   keepPlaceholderOnFocus={true}
                 />
-
                 <URLInputButton
                   label={__('Button link', 'mojblocks')}
                   onChange={onChangeStaggeredBoxButtonLink}
@@ -137,6 +124,7 @@ registerBlockType("mojblocks/staggered-box", {
                   placeholder={__('Add staggered box button', 'mojblocks')}
                 />
               </div>
+
             </div>
           </div>
         </div>
@@ -145,38 +133,34 @@ registerBlockType("mojblocks/staggered-box", {
   },
 
   save: props => {
-
     const {
       attributes: { staggeredBoxTitle, staggeredBoxContent, staggeredBoxButtonText, staggeredBoxButtonLink, staggeredBoxImageURL, staggeredBoxImageAltText }
     } = props;
 
     return (
-
-    <div className="mojblocks-staggered-box">
-      <div className="govuk-width-container">
+      <div className="mojblocks-staggered-box">
+        <div className="govuk-width-container">
           <div className="govuk-grid-row">
 
-            <div className="govuk-grid-column-two-thirds mojblocks-staggered-box__image-container">
+            <div className="mojblocks-staggered-box__image-container govuk-grid-column-two-thirds ">
               <img className="mojblocks-staggered-block__image" src={staggeredBoxImageURL} alt={staggeredBoxImageAltText}/>
             </div>
 
             <div className="mojblocks-staggered-box__text-container govuk-grid-column-one-half" >
               <RichText.Content className="mojblocks-staggered-box__title" tagName="h2" value = { staggeredBoxTitle } />
               <RichText.Content className="mojblocks-staggered-box__content" tagName="p" value = { staggeredBoxContent } />
-              <a className="mojblocks-staggered-box__button" href={staggeredBoxButtonLink}>
-                <RichText.Content  value = { staggeredBoxButtonText } />
+              <a href={staggeredBoxButtonLink} className="mojblocks-staggered-box__button" >
+                <RichText.Content  value={ staggeredBoxButtonText } />
               </a>
             </div>
 
           </div>
+        </div>
       </div>
-    </div>
-
     );
   }
 });
 
-// style variations
 registerBlockStyle('mojblocks/staggered-box',
   {
     name: 'image-left',
