@@ -179,14 +179,14 @@ registerBlockType("mojblocks/staggered-box", {
 // style variations
 registerBlockStyle('mojblocks/staggered-box',
   {
-    name: 'image-right',
-    label: 'Image aligned on the right',
+    name: 'image-left',
+    label: 'Image aligned on the left',
     isDefault: true,
   }
 );
 registerBlockStyle('mojblocks/staggered-box',
   {
-    name: 'staggered-box-image-left',
-    label: 'Image aligned on left'
+    name: 'staggered-box-image-right',
+    label: 'Image aligned on right'
   }
 );

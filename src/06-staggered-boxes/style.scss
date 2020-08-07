@@ -26,18 +26,20 @@ $mojblocks-color-white: #ffffff;
   margin-right: -15px;
   margin-left: -15px;
 
+  & .govuk-grid-row {
+    position: relative;
+  }
+
   @include govuk-media-query($from: tablet) {
-    margin-bottom: 10rem;
+    @include govuk-clearfix;
   }
 
   &__image-container {
     padding: 0;
-    position: relative;
 
     @include govuk-media-query($from: tablet) {
-      margin-bottom: -18.5rem;
-      float: right;
-      margin-top: 8.5rem;
+      float: left;
+      position: absolute;
     }
   }
 
@@ -45,35 +47,18 @@ $mojblocks-color-white: #ffffff;
     display: block;
   }
 
-  &__image-credit-container {
-    background-color: $mojblocks-color-black;
-    opacity: 0.9;
-    color: $mojblocks-color-white;
-    width: auto;
-    display: inline-block;
-    padding: 0 0.5rem;
-    position: absolute;
-    bottom: 1rem;
-    left: 1rem;
-    margin-bottom: 0;
-  }
-
-  &__image-credit-text {
-    display: inline;
-    margin-left: 0.5rem;
-  }
-
   &__text-container {
+
     z-index: 1;
     background-color: $mojblocks-color-grey;
     color: $mojblocks-color-white;
     padding: 1rem;
-    display: inline-block;
     position: relative;
 
     @include govuk-media-query($from: tablet) {
       padding: 2rem;
-      margin-top: -7rem;
+        float: right;
+        margin-top: 12.5%;
     }
   }
 
@@ -117,28 +102,24 @@ $mojblocks-color-white: #ffffff;
   }
 }
 
-.is-style-staggered-box-image-left {
-
-  margin-bottom: 5rem;
-
-  @include govuk-media-query($from: tablet) {
-    margin-top: 15rem;
-    margin-bottom: unset;
-  }
+.is-style-staggered-box-image-right {
 
   & .mojblocks-staggered-box__image-container {
+
     @include govuk-media-query($from: tablet) {
-      float: left;
-      margin-top: -14rem;
-      margin-bottom: -14.5rem;
+      float: right;
+      margin-top: 20%;
+      margin-left: 33%;
+      position: relative;
     }
+
   }
 
   & .mojblocks-staggered-box__text-container {
-    float: right;
-  }
-
-  & .mojblocks-staggered-box__image-credit-container {
-    text-align: right;
+    @include govuk-media-query($from: tablet) {
+      float: left;
+      position: absolute;
+      margin-top: 0;
+    }
   }
 }
