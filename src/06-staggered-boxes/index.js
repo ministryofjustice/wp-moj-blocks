@@ -35,7 +35,7 @@ registerBlockType("mojblocks/staggered-box", {
     },
     staggeredBoxImageURL: {
       type: "string",
-      default: 'https://pusheen.com/wp-content/themes/pusheen-custom/img/header-pusheen.gif'
+      default: ''
     },
     staggeredBoxImageAltText: {
       type: "string",
