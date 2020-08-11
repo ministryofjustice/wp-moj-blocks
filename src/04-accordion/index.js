@@ -22,7 +22,7 @@ registerBlockType('mojblocks/accordion', {
 
         // Load template/block when block is selected
         const templates = [
-            [ 'mojblocks/accordion-section', { placeholder:'Add accordion sections' } ]
+            [ 'mojblocks/accordion-section', {} ]
         ];
   
         return (
@@ -51,7 +51,7 @@ registerBlockType('mojblocks/accordion', {
  * Inner-block. Displayed only in the parent accordion block.
  */
 registerBlockType("mojblocks/accordion-section", {
-    title: __("MoJBlocks Accordion Section", "mojblocks"),
+    title: __("Accordion Section", "mojblocks"),
     category: "mojblocks",
     parent: [ 'mojblocks/accordion' ],
     attributes: {
@@ -77,35 +77,41 @@ registerBlockType("mojblocks/accordion-section", {
             setAttributes
         } = props
 
+        // Load allowed blocks to be added to accordion section body
+        const allowedBlocks = [ 'core/heading','core/list', 'core/paragraph' ];
+
         const onChangeAccordionSectionTitle = newAccordionTitle => {
             setAttributes({ accordionSectionTitle: newAccordionTitle })
           }
 
-          const onChangeAccordionSectionTextArea = newAccordionSectionTextArea => {
+        const onChangeAccordionSectionTextArea = newAccordionSectionTextArea => {
             setAttributes({ accordionSectionTextArea: newAccordionSectionTextArea })
-          }
+        }
   
         return (
             <div className="govuk-accordion__section">
                 <div className="govuk-accordion__section-header">
-                <h2 className="govuk-accordion__section-heading">
+                <h3 className="govuk-accordion__section-heading">
                     <span className="govuk-accordion__section-button" id="accordion-default-heading-1">
                     <RichText
-                        placeholder={__('Add title', 'mojblocks')}
+                        placeholder={__('Add section title', 'mojblocks')}
                         value={ accordionSectionTitle }
                         onChange={ onChangeAccordionSectionTitle }
                         keepPlaceholderOnFocus={ true }
                     />
                     </span>
-                </h2>
+                </h3>
                 </div>
                 <div id="accordion-default-content-1" className="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
                     <div className="govuk-body">
                         <RichText
-                            placeholder={__('Add content', 'mojblocks')}
+                            placeholder={__('Add section content', 'mojblocks')}
                             value={ accordionSectionTextArea }
                             onChange={ onChangeAccordionSectionTextArea }
                             keepPlaceholderOnFocus={ true }
+                        />
+                        <InnerBlocks
+                            allowedBlocks={ allowedBlocks }
                         />
                     </div>
                 </div>
@@ -125,15 +131,16 @@ registerBlockType("mojblocks/accordion-section", {
         return (
             <div className="govuk-accordion__section">
                 <div className="govuk-accordion__section-header">
-                <h2 className="govuk-accordion__section-heading">
+                <h3 className="govuk-accordion__section-heading">
                     <span className="govuk-accordion__section-button" id="accordion-default-heading-1">
                     <RichText.Content value={ accordionSectionTitle } />
                     </span>
-                </h2>
+                </h3>
                 </div>
                 <div id="accordion-default-content-1" className="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
                     <div className="govuk-body">
                         <RichText.Content value={ accordionSectionTextArea } />
+                        <InnerBlocks.Content />
                     </div>
                 </div>
             </div>

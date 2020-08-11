@@ -17,11 +17,40 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 
 **********************************************************************************************/
 
+.govuk-accordion {
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        color: $mojblocks-color-light-blue;
+    }
+
+    h3 {
+        margin: 12px 0 10px;
+        margin: govuk-px-to-rem(12) 0 govuk-px-to-rem(10);
+    }
+
+    .block-editor-block-list__block .block-list-appender {
+        margin-left: 0;
+        width: govuk-px-to-rem(400);
+
+        textarea {
+            padding-left: 0;
+            margin-left: 0;
+        }
+    }  
+}
+
+
 .govuk-accordion__section-header {
     border-top: 1px dashed $mojblocks-color-grey;
     color: $mojblocks-color-light-blue;
 
     &:before {
+        color: $mojblocks-color-grey;
         content: 'Accordion section';
     }
 }

@@ -28,6 +28,20 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 **********************************************************************************************/
 
 .govuk-accordion {
+
+    font-style: normal;
+    font-family: inherit;
+    font-size: inherit;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6  {
+        color: $mojblocks-color-light-blue;
+    }
+
     border-bottom: none;
 
     // Reset NHS margin to display no margin on accordion sections
@@ -56,10 +70,16 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 .govuk-accordion__section-header {
     padding: 20px 28px 0 10px;
     padding: govuk-px-to-rem(20) govuk-px-to-rem(28) govuk-px-to-rem(0) govuk-px-to-rem(10);
-    color: $mojblocks-color-light-blue;
 }
 
 .govuk-accordion__section-heading {
+
+    h4 {
+        font-style: normal;
+        font-family: inherit;
+        font-size: inherit;
+    }
+
     margin-left: 22px;
     margin-left: govuk-px-to-rem(22);
 }
