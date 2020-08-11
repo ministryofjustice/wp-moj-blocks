@@ -8,6 +8,8 @@ Text Domain: mojblocks
 
 **********************************************************************************************/
 
+$mojblocks-color-white: #ffffff;
+
 .mojblocks-hero {
   width: 100vw;
   position: relative;
@@ -20,22 +22,32 @@ Text Domain: mojblocks
     background: #336C83;
     width: 100vw;
     min-height: 250px;
+    min-height: govuk-px-to-rem(250);
 
     @include govuk-media-query($from: tablet) {
       min-height: 500px;
+      min-height: govuk-px-to-rem(500);
     }
   }
 
   &__overlay {
     padding: 15px 0;
+    padding: govuk-px-to-rem(15) 0;
     float: left;
     width: 100%;
     margin-left: -15px;
+    margin-left: govuk-px-to-rem(-15);
+
+    & .govuk-grid-column-three-quarters {
+      padding-left: 24px;
+      padding-left: govuk-px-to-rem(24)
+    }
 
 
     @include govuk-media-query($from: tablet) {
       margin-top: -80px;
-      background: #f0f4f5;
+      margin-top: govuk-px-to-rem(-80);
+      background: $mojblocks-color-white;
     }
 
     h2 {
