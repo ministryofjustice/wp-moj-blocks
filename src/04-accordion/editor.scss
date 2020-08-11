@@ -30,7 +30,7 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 
     h3 {
         margin: 12px 0 10px;
-        margin: govuk-px-to-rem(12) govuk-px-to-rem(0) govuk-px-to-rem(10);
+        margin: govuk-px-to-rem(12) 0 govuk-px-to-rem(10);
     }
 
     .block-editor-block-list__block .block-list-appender {
