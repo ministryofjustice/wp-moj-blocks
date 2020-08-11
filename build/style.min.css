@@ -2870,6 +2870,18 @@ Author:  Ministry of Justice - Damien Wilson
   }
 }
 
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-cta .govuk-grid-column-three-quarters {
+    padding: 0;
+  }
+}
+
+@media (min-width: 40.0625em) and (min-width: 40.0625em) {
+  .wp-block-mojblocks-cta .govuk-grid-column-three-quarters {
+    padding: 0;
+  }
+}
+
 /*********************************************************************************************
 Plugin Name: MOJ Blocks
 Author:  Ministry of Justice

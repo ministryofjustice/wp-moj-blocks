@@ -148,4 +148,10 @@ $mojblocks-color-white: #ffffff;
             padding: 35px 75px 50px 75px;
         }
     }
+
+    .govuk-grid-column-three-quarters {
+        @include govuk-media-query($from: tablet) {
+            @include govuk-responsive-padding(0);
+        }
+    }
 }
