@@ -76,43 +76,45 @@ registerBlockType('mojblocks/cta', {
 
         return (
             <div className={`${className}`}>
-                <div className={'nhsuk-width-container'}>
+                <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
-                        <div className="mojblocks-cta__heading-container">
-                            <h3 className="mojblocks-cta__heading">
-                            <span role="text">
-                                <span className="mojblocks-cta__heading-text">
-                                    <RichText
-                                        placeholder={__('A great call-to-action title', 'mojblocks')}
-                                        keepPlaceholderOnFocus
-                                        value={ctaTitle}
-                                        onChange={onChangeCtaTitle}
-                                    />
+                        <div class="govuk-grid-column-three-quarters">
+                            <div className="mojblocks-cta__heading-container">
+                                <h3 className="mojblocks-cta__heading">
+                                <span role="text">
+                                    <span className="mojblocks-cta__heading-text">
+                                        <RichText
+                                            placeholder={__('A great call-to-action title', 'mojblocks')}
+                                            keepPlaceholderOnFocus
+                                            value={ctaTitle}
+                                            onChange={onChangeCtaTitle}
+                                        />
+                                    </span>
                                 </span>
-                            </span>
-                            </h3>
-                        </div>
-                        <div className={'mojblocks-cta__content'}>
+                                </h3>
+                            </div>
+                            <div className={'mojblocks-cta__content'}>
+                                <RichText
+                                    multiline="p"
+                                    placeholder={__('Some compelling text to send the message home!', 'mojblocks')}
+                                    keepPlaceholderOnFocus
+                                    onChange={onChangeCtaText}
+                                    value={ctaText}
+                                />
+                            </div>
+                            <URLInputButton
+                                className="mojblocks-dropdown__input"
+                                label={__('CTA Link', 'mojblocks')}
+                                onChange={onChangeButtonLink}
+                                url={buttonLink}
+                            />
                             <RichText
-                                multiline="p"
-                                placeholder={__('Some compelling text to send the message home!', 'mojblocks')}
-                                keepPlaceholderOnFocus
-                                onChange={onChangeCtaText}
-                                value={ctaText}
+                                className="mojblocks-button"
+                                value={buttonLabel}
+                                onChange={onChangeButtonLabel}
+                                placeholder="Button label"
                             />
                         </div>
-                        <URLInputButton
-                            className="mojblocks-dropdown__input"
-                            label={__('CTA Link', 'mojblocks')}
-                            onChange={onChangeButtonLink}
-                            url={buttonLink}
-                        />
-                        <RichText
-                            className="mojblocks-button"
-                            value={buttonLabel}
-                            onChange={onChangeButtonLabel}
-                            placeholder="Button label"
-                        />
                     </div>
                 </div>
             </div>
@@ -131,23 +133,25 @@ registerBlockType('mojblocks/cta', {
 
         return (
             <div className={`mojblocks-cta`}>
-                <div className={'nhsuk-width-container'}>
+                <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
-                        <div className="mojblocks-cta__heading-container">
-                            <h3 className="mojblocks-cta__heading">
-                            <span role="text">
-                                <span className="mojblocks-cta__heading-text">
-                                    <RichText.Content value={ctaTitle}/>
+                        <div class="govuk-grid-column-three-quarters">
+                            <div className="mojblocks-cta__heading-container">
+                                <h3 className="mojblocks-cta__heading">
+                                <span role="text">
+                                    <span className="mojblocks-cta__heading-text">
+                                        <RichText.Content value={ctaTitle}/>
+                                    </span>
                                 </span>
-                            </span>
-                            </h3>
+                                </h3>
+                            </div>
+                            <div className="mojblocks-cta__content">
+                                <RichText.Content value={ctaText} multiline="p"/>
+                            </div>
+                            <a href={buttonLink} className="mojblocks-button">
+                                <RichText.Content value={buttonLabel}/>
+                            </a>
                         </div>
-                        <div className="mojblocks-cta__content">
-                            <RichText.Content value={ctaText} multiline="p"/>
-                        </div>
-                        <a href={buttonLink} className="mojblocks-button">
-                            <RichText.Content value={buttonLabel}/>
-                        </a>
                     </div>
                 </div>
             </div>
