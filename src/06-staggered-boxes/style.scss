@@ -23,10 +23,8 @@ $mojblocks-color-light-grey: #F3F2F1;
 $mojblocks-color-white: #ffffff;
 
 .mojblocks-staggered-box {
-  margin-right: -15px;
-  margin-right: govuk-px-to-rem(-15);
-  margin-left: -15px;
-  margin-left: govuk-px-to-rem(15);
+  margin: 48px -15px;
+  margin: govuk-px-to-rem(48) govuk-px-to-rem(-15);
 
   & .govuk-grid-row {
     position: relative;
@@ -61,17 +59,15 @@ $mojblocks-color-white: #ffffff;
       padding: 32px;
       padding: govuk-px-to-rem(32);
         float: right;
-        margin-top: 12.5%;
+        margin-top: 17.5%;
     }
   }
 
   &__title {
-    margin-top: 32px;
-    margin-top: govuk-px-to-rem(32);
-    @include govuk-media-query($from: tablet) {
-      margin-top: 32px;
-      margin-top: govuk-px-to-rem(32);
-    }
+    margin-top: 16px;
+    margin-top: govuk-px-to-rem(16);
+    margin-bottom: 24px;
+    margin-bottom: govuk-px-to-rem(24);
 
     &:before {
       content: '';
@@ -104,6 +100,7 @@ $mojblocks-color-white: #ffffff;
   &__button {
     border: 1px solid $mojblocks-color-mustard;
     color: $mojblocks-color-white;
+    display: inline-block;
     padding: 0.5rem 1rem;
     padding: govuk-px-to-rem(8) govuk-px-to-rem(16);
 
