@@ -629,9 +629,7 @@ registerBlockType('mojblocks/accordion', {
     // Load allowed blocks on repeater
     var allowedBlocks = ['mojblocks/accordion-section']; // Load template/block when block is selected
 
-    var templates = [['mojblocks/accordion-section', {
-      placeholder: 'Add accordion sections'
-    }]];
+    var templates = [['mojblocks/accordion-section', {}]];
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "govuk-accordion",
       "data-module": "govuk-accordion",
@@ -656,7 +654,7 @@ registerBlockType('mojblocks/accordion', {
  */
 
 registerBlockType("mojblocks/accordion-section", {
-  title: __("MoJBlocks Accordion Section", "mojblocks"),
+  title: __("Accordion Section", "mojblocks"),
   category: "mojblocks",
   parent: ['mojblocks/accordion'],
   attributes: {
@@ -675,7 +673,9 @@ registerBlockType("mojblocks/accordion-section", {
     var _props$attributes = props.attributes,
         accordionSectionTitle = _props$attributes.accordionSectionTitle,
         accordionSectionTextArea = _props$attributes.accordionSectionTextArea,
-        setAttributes = props.setAttributes;
+        setAttributes = props.setAttributes; // Load allowed blocks to be added to accordion section body
+
+    var allowedBlocks = ['core/heading', 'core/list', 'core/paragraph'];
 
     var onChangeAccordionSectionTitle = function onChangeAccordionSectionTitle(newAccordionTitle) {
       setAttributes({
@@ -693,13 +693,13 @@ registerBlockType("mojblocks/accordion-section", {
       className: "govuk-accordion__section"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "govuk-accordion__section-header"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", {
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h3", {
       className: "govuk-accordion__section-heading"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
       className: "govuk-accordion__section-button",
       id: "accordion-default-heading-1"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
-      placeholder: __('Add title', 'mojblocks'),
+      placeholder: __('Add section title', 'mojblocks'),
       value: accordionSectionTitle,
       onChange: onChangeAccordionSectionTitle,
       keepPlaceholderOnFocus: true
@@ -710,10 +710,12 @@ registerBlockType("mojblocks/accordion-section", {
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "govuk-body"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
-      placeholder: __('Add content', 'mojblocks'),
+      placeholder: __('Add section content', 'mojblocks'),
       value: accordionSectionTextArea,
       onChange: onChangeAccordionSectionTextArea,
       keepPlaceholderOnFocus: true
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks, {
+      allowedBlocks: allowedBlocks
     }))));
   },
   save: function save(props) {
@@ -724,7 +726,7 @@ registerBlockType("mojblocks/accordion-section", {
       className: "govuk-accordion__section"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "govuk-accordion__section-header"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", {
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h3", {
       className: "govuk-accordion__section-heading"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
       className: "govuk-accordion__section-button",
@@ -739,7 +741,7 @@ registerBlockType("mojblocks/accordion-section", {
       className: "govuk-body"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
       value: accordionSectionTextArea
-    }))));
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks.Content, null))));
   }
 });
 

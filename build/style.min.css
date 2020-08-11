@@ -3260,9 +3260,21 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 **********************************************************************************************/
 
 .govuk-accordion {
+  font-style: normal;
+  font-family: inherit;
+  font-size: inherit;
   border-bottom: none;
   margin-bottom: 0;
   margin-bottom: 0rem;
+}
+
+.govuk-accordion h1,
+.govuk-accordion h2,
+.govuk-accordion h3,
+.govuk-accordion h4,
+.govuk-accordion h5,
+.govuk-accordion h6 {
+  color: #1d70b8;
 }
 
 .govuk-accordion:last-child {
@@ -3282,12 +3294,17 @@ SASS modifications to conform GovUK frontent to MoJ block styling
 .govuk-accordion__section-header {
   padding: 20px 28px 0 10px;
   padding: 1.25rem 1.75rem 0rem 0.625rem;
-  color: #1d70b8;
 }
 
 .govuk-accordion__section-heading {
   margin-left: 22px;
   margin-left: 1.375rem;
+}
+
+.govuk-accordion__section-heading h4 {
+  font-style: normal;
+  font-family: inherit;
+  font-size: inherit;
 }
 
 .govuk-accordion__section-button,
