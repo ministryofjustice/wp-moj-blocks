@@ -4,10 +4,11 @@
  */
 
 import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
+import { registerBlockType, unregisterBlockType } from '@wordpress/blocks';
 import { Fragment } from '@wordpress/element';
 import { RichText, MediaUpload, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
 import { Button, Dashicon } from '@wordpress/components';
+import domReady from '@wordpress/dom-ready'
 import Icons from '../../assets/svg/index';
 
 const ALLOWED_MEDIA_TYPES = ['image'];
@@ -207,3 +208,7 @@ registerBlockType('mojblocks/quote', {
         );
     }
 });
+
+domReady( function() {
+    unregisterBlockType( 'core/quote' );
+} );
