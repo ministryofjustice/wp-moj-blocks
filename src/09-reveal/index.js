@@ -1,6 +1,5 @@
 /**
- * Intro
- * A stylised intro section
+ * Reveal
  */
 import { __ } from '@wordpress/i18n';
 import { registerBlockType, registerBlockStyle } from '@wordpress/blocks';
