@@ -10,3 +10,4 @@ import "./05-video";
 import "./06-staggered-boxes";
 import "./07-quote";
 import "./08-intro";
+import "./09-reveal";
