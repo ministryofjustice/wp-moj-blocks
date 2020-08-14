@@ -11,5 +11,9 @@ import { Details } from 'govuk-frontend';
 /** Accordion **/
 const mojblocksAccordion = document.querySelector('[data-module="govuk-accordion"]') || null;
 
+/** Reveal **/
+const mojblocksReveal = document.querySelector('[data-module="govuk-details"]') || null;
+
 // initialise components
 if (mojblocksAccordion) { new Accordion(mojblocksAccordion).init() }
+if (mojblocksReveal) { new Details(mojblocksReveal).init() }
