@@ -5,6 +5,7 @@
 
 // import dependencies
 import { Accordion } from 'govuk-frontend';
+import { Details } from 'govuk-frontend';
 
 // get components
 /** Accordion **/
