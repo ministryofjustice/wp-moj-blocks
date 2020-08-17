@@ -35,11 +35,11 @@
   "scripts": {
     "start": "wp-scripts start",
     "build": "wp-scripts build && NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "build-comp": "wp-scripts build",
+    "build-comp": "wp-scripts build && npm run production",
     "zip": "zip -r mojblocks.zip ./ -x .git .gitignore *.git/* .DS_Store .package.json .package-lock.json *.scss webpack.config.js mojblocks.zip  postcss.config.css README.md .wordpress-org/**\\* .ds_store vendor/**\\* node_modules/**\\* src/**\\* webpack.config.js n",
     "build:docs": "rm -rf hookdocs/ && jsdoc -c hookdoc-conf.json",
     "watch": "webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
-    "production": "NODE_ENV=production webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "production": "NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
   },
   "dependencies": {
     "lodash": "^4.17.20"
