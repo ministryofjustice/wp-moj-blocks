@@ -22,7 +22,7 @@
  **/
 
 defined('ABSPATH') || exit;
- 
+
 /**
  * Load translations (if any) for the plugin from the /languages/ folder.
  *
@@ -92,7 +92,7 @@ function mojblocks_register_blocks()
         $meta = require_once('build/index.asset.php');
     } else {
         $meta = [
-            'dependencies' => array( 'wp-blocks', 'wp-dom-ready', 'wp-edit-post' ),
+            'dependencies' => array('wp-blocks', 'wp-dom-ready', 'wp-edit-post'),
             'version' => '20200723'
         ];
 
@@ -111,7 +111,7 @@ function mojblocks_register_blocks()
         true
     );
 
-     // Calls registered script above. Registering one brings all. One block to rule them all.
+    // Calls registered script above. Registering one brings all. One block to rule them all.
     register_block_type(
         'mojblocks/blocks',
         ['editor_script' => 'mojblocks-editor-script']
@@ -131,6 +131,7 @@ function mojblocks_gutenberg_editor_styles()
         'all'
     );
 }
+
 // Pulls the enqueued file in to standard wp process.
 add_action('enqueue_block_editor_assets', 'mojblocks_gutenberg_editor_styles');
 
@@ -149,6 +150,14 @@ add_action('init', 'mojblocks_register_style');
 function mojblocks_enqueue_style()
 {
     wp_enqueue_style('mojblocks');
+
+    // IE specific stylesheet
+    wp_enqueue_style(
+        'mojblocks-ie',
+        plugins_url('build/ie.min.js', __FILE__),
+        array('mojblocks')
+    );
+    wp_style_add_data('mojblocks-ie', 'conditional', 'IE');
 
     wp_enqueue_script(
         'mojblocks-js',

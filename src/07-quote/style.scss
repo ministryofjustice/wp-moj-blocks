@@ -26,57 +26,20 @@ $mojblocks-color-white: #ffffff;
     margin: 15px 0;
 
     &__image {
+
         &-selected {
-            min-height: 255px;
-            min-width: auto;
-            padding: 10px;
-        }
+            // ratio of 3 over 2 for small devices
+            width: 100%;
+            padding-bottom: 75%;
+            // end ratio
+            position: relative;
+            background-size: cover;
+            background-position: top center;
+            border-radius: 0;
 
-        &__button {
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            border: 3px solid #ffffff;
-            padding: 6px;
-            box-shadow: none;
-            transition: all 0.3s;
-
-            &:hover,
-            &:focus {
-                box-shadow: none !important;
-            }
-
-            &-add {
-
-            }
-
-            &-change {
-                background-color: rgba(0, 0, 0, 0.8);
-
-                > svg {
-                    color: white;
-                }
-
-                &:hover > svg,
-                &:focus > svg  {
-                    color: $mojblocks-color-grey;
-                }
-            }
-
-            &-remove {
-                background-color: rgba(0, 0, 0, 0.8);
-                float: right;
-                width: 36px;
-                height: 36px;
-
-                > svg {
-                    color: white;
-                }
-
-                &:hover > svg,
-                &:focus > svg {
-                    color: $mojblocks-color-grey;
-                }
+            @include govuk-media-query($from: tablet) {
+                // ratio of 2 over 1 for small devices
+                padding-bottom: 50%;
             }
         }
     }

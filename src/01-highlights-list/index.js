@@ -57,7 +57,7 @@ registerBlockType('mojblocks/highlights-list', {
 
         return (
             <div className={`${className}`}>
-                <div className={'nhsuk-width-container'}>
+                <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
                         <div className="mojblocks-highlights-list__heading-container">
                             <h3 className="mojblocks-highlights-list__heading">

@@ -1,0 +1,4 @@
+/// hack: prevent a horizontal scrollbar in IE11
+main {
+    overflow-x: hidden;
+}
