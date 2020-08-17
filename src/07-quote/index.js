@@ -80,9 +80,7 @@ registerBlockType('mojblocks/quote', {
                             : ''
                     )}
                     style={{
-                        backgroundImage: `url(${attributes.quoteImgURL})`,
-                        backgroundSize: 'cover',
-                        backgroundPosition: 'center'
+                        backgroundImage: `url(${attributes.quoteImgURL})`
                     }}>
                     <MediaUpload
                         buttonProps={{
@@ -178,9 +176,7 @@ registerBlockType('mojblocks/quote', {
                 {typeof quoteImgURL === "string" && (
                     <div className="mojblocks-quote__image mojblocks-quote__image-selected"
                          style={{
-                             backgroundImage: `url(${quoteImgURL})`,
-                             backgroundSize: 'cover',
-                             backgroundPosition: 'center'
+                             backgroundImage: `url(${quoteImgURL})`
                          }}>
                     </div>
                 )}

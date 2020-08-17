@@ -14,12 +14,11 @@ Text Domain: mojblocks
 @import 'node_modules/govuk-frontend/govuk/base';
 @import 'node_modules/govuk-frontend/govuk/core/all';
 @import 'node_modules/govuk-frontend/govuk/objects/all';
+
+/// components should be loaded here, before utilities and overrides
+/// suggestion to import block specific files: govuk.scss
+
 @import 'node_modules/govuk-frontend/govuk/utilities/all';
 @import 'node_modules/govuk-frontend/govuk/overrides/all';
 
 @import 'src/**/style.scss';
-
-/// hack: prevent a horizontal scrollbar in IE11
-main {
-    overflow-x: hidden;
-}

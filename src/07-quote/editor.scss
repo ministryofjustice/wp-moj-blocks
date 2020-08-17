@@ -7,4 +7,84 @@ Text Domain: mojblocks
 
 **********************************************************************************************/
 
+/** Variables */
+$mojblocks-color-teal: #336C83;
+$mojblocks-color-yellow: #FFDD00;
+$mojblocks-color-purple: #912B88;
+$mojblocks-color-lime: #B8EA23;
+$mojblocks-color-violet: #4C2C92;
+$mojblocks-color-mustard: #FFCE21;
+$mojblocks-color-dark-blue: #003078;
+$mojblocks-color-orange: #FF993C;
+$mojblocks-color-black: #0B0C0C;
+$mojblocks-color-dark-grey: #454A4C;
+$mojblocks-color-grey: #6F777B;
+$mojblocks-color-mid-grey: #B1B4B6;
+$mojblocks-color-light-grey: #F3F2F1;
+$mojblocks-color-white: #ffffff;
+
+.mojblocks-quote {
+    &__image {
+        background-color: $mojblocks-color-dark-grey;
+        min-height: 70px;
+        border-radius: 4px;
+
+        &__button {
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            border: 3px solid #ffffff;
+            padding: 6px;
+            box-shadow: none;
+            transition: all 0.3s;
+            position: absolute;
+            top: 10px;
+
+            > svg {
+                color: white;
+            }
+
+            &:hover,
+            &:focus {
+                box-shadow: none !important;
+            }
+
+            &-add {
+                left: 10px;
+            }
+
+            &-change {
+                background-color: rgba(0, 0, 0, 0.8);
+                left: 10px;
+
+                > svg {
+                    color: white;
+                }
+
+                &:hover > svg,
+                &:focus > svg  {
+                    color: $mojblocks-color-grey;
+                }
+            }
+
+            &-remove {
+                background-color: rgba(0, 0, 0, 0.8);
+                left: unset;
+                right: 10px;
+                width: 36px;
+                height: 36px;
+
+                > svg {
+                    color: white;
+                }
+
+                &:hover > svg,
+                &:focus > svg {
+                    color: $mojblocks-color-grey;
+                }
+            }
+        }
+    }
+}
+
 @import 'style.scss';
