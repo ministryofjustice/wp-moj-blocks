@@ -33,10 +33,15 @@ SASS modifications to conform GovUK frontend to MoJ block styling
         color: $mojblocks-color-light-blue;
     }
 
-    // Change postion and colour of title and arrow to align within section
+    // Change position and colour of title and arrow to align within section
     &__section-header {
         padding: 20px 28px 20px 10px;
         padding: govuk-px-to-rem(20) govuk-px-to-rem(28) govuk-px-to-rem(20) govuk-px-to-rem(10);
+
+        @include govuk-media-query($from: tablet) {
+            padding-left: 30px;
+            padding-left: govuk-px-to-rem(30);
+        }
     }
 
     // Accordion title - stop NHS theme causing "link bounce" effect when clicked on
@@ -73,8 +78,8 @@ SASS modifications to conform GovUK frontend to MoJ block styling
         left: -30px;
         width: 16px;
         height: 16px;
-        margin-top: -8px;
-        margin-top: govuk-px-to-rem(-8);
+        margin-top: -7px;
+        margin-top: govuk-px-to-rem(-7);
 
         &:after {
             display: none;
@@ -107,7 +112,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
                 border-left-color: transparent;
                 -webkit-clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
                 clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-                border-width: 7px 0 7px 12.124px;
+                border-width: 8.5px 0 8.5px 14.624px;
                 border-left-color: inherit;
                 background-color: $mojblocks-color-light-blue;
             }
@@ -155,7 +160,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
                     border-left-color: transparent;
                     -webkit-clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
                     clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-                    border-width: 12.124px 7px 0 7px;
+                    border-width: 14.624px 8.5px 0 8.5px;
                     border-left-color: inherit;
                     background-color: $mojblocks-color-light-blue;
                 }
