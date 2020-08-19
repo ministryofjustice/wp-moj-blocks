@@ -23,112 +23,117 @@ $mojblocks-color-light-grey: #F3F2F1;
 $mojblocks-color-white: #ffffff;
 
 .mojblocks-staggered-box {
-  margin: 48px -15px;
-  margin: govuk-px-to-rem(48) govuk-px-to-rem(-15);
+	margin: 48px -15px;
+	margin: govuk-px-to-rem(48) govuk-px-to-rem(-15);
 
-  & .govuk-grid-row {
-    position: relative;
-  }
+	& .govuk-grid-row {
+		position: relative;
+	}
 
-  @include govuk-media-query($from: tablet) {
-    @include govuk-clearfix;
-  }
+	@include govuk-media-query($from: tablet) {
+		@include govuk-clearfix;
+	}
 
-  &__image-container {
-    padding: 0;
+	&__image-container {
+		padding: 0;
 
-    @include govuk-media-query($from: tablet) {
-      float: left;
-      position: absolute;
-    }
-  }
+		@include govuk-media-query($from: tablet) {
+			float: left;
+			position: absolute;
+		}
+	}
 
-  &__image {
-    display: block;
-  }
+	&__image {
+		display: block;
+	}
 
-  &__text-container {
+	&__text-container {
 
-    z-index: 1;
-    background-color: $mojblocks-color-grey;
-    color: $mojblocks-color-white;
-    padding: 1rem;
-    position: relative;
+		z-index: 1;
+		background-color: $mojblocks-color-grey;
+		color: $mojblocks-color-white;
+		padding: 1rem;
+		position: relative;
 
-    @include govuk-media-query($from: tablet) {
-      padding: 32px;
-      padding: govuk-px-to-rem(32);
-        float: right;
-        margin-top: 17.5%;
-    }
-  }
+		@include govuk-media-query($from: tablet) {
+			padding: 32px;
+			padding: govuk-px-to-rem(32);
+			float: right;
+			margin-top: 17.5%;
+		}
+	}
 
-  &__title {
-    margin-top: 16px;
-    margin-top: govuk-px-to-rem(16);
-    margin-bottom: 24px;
-    margin-bottom: govuk-px-to-rem(24);
+	&__title {
+		margin-top: 16px;
+		margin-top: govuk-px-to-rem(16);
+		margin-bottom: 24px;
+		margin-bottom: govuk-px-to-rem(24);
 
-    &:before {
-      content: '';
-      width: 50px;
-      width: govuk-px-to-rem(50);
-      height: 7px;
-      height: govuk-px-to-rem(7);
-      background: $mojblocks-color-yellow;
-      position: absolute;
-      top: 32px;
-      top: govuk-px-to-rem(32);
-    }
+		&:before {
+			content: '';
+			width: 50px;
+			width: govuk-px-to-rem(50);
+			height: 7px;
+			height: govuk-px-to-rem(7);
+			background: $mojblocks-color-yellow;
+			position: absolute;
+			top: 32px;
+			top: govuk-px-to-rem(32);
+		}
 
-    @include govuk-media-query($from: tablet) {
-      &:before {
-        content: '';
-        width: 64px;
-        width: govuk-px-to-rem(64);
-        height: 8px;
-        height: govuk-px-to-rem(8);
-        background: $mojblocks-color-yellow;
-        position: absolute;
-        top: 32px;
-        top: govuk-px-to-rem(32);
-      }
+		@include govuk-media-query($from: tablet) {
+			&:before {
+				content: '';
+				width: 64px;
+				width: govuk-px-to-rem(64);
+				height: 8px;
+				height: govuk-px-to-rem(8);
+				background: $mojblocks-color-yellow;
+				position: absolute;
+				top: 32px;
+				top: govuk-px-to-rem(32);
+			}
 
-    }
-  }
+		}
+	}
 
-  &__button {
-    border: 1px solid $mojblocks-color-mustard;
-    color: $mojblocks-color-white;
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    padding: govuk-px-to-rem(8) govuk-px-to-rem(16);
+	&__button {
+		border: 1px solid $mojblocks-color-mustard;
+		color: $mojblocks-color-white;
+		display: inline-block;
+		padding: 0.5rem 1rem;
+		padding: govuk-px-to-rem(8) govuk-px-to-rem(16);
+		text-decoration: none;
 
-    &:hover, :focus, :active {
-      background-color: $mojblocks-color-mustard;
-      color: $mojblocks-color-black;
-    }
-  }
+		&:visited {
+			color: $mojblocks-color-white;
+		}
+
+		&:hover, :focus, :active {
+			background-color: $mojblocks-color-mustard;
+			color: $mojblocks-color-black;
+		}
+	}
 }
 
 .is-style-staggered-box-image-right {
 
-  & .mojblocks-staggered-box__image-container {
+	& .mojblocks-staggered-box__image-container {
 
-    @include govuk-media-query($from: tablet) {
-      float: right;
-      margin-top: 20%;
-      margin-left: 33%;
-      position: relative;
-    }
+		@include govuk-media-query($from: tablet) {
+			float: right;
+			margin-top: 20%;
+			margin-left: 33%;
+			position: relative;
+		}
 
-  }
+	}
 
-  & .mojblocks-staggered-box__text-container {
-    @include govuk-media-query($from: tablet) {
-      float: left;
-      position: absolute;
-      margin-top: 0;
-    }
-  }
+	& .mojblocks-staggered-box__text-container {
+		@include govuk-media-query($from: tablet) {
+			float: left;
+			position: absolute;
+			margin-top: 0;
+		}
+	}
 }
