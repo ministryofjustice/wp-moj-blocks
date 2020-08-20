@@ -13,6 +13,7 @@
 /** Variables */
 $mojblocks-color-light-blue: #1d70b8;
 $mojblocks-color-light-grey: #C7CDD0;
+$mojblocks-color-black: #0B0C0C;
 
 /*********************************************************************************************
 
@@ -30,7 +31,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     margin-bottom: 0;
 
     h1, h2, h3, h4, h5, h6 {
-        color: $mojblocks-color-light-blue;
+        color: $mojblocks-color-black;
     }
 
     // Change position and colour of title and arrow to align within section
@@ -42,6 +43,10 @@ SASS modifications to conform GovUK frontend to MoJ block styling
             padding-left: 30px;
             padding-left: govuk-px-to-rem(30);
         }
+
+		h3 {
+			color: $mojblocks-color-light-blue;
+		}
     }
 
     // Accordion title - stop NHS theme causing "link bounce" effect when clicked on
