@@ -60,7 +60,7 @@ registerBlockType('mojblocks/highlights-list', {
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
                         <div className="mojblocks-highlights-list__heading-container">
-                            <h3 className="mojblocks-highlights-list__heading">
+                            <h2 className="mojblocks-highlights-list__heading">
                                 <span role="text">
                                     <span className="mojblocks-highlights-list__heading-text">
                                         <RichText
@@ -71,7 +71,7 @@ registerBlockType('mojblocks/highlights-list', {
                                         />
                                     </span>
                                 </span>
-                            </h3>
+                            </h2>
                         </div>
                         <div className={'mojblocks-highlights-list__content'}>
                             <RichText
@@ -102,13 +102,13 @@ registerBlockType('mojblocks/highlights-list', {
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
                         <div className="mojblocks-highlights-list__heading-container">
-                            <h3 className="mojblocks-highlights-list__heading">
+                            <h2 className="mojblocks-highlights-list__heading">
                                  <span role="text">
                                     <span className="mojblocks-highlights-list__heading-text">
                                         <RichText.Content value={listTitle}/>
                                     </span>
                                   </span>
-                            </h3>
+                            </h2>
                         </div>
                         <div className={'mojblocks-highlights-list__content'}>
                             <RichText.Content

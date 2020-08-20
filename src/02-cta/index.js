@@ -80,7 +80,7 @@ registerBlockType('mojblocks/cta', {
                     <div className={'govuk-grid-row'}>
                         <div class="govuk-grid-column-three-quarters">
                             <div className="mojblocks-cta__heading-container">
-                                <h3 className="mojblocks-cta__heading">
+                                <h2 className="mojblocks-cta__heading">
                                 <span role="text">
                                     <span className="mojblocks-cta__heading-text">
                                         <RichText
@@ -91,7 +91,7 @@ registerBlockType('mojblocks/cta', {
                                         />
                                     </span>
                                 </span>
-                                </h3>
+                                </h2>
                             </div>
                             <div className={'mojblocks-cta__content'}>
                                 <RichText
@@ -137,13 +137,13 @@ registerBlockType('mojblocks/cta', {
                     <div className={'govuk-grid-row'}>
                         <div class="govuk-grid-column-three-quarters">
                             <div className="mojblocks-cta__heading-container">
-                                <h3 className="mojblocks-cta__heading">
+                                <h2 className="mojblocks-cta__heading">
                                 <span role="text">
                                     <span className="mojblocks-cta__heading-text">
                                         <RichText.Content value={ctaTitle}/>
                                     </span>
                                 </span>
-                                </h3>
+                                </h2>
                             </div>
                             <div className="mojblocks-cta__content">
                                 <RichText.Content value={ctaText} multiline="p"/>
