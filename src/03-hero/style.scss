@@ -33,6 +33,8 @@ $mojblocks-color-white: #ffffff;
   &__overlay {
     float: left;
     width: 100%;
+	padding: 16px 0;
+	padding: govuk-px-to-rem(16) 0;
 
     & .govuk-grid-column-three-quarters {
 
@@ -44,8 +46,6 @@ $mojblocks-color-white: #ffffff;
 
 
     @include govuk-media-query($from: tablet) {
-      padding: 15px 0;
-      padding: govuk-px-to-rem(15) 0;
       margin-left: -15px;
       margin-left: govuk-px-to-rem(-15);
       margin-top: -80px;
