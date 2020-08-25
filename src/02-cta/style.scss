@@ -69,7 +69,7 @@ $mojblocks-color-white: #ffffff;
 
     .mojblocks-button, a.mojblocks-button {
         background-color: $mojblocks-color-yellow;
-        color: $mojblocks-color-black !important;
+        color: $mojblocks-color-black;
         box-sizing: border-box;
         cursor: pointer;
         display: block;
@@ -90,6 +90,17 @@ $mojblocks-color-white: #ffffff;
             display: inline-block;
             width: auto;
         }
+
+		&:visited {
+			color: $mojblocks-color-black;
+			text-decoration: none;
+		}
+
+		&:hover, &:active, &:focus {
+			background: $mojblocks-color-black;
+			color: $mojblocks-color-white;
+			box-shadow: none;
+		}
     }
 
     &.is-style-judicial-teal {
