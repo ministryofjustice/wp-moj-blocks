@@ -15,7 +15,7 @@
 
 /** Variables */
 $mojblocks-color-light-blue: #1d70b8;
-$mojblocks-color-light-grey: #C7CDD0;
+$mojblocks-color-light-grey: #b1b4b6;
 $mojblocks-color-black: #0B0C0C;
 
 /*********************************************************************************************
@@ -56,7 +56,10 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     &__section-heading {
         @extend .govuk-details__summary;
         @extend .govuk-link;
-        @extend .govuk-details;
+		@extend .govuk-details;
+
+		// Remove margin bottom that @extend above introduces.
+		margin-bottom: 0;
 
         h4 {
             font-style: normal;
@@ -72,10 +75,10 @@ SASS modifications to conform GovUK frontend to MoJ block styling
         // Decrease padding causes by NHS styles around accordion content
         padding-top: 0;
 
-        // Indent in accordion section content to align with title
+        // Indent body text in accordion section content to align with title
         .govuk-body {
-			margin-left: 20px;
-			margin-left: govuk-px-to-rem(20);
+			margin-left: 16px;
+			margin-left: govuk-px-to-rem(16);
             padding-left: 30px;
             padding-left: govuk-px-to-rem(30);
         }
@@ -113,12 +116,12 @@ SASS modifications to conform GovUK frontend to MoJ block styling
         }
     }
 
-    // We're using the "details" component arrow, not the +/- that comes with accordion.
+    // Remove +/- that comes with accordion (replaced with arrows).
     &__icon {
         display: none;
     }
 
-    // Add a bottom border to accordion sections (on last one)
+    // Add a bottom border to last accordion section
     &:last-child {
         border-bottom: 1px solid $mojblocks-color-light-grey;
     }
