@@ -10,9 +10,12 @@
 // https://design-system.service.gov.uk/components/accordion/
 @import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
 
+// https://design-system.service.gov.uk/components/details/
+@import "node_modules/govuk-frontend/govuk/components/details/details";
+
 /** Variables */
 $mojblocks-color-light-blue: #1d70b8;
-$mojblocks-color-light-grey: #C7CDD0;
+$mojblocks-color-light-grey: #b1b4b6;
 $mojblocks-color-black: #0B0C0C;
 
 /*********************************************************************************************
@@ -30,27 +33,33 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     // Reset NHS margin to display no margin on accordion sections
     margin-bottom: 0;
 
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3 {
+        color: $mojblocks-color-light-blue;
+    }
+
+    h4,
+    h5,
+    h6 {
         color: $mojblocks-color-black;
     }
 
-    // Change position and colour of title and arrow to align within section
-    &__section-header {
-        padding: 20px 28px 20px 10px;
-        padding: govuk-px-to-rem(20) govuk-px-to-rem(28) govuk-px-to-rem(20) govuk-px-to-rem(10);
-
-        @include govuk-media-query($from: tablet) {
-            padding-left: 30px;
-            padding-left: govuk-px-to-rem(30);
+    &__section {
+        &:active {
+            button:active {
+                top: 0;
+            }
         }
-
-		h3 {
-			color: $mojblocks-color-light-blue;
-		}
     }
 
-    // Accordion title - stop NHS theme causing "link bounce" effect when clicked on
     &__section-heading {
+        @extend .govuk-details__summary;
+        @extend .govuk-link;
+		@extend .govuk-details;
+
+		// Remove margin bottom that @extend above introduces.
+		margin-bottom: 0;
 
         h4 {
             font-style: normal;
@@ -62,12 +71,38 @@ SASS modifications to conform GovUK frontend to MoJ block styling
         margin-left: govuk-px-to-rem(22);
     }
 
-    &__section {
-        &:active {
-            button:active {
-                top: 0;
+    &__section-content {
+        // Decrease padding causes by NHS styles around accordion content
+        padding-top: 0;
+
+        // Indent body text in accordion section content to align with title
+        .govuk-body {
+			margin-left: 16px;
+			margin-left: govuk-px-to-rem(16);
+            padding-left: 30px;
+            padding-left: govuk-px-to-rem(30);
+        }
+    }
+
+    // When accordion seciton is open.
+    &__section--expanded {
+        .govuk-accordion {
+            &__section-heading {
+                &:before {
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-color: transparent;
+                    border-top-color: transparent;
+                    -webkit-clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+                    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+                    border-width: 12.124px 7px 0 7px;
+                    border-top-color: inherit;
+                }
             }
         }
+
     }
 
     // Remove "mustaches" underline caused by NHS styles conflicting with Gov UK
@@ -75,101 +110,19 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     &__open-all {
         box-shadow: none;
         border-radius: 0;
-    }
 
-    // Change position of open/close icon to far left side
-    &__icon {
-        right: 0;
-        left: -30px;
-        width: 16px;
-        height: 16px;
-        margin-top: -7px;
-        margin-top: govuk-px-to-rem(-7);
-
-        &:after {
-            display: none;
+        &:active {
+            top: 0;
         }
     }
 
-    // Add a bottom border to accordion sections (on last one)
+    // Remove +/- that comes with accordion (replaced with arrows).
+    &__icon {
+        display: none;
+    }
+
+    // Add a bottom border to last accordion section
     &:last-child {
         border-bottom: 1px solid $mojblocks-color-light-grey;
-    }
-}
-
-// Replace Gov plus symbol with arrow symbol (when open)
-.js-enabled {
-    .govuk-accordion {
-        // Replace Gov plus symbol with arrow symbol (when closed)
-        &__icon {
-            &:before {
-                content: "";
-                position: absolute;
-                top: -1px;
-                bottom: 0;
-                left: 0;
-                margin: auto;
-                display: block;
-                width: 0;
-                height: 0;
-                border-style: solid;
-                border-color: transparent;
-                border-left-color: transparent;
-                -webkit-clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-                clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
-                border-width: 8.5px 0 8.5px 14.624px;
-                border-left-color: inherit;
-                background-color: $mojblocks-color-light-blue;
-            }
-        }
-
-        // Open/close button - stop NHS theme causing "link bounce" effect when clicked on
-        &__open-all {
-            &:active {
-                top: 0;
-            }
-        }
-
-        &__section-content {
-            // Decrease padding causes by NHS styles around accordion content
-            padding-top: 0;
-
-            // Indent in accordion section content to align with title
-            .govuk-body {
-                padding-left: 30px;
-                padding-left: govuk-px-to-rem(30);
-            }
-        }
-
-        &__section--expanded {
-
-            .govuk-accordion__icon {
-                &:before {
-                    display: none;
-                }
-            }
-
-            .govuk-accordion__icon {
-                &:after {
-                    content: "";
-                    position: absolute;
-                    top: -1px;
-                    bottom: 0;
-                    left: 0;
-                    margin: auto;
-                    display: block;
-                    width: 0;
-                    height: 0;
-                    border-style: solid;
-                    border-color: transparent;
-                    border-left-color: transparent;
-                    -webkit-clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-                    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
-                    border-width: 14.624px 8.5px 0 8.5px;
-                    border-left-color: inherit;
-                    background-color: $mojblocks-color-light-blue;
-                }
-            }
-        }
     }
 }
