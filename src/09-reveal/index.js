@@ -43,27 +43,35 @@ registerBlockType('mojblocks/reveal', {
         };
 
         return (
-            <details className="govuk-details" data-module="govuk-details" open>
-            <summary className="govuk-details__summary">
-                <span className="mojblocks-reveal__title govuk-details__summary-text">
-                        <RichText
-                    value={revealTitle}
-                    placeholder={__('Add reveal title', 'mojblocks')}
-                    keepPlaceholderOnFocus
-                    onChange={onChangeRevealTitle}
-                    />
-                </span>
-            </summary>
-            <div className="mojblocks-reveal__content govuk-details__text">
-            <RichText
-        multiline="p"
-        placeholder={__('Add reveal content', 'mojblocks')}
-        keepPlaceholderOnFocus
-        onChange={onChangeRevealText}
-        value={revealText}
-        />
+            <div className={`mojblocks-reveal`}>
+                <div className={'govuk-width-container'}>
+                    <div className={'govuk-grid-row'}>
+                        <div className="govuk-grid-column-three-quarters">
+                            <details className="govuk-details" data-module="govuk-details" open>
+                                <summary className="govuk-details__summary">
+                                    <span className="mojblocks-reveal__title govuk-details__summary-text">
+                                            <RichText
+                                        value={revealTitle}
+                                        placeholder={__('Add reveal title', 'mojblocks')}
+                                        keepPlaceholderOnFocus
+                                        onChange={onChangeRevealTitle}
+                                        />
+                                    </span>
+                                </summary>
+                                <div className="mojblocks-reveal__content govuk-details__text">
+                                    <RichText
+                                    multiline="p"
+                                    placeholder={__('Add reveal content', 'mojblocks')}
+                                    keepPlaceholderOnFocus
+                                    onChange={onChangeRevealText}
+                                    value={revealText}
+                                    />
+                                </div>
+                            </details>
+                        </div>
+                     </div>
+                 </div>
             </div>
-            </details>
 
     );
     },
@@ -77,18 +85,26 @@ registerBlockType('mojblocks/reveal', {
         } = props;
 
         return (
-            <details className="govuk-details" data-module="govuk-details">
-                <summary className="govuk-details__summary">
-                    <span className="mojblocks-reveal__title govuk-details__summary-text">
-                        <RichText.Content
-                        value={revealTitle}
-                        />
-                    </span>
-                </summary>
-                <div className="mojblocks-reveal__content govuk-details__text">
-                <RichText.Content value={revealText} multiline="p" />
+            <div className={`mojblocks-reveal`}>
+                <div className={'govuk-width-container'}>
+                    <div className={'govuk-grid-row'}>
+                        <div className="govuk-grid-column-three-quarters">
+                            <details className="govuk-details" data-module="govuk-details">
+                                <summary className="govuk-details__summary">
+                                    <span className="mojblocks-reveal__title govuk-details__summary-text">
+                                        <RichText.Content
+                                        value={revealTitle}
+                                        />
+                                    </span>
+                                </summary>
+                                <div className="mojblocks-reveal__content govuk-details__text">
+                                <RichText.Content value={revealText} multiline="p" />
+                                </div>
+                            </details>
+                        </div>
+                    </div>
                 </div>
-            </details>
+            </div>
     );
     }
 });

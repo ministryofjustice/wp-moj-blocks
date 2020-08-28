@@ -33,17 +33,25 @@ registerBlockType('mojblocks/intro', {
         };
 
         return (
-            <div className="mojblocks-intro--type">
-                <div className={'mojblocks-intro__content intro'}>
-                    <RichText
-                    multiline="p"
-                    placeholder={__('Some compelling text to send the message home!', 'mojblocks')}
-                    keepPlaceholderOnFocus
-                    onChange={onChangeIntroText}
-                    value={introText}
-                    />
-                </div>
+            <div className={`${className}`}>
+                <div className={'govuk-width-container'}>
+                    <div className={'govuk-grid-row'}>
+                        <div className="govuk-grid-column-three-quarters">
+                            <div className="mojblocks-intro--type">
+                                <div className={'mojblocks-intro__content intro'}>
+                                    <RichText
+                                    multiline="p"
+                                    placeholder={__('Some compelling text to send the message home!', 'mojblocks')}
+                                    keepPlaceholderOnFocus
+                                    onChange={onChangeIntroText}
+                                    value={introText}
+                                    />
+                                </div>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
     );
     },
@@ -56,10 +64,18 @@ registerBlockType('mojblocks/intro', {
         } = props;
 
         return (
-            <div className="mojblocks-intro--type">
+            <div className={`mojblocks-intro`}>
+                <div className={'govuk-width-container'}>
+                    <div className={'govuk-grid-row'}>
+                        <div className="govuk-grid-column-three-quarters">
+                            <div className="mojblocks-intro--type">
 
-                <div className="mojblocks-intro__content intro">
-                    <RichText.Content value={introText} multiline="p" />
+                                <div className="mojblocks-intro__content intro">
+                                    <RichText.Content value={introText} multiline="p" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
     );

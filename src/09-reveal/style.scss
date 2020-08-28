@@ -13,3 +13,9 @@ Author:  Ministry of Justice
 **/
 // https://design-system.service.gov.uk/components/details/
 @import "node_modules/govuk-frontend/govuk/components/details/details";
+
+.mojblocks-reveal {
+	.govuk-width-container {
+		margin: 0;
+	}
+}
