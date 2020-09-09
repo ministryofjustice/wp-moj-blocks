@@ -36,6 +36,7 @@ $mojblocks-color-white: #ffffff;
 
 	&__image-container {
 		padding: 0;
+		line-height: 0;
 
 		@include govuk-media-query($from: tablet) {
 			float: left;
@@ -68,6 +69,8 @@ $mojblocks-color-white: #ffffff;
 		margin-top: govuk-px-to-rem(16);
 		margin-bottom: 24px;
 		margin-bottom: govuk-px-to-rem(24);
+		padding-top: 16px;
+		padding-top: govuk-px-to-rem(16);
 
 		&:before {
 			content: '';
@@ -82,6 +85,9 @@ $mojblocks-color-white: #ffffff;
 		}
 
 		@include govuk-media-query($from: tablet) {
+
+			padding-top: 0;
+
 			&:before {
 				content: '';
 				width: 64px;
