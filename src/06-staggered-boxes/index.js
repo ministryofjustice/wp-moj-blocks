@@ -40,7 +40,8 @@ registerBlockType("mojblocks/staggered-box", {
     staggeredBoxImageAltText: {
       type: "string",
       source: "attribute",
-      attribute: "alt"
+      attribute: "alt",
+      default: ''
     }
   },
 
