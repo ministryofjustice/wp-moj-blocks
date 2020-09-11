@@ -1,4 +1,9 @@
 @charset "UTF-8";
+/*********************************************************************************************
+
+Block: Accordion (Frontend styles)
+
+**********************************************************************************************/
 
 /**
 * This file contains imported styling to support GOV UK Frontend usage in the plugin
@@ -13,10 +18,6 @@
 // https://design-system.service.gov.uk/components/details/
 @import "node_modules/govuk-frontend/govuk/components/details/details";
 
-/** Variables */
-$mojblocks-color-light-blue: #1d70b8;
-$mojblocks-color-light-grey: #b1b4b6;
-$mojblocks-color-black: #0B0C0C;
 
 /*********************************************************************************************
 
@@ -123,6 +124,6 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 
     // Add a bottom border to last accordion section
     &:last-child {
-        border-bottom: 1px solid $mojblocks-color-light-grey;
+        border-bottom: 1px solid $mojblocks-color-mid-grey;
     }
 }

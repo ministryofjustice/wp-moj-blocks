@@ -1,11 +1,10 @@
 @charset "UTF-8";
 /*********************************************************************************************
 
-Plugin Name: MOJ Blocks
 Block: Reveal (Gutenberg editor styles)
-Text Domain: mojblocks
 
 **********************************************************************************************/
+
 @import 'style.scss';
 
 .govuk-details[open] > .govuk-details__summary:before {

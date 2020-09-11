@@ -13,7 +13,7 @@
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
  * Version:     1.0.0
- * Author:      Ministry of Justice
+ * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
  * License:     MIT License
