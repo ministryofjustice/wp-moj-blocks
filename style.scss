@@ -3,7 +3,7 @@
 /*********************************************************************************************
 
 Plugin Name: MoJ Blocks
-Author:  Ministry of Justice
+Author:  Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
 License: GNU General Public License v3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: mojblocks
@@ -21,4 +21,5 @@ Text Domain: mojblocks
 @import 'node_modules/govuk-frontend/govuk/utilities/all';
 @import 'node_modules/govuk-frontend/govuk/overrides/all';
 
+@import "assets/scss/variables.scss";
 @import 'src/**/style.scss';
