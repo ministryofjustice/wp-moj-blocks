@@ -29,6 +29,11 @@ Block: Staggered Box (Frontend styles)
 
 	&__image {
 		display: block;
+
+		@media screen and (-ms-high-contrast: active) {
+      filter: invert(100%);
+		}
+
 	}
 
 	&__text-container {

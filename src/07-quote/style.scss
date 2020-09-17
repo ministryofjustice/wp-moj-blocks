@@ -25,6 +25,10 @@ Block: Quote (Frontend styles)
                 padding-bottom: 50%;
             }
         }
+
+        @media screen and (-ms-high-contrast: active) {
+            filter: invert(100%);
+        }
     }
 
     &__content {
