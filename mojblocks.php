@@ -111,11 +111,91 @@ function mojblocks_register_blocks()
         true
     );
 
-    // Calls registered script above. Registering one brings all. One block to rule them all.
+    // Register blocks
     register_block_type(
-        'mojblocks/blocks',
+        'mojblocks/highlights',
         ['editor_script' => 'mojblocks-editor-script']
-    );
+	);
+
+	register_block_type(
+        'mojblocks/cta',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/hero',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/accordion',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/video',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/staggered-boxes',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/quote',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/intro',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/reveal',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/card',
+			['editor_script' => 'mojblocks-editor-script' ]
+	);
+}
+
+function navigation_card_render_callback( $attributes, $content ) {
+	global $post;
+
+	$recent_posts = wp_get_recent_posts([
+		'category' => 4,
+		'post_type' => 'page',
+		'numberposts' => 1,
+		'post_status' => 'publish'
+	]);
+
+	//var_dump($recent_posts);
+
+	if ( 0 == count($recent_posts)) {
+		return 'No posts';
+	}
+
+	$post_id = $recent_posts[0]['ID'];
+
+	$post = get_post($post_id);
+
+	setup_postdata( $post );
+
+	return sprintf(
+		'<div>
+        <img src="https://via.placeholder.com/450" alt=""></img>
+        <a href="%3$s">%1$s</a>
+        <p>%2$s</p>
+	   </div>',
+	   esc_html( get_the_title($post)),
+	   esc_html( get_the_excerpt($post)),
+	   esc_html( get_the_permalink($post))
+	);
+
 }
 
 /**
@@ -124,7 +204,7 @@ function mojblocks_register_blocks()
 function mojblocks_gutenberg_editor_styles()
 {
     wp_enqueue_style(
-        'nhsl-block-editor-styles',
+        'mojblocks-block-editor-styles',
         plugins_url('build/style-gutenburg.css', __FILE__),
         false,
         '1.1',
