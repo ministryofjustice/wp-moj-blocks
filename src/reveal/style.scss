@@ -1,0 +1,21 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Reveal (Frontend styles)
+
+**********************************************************************************************/
+
+/**
+* This file contains imported styling to support GOV UK Frontend usage in the plugin
+*
+* To import styles from govuk-frontend, simply include the Gov UK module using
+*  @imports with a URL reference
+**/
+// https://design-system.service.gov.uk/components/details/
+@import "node_modules/govuk-frontend/govuk/components/details/details";
+
+.mojblocks-reveal {
+	.govuk-width-container {
+		margin: 0;
+	}
+}

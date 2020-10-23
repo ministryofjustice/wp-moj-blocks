@@ -5,7 +5,7 @@ Block: Card (Gutenberg editor styles)
 
 **********************************************************************************************/
 
-.card-container {
+.mojblocks-card {
 
 	h2, p {
 		margin-bottom: govuk-px-to-rem(12);
@@ -15,9 +15,7 @@ Block: Card (Gutenberg editor styles)
 	max-width: 100%;
 	padding: govuk-px-to-rem(12);
 	margin-bottom: govuk-px-to-rem(12);
-}
 
-.mojblocks-card {
 	&__image {
 		background-color: $mojblocks-color-dark-grey;
 		min-height: 70px;

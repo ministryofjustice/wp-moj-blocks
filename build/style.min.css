@@ -3729,24 +3729,119 @@ Block: Reveal (Frontend styles)
 
 /*********************************************************************************************
 
+Block: Accordion (Frontend styles)
+
+**********************************************************************************************/
+
+/**
+* This file contains imported styling to support GOV UK Frontend usage in the plugin
+*
+* To import styles from govuk-frontend, simply include the Gov UK module using
+*  @imports with a URL reference
+**/
+
+/*********************************************************************************************
+
+SASS modifications to conform GovUK frontend to MoJ block styling
+
+**********************************************************************************************/
+
+.govuk-accordion {
+  font-style: normal;
+  font-family: inherit;
+  font-size: inherit;
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.govuk-accordion h1,
+.govuk-accordion h2,
+.govuk-accordion h3 {
+  color: #1d70b8;
+}
+
+.govuk-accordion h4,
+.govuk-accordion h5,
+.govuk-accordion h6 {
+  color: #0B0C0C;
+}
+
+.govuk-accordion__section:active button:active {
+  top: 0;
+}
+
+.govuk-accordion__section-heading {
+  margin-bottom: 0;
+  margin-left: 22px;
+  margin-left: 1.375rem;
+}
+
+.govuk-accordion__section-heading h4 {
+  font-style: normal;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.govuk-accordion__section-content {
+  padding-top: 0;
+}
+
+.govuk-accordion__section-content .govuk-body {
+  margin-left: 16px;
+  margin-left: 1rem;
+  padding-left: 30px;
+  padding-left: 1.875rem;
+}
+
+.govuk-accordion__section--expanded .govuk-accordion__section-heading:before {
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent;
+  border-top-color: transparent;
+  -webkit-clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+  clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+  border-width: 12.124px 7px 0 7px;
+  border-top-color: inherit;
+}
+
+.govuk-accordion__section-button,
+.govuk-accordion__open-all {
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.govuk-accordion__section-button:active,
+.govuk-accordion__open-all:active {
+  top: 0;
+}
+
+.govuk-accordion__icon {
+  display: none;
+}
+
+.govuk-accordion:last-child {
+  border-bottom: 1px solid #B1B4B6;
+}
+
+/*********************************************************************************************
+
 Block: Card (Frontend styles)
 
 **********************************************************************************************/
 
-.card-container {
+.mojblocks-card {
   background-color: white;
   max-width: 100%;
   padding: 0.75rem;
   margin-bottom: 0.75rem;
-}
-
-.card-container h2,
-.card-container p {
-  margin-top: 0.75rem;
-}
-
-.mojblocks-card {
   margin: 15px 0;
+}
+
+.mojblocks-card h2,
+.mojblocks-card p {
+  margin-top: 0.75rem;
 }
 
 .mojblocks-card__image-selected {
@@ -3802,4 +3897,772 @@ Block: Card (Frontend styles)
   color: #454A4C;
   margin: 0 0 24px;
 }
+
+/*********************************************************************************************
+
+Block: Call to Action (Frontend styles)
+
+**********************************************************************************************/
+
+.wp-block-mojblocks-cta {
+  padding: 15px;
+  margin: auto -15px;
+  background-color: #1d70b8;
+}
+
+.wp-block-mojblocks-cta .mojblocks-cta__heading {
+  margin: 12px 0 15px;
+  padding: 0;
+}
+
+.wp-block-mojblocks-cta .mojblocks-cta__heading-text {
+  color: #FFDD00;
+}
+
+.wp-block-mojblocks-cta .mojblocks-cta__content {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.wp-block-mojblocks-cta .mojblocks-cta__content p {
+  color: #ffffff;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-size: 1.25rem;
+}
+
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-cta .mojblocks-cta__content p {
+    font-size: 1.1rem;
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-cta .mojblocks-cta__content {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.wp-block-mojblocks-cta button.components-button.components-toolbar__control.has-icon {
+  background-color: white;
+}
+
+.wp-block-mojblocks-cta .mojblocks-button,
+.wp-block-mojblocks-cta a.mojblocks-button {
+  background-color: #FFDD00;
+  color: #0B0C0C;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  font-size: 24px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 36px;
+  line-height: 2.25rem;
+  margin-top: 15px;
+  padding: 4px 22px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+  width: 100%;
+  border-radius: 5px;
+}
+
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-cta .mojblocks-button,
+  .wp-block-mojblocks-cta a.mojblocks-button {
+    display: inline-block;
+    width: auto;
+  }
+}
+
+.wp-block-mojblocks-cta .mojblocks-button:visited,
+.wp-block-mojblocks-cta a.mojblocks-button:visited {
+  color: #0B0C0C;
+  text-decoration: none;
+}
+
+.wp-block-mojblocks-cta .mojblocks-button:hover,
+.wp-block-mojblocks-cta .mojblocks-button:active,
+.wp-block-mojblocks-cta .mojblocks-button:focus,
+.wp-block-mojblocks-cta a.mojblocks-button:hover,
+.wp-block-mojblocks-cta a.mojblocks-button:active,
+.wp-block-mojblocks-cta a.mojblocks-button:focus {
+  background: #0B0C0C;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.wp-block-mojblocks-cta.is-style-judicial-teal {
+  background-color: #336C83;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-cta.is-style-judicial-teal {
+    padding: 25px 0 25px;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .wp-block-mojblocks-cta.is-style-judicial-teal {
+    padding: 35px 0 50px;
+  }
+}
+
+.wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading {
+  margin: 12px -75px 15px;
+  padding: 12px 75px;
+  background-color: #0B0C0C;
+}
+
+.wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading-text {
+  color: #ffffff;
+}
+
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-cta.is-style-moj-blue {
+    padding: 25px 0 25px 35px;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .wp-block-mojblocks-cta.is-style-moj-blue {
+    padding: 35px 75px 50px 75px;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-cta .govuk-grid-column-three-quarters {
+    padding: 0;
+  }
+}
+
+@media (min-width: 40.0625em) and (min-width: 40.0625em) {
+  .wp-block-mojblocks-cta .govuk-grid-column-three-quarters {
+    padding: 0;
+  }
+}
+
+/*********************************************************************************************
+
+Block: Hero (Frontend styles)
+
+**********************************************************************************************/
+
+.mojblocks-hero {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.mojblocks-hero__image {
+  background: #336C83;
+  width: 100vw;
+  min-height: 250px;
+  min-height: 15.625rem;
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .mojblocks-hero__image {
+    -webkit-filter: invert(100%);
+            filter: invert(100%);
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .mojblocks-hero__image {
+    min-height: 500px;
+    min-height: 31.25rem;
+  }
+}
+
+.mojblocks-hero__overlay {
+  float: left;
+  width: 100%;
+  padding: 16px 0;
+  padding: 1rem 0;
+}
+
+@media (min-width: 40.0625em) {
+  .mojblocks-hero__overlay .govuk-grid-column-three-quarters {
+    padding-left: 24px;
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .mojblocks-hero__overlay {
+    margin-left: -15px;
+    margin-left: -0.9375rem;
+    margin-top: -80px;
+    margin-top: -5rem;
+    background: #ffffff;
+  }
+}
+
+.mojblocks-hero__overlay h2 {
+  margin-top: 0;
+}
+
+/*********************************************************************************************
+
+Block: Highlights List (Frontend styles)
+
+**********************************************************************************************/
+
+.wp-block-mojblocks-highlights-list {
+  padding: 15px;
+  margin: auto -15px;
+  background-color: #1d70b8;
+}
+
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-highlights-list {
+    padding: 25px 0 25px;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .wp-block-mojblocks-highlights-list {
+    padding: 35px 0 25px;
+  }
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading {
+  margin: 12px 0 15px;
+  padding: 0;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading-text {
+  color: #FFDD00;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul {
+  list-style: none;
+  padding: 0;
+  margin: 26px 0 0;
+  display: -ms-grid;
+  -ms-grid-columns: 100%;
+  -ms-grid-rows: auto;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2) {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3) {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4) {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5) {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6) {
+  -ms-grid-row: 6;
+  -ms-grid-column: 1;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7) {
+  -ms-grid-row: 7;
+  -ms-grid-column: 1;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8) {
+  -ms-grid-row: 8;
+  -ms-grid-column: 1;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9) {
+  -ms-grid-row: 9;
+  -ms-grid-column: 1;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10) {
+  -ms-grid-row: 10;
+  -ms-grid-column: 1;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11) {
+  -ms-grid-row: 11;
+  -ms-grid-column: 1;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12) {
+  -ms-grid-row: 12;
+  -ms-grid-column: 1;
+}
+
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul {
+    margin: 40px 0 0;
+    -ms-grid-columns: 50% 50%;
+    grid-template-columns: 50% 50%;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7) {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8) {
+    -ms-grid-row: 4;
+    -ms-grid-column: 2;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9) {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10) {
+    -ms-grid-row: 5;
+    -ms-grid-column: 2;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11) {
+    -ms-grid-row: 6;
+    -ms-grid-column: 1;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12) {
+    -ms-grid-row: 6;
+    -ms-grid-column: 2;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul {
+    -ms-grid-columns: 33% 33% 33%;
+    grid-template-columns: 33% 33% 33%;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 3;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 3;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10) {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11) {
+    -ms-grid-row: 4;
+    -ms-grid-column: 2;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12) {
+    -ms-grid-row: 4;
+    -ms-grid-column: 3;
+  }
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li {
+  position: relative;
+  color: #ffffff;
+  padding: 16px 0;
+  margin-bottom: 0;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 21px;
+  font-size: 1.3125rem;
+  line-height: 28px;
+  line-height: 1.75rem;
+  word-wrap: break-word;
+}
+
+.wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li:before {
+  content: '';
+  width: 100%;
+  height: 1px;
+  background: #FFDD00;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li {
+    padding: 24px 25% 36px 0;
+    margin-bottom: 8px;
+  }
+
+  .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li:before {
+    width: 23%;
+    height: 8px;
+  }
+}
+
+.wp-block-mojblocks-highlights-list.is-style-judicial-teal {
+  background-color: #336C83;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-highlights-list.is-style-judicial-teal {
+    padding: 25px 0 25px;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .wp-block-mojblocks-highlights-list.is-style-judicial-teal {
+    padding: 35px 0 25px;
+  }
+}
+
+.wp-block-mojblocks-highlights-list.is-style-moj-blue .mojblocks-highlights-list__heading {
+  margin: 12px -75px 15px;
+  padding: 12px 75px;
+  background-color: #0B0C0C;
+}
+
+.wp-block-mojblocks-highlights-list.is-style-moj-blue .mojblocks-highlights-list__heading-text {
+  color: #ffffff;
+}
+
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-highlights-list.is-style-moj-blue {
+    padding: 25px 0 25px 35px;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .wp-block-mojblocks-highlights-list.is-style-moj-blue {
+    padding: 35px 75px 50px 75px;
+  }
+}
+
+/*********************************************************************************************
+
+Block: Intro (Frontend styles)
+
+**********************************************************************************************/
+
+.mojblocks-intro .govuk-width-container {
+  margin: 0;
+}
+
+/*********************************************************************************************
+
+Block: Quote (Frontend styles)
+
+**********************************************************************************************/
+
+.mojblocks-quote {
+  margin: 15px 0;
+}
+
+.mojblocks-quote__image-selected {
+  width: 100%;
+  padding-bottom: 75%;
+  position: relative;
+  background-size: cover;
+  background-position: top center;
+  border-radius: 0;
+}
+
+@media (min-width: 40.0625em) {
+  .mojblocks-quote__image-selected {
+    padding-bottom: 50%;
+  }
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .mojblocks-quote__image {
+    -webkit-filter: invert(100%);
+            filter: invert(100%);
+  }
+}
+
+.mojblocks-quote__content__icon {
+  padding: 20px 0 2px;
+}
+
+.mojblocks-quote__content__icon > svg {
+  color: #454A4C;
+  fill: #454A4C;
+  transform: rotate(1deg) skew(-10deg, 0deg);
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.mojblocks-quote__content__quote {
+  color: #454A4C;
+  display: block;
+  font-style: italic;
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
+  line-height: 1.75rem;
+  margin-bottom: 15px;
+  quotes: none;
+}
+
+.mojblocks-quote__content__name {
+  display: inline-block;
+  font-size: 16px;
+  font-size: 1rem;
+  color: #454A4C;
+  margin: 0 0 24px;
+}
+
+/*********************************************************************************************
+
+Block: Reveal (Frontend styles)
+
+**********************************************************************************************/
+
+/**
+* This file contains imported styling to support GOV UK Frontend usage in the plugin
+*
+* To import styles from govuk-frontend, simply include the Gov UK module using
+*  @imports with a URL reference
+**/
+
+.mojblocks-reveal .govuk-width-container {
+  margin: 0;
+}
+
+/*********************************************************************************************
+
+Block: Staggered Box (Frontend styles)
+
+**********************************************************************************************/
+
+.mojblocks-staggered-box {
+  margin: 48px -15px;
+  margin: 3rem -0.9375rem;
+}
+
+.mojblocks-staggered-box .govuk-grid-row {
+  position: relative;
+}
+
+@media (min-width: 40.0625em) {
+  .mojblocks-staggered-box:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.mojblocks-staggered-box__image-container {
+  padding: 0;
+  line-height: 0;
+}
+
+@media (min-width: 40.0625em) {
+  .mojblocks-staggered-box__image-container {
+    float: left;
+    position: absolute;
+  }
+}
+
+.mojblocks-staggered-box__image {
+  display: block;
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .mojblocks-staggered-box__image {
+    -webkit-filter: invert(100%);
+            filter: invert(100%);
+  }
+}
+
+.mojblocks-staggered-box__text-container {
+  z-index: 1;
+  background-color: #6F777B;
+  color: #ffffff;
+  padding: 1rem;
+  position: relative;
+}
+
+@media (min-width: 40.0625em) {
+  .mojblocks-staggered-box__text-container {
+    padding: 32px;
+    padding: 2rem;
+    float: right;
+    margin-top: 17.5%;
+  }
+}
+
+.mojblocks-staggered-box__title {
+  margin-top: 16px;
+  margin-top: 1rem;
+  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
+  padding-top: 16px;
+  padding-top: 1rem;
+}
+
+.mojblocks-staggered-box__title:before {
+  content: '';
+  width: 50px;
+  width: 3.125rem;
+  height: 7px;
+  height: 0.4375rem;
+  background: #FFDD00;
+  position: absolute;
+  top: 32px;
+  top: 2rem;
+}
+
+@media (min-width: 40.0625em) {
+  .mojblocks-staggered-box__title {
+    padding-top: 0;
+  }
+
+  .mojblocks-staggered-box__title:before {
+    content: '';
+    width: 64px;
+    width: 4rem;
+    height: 8px;
+    height: 0.5rem;
+    background: #FFDD00;
+    position: absolute;
+    top: 32px;
+    top: 2rem;
+  }
+}
+
+.mojblocks-staggered-box__button {
+  border: 1px solid #FFCE21;
+  color: #ffffff;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.mojblocks-staggered-box__button:visited {
+  color: #ffffff;
+}
+
+.mojblocks-staggered-box__button:hover,
+.mojblocks-staggered-box__button :focus,
+.mojblocks-staggered-box__button :active {
+  background-color: #FFCE21;
+  color: #0B0C0C;
+}
+
+@media (min-width: 40.0625em) {
+  .is-style-staggered-box-image-right .mojblocks-staggered-box__image-container {
+    float: right;
+    margin-top: 20%;
+    margin-left: 33%;
+    position: relative;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .is-style-staggered-box-image-right .mojblocks-staggered-box__text-container {
+    float: left;
+    position: absolute;
+    margin-top: 0;
+  }
+}
+
+/*********************************************************************************************
+Plugin Name: MOJ Blocks
+Author:  Ministry of Justice
+License: GNU General Public License v3 or later
+License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Text Domain: mojblocks
+
+**********************************************************************************************/
 

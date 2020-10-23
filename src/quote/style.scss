@@ -1,22 +1,12 @@
 @charset "UTF-8";
 /*********************************************************************************************
 
-Block: Card (Frontend styles)
+Block: Quote (Frontend styles)
 
 **********************************************************************************************/
 
-.mojblocks-card {
-
-	h2, p {
-		margin-top: govuk-px-to-rem(12);
-	}
-
-	background-color: white;
-	max-width: 100%;
-	padding: govuk-px-to-rem(12);
-	margin-bottom: govuk-px-to-rem(12);
-
-	margin: 15px 0;
+.mojblocks-quote {
+    margin: 15px 0;
 
     &__image {
 
@@ -32,12 +22,12 @@ Block: Card (Frontend styles)
 
             @include govuk-media-query($from: tablet) {
                 // ratio of 2 over 1 for small devices
-				padding-bottom: 100%;
+                padding-bottom: 50%;
             }
         }
 
         @media screen and (-ms-high-contrast: active) {
-			filter: invert(100%);
+            filter: invert(100%);
         }
     }
 
@@ -58,7 +48,7 @@ Block: Card (Frontend styles)
             }
         }
 
-        &__card {
+        &__quote {
             color: $mojblocks-color-dark-grey;
             display: block;
             font-style: italic;
@@ -79,4 +69,3 @@ Block: Card (Frontend styles)
         }
     }
 }
-

@@ -101,12 +101,98 @@ Block: Reveal (Frontend styles)
 **/
   /*********************************************************************************************
 
+Block: Accordion (Gutenberg editor styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+SASS modifications to conform GovUK frontend to MoJ block styling
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
 Block: Card (Gutenberg editor styles)
 
 **********************************************************************************************/
   /*********************************************************************************************
 
 Block: Card (Frontend styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Call to Action (Gutenberg editor styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Call to Action (Frontend styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Hero (Gutenberg editor styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Hero (Frontend styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Highlights List (Gutenberg editor styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Highlights List (Frontend styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Intro (Gutenberg editor styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Intro (Frontend styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Quote (Gutenberg editor styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Quote (Frontend styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Reveal (Gutenberg editor styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Reveal (Frontend styles)
+
+**********************************************************************************************/
+  /**
+* This file contains imported styling to support GOV UK Frontend usage in the plugin
+*
+* To import styles from govuk-frontend, simply include the Gov UK module using
+*  @imports with a URL reference
+**/
+  /*********************************************************************************************
+
+Block: Staggered Box (Gutenberg editor styles)
+
+**********************************************************************************************/
+  /*********************************************************************************************
+
+Block: Staggered Box (Frontend styles)
 
 **********************************************************************************************/
 }
@@ -6408,21 +6494,83 @@ Block: Card (Frontend styles)
   border-top-color: inherit;
 }
 
-.edit-post-visual-editor .card-container,
-.block-editor-block-styles .card-container,
-.block-editor-inserter__menu-help-panel .card-container {
+.edit-post-visual-editor .govuk-accordion h1,
+.edit-post-visual-editor .govuk-accordion h2,
+.edit-post-visual-editor .govuk-accordion h3,
+.edit-post-visual-editor .govuk-accordion h4,
+.edit-post-visual-editor .govuk-accordion h5,
+.edit-post-visual-editor .govuk-accordion h6,
+.block-editor-block-styles .govuk-accordion h1,
+.block-editor-block-styles .govuk-accordion h2,
+.block-editor-block-styles .govuk-accordion h3,
+.block-editor-block-styles .govuk-accordion h4,
+.block-editor-block-styles .govuk-accordion h5,
+.block-editor-block-styles .govuk-accordion h6,
+.block-editor-inserter__menu-help-panel .govuk-accordion h1,
+.block-editor-inserter__menu-help-panel .govuk-accordion h2,
+.block-editor-inserter__menu-help-panel .govuk-accordion h3,
+.block-editor-inserter__menu-help-panel .govuk-accordion h4,
+.block-editor-inserter__menu-help-panel .govuk-accordion h5,
+.block-editor-inserter__menu-help-panel .govuk-accordion h6 {
+  color: #1d70b8;
+}
+
+.edit-post-visual-editor .govuk-accordion h3,
+.block-editor-block-styles .govuk-accordion h3,
+.block-editor-inserter__menu-help-panel .govuk-accordion h3 {
+  margin: 12px 0 10px;
+  margin: 0.75rem 0 0.625rem;
+}
+
+.edit-post-visual-editor .govuk-accordion .block-editor-block-list__block .block-list-appender,
+.block-editor-block-styles .govuk-accordion .block-editor-block-list__block .block-list-appender,
+.block-editor-inserter__menu-help-panel .govuk-accordion .block-editor-block-list__block .block-list-appender {
+  margin-left: 0;
+  width: 25rem;
+}
+
+.edit-post-visual-editor .govuk-accordion .block-editor-block-list__block .block-list-appender textarea,
+.block-editor-block-styles .govuk-accordion .block-editor-block-list__block .block-list-appender textarea,
+.block-editor-inserter__menu-help-panel .govuk-accordion .block-editor-block-list__block .block-list-appender textarea {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.edit-post-visual-editor .govuk-accordion__section-header,
+.block-editor-block-styles .govuk-accordion__section-header,
+.block-editor-inserter__menu-help-panel .govuk-accordion__section-header {
+  border-top: 1px dashed #6F777B;
+  color: #1d70b8;
+}
+
+.edit-post-visual-editor .govuk-accordion__section-header:before,
+.block-editor-block-styles .govuk-accordion__section-header:before,
+.block-editor-inserter__menu-help-panel .govuk-accordion__section-header:before {
+  color: #6F777B;
+  content: 'Accordion section';
+}
+
+.edit-post-visual-editor .govuk-accordion__section-content,
+.block-editor-block-styles .govuk-accordion__section-content,
+.block-editor-inserter__menu-help-panel .govuk-accordion__section-content {
+  display: block;
+}
+
+.edit-post-visual-editor .mojblocks-card,
+.block-editor-block-styles .mojblocks-card,
+.block-editor-inserter__menu-help-panel .mojblocks-card {
   background-color: white;
   max-width: 100%;
   padding: 0.75rem;
   margin-bottom: 0.75rem;
 }
 
-.edit-post-visual-editor .card-container h2,
-.edit-post-visual-editor .card-container p,
-.block-editor-block-styles .card-container h2,
-.block-editor-block-styles .card-container p,
-.block-editor-inserter__menu-help-panel .card-container h2,
-.block-editor-inserter__menu-help-panel .card-container p {
+.edit-post-visual-editor .mojblocks-card h2,
+.edit-post-visual-editor .mojblocks-card p,
+.block-editor-block-styles .mojblocks-card h2,
+.block-editor-block-styles .mojblocks-card p,
+.block-editor-inserter__menu-help-panel .mojblocks-card h2,
+.block-editor-inserter__menu-help-panel .mojblocks-card p {
   margin-bottom: 0.75rem;
 }
 
@@ -6516,28 +6664,23 @@ Block: Card (Frontend styles)
   color: #6F777B;
 }
 
-.edit-post-visual-editor .card-container,
-.block-editor-block-styles .card-container,
-.block-editor-inserter__menu-help-panel .card-container {
+.edit-post-visual-editor .mojblocks-card,
+.block-editor-block-styles .mojblocks-card,
+.block-editor-inserter__menu-help-panel .mojblocks-card {
   background-color: white;
   max-width: 100%;
   padding: 0.75rem;
   margin-bottom: 0.75rem;
-}
-
-.edit-post-visual-editor .card-container h2,
-.edit-post-visual-editor .card-container p,
-.block-editor-block-styles .card-container h2,
-.block-editor-block-styles .card-container p,
-.block-editor-inserter__menu-help-panel .card-container h2,
-.block-editor-inserter__menu-help-panel .card-container p {
-  margin-top: 0.75rem;
-}
-
-.edit-post-visual-editor .mojblocks-card,
-.block-editor-block-styles .mojblocks-card,
-.block-editor-inserter__menu-help-panel .mojblocks-card {
   margin: 15px 0;
+}
+
+.edit-post-visual-editor .mojblocks-card h2,
+.edit-post-visual-editor .mojblocks-card p,
+.block-editor-block-styles .mojblocks-card h2,
+.block-editor-block-styles .mojblocks-card p,
+.block-editor-inserter__menu-help-panel .mojblocks-card h2,
+.block-editor-inserter__menu-help-panel .mojblocks-card p {
+  margin-top: 0.75rem;
 }
 
 .edit-post-visual-editor .mojblocks-card__image-selected,
@@ -6606,5 +6749,1237 @@ Block: Card (Frontend styles)
   font-size: 1rem;
   color: #454A4C;
   margin: 0 0 24px;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta,
+.block-editor-block-styles .wp-block-mojblocks-cta,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta {
+  padding: 15px;
+  margin: auto -15px;
+  background-color: #1d70b8;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-cta__heading,
+.block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-cta__heading,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-cta__heading {
+  margin: 12px 0 15px;
+  padding: 0;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-cta__heading-text,
+.block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-cta__heading-text,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-cta__heading-text {
+  color: #FFDD00;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-cta__content,
+.block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-cta__content,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-cta__content {
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-cta__content p,
+.block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-cta__content p,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-cta__content p {
+  color: #ffffff;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  font-size: 20px;
+  font-size: 1.25rem;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-cta__content p,
+  .block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-cta__content p,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-cta__content p {
+    font-size: 1.1rem;
+    font-size: 1.125rem;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-cta__content,
+  .block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-cta__content,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-cta__content {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta button.components-button.components-toolbar__control.has-icon,
+.block-editor-block-styles .wp-block-mojblocks-cta button.components-button.components-toolbar__control.has-icon,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta button.components-button.components-toolbar__control.has-icon {
+  background-color: white;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-button,
+.edit-post-visual-editor .wp-block-mojblocks-cta a.mojblocks-button,
+.block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-button,
+.block-editor-block-styles .wp-block-mojblocks-cta a.mojblocks-button,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-button,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta a.mojblocks-button {
+  background-color: #FFDD00;
+  color: #0B0C0C;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  font-size: 24px;
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 36px;
+  line-height: 2.25rem;
+  margin-top: 15px;
+  padding: 4px 22px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  vertical-align: top;
+  width: 100%;
+  border-radius: 5px;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-button,
+  .edit-post-visual-editor .wp-block-mojblocks-cta a.mojblocks-button,
+  .block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-button,
+  .block-editor-block-styles .wp-block-mojblocks-cta a.mojblocks-button,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-button,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta a.mojblocks-button {
+    display: inline-block;
+    width: auto;
+  }
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-button:visited,
+.edit-post-visual-editor .wp-block-mojblocks-cta a.mojblocks-button:visited,
+.block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-button:visited,
+.block-editor-block-styles .wp-block-mojblocks-cta a.mojblocks-button:visited,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-button:visited,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta a.mojblocks-button:visited {
+  color: #0B0C0C;
+  text-decoration: none;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-button:hover,
+.edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-button:active,
+.edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-button:focus,
+.edit-post-visual-editor .wp-block-mojblocks-cta a.mojblocks-button:hover,
+.edit-post-visual-editor .wp-block-mojblocks-cta a.mojblocks-button:active,
+.edit-post-visual-editor .wp-block-mojblocks-cta a.mojblocks-button:focus,
+.block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-button:hover,
+.block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-button:active,
+.block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-button:focus,
+.block-editor-block-styles .wp-block-mojblocks-cta a.mojblocks-button:hover,
+.block-editor-block-styles .wp-block-mojblocks-cta a.mojblocks-button:active,
+.block-editor-block-styles .wp-block-mojblocks-cta a.mojblocks-button:focus,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-button:hover,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-button:active,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-button:focus,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta a.mojblocks-button:hover,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta a.mojblocks-button:active,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta a.mojblocks-button:focus {
+  background: #0B0C0C;
+  color: #ffffff;
+  box-shadow: none;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta.is-style-judicial-teal,
+.block-editor-block-styles .wp-block-mojblocks-cta.is-style-judicial-teal,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-judicial-teal {
+  background-color: #336C83;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-judicial-teal,
+  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-judicial-teal,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-judicial-teal {
+    padding: 25px 0 25px;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-judicial-teal,
+  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-judicial-teal,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-judicial-teal {
+    padding: 35px 0 50px;
+  }
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading,
+.block-editor-block-styles .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading {
+  margin: 12px -75px 15px;
+  padding: 12px 75px;
+  background-color: #0B0C0C;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading-text,
+.block-editor-block-styles .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading-text,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading-text {
+  color: #ffffff;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-moj-blue,
+  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-moj-blue,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-moj-blue {
+    padding: 25px 0 25px 35px;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-moj-blue,
+  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-moj-blue,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-moj-blue {
+    padding: 35px 75px 50px 75px;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-cta .govuk-grid-column-three-quarters,
+  .block-editor-block-styles .wp-block-mojblocks-cta .govuk-grid-column-three-quarters,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .govuk-grid-column-three-quarters {
+    padding: 0;
+  }
+}
+
+@media (min-width: 40.0625em) and (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-cta .govuk-grid-column-three-quarters,
+  .block-editor-block-styles .wp-block-mojblocks-cta .govuk-grid-column-three-quarters,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .govuk-grid-column-three-quarters {
+    padding: 0;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-hero,
+.block-editor-block-styles .mojblocks-hero,
+.block-editor-inserter__menu-help-panel .mojblocks-hero {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.edit-post-visual-editor .mojblocks-hero__image,
+.block-editor-block-styles .mojblocks-hero__image,
+.block-editor-inserter__menu-help-panel .mojblocks-hero__image {
+  background: #336C83;
+  width: 100vw;
+  min-height: 250px;
+  min-height: 15.625rem;
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .edit-post-visual-editor .mojblocks-hero__image,
+  .block-editor-block-styles .mojblocks-hero__image,
+  .block-editor-inserter__menu-help-panel .mojblocks-hero__image {
+    -webkit-filter: invert(100%);
+            filter: invert(100%);
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-hero__image,
+  .block-editor-block-styles .mojblocks-hero__image,
+  .block-editor-inserter__menu-help-panel .mojblocks-hero__image {
+    min-height: 500px;
+    min-height: 31.25rem;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-hero__overlay,
+.block-editor-block-styles .mojblocks-hero__overlay,
+.block-editor-inserter__menu-help-panel .mojblocks-hero__overlay {
+  float: left;
+  width: 100%;
+  padding: 16px 0;
+  padding: 1rem 0;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-hero__overlay .govuk-grid-column-three-quarters,
+  .block-editor-block-styles .mojblocks-hero__overlay .govuk-grid-column-three-quarters,
+  .block-editor-inserter__menu-help-panel .mojblocks-hero__overlay .govuk-grid-column-three-quarters {
+    padding-left: 24px;
+    padding-left: 1.5rem;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-hero__overlay,
+  .block-editor-block-styles .mojblocks-hero__overlay,
+  .block-editor-inserter__menu-help-panel .mojblocks-hero__overlay {
+    margin-left: -15px;
+    margin-left: -0.9375rem;
+    margin-top: -80px;
+    margin-top: -5rem;
+    background: #ffffff;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-hero__overlay h2,
+.block-editor-block-styles .mojblocks-hero__overlay h2,
+.block-editor-inserter__menu-help-panel .mojblocks-hero__overlay h2 {
+  margin-top: 0;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list,
+.block-editor-block-styles .wp-block-mojblocks-highlights-list,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list {
+  padding: 15px;
+  margin: auto -15px;
+  background-color: #1d70b8;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list,
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list {
+    padding: 25px 0 25px;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list,
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list {
+    padding: 35px 0 25px;
+  }
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading,
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading {
+  margin: 12px 0 15px;
+  padding: 0;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading-text,
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading-text,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading-text {
+  color: #FFDD00;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul,
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul {
+  list-style: none;
+  padding: 0;
+  margin: 26px 0 0;
+  display: -ms-grid;
+  -ms-grid-columns: 100%;
+  -ms-grid-rows: auto;
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(1),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(1),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(1) {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2) {
+  -ms-grid-row: 2;
+  -ms-grid-column: 1;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3) {
+  -ms-grid-row: 3;
+  -ms-grid-column: 1;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4) {
+  -ms-grid-row: 4;
+  -ms-grid-column: 1;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5) {
+  -ms-grid-row: 5;
+  -ms-grid-column: 1;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6) {
+  -ms-grid-row: 6;
+  -ms-grid-column: 1;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7) {
+  -ms-grid-row: 7;
+  -ms-grid-column: 1;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8) {
+  -ms-grid-row: 8;
+  -ms-grid-column: 1;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9) {
+  -ms-grid-row: 9;
+  -ms-grid-column: 1;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10) {
+  -ms-grid-row: 10;
+  -ms-grid-column: 1;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11) {
+  -ms-grid-row: 11;
+  -ms-grid-column: 1;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12),
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12),
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12) {
+  -ms-grid-row: 12;
+  -ms-grid-column: 1;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul,
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul {
+    margin: 40px 0 0;
+    -ms-grid-columns: 50% 50%;
+    grid-template-columns: 50% 50%;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7) {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8) {
+    -ms-grid-row: 4;
+    -ms-grid-column: 2;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9) {
+    -ms-grid-row: 5;
+    -ms-grid-column: 1;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10) {
+    -ms-grid-row: 5;
+    -ms-grid-column: 2;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11) {
+    -ms-grid-row: 6;
+    -ms-grid-column: 1;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12) {
+    -ms-grid-row: 6;
+    -ms-grid-column: 2;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul,
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul {
+    -ms-grid-columns: 33% 33% 33%;
+    grid-template-columns: 33% 33% 33%;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(2) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(3) {
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(4) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(5) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(6) {
+    -ms-grid-row: 2;
+    -ms-grid-column: 3;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(7) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 1;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(8) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 2;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(9) {
+    -ms-grid-row: 3;
+    -ms-grid-column: 3;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(10) {
+    -ms-grid-row: 4;
+    -ms-grid-column: 1;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(11) {
+    -ms-grid-row: 4;
+    -ms-grid-column: 2;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12),
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12),
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content ul > *:nth-child(12) {
+    -ms-grid-row: 4;
+    -ms-grid-column: 3;
+  }
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li,
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li {
+  position: relative;
+  color: #ffffff;
+  padding: 16px 0;
+  margin-bottom: 0;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 21px;
+  font-size: 1.3125rem;
+  line-height: 28px;
+  line-height: 1.75rem;
+  word-wrap: break-word;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li:before,
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li:before,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li:before {
+  content: '';
+  width: 100%;
+  height: 1px;
+  background: #FFDD00;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li,
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li {
+    padding: 24px 25% 36px 0;
+    margin-bottom: 8px;
+  }
+
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li:before,
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li:before,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__content li:before {
+    width: 23%;
+    height: 8px;
+  }
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list.is-style-judicial-teal,
+.block-editor-block-styles .wp-block-mojblocks-highlights-list.is-style-judicial-teal,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list.is-style-judicial-teal {
+  background-color: #336C83;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list.is-style-judicial-teal,
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list.is-style-judicial-teal,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list.is-style-judicial-teal {
+    padding: 25px 0 25px;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list.is-style-judicial-teal,
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list.is-style-judicial-teal,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list.is-style-judicial-teal {
+    padding: 35px 0 25px;
+  }
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list.is-style-moj-blue .mojblocks-highlights-list__heading,
+.block-editor-block-styles .wp-block-mojblocks-highlights-list.is-style-moj-blue .mojblocks-highlights-list__heading,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list.is-style-moj-blue .mojblocks-highlights-list__heading {
+  margin: 12px -75px 15px;
+  padding: 12px 75px;
+  background-color: #0B0C0C;
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list.is-style-moj-blue .mojblocks-highlights-list__heading-text,
+.block-editor-block-styles .wp-block-mojblocks-highlights-list.is-style-moj-blue .mojblocks-highlights-list__heading-text,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list.is-style-moj-blue .mojblocks-highlights-list__heading-text {
+  color: #ffffff;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list.is-style-moj-blue,
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list.is-style-moj-blue,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list.is-style-moj-blue {
+    padding: 25px 0 25px 35px;
+  }
+}
+
+@media (min-width: 48.0625em) {
+  .edit-post-visual-editor .wp-block-mojblocks-highlights-list.is-style-moj-blue,
+  .block-editor-block-styles .wp-block-mojblocks-highlights-list.is-style-moj-blue,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list.is-style-moj-blue {
+    padding: 35px 75px 50px 75px;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-intro .govuk-width-container,
+.block-editor-block-styles .mojblocks-intro .govuk-width-container,
+.block-editor-inserter__menu-help-panel .mojblocks-intro .govuk-width-container {
+  margin: 0;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image,
+.block-editor-block-styles .mojblocks-quote__image,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image {
+  background-color: #454A4C;
+  min-height: 70px;
+  border-radius: 4px;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image__button,
+.block-editor-block-styles .mojblocks-quote__image__button,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #ffffff;
+  padding: 6px;
+  box-shadow: none;
+  transition: all 0.3s;
+  position: absolute;
+  top: 10px;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image__button > svg,
+.block-editor-block-styles .mojblocks-quote__image__button > svg,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button > svg {
+  color: white;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image__button:hover,
+.edit-post-visual-editor .mojblocks-quote__image__button:focus,
+.block-editor-block-styles .mojblocks-quote__image__button:hover,
+.block-editor-block-styles .mojblocks-quote__image__button:focus,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button:hover,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button:focus {
+  box-shadow: none !important;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image__button-add,
+.block-editor-block-styles .mojblocks-quote__image__button-add,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button-add {
+  left: 10px;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image__button-change,
+.block-editor-block-styles .mojblocks-quote__image__button-change,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button-change {
+  background-color: rgba(0, 0, 0, 0.8);
+  left: 10px;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image__button-change > svg,
+.block-editor-block-styles .mojblocks-quote__image__button-change > svg,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button-change > svg {
+  color: white;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image__button-change:hover > svg,
+.edit-post-visual-editor .mojblocks-quote__image__button-change:focus > svg,
+.block-editor-block-styles .mojblocks-quote__image__button-change:hover > svg,
+.block-editor-block-styles .mojblocks-quote__image__button-change:focus > svg,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button-change:hover > svg,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button-change:focus > svg {
+  color: #6F777B;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image__button-remove,
+.block-editor-block-styles .mojblocks-quote__image__button-remove,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button-remove {
+  background-color: rgba(0, 0, 0, 0.8);
+  left: unset;
+  right: 10px;
+  width: 36px;
+  height: 36px;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image__button-remove > svg,
+.block-editor-block-styles .mojblocks-quote__image__button-remove > svg,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button-remove > svg {
+  color: white;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image__button-remove:hover > svg,
+.edit-post-visual-editor .mojblocks-quote__image__button-remove:focus > svg,
+.block-editor-block-styles .mojblocks-quote__image__button-remove:hover > svg,
+.block-editor-block-styles .mojblocks-quote__image__button-remove:focus > svg,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button-remove:hover > svg,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image__button-remove:focus > svg {
+  color: #6F777B;
+}
+
+.edit-post-visual-editor .mojblocks-quote,
+.block-editor-block-styles .mojblocks-quote,
+.block-editor-inserter__menu-help-panel .mojblocks-quote {
+  margin: 15px 0;
+}
+
+.edit-post-visual-editor .mojblocks-quote__image-selected,
+.block-editor-block-styles .mojblocks-quote__image-selected,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__image-selected {
+  width: 100%;
+  padding-bottom: 75%;
+  position: relative;
+  background-size: cover;
+  background-position: top center;
+  border-radius: 0;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-quote__image-selected,
+  .block-editor-block-styles .mojblocks-quote__image-selected,
+  .block-editor-inserter__menu-help-panel .mojblocks-quote__image-selected {
+    padding-bottom: 50%;
+  }
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .edit-post-visual-editor .mojblocks-quote__image,
+  .block-editor-block-styles .mojblocks-quote__image,
+  .block-editor-inserter__menu-help-panel .mojblocks-quote__image {
+    -webkit-filter: invert(100%);
+            filter: invert(100%);
+  }
+}
+
+.edit-post-visual-editor .mojblocks-quote__content__icon,
+.block-editor-block-styles .mojblocks-quote__content__icon,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__content__icon {
+  padding: 20px 0 2px;
+}
+
+.edit-post-visual-editor .mojblocks-quote__content__icon > svg,
+.block-editor-block-styles .mojblocks-quote__content__icon > svg,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__content__icon > svg {
+  color: #454A4C;
+  fill: #454A4C;
+  transform: rotate(1deg) skew(-10deg, 0deg);
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.edit-post-visual-editor .mojblocks-quote__content__quote,
+.block-editor-block-styles .mojblocks-quote__content__quote,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__content__quote {
+  color: #454A4C;
+  display: block;
+  font-style: italic;
+  font-size: 22px;
+  font-size: 1.375rem;
+  line-height: 28px;
+  line-height: 1.75rem;
+  margin-bottom: 15px;
+  quotes: none;
+}
+
+.edit-post-visual-editor .mojblocks-quote__content__name,
+.block-editor-block-styles .mojblocks-quote__content__name,
+.block-editor-inserter__menu-help-panel .mojblocks-quote__content__name {
+  display: inline-block;
+  font-size: 16px;
+  font-size: 1rem;
+  color: #454A4C;
+  margin: 0 0 24px;
+}
+
+.edit-post-visual-editor .govuk-details,
+.block-editor-block-styles .govuk-details,
+.block-editor-inserter__menu-help-panel .govuk-details {
+  font-family: "GDS Transport", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-weight: 400;
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.25;
+  color: #0b0c0c;
+  margin-bottom: 20px;
+  display: block;
+}
+
+/*! Copyright (c) 2011 by Margaret Calvert & Henrik Kubel. All rights reserved. The font has been customised for exclusive use on gov.uk. This cut is not commercially available. */
+
+@font-face {
+  font-family: "GDS Transport";
+  src: url("/assets/fonts/light-94a07e06a1-v2.woff2") format("woff2"), url("/assets/fonts/light-f591b13f7d-v2.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@font-face {
+  font-family: "GDS Transport";
+  src: url("/assets/fonts/bold-b542beb274-v2.woff2") format("woff2"), url("/assets/fonts/bold-affa96571d-v2.woff") format("woff");
+  font-weight: bold;
+  font-style: normal;
+  font-display: fallback;
+}
+
+@media print {
+  .edit-post-visual-editor .govuk-details,
+  .block-editor-block-styles .govuk-details,
+  .block-editor-inserter__menu-help-panel .govuk-details {
+    font-family: sans-serif;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .govuk-details,
+  .block-editor-block-styles .govuk-details,
+  .block-editor-inserter__menu-help-panel .govuk-details {
+    font-size: 19px;
+    font-size: 1.1875rem;
+    line-height: 1.31578947;
+  }
+}
+
+@media print {
+  .edit-post-visual-editor .govuk-details,
+  .block-editor-block-styles .govuk-details,
+  .block-editor-inserter__menu-help-panel .govuk-details {
+    font-size: 14pt;
+    line-height: 1.15;
+  }
+}
+
+@media print {
+  .edit-post-visual-editor .govuk-details,
+  .block-editor-block-styles .govuk-details,
+  .block-editor-inserter__menu-help-panel .govuk-details {
+    color: #000000;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .govuk-details,
+  .block-editor-block-styles .govuk-details,
+  .block-editor-inserter__menu-help-panel .govuk-details {
+    margin-bottom: 30px;
+  }
+}
+
+.edit-post-visual-editor .govuk-details__summary,
+.block-editor-block-styles .govuk-details__summary,
+.block-editor-inserter__menu-help-panel .govuk-details__summary {
+  display: inline-block;
+  position: relative;
+  margin-bottom: 5px;
+  padding-left: 25px;
+  color: #1d70b8;
+  cursor: pointer;
+}
+
+.edit-post-visual-editor .govuk-details__summary:hover,
+.block-editor-block-styles .govuk-details__summary:hover,
+.block-editor-inserter__menu-help-panel .govuk-details__summary:hover {
+  color: #003078;
+}
+
+.edit-post-visual-editor .govuk-details__summary:focus,
+.block-editor-block-styles .govuk-details__summary:focus,
+.block-editor-inserter__menu-help-panel .govuk-details__summary:focus {
+  outline: 3px solid transparent;
+  color: #0b0c0c;
+  background-color: #ffdd00;
+  box-shadow: 0 -2px #ffdd00, 0 4px #0b0c0c;
+  text-decoration: none;
+}
+
+.edit-post-visual-editor .govuk-details__summary-text,
+.block-editor-block-styles .govuk-details__summary-text,
+.block-editor-inserter__menu-help-panel .govuk-details__summary-text {
+  text-decoration: underline;
+}
+
+.edit-post-visual-editor .govuk-details__summary:focus .govuk-details__summary-text,
+.block-editor-block-styles .govuk-details__summary:focus .govuk-details__summary-text,
+.block-editor-inserter__menu-help-panel .govuk-details__summary:focus .govuk-details__summary-text {
+  text-decoration: none;
+}
+
+.edit-post-visual-editor .govuk-details__summary::-webkit-details-marker,
+.block-editor-block-styles .govuk-details__summary::-webkit-details-marker,
+.block-editor-inserter__menu-help-panel .govuk-details__summary::-webkit-details-marker {
+  display: none;
+}
+
+.edit-post-visual-editor .govuk-details__summary:before,
+.block-editor-block-styles .govuk-details__summary:before,
+.block-editor-inserter__menu-help-panel .govuk-details__summary:before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent;
+  -webkit-clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  clip-path: polygon(0% 0%, 100% 50%, 0% 100%);
+  border-width: 7px 0 7px 12.124px;
+  border-left-color: inherit;
+}
+
+.govuk-details[open] > .edit-post-visual-editor .govuk-details__summary:before,
+.govuk-details[open] >
+.block-editor-block-styles .govuk-details__summary:before,
+.govuk-details[open] >
+.block-editor-inserter__menu-help-panel .govuk-details__summary:before {
+  display: block;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent;
+  -webkit-clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+  clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+  border-width: 12.124px 7px 0 7px;
+  border-top-color: inherit;
+}
+
+.edit-post-visual-editor .govuk-details__text,
+.block-editor-block-styles .govuk-details__text,
+.block-editor-inserter__menu-help-panel .govuk-details__text {
+  padding: 15px;
+  padding-left: 20px;
+  border-left: 5px solid #b1b4b6;
+}
+
+.edit-post-visual-editor .govuk-details__text p,
+.block-editor-block-styles .govuk-details__text p,
+.block-editor-inserter__menu-help-panel .govuk-details__text p {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.edit-post-visual-editor .govuk-details__text > :last-child,
+.block-editor-block-styles .govuk-details__text > :last-child,
+.block-editor-inserter__menu-help-panel .govuk-details__text > :last-child {
+  margin-bottom: 0;
+}
+
+.edit-post-visual-editor .mojblocks-reveal .govuk-width-container,
+.block-editor-block-styles .mojblocks-reveal .govuk-width-container,
+.block-editor-inserter__menu-help-panel .mojblocks-reveal .govuk-width-container {
+  margin: 0;
+}
+
+.edit-post-visual-editor .govuk-details[open] > .govuk-details__summary:before,
+.block-editor-block-styles .govuk-details[open] > .govuk-details__summary:before,
+.block-editor-inserter__menu-help-panel .govuk-details[open] > .govuk-details__summary:before {
+  display: block;
+  width: 0;
+  height: 0;
+  -webkit-clip-path: polygon(0 0, 50% 100%, 100% 0);
+  clip-path: polygon(0 0, 50% 100%, 100% 0);
+  border-color: transparent;
+  border-style: solid;
+  border-width: 12.124px 7px 0;
+  border-top-color: inherit;
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box,
+.block-editor-block-styles .mojblocks-staggered-box,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box {
+  margin: 48px -15px;
+  margin: 3rem -0.9375rem;
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box .govuk-grid-row,
+.block-editor-block-styles .mojblocks-staggered-box .govuk-grid-row,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box .govuk-grid-row {
+  position: relative;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-staggered-box:after,
+  .block-editor-block-styles .mojblocks-staggered-box:after,
+  .block-editor-inserter__menu-help-panel .mojblocks-staggered-box:after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__image-container,
+.block-editor-block-styles .mojblocks-staggered-box__image-container,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__image-container {
+  padding: 0;
+  line-height: 0;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-staggered-box__image-container,
+  .block-editor-block-styles .mojblocks-staggered-box__image-container,
+  .block-editor-inserter__menu-help-panel .mojblocks-staggered-box__image-container {
+    float: left;
+    position: absolute;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__image,
+.block-editor-block-styles .mojblocks-staggered-box__image,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__image {
+  display: block;
+}
+
+@media screen and (-ms-high-contrast: active) {
+  .edit-post-visual-editor .mojblocks-staggered-box__image,
+  .block-editor-block-styles .mojblocks-staggered-box__image,
+  .block-editor-inserter__menu-help-panel .mojblocks-staggered-box__image {
+    -webkit-filter: invert(100%);
+            filter: invert(100%);
+  }
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__text-container,
+.block-editor-block-styles .mojblocks-staggered-box__text-container,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__text-container {
+  z-index: 1;
+  background-color: #6F777B;
+  color: #ffffff;
+  padding: 1rem;
+  position: relative;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-staggered-box__text-container,
+  .block-editor-block-styles .mojblocks-staggered-box__text-container,
+  .block-editor-inserter__menu-help-panel .mojblocks-staggered-box__text-container {
+    padding: 32px;
+    padding: 2rem;
+    float: right;
+    margin-top: 17.5%;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__title,
+.block-editor-block-styles .mojblocks-staggered-box__title,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__title {
+  margin-top: 16px;
+  margin-top: 1rem;
+  margin-bottom: 24px;
+  margin-bottom: 1.5rem;
+  padding-top: 16px;
+  padding-top: 1rem;
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__title:before,
+.block-editor-block-styles .mojblocks-staggered-box__title:before,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__title:before {
+  content: '';
+  width: 50px;
+  width: 3.125rem;
+  height: 7px;
+  height: 0.4375rem;
+  background: #FFDD00;
+  position: absolute;
+  top: 32px;
+  top: 2rem;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .mojblocks-staggered-box__title,
+  .block-editor-block-styles .mojblocks-staggered-box__title,
+  .block-editor-inserter__menu-help-panel .mojblocks-staggered-box__title {
+    padding-top: 0;
+  }
+
+  .edit-post-visual-editor .mojblocks-staggered-box__title:before,
+  .block-editor-block-styles .mojblocks-staggered-box__title:before,
+  .block-editor-inserter__menu-help-panel .mojblocks-staggered-box__title:before {
+    content: '';
+    width: 64px;
+    width: 4rem;
+    height: 8px;
+    height: 0.5rem;
+    background: #FFDD00;
+    position: absolute;
+    top: 32px;
+    top: 2rem;
+  }
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__button,
+.block-editor-block-styles .mojblocks-staggered-box__button,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__button {
+  border: 1px solid #FFCE21;
+  color: #ffffff;
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__button:visited,
+.block-editor-block-styles .mojblocks-staggered-box__button:visited,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__button:visited {
+  color: #ffffff;
+}
+
+.edit-post-visual-editor .mojblocks-staggered-box__button:hover,
+.edit-post-visual-editor .mojblocks-staggered-box__button :focus,
+.edit-post-visual-editor .mojblocks-staggered-box__button :active,
+.block-editor-block-styles .mojblocks-staggered-box__button:hover,
+.block-editor-block-styles .mojblocks-staggered-box__button :focus,
+.block-editor-block-styles .mojblocks-staggered-box__button :active,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__button:hover,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__button :focus,
+.block-editor-inserter__menu-help-panel .mojblocks-staggered-box__button :active {
+  background-color: #FFCE21;
+  color: #0B0C0C;
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .is-style-staggered-box-image-right .mojblocks-staggered-box__image-container,
+  .block-editor-block-styles .is-style-staggered-box-image-right .mojblocks-staggered-box__image-container,
+  .block-editor-inserter__menu-help-panel .is-style-staggered-box-image-right .mojblocks-staggered-box__image-container {
+    float: right;
+    margin-top: 20%;
+    margin-left: 33%;
+    position: relative;
+  }
+}
+
+@media (min-width: 40.0625em) {
+  .edit-post-visual-editor .is-style-staggered-box-image-right .mojblocks-staggered-box__text-container,
+  .block-editor-block-styles .is-style-staggered-box-image-right .mojblocks-staggered-box__text-container,
+  .block-editor-inserter__menu-help-panel .is-style-staggered-box-image-right .mojblocks-staggered-box__text-container {
+    float: left;
+    position: absolute;
+    margin-top: 0;
+  }
 }
 

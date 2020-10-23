@@ -1,5 +1,6 @@
 /**
- * Card
+ * Card block
+ *
  * Create a flexible card pattern on the page,
  * with an image, hyperlink title and body content.
  */
@@ -66,7 +67,7 @@ registerBlockType('mojblocks/card', {
     };
 
     return (
-        <div className={`${className} card-container mojblocks-card-image`} data-src={cardImageURL}>
+        <div className={`${className} mojblocks-card mojblocks-card-image`} data-src={cardImageURL}>
             <div className={`${className} mojblocks-card__image` + ' ' + (cardImageId ? 'mojblocks-card__image-selected': '')}
                 style={{backgroundImage: `url(${cardImageURL})`}}>
             <MediaUpload
@@ -131,7 +132,7 @@ registerBlockType('mojblocks/card', {
         } = props;
 
         return (
-            <div className={`${className} card-container mojblocks-card-image`} data-src={cardImageURL}>
+            <div className={`${className} mojblocks-card mojblocks-card-image`} data-src={cardImageURL}>
             {typeof cardImageURL === "string" && (
                 <div className="mojblocks-card__image mojblocks-card__image-selected"
                         style={{

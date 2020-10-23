@@ -1,0 +1,129 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Accordion (Frontend styles)
+
+**********************************************************************************************/
+
+/**
+* This file contains imported styling to support GOV UK Frontend usage in the plugin
+*
+* To import styles from govuk-frontend, simply include the Gov UK module using
+*  @imports with a URL reference
+**/
+
+// https://design-system.service.gov.uk/components/accordion/
+@import "node_modules/govuk-frontend/govuk/components/accordion/accordion";
+
+// https://design-system.service.gov.uk/components/details/
+@import "node_modules/govuk-frontend/govuk/components/details/details";
+
+
+/*********************************************************************************************
+
+SASS modifications to conform GovUK frontend to MoJ block styling
+
+**********************************************************************************************/
+
+.govuk-accordion {
+    font-style: normal;
+    font-family: inherit;
+    font-size: inherit;
+    border-bottom: none;
+
+    // Reset NHS margin to display no margin on accordion sections
+    margin-bottom: 0;
+
+    h1,
+    h2,
+    h3 {
+        color: $mojblocks-color-light-blue;
+    }
+
+    h4,
+    h5,
+    h6 {
+        color: $mojblocks-color-black;
+    }
+
+    &__section {
+        &:active {
+            button:active {
+                top: 0;
+            }
+        }
+    }
+
+    &__section-heading {
+        @extend .govuk-details__summary;
+        @extend .govuk-link;
+		@extend .govuk-details;
+
+		// Remove margin bottom that @extend above introduces.
+		margin-bottom: 0;
+
+        h4 {
+            font-style: normal;
+            font-family: inherit;
+            font-size: inherit;
+        }
+
+        margin-left: 22px;
+        margin-left: govuk-px-to-rem(22);
+    }
+
+    &__section-content {
+        // Decrease padding causes by NHS styles around accordion content
+        padding-top: 0;
+
+        // Indent body text in accordion section content to align with title
+        .govuk-body {
+			margin-left: 16px;
+			margin-left: govuk-px-to-rem(16);
+            padding-left: 30px;
+            padding-left: govuk-px-to-rem(30);
+        }
+    }
+
+    // When accordion seciton is open.
+    &__section--expanded {
+        .govuk-accordion {
+            &__section-heading {
+                &:before {
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    border-style: solid;
+                    border-color: transparent;
+                    border-top-color: transparent;
+                    -webkit-clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+                    clip-path: polygon(0% 0%, 50% 100%, 100% 0%);
+                    border-width: 12.124px 7px 0 7px;
+                    border-top-color: inherit;
+                }
+            }
+        }
+
+    }
+
+    // Remove "mustaches" underline caused by NHS styles conflicting with Gov UK
+    &__section-button,
+    &__open-all {
+        box-shadow: none;
+        border-radius: 0;
+
+        &:active {
+            top: 0;
+        }
+    }
+
+    // Remove +/- that comes with accordion (replaced with arrows).
+    &__icon {
+        display: none;
+    }
+
+    // Add a bottom border to last accordion section
+    &:last-child {
+        border-bottom: 1px solid $mojblocks-color-mid-grey;
+    }
+}
