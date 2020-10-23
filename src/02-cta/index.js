@@ -18,6 +18,9 @@ registerBlockType('mojblocks/cta', {
             buttonLink: 'https://intranet.justice.gov.uk/'
         },
     },
+    keywords: [
+        __('cta', 'Call To Action', 'mojblocks')
+    ],
     attributes: {
         ctaTitle: {
             type: 'string',
