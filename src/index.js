@@ -2,11 +2,12 @@
  * Import blocks as components.
  */
 
-import "./01-highlights-list";
-import "./02-cta";
-import "./03-hero";
-import "./04-accordion";
-import "./06-staggered-boxes";
-import "./07-quote";
-import "./08-intro";
-import "./09-reveal";
+import "./highlights-list";
+import "./cta";
+import "./hero";
+import "./accordion";
+import "./staggered-boxes";
+import "./quote";
+import "./intro";
+import "./reveal";
+import "./card";

@@ -1,0 +1,135 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Call to Action (Frontend styles)
+
+**********************************************************************************************/
+
+.wp-block-mojblocks-cta {
+    padding: 15px;
+    margin: auto -15px;
+    background-color: $mojblocks-color-light-blue;
+
+    .mojblocks-cta {
+
+        &__heading {
+            margin: 12px 0 15px;
+            padding: 0;
+        }
+
+        &__heading-text {
+            color: $mojblocks-color-yellow;
+        }
+
+        &__content {
+            padding-top: 1px;
+            padding-bottom: 1px;
+
+            p {
+                color:$mojblocks-color-white;
+                margin-top: 15px;
+                margin-bottom: 15px;
+                font-size: 20px;
+                font-size: govuk-px-to-rem(20);
+
+                @include govuk-media-query($from: tablet) {
+                    font-size: 1.1rem;
+                    font-size: govuk-px-to-rem(18);
+                }
+            }
+
+            @include govuk-media-query($from: tablet) {
+                padding-top: 0;
+                padding-bottom: 0;
+            }
+        }
+    }
+
+    button.components-button.components-toolbar__control.has-icon {
+        background-color: white;
+    }
+
+    .mojblocks-button, a.mojblocks-button {
+        background-color: $mojblocks-color-yellow;
+        color: $mojblocks-color-black;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: block;
+        font-size: 24px;
+        font-size: govuk-px-to-rem(24);
+        font-weight: 900;
+        line-height: 36px;
+        line-height: govuk-px-to-rem(36);
+        margin-top: 15px;
+        padding: 4px 22px;
+        position: relative;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: top;
+        width: 100%;
+		border-radius: 5px;
+
+        @include govuk-media-query($from: tablet) {
+            display: inline-block;
+            width: auto;
+        }
+
+		&:visited {
+			color: $mojblocks-color-black;
+			text-decoration: none;
+		}
+
+		&:hover, &:active, &:focus {
+			background: $mojblocks-color-black;
+			color: $mojblocks-color-white;
+			box-shadow: none;
+		}
+    }
+
+    &.is-style-judicial-teal {
+        background-color: $mojblocks-color-teal;
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+
+        @include govuk-media-query($from: tablet) {
+            padding: 25px 0 25px;
+        }
+
+        @include govuk-media-query($from: desktop) {
+            padding: 35px 0 50px;
+        }
+    }
+
+    &.is-style-moj-blue {
+        .mojblocks-cta {
+            &__heading {
+                margin: 12px -75px 15px;
+                padding: 12px 75px;
+                background-color: $mojblocks-color-black;
+            }
+            &__heading-text {
+                color: $mojblocks-color-white;
+            }
+            &__content {
+            }
+        }
+
+        @include govuk-media-query($from: tablet) {
+            padding: 25px 0 25px 35px;
+        }
+
+        @include govuk-media-query($from: desktop) {
+            padding: 35px 75px 50px 75px;
+        }
+    }
+
+    .govuk-grid-column-three-quarters {
+        @include govuk-media-query($from: tablet) {
+            @include govuk-responsive-padding(0);
+        }
+    }
+}

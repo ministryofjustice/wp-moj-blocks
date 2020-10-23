@@ -1,0 +1,84 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Card (Gutenberg editor styles)
+
+**********************************************************************************************/
+
+.mojblocks-card {
+
+	h2, p {
+		margin-bottom: govuk-px-to-rem(12);
+	}
+
+	background-color: white;
+	max-width: 100%;
+	padding: govuk-px-to-rem(12);
+	margin-bottom: govuk-px-to-rem(12);
+
+	&__image {
+		background-color: $mojblocks-color-dark-grey;
+		min-height: 70px;
+		border-radius: 4px;
+
+		&__button {
+			border-radius: 50%;
+			width: 50px;
+			height: 50px;
+			border: 3px solid #ffffff;
+			padding: 6px;
+			box-shadow: none;
+			transition: all 0.3s;
+			position: absolute;
+			top: 10px;
+
+			> svg {
+				color: white;
+			}
+
+			&:hover,
+			&:focus {
+				box-shadow: none !important;
+			}
+
+			&-add {
+				left: 10px;
+			}
+
+			&-change {
+				background-color: rgba(0, 0, 0, 0.8);
+				left: 10px;
+
+				> svg {
+					color: white;
+				}
+
+				&:hover > svg,
+				&:focus > svg  {
+					color: $mojblocks-color-grey;
+				}
+			}
+
+			&-remove {
+				background-color: rgba(0, 0, 0, 0.8);
+				left: unset;
+				right: 10px;
+				width: 36px;
+				height: 36px;
+
+				> svg {
+					color: white;
+				}
+
+				&:hover > svg,
+				&:focus > svg {
+					color: $mojblocks-color-grey;
+				}
+			}
+		}
+	}
+}
+
+
+@import 'style.scss';
+

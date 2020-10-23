@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     1.0.0
+ * Version:     1.1.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -111,11 +111,56 @@ function mojblocks_register_blocks()
         true
     );
 
-    // Calls registered script above. Registering one brings all. One block to rule them all.
+    // Register blocks
     register_block_type(
-        'mojblocks/blocks',
+        'mojblocks/highlights',
         ['editor_script' => 'mojblocks-editor-script']
-    );
+	);
+
+	register_block_type(
+        'mojblocks/cta',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/hero',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/accordion',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/video',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/staggered-boxes',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/quote',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/intro',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/reveal',
+        ['editor_script' => 'mojblocks-editor-script']
+	);
+
+	register_block_type(
+        'mojblocks/card',
+			['editor_script' => 'mojblocks-editor-script' ]
+	);
 }
 
 /**
@@ -124,7 +169,7 @@ function mojblocks_register_blocks()
 function mojblocks_gutenberg_editor_styles()
 {
     wp_enqueue_style(
-        'nhsl-block-editor-styles',
+        'mojblocks-block-editor-styles',
         plugins_url('build/style-gutenburg.css', __FILE__),
         false,
         '1.1',

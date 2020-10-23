@@ -10,6 +10,7 @@ registerBlockType('mojblocks/cta', {
     title: __('Call to Action', 'mojblocks'),
     icon: 'megaphone',
     category: 'mojblocks',
+    keywords: [ __( 'cta' ), __( 'Call to Action' ), __( 'banner' ) ],
     example: {
         attributes: {
             ctaTitle: 'Interact with this amazing CTA!',
@@ -18,9 +19,6 @@ registerBlockType('mojblocks/cta', {
             buttonLink: 'https://intranet.justice.gov.uk/'
         },
     },
-    keywords: [
-        __('cta', 'Call To Action', 'mojblocks')
-    ],
     attributes: {
         ctaTitle: {
             type: 'string',

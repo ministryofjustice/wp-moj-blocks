@@ -1,0 +1,60 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Hero (Frontend styles)
+
+**********************************************************************************************/
+
+.mojblocks-hero {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+
+  &__image {
+    background: #336C83;
+    width: 100vw;
+    min-height: 250px;
+    min-height: govuk-px-to-rem(250);
+
+    @media screen and (-ms-high-contrast: active) {
+      filter: invert(100%);
+    }
+
+    @include govuk-media-query($from: tablet) {
+      min-height: 500px;
+      min-height: govuk-px-to-rem(500);
+    }
+  }
+
+  &__overlay {
+    float: left;
+    width: 100%;
+	padding: 16px 0;
+	padding: govuk-px-to-rem(16) 0;
+
+    & .govuk-grid-column-three-quarters {
+
+      @include govuk-media-query($from: tablet) {
+        padding-left: 24px;
+        padding-left: govuk-px-to-rem(24);
+      }
+    }
+
+
+    @include govuk-media-query($from: tablet) {
+      margin-left: -15px;
+      margin-left: govuk-px-to-rem(-15);
+      margin-top: -80px;
+      margin-top: govuk-px-to-rem(-80);
+      background: $mojblocks-color-white;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+  }
+
+}
