@@ -3239,8 +3239,6 @@ Block: Hero (Frontend styles)
 
 @media (min-width: 40.0625em) {
   .mojblocks-hero__overlay {
-    margin-left: -15px;
-    margin-left: -0.9375rem;
     margin-top: -80px;
     margin-top: -5rem;
     background: #ffffff;

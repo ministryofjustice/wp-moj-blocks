@@ -5638,8 +5638,6 @@ Block: Staggered Box (Frontend styles)
   .edit-post-visual-editor .mojblocks-hero__overlay,
   .block-editor-block-styles .mojblocks-hero__overlay,
   .block-editor-inserter__menu-help-panel .mojblocks-hero__overlay {
-    margin-left: -15px;
-    margin-left: -0.9375rem;
     margin-top: -80px;
     margin-top: -5rem;
     background: #ffffff;
