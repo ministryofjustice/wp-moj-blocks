@@ -2919,10 +2919,10 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 }
 
 .govuk-accordion__section-content .govuk-body {
-  margin-left: 16px;
-  margin-left: 1rem;
-  padding-left: 30px;
-  padding-left: 1.875rem;
+  margin-left: 14px;
+  margin-left: 0.875rem;
+  padding-left: 14px;
+  padding-left: 0.875rem;
 }
 
 .govuk-accordion__section--expanded .govuk-accordion__section-heading:before {

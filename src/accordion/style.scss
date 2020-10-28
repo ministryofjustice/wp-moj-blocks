@@ -75,10 +75,10 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 
         // Indent body text in accordion section content to align with title
         .govuk-body {
-			margin-left: 16px;
-			margin-left: govuk-px-to-rem(16);
-            padding-left: 30px;
-            padding-left: govuk-px-to-rem(30);
+			margin-left: 14px;
+			margin-left: govuk-px-to-rem(14);
+            padding-left: 14px;
+            padding-left: govuk-px-to-rem(14);
         }
     }
 
