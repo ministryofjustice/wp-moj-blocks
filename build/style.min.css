@@ -3044,6 +3044,11 @@ Block: Call to Action (Frontend styles)
   background-color: #1d70b8;
 }
 
+.wp-block-mojblocks-cta .govuk-grid-row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
 .wp-block-mojblocks-cta .mojblocks-cta__heading {
   margin: 12px 0 15px;
   padding: 0;
@@ -3232,8 +3237,8 @@ Block: Hero (Frontend styles)
 
 @media (min-width: 40.0625em) {
   .mojblocks-hero__overlay .govuk-grid-column-three-quarters {
-    padding-left: 24px;
-    padding-left: 1.5rem;
+    padding-left: 16px;
+    padding-left: 1rem;
   }
 }
 
@@ -3271,6 +3276,11 @@ Block: Highlights List (Frontend styles)
   .wp-block-mojblocks-highlights-list {
     padding: 35px 0 25px;
   }
+}
+
+.wp-block-mojblocks-highlights-list .govuk-grid-row {
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading {
@@ -3663,6 +3673,8 @@ Block: Staggered Box (Frontend styles)
 
 .mojblocks-staggered-box .govuk-grid-row {
   position: relative;
+  margin-right: 0;
+  margin-left: 0;
 }
 
 @media (min-width: 40.0625em) {

@@ -38,8 +38,8 @@ Block: Hero (Frontend styles)
     & .govuk-grid-column-three-quarters {
 
       @include govuk-media-query($from: tablet) {
-        padding-left: 24px;
-        padding-left: govuk-px-to-rem(24);
+        padding-left: 16px;
+        padding-left: govuk-px-to-rem(16);
       }
     }
 

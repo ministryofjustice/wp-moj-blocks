@@ -5379,6 +5379,13 @@ Block: Staggered Box (Frontend styles)
   background-color: #1d70b8;
 }
 
+.edit-post-visual-editor .wp-block-mojblocks-cta .govuk-grid-row,
+.block-editor-block-styles .wp-block-mojblocks-cta .govuk-grid-row,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .govuk-grid-row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
 .edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-cta__heading,
 .block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-cta__heading,
 .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-cta__heading {
@@ -5629,8 +5636,8 @@ Block: Staggered Box (Frontend styles)
   .edit-post-visual-editor .mojblocks-hero__overlay .govuk-grid-column-three-quarters,
   .block-editor-block-styles .mojblocks-hero__overlay .govuk-grid-column-three-quarters,
   .block-editor-inserter__menu-help-panel .mojblocks-hero__overlay .govuk-grid-column-three-quarters {
-    padding-left: 24px;
-    padding-left: 1.5rem;
+    padding-left: 16px;
+    padding-left: 1rem;
   }
 }
 
@@ -5672,6 +5679,13 @@ Block: Staggered Box (Frontend styles)
   .block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list {
     padding: 35px 0 25px;
   }
+}
+
+.edit-post-visual-editor .wp-block-mojblocks-highlights-list .govuk-grid-row,
+.block-editor-block-styles .wp-block-mojblocks-highlights-list .govuk-grid-row,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-highlights-list .govuk-grid-row {
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .edit-post-visual-editor .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading,
@@ -6439,6 +6453,8 @@ Block: Staggered Box (Frontend styles)
 .block-editor-block-styles .mojblocks-staggered-box .govuk-grid-row,
 .block-editor-inserter__menu-help-panel .mojblocks-staggered-box .govuk-grid-row {
   position: relative;
+  margin-right: 0;
+  margin-left: 0;
 }
 
 @media (min-width: 40.0625em) {

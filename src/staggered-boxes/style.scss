@@ -11,6 +11,10 @@ Block: Staggered Box (Frontend styles)
 
 	& .govuk-grid-row {
 		position: relative;
+
+		// Gov UK override keeping the block within the container.
+		margin-right: 0;
+		margin-left: 0;
 	}
 
 	@include govuk-media-query($from: tablet) {

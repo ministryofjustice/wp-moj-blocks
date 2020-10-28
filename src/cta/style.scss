@@ -8,8 +8,13 @@ Block: Call to Action (Frontend styles)
 .wp-block-mojblocks-cta {
     padding: 15px;
     margin: auto -15px;
-    background-color: $mojblocks-color-light-blue;
+	background-color: $mojblocks-color-light-blue;
 
+	.govuk-grid-row {
+		// Gov UK override keeping the block within the container.
+		margin-right: 0;
+		margin-left: 0;
+	}
     .mojblocks-cta {
 
         &__heading {
