@@ -2906,8 +2906,6 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 
 .govuk-accordion__section-heading {
   margin-bottom: 0;
-  margin-left: 22px;
-  margin-left: 1.375rem;
 }
 
 .govuk-accordion__section-heading h4 {
@@ -2956,7 +2954,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 }
 
 .govuk-accordion:last-child {
-  border-bottom: 1px solid #B1B4B6;
+  border-bottom: 1px solid #F3F2F1;
 }
 
 /*********************************************************************************************
