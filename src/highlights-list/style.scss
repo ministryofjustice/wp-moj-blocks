@@ -16,7 +16,13 @@ Block: Highlights List (Frontend styles)
 
     @include govuk-media-query($from: desktop) {
         padding: 35px 0 25px;
-    }
+	}
+
+	.govuk-grid-row {
+		// Gov UK override keeping the block within the container.
+		margin-right: 0;
+		margin-left: 0;
+	}
 
     .mojblocks-highlights-list {
 

@@ -30,9 +30,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     font-family: inherit;
     font-size: inherit;
     border-bottom: none;
-
-    // Reset NHS margin to display no margin on accordion sections
-    margin-bottom: 0;
+    margin-bottom: 24px;
 
     h1,
     h2,
@@ -67,10 +65,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
             font-family: inherit;
             font-size: inherit;
         }
-
-        margin-left: 22px;
-        margin-left: govuk-px-to-rem(22);
-    }
+	}
 
     &__section-content {
         // Decrease padding causes by NHS styles around accordion content
@@ -78,10 +73,10 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 
         // Indent body text in accordion section content to align with title
         .govuk-body {
-			margin-left: 16px;
-			margin-left: govuk-px-to-rem(16);
-            padding-left: 30px;
-            padding-left: govuk-px-to-rem(30);
+			margin-left: 14px;
+			margin-left: govuk-px-to-rem(14);
+            padding-left: 14px;
+            padding-left: govuk-px-to-rem(14);
         }
     }
 
@@ -124,6 +119,6 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 
     // Add a bottom border to last accordion section
     &:last-child {
-        border-bottom: 1px solid $mojblocks-color-mid-grey;
+        border-bottom: 1px solid $mojblocks-color-light-grey;
     }
 }

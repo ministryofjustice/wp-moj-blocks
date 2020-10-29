@@ -2885,7 +2885,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
   font-family: inherit;
   font-size: inherit;
   border-bottom: none;
-  margin-bottom: 0;
+  margin-bottom: 24px;
 }
 
 .govuk-accordion h1,
@@ -2906,8 +2906,6 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 
 .govuk-accordion__section-heading {
   margin-bottom: 0;
-  margin-left: 22px;
-  margin-left: 1.375rem;
 }
 
 .govuk-accordion__section-heading h4 {
@@ -2921,10 +2919,10 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 }
 
 .govuk-accordion__section-content .govuk-body {
-  margin-left: 16px;
-  margin-left: 1rem;
-  padding-left: 30px;
-  padding-left: 1.875rem;
+  margin-left: 14px;
+  margin-left: 0.875rem;
+  padding-left: 14px;
+  padding-left: 0.875rem;
 }
 
 .govuk-accordion__section--expanded .govuk-accordion__section-heading:before {
@@ -2956,7 +2954,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 }
 
 .govuk-accordion:last-child {
-  border-bottom: 1px solid #B1B4B6;
+  border-bottom: 1px solid #F3F2F1;
 }
 
 /*********************************************************************************************
@@ -3042,6 +3040,11 @@ Block: Call to Action (Frontend styles)
   padding: 15px;
   margin: auto -15px;
   background-color: #1d70b8;
+}
+
+.wp-block-mojblocks-cta .govuk-grid-row {
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .wp-block-mojblocks-cta .mojblocks-cta__heading {
@@ -3232,8 +3235,8 @@ Block: Hero (Frontend styles)
 
 @media (min-width: 40.0625em) {
   .mojblocks-hero__overlay .govuk-grid-column-three-quarters {
-    padding-left: 24px;
-    padding-left: 1.5rem;
+    padding-left: 16px;
+    padding-left: 1rem;
   }
 }
 
@@ -3271,6 +3274,11 @@ Block: Highlights List (Frontend styles)
   .wp-block-mojblocks-highlights-list {
     padding: 35px 0 25px;
   }
+}
+
+.wp-block-mojblocks-highlights-list .govuk-grid-row {
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading {
@@ -3663,6 +3671,8 @@ Block: Staggered Box (Frontend styles)
 
 .mojblocks-staggered-box .govuk-grid-row {
   position: relative;
+  margin-right: 0;
+  margin-left: 0;
 }
 
 @media (min-width: 40.0625em) {
