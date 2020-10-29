@@ -2885,7 +2885,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
   font-family: inherit;
   font-size: inherit;
   border-bottom: none;
-  margin-bottom: 0;
+  margin-bottom: 24px;
 }
 
 .govuk-accordion h1,
