@@ -25,6 +25,7 @@ Download this repository, unzip and copy the folder into your WordPress plugin f
 
 ## Prerequesites
 * Wordpress and the [Hale theme](https://github.com/ministryofjustice/wp-hale).
+* NPM (For developers needing to compile assets)
 
 ## Coding guidelines
 This plugin follows
