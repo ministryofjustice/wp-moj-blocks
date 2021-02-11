@@ -1,11 +1,15 @@
 {
-    "name": "ministryofjustice/wp-moj-blocks",
-    "description": "WP blocks plugin adding additional block features.",
-    "type": "project",
+    "name": "ministryofjustice/cookie-compliance-for-wordpress",
+    "description": "WP plugin that adds addtional blocks.",
+    "type": "wordpress-plugin",
     "license": "MIT",
     "minimum-stability": "beta",
     "require": {},
-	"scripts": {
+    "require-dev": {
+        "composer/composer": "*",
+        "squizlabs/php_codesniffer": "*"
+    },
+    "scripts": {
         "phpcs-config-set" : "phpcs --config-set ignore_warnings_on_exit 1",
         "phpcs": "phpcs --extensions=php --ignore=*/vendor/* --standard=PSR12 .",
         "phpcbf": "phpcbf --extensions=php --ignore=*/vendor/* --standard=PSR12 ."
