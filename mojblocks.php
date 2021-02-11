@@ -115,52 +115,52 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/highlights',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/cta',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/hero',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/accordion',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/video',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/staggered-boxes',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/quote',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/intro',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/reveal',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/card',
-			['editor_script' => 'mojblocks-editor-script' ]
-	);
+        ['editor_script' => 'mojblocks-editor-script' ]
+    );
 }
 
 /**
