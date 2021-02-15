@@ -1,8 +1,6 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {  RichText, InspectorControls, MediaUpload, InnerBlocks } = wp.blockEditor;
-const { ServerSideRender } = wp.editor;
-
 
 registerBlockType("mojblocks/hero", {
     title: __("Hero", "mojblocks"),
@@ -56,16 +54,18 @@ registerBlockType("mojblocks/hero", {
             <InspectorControls>
             <div>
             <strong>Select a background image:</strong>
+
         <MediaUpload
-        onSelect={onImageSelect}
-        type="image"
-        value={backgroundImage}
-        render={({ open }) => (
-        <button className="button button-primary button-hero" onClick={open}>
-            Upload Image!
-        </button>
-    )}
+            onSelect={onImageSelect}
+            type="image"
+            value={backgroundImage}
+            render={({ open }) => (
+            <button className="button button-primary button-hero" onClick={open}>
+                Upload Image!
+            </button>
+            )}
         />
+
         </div>
         </InspectorControls>,
         <section className={`${className}  mojblocks-hero`} >

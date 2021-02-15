@@ -641,7 +641,6 @@ var _wp$blockEditor = wp.blockEditor,
     InspectorControls = _wp$blockEditor.InspectorControls,
     MediaUpload = _wp$blockEditor.MediaUpload,
     InnerBlocks = _wp$blockEditor.InnerBlocks;
-var ServerSideRender = wp.editor.ServerSideRender;
 registerBlockType("mojblocks/hero", {
   title: __("Hero", "mojblocks"),
   description: __("Full width hero banner with title and text", "mojblocks"),
