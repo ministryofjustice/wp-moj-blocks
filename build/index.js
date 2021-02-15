@@ -641,6 +641,7 @@ var _wp$blockEditor = wp.blockEditor,
     InspectorControls = _wp$blockEditor.InspectorControls,
     MediaUpload = _wp$blockEditor.MediaUpload,
     InnerBlocks = _wp$blockEditor.InnerBlocks;
+var ServerSideRender = wp.editor.ServerSideRender;
 registerBlockType("mojblocks/hero", {
   title: __("Hero", "mojblocks"),
   description: __("Full width hero banner with title and text", "mojblocks"),
@@ -651,23 +652,23 @@ registerBlockType("mojblocks/hero", {
       type: 'string'
     },
     heroTitle: {
-      type: 'string',
-      source: 'html',
-      selector: 'h2'
+      type: 'string'
     },
     heroText: {
-      type: 'string',
-      source: 'html',
-      selector: '.mojblocks-hero__content'
+      type: 'string'
+    },
+    heroClassName: {
+      type: 'string'
     }
   },
   edit: function edit(props) {
     var setAttributes = props.setAttributes,
         attributes = props.attributes,
         className = props.className;
-    var backgroundImage = attributes.backgroundImage,
-        heroTitle = attributes.heroTitle,
-        heroText = attributes.heroText;
+    var backgroundImage = attributes.backgroundImage;
+    setAttributes({
+      heroClassName: className
+    });
 
     function onImageSelect(imageObject) {
       setAttributes({
@@ -714,7 +715,7 @@ registerBlockType("mojblocks/hero", {
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "mojblocks-hero__overlay"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      class: "govuk-grid-column-three-quarters"
+      className: "govuk-grid-column-three-quarters"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
       tagName: "h2",
       className: "mojblocks-hero__title",
@@ -725,46 +726,14 @@ registerBlockType("mojblocks/hero", {
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: 'mojblocks-hero__content intro'
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
-      multiline: "p",
       placeholder: __('Enter your hero text here!', 'mojblocks'),
       keepPlaceholderOnFocus: true,
       onChange: onChangeHeroText,
       value: attributes.heroText
     })))))))];
   },
-  save: function save(props) {
-    var attributes = props.attributes,
-        className = props.className;
-    var backgroundImage = attributes.backgroundImage,
-        heroTitle = attributes.heroTitle,
-        heroText = attributes.heroText;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
-      className: "mojblocks-hero"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "mojblocks-hero__image",
-      style: {
-        backgroundImage: "url(".concat(backgroundImage, ")"),
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: 'govuk-width-container'
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: 'govuk-grid-row'
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "mojblocks-hero__overlay"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      class: "govuk-grid-column-three-quarters"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
-      tagName: "h2",
-      className: "mojblocks-hero__title",
-      value: attributes.heroTitle
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "mojblocks-hero__content intro"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
-      value: attributes.heroText,
-      multiline: "p"
-    })))))));
+  save: function save() {
+    return null;
   }
 });
 

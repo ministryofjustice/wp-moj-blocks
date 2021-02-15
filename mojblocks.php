@@ -124,7 +124,26 @@ function mojblocks_register_blocks()
 
     register_block_type(
         'mojblocks/hero',
-        ['editor_script' => 'mojblocks-editor-script']
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'hero_dynamic_render_callback',
+            'attributes' => [
+                'backgroundImage' => [
+                    'type' => 'string'
+                ],
+                'heroTitle' => [
+                    'type' => 'string'
+                ],
+                [
+                'heroText' => [
+                    'type' => 'string'
+                ],
+                'heroClassName' => [
+                    'type' => 'string'
+                ]
+                ]
+            ]
+        ]
     );
 
     register_block_type(
@@ -162,6 +181,11 @@ function mojblocks_register_blocks()
         ['editor_script' => 'mojblocks-editor-script' ]
     );
 }
+
+/**
+ * Load PHP code for each block
+ */
+include plugin_dir_path(__FILE__) . 'src/hero/index.php';
 
 /**
  * Queues up the gutenberg editor style

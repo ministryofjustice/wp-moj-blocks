@@ -1,6 +1,7 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {  RichText, InspectorControls, MediaUpload, InnerBlocks } = wp.blockEditor;
+const { ServerSideRender } = wp.editor;
 
 
 registerBlockType("mojblocks/hero", {
@@ -13,15 +14,14 @@ registerBlockType("mojblocks/hero", {
             type: 'string'
         },
         heroTitle: {
-            type: 'string',
-            source: 'html',
-            selector: 'h2'
+            type: 'string'
         },
         heroText: {
-            type: 'string',
-            source: 'html',
-            selector: '.mojblocks-hero__content'
+            type: 'string'
         },
+        heroClassName: {
+            type: 'string'
+        }
     },
     edit: props => {
         const {
@@ -29,7 +29,12 @@ registerBlockType("mojblocks/hero", {
             attributes,
             className
         } = props;
-        const { backgroundImage, heroTitle, heroText} = attributes;
+
+        const { backgroundImage } = attributes;
+
+        setAttributes({
+            heroClassName: className
+        });
 
         function onImageSelect(imageObject) {
             setAttributes({
@@ -46,9 +51,9 @@ registerBlockType("mojblocks/hero", {
                 heroText: changes
             });
         }
+
         return ([
             <InspectorControls>
-
             <div>
             <strong>Select a background image:</strong>
         <MediaUpload
@@ -74,7 +79,7 @@ registerBlockType("mojblocks/hero", {
             <div className={'govuk-width-container'}>
                 <div className={'govuk-grid-row'}>
                     <div className="mojblocks-hero__overlay">
-                        <div class="govuk-grid-column-three-quarters">
+                        <div className="govuk-grid-column-three-quarters">
                             <RichText
                             tagName="h2"
                             className="mojblocks-hero__title"
@@ -85,7 +90,6 @@ registerBlockType("mojblocks/hero", {
                                 />
                             <div className={'mojblocks-hero__content intro'}>
                                 <RichText
-                                multiline="p"
                                 placeholder={__('Enter your hero text here!', 'mojblocks')}
                                 keepPlaceholderOnFocus
                                 onChange={onChangeHeroText}
@@ -101,35 +105,5 @@ registerBlockType("mojblocks/hero", {
     ])
 
     },
-    save: props => {
-        const { attributes, className } = props;
-        const { backgroundImage, heroTitle, heroText } = attributes;
-        return (
-            <section className="mojblocks-hero">
-                <div className="mojblocks-hero__image" style={{
-                        backgroundImage: `url(${ backgroundImage })`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center'
-                    }}>
-                </div>
-
-                <div className={'govuk-width-container'}>
-                    <div className={'govuk-grid-row'}>
-                        <div className="mojblocks-hero__overlay">
-                            <div class="govuk-grid-column-three-quarters">
-                                <RichText.Content
-                                tagName="h2"
-                                className="mojblocks-hero__title"
-                                value={attributes.heroTitle}
-                                />
-                                <div className="mojblocks-hero__content intro">
-                                    <RichText.Content value={attributes.heroText} multiline="p" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-    )
-    }
+    save: () => { return null }
 });
