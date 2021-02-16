@@ -126,7 +126,7 @@ function mojblocks_register_blocks()
         'mojblocks/hero',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'hero_dynamic_render_callback',
+            'render_callback' => 'dynamic_render_callback_hero_block',
             'attributes' => [
                 'backgroundImage' => [
                     'type' => 'string'
@@ -148,11 +148,6 @@ function mojblocks_register_blocks()
 
     register_block_type(
         'mojblocks/accordion',
-        ['editor_script' => 'mojblocks-editor-script']
-    );
-
-    register_block_type(
-        'mojblocks/video',
         ['editor_script' => 'mojblocks-editor-script']
     );
 

@@ -12,7 +12,6 @@ This plugin adds the following blocks,
 * Quote
 * Reveal
 * Staggered-boxes
-* Video
 
 Note: This plugin suppresses and [unregisters](https://github.com/ministryofjustice/wp-moj-blocks/blob/main/src/quote/index.js#L208-L210) the default WP quote block.
 
