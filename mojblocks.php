@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     1.1.0
+ * Version:     1.2.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -115,53 +115,72 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/highlights',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/cta',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/hero',
-        ['editor_script' => 'mojblocks-editor-script']
-	);
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'dynamic_render_callback_hero_block',
+            'attributes' => [
+                'backgroundImage' => [
+                    'type' => 'string'
+                ],
+                'heroTitle' => [
+                    'type' => 'string'
+                ],
+                [
+                'heroText' => [
+                    'type' => 'string'
+                ],
+                'heroClassName' => [
+                    'type' => 'string'
+                ]
+                ]
+            ]
+        ]
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/accordion',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
-        'mojblocks/video',
-        ['editor_script' => 'mojblocks-editor-script']
-	);
-
-	register_block_type(
+    register_block_type(
         'mojblocks/staggered-boxes',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/quote',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/intro',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/reveal',
         ['editor_script' => 'mojblocks-editor-script']
-	);
+    );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/card',
-			['editor_script' => 'mojblocks-editor-script' ]
-	);
+        ['editor_script' => 'mojblocks-editor-script' ]
+    );
 }
+
+/**
+ * Load PHP code for each block
+ */
+include plugin_dir_path(__FILE__) . 'src/hero/index.php';
 
 /**
  * Queues up the gutenberg editor style

@@ -651,44 +651,49 @@ registerBlockType("mojblocks/hero", {
       type: 'string'
     },
     heroTitle: {
-      type: 'string',
-      source: 'html',
-      selector: 'h2'
+      type: 'string'
     },
     heroText: {
-      type: 'string',
-      source: 'html',
-      selector: '.mojblocks-hero__content'
+      type: 'string'
+    },
+    heroClassName: {
+      type: 'string'
     }
   },
   edit: function edit(props) {
     var setAttributes = props.setAttributes,
-        attributes = props.attributes,
-        className = props.className;
-    var backgroundImage = attributes.backgroundImage,
-        heroTitle = attributes.heroTitle,
-        heroText = attributes.heroText;
+        _props$attributes = props.attributes,
+        backgroundImage = _props$attributes.backgroundImage,
+        heroTitle = _props$attributes.heroTitle,
+        heroText = _props$attributes.heroText,
+        className = props.className; // Set className attribute for PHP frontend to use
 
-    function onImageSelect(imageObject) {
+    setAttributes({
+      heroClassName: className
+    });
+
+    var onChangeBackgroundImage = function onChangeBackgroundImage(imageObject) {
       setAttributes({
         backgroundImage: imageObject.sizes.full.url
       });
-    }
+    };
 
-    function onTitleChange(changes) {
+    var onTitleChange = function onTitleChange(newTitle) {
       setAttributes({
-        heroTitle: changes
+        heroTitle: newTitle
       });
-    }
+    };
 
-    function onChangeHeroText(changes) {
+    var onChangeHeroText = function onChangeHeroText(newHeroText) {
       setAttributes({
-        heroText: changes
+        heroText: newHeroText
       });
-    }
+    };
 
-    return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("strong", null, "Select a background image:"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
-      onSelect: onImageSelect,
+    return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "block-editor-block-card"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
+      onSelect: onChangeBackgroundImage,
       type: "image",
       value: backgroundImage,
       render: function render(_ref) {
@@ -696,7 +701,7 @@ registerBlockType("mojblocks/hero", {
         return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
           className: "button button-primary button-hero",
           onClick: open
-        }, "Upload Image!");
+        }, "Upload background image");
       }
     }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
       className: "".concat(className, "  mojblocks-hero")
@@ -714,57 +719,26 @@ registerBlockType("mojblocks/hero", {
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "mojblocks-hero__overlay"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      class: "govuk-grid-column-three-quarters"
+      className: "govuk-grid-column-three-quarters"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
       tagName: "h2",
       className: "mojblocks-hero__title",
-      value: attributes.heroTitle,
+      value: heroTitle,
       keepPlaceholderOnFocus: true,
       onChange: onTitleChange,
-      placeholder: "Enter your hero title here!"
+      placeholder: "Enter your hero title"
     }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: 'mojblocks-hero__content intro'
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
-      multiline: "p",
-      placeholder: __('Enter your hero text here!', 'mojblocks'),
+      placeholder: __('Enter your hero text', 'mojblocks'),
       keepPlaceholderOnFocus: true,
       onChange: onChangeHeroText,
-      value: attributes.heroText
+      value: heroText
     })))))))];
   },
-  save: function save(props) {
-    var attributes = props.attributes,
-        className = props.className;
-    var backgroundImage = attributes.backgroundImage,
-        heroTitle = attributes.heroTitle,
-        heroText = attributes.heroText;
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
-      className: "mojblocks-hero"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "mojblocks-hero__image",
-      style: {
-        backgroundImage: "url(".concat(backgroundImage, ")"),
-        backgroundSize: 'cover',
-        backgroundPosition: 'center'
-      }
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: 'govuk-width-container'
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: 'govuk-grid-row'
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "mojblocks-hero__overlay"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      class: "govuk-grid-column-three-quarters"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
-      tagName: "h2",
-      className: "mojblocks-hero__title",
-      value: attributes.heroTitle
-    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "mojblocks-hero__content intro"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
-      value: attributes.heroText,
-      multiline: "p"
-    })))))));
+  // return null as frontend output is done via PHP
+  save: function save() {
+    return null;
   }
 });
 

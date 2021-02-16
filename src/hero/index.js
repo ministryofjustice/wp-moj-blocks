@@ -2,7 +2,6 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {  RichText, InspectorControls, MediaUpload, InnerBlocks } = wp.blockEditor;
 
-
 registerBlockType("mojblocks/hero", {
     title: __("Hero", "mojblocks"),
     description: __("Full width hero banner with title and text", "mojblocks"),
@@ -13,83 +12,83 @@ registerBlockType("mojblocks/hero", {
             type: 'string'
         },
         heroTitle: {
-            type: 'string',
-            source: 'html',
-            selector: 'h2'
+            type: 'string'
         },
         heroText: {
-            type: 'string',
-            source: 'html',
-            selector: '.mojblocks-hero__content'
+            type: 'string'
         },
+        heroClassName: {
+            type: 'string'
+        }
     },
     edit: props => {
         const {
             setAttributes,
-            attributes,
+            attributes: {
+                backgroundImage,
+                heroTitle,
+                heroText
+            },
             className
         } = props;
-        const { backgroundImage, heroTitle, heroText} = attributes;
 
-        function onImageSelect(imageObject) {
-            setAttributes({
-                backgroundImage: imageObject.sizes.full.url
-            })
+        // Set className attribute for PHP frontend to use
+        setAttributes({ heroClassName: className });
+
+        const onChangeBackgroundImage = imageObject => {
+            setAttributes({ backgroundImage: imageObject.sizes.full.url})
+          }
+
+        const onTitleChange = newTitle => {
+            setAttributes({ heroTitle: newTitle })
         }
-        function onTitleChange(changes) {
-            setAttributes({
-                heroTitle: changes
-            });
+
+        const onChangeHeroText = newHeroText => {
+            setAttributes({ heroText: newHeroText })
         }
-        function onChangeHeroText(changes) {
-            setAttributes({
-                heroText: changes
-            });
-        }
+
         return ([
             <InspectorControls>
+            <div className="block-editor-block-card">
+            <MediaUpload
+            onSelect={ onChangeBackgroundImage }
+            type="image"
+            value={ backgroundImage }
+            render={({ open }) => (
+            <button className="button button-primary button-hero" onClick={open}>
+                Upload background image
+            </button>
+            )}
+            />
+            </div>
+            </InspectorControls>,
 
-            <div>
-            <strong>Select a background image:</strong>
-        <MediaUpload
-        onSelect={onImageSelect}
-        type="image"
-        value={backgroundImage}
-        render={({ open }) => (
-        <button className="button button-primary button-hero" onClick={open}>
-            Upload Image!
-        </button>
-    )}
-        />
-        </div>
-        </InspectorControls>,
         <section className={`${className}  mojblocks-hero`} >
             <div className="mojblocks-hero__image" style={{
             backgroundImage: `url(${ backgroundImage })`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
-        }}>
+            }}>
             </div>
 
             <div className={'govuk-width-container'}>
                 <div className={'govuk-grid-row'}>
                     <div className="mojblocks-hero__overlay">
-                        <div class="govuk-grid-column-three-quarters">
+                        <div className="govuk-grid-column-three-quarters">
                             <RichText
                             tagName="h2"
                             className="mojblocks-hero__title"
-                            value={attributes.heroTitle}
+                            value={ heroTitle }
                             keepPlaceholderOnFocus
-                            onChange={onTitleChange}
-                            placeholder="Enter your hero title here!"
+                            onChange={ onTitleChange }
+                            placeholder="Enter your hero title"
                                 />
                             <div className={'mojblocks-hero__content intro'}>
                                 <RichText
-                                multiline="p"
-                                placeholder={__('Enter your hero text here!', 'mojblocks')}
+                                placeholder={__('Enter your hero text', 'mojblocks')}
                                 keepPlaceholderOnFocus
-                                onChange={onChangeHeroText}
-                                value={attributes.heroText}
+                                onChange={ onChangeHeroText }
+                                value={ heroText }
                                 />
                             </div>
                         </div>
@@ -101,35 +100,6 @@ registerBlockType("mojblocks/hero", {
     ])
 
     },
-    save: props => {
-        const { attributes, className } = props;
-        const { backgroundImage, heroTitle, heroText } = attributes;
-        return (
-            <section className="mojblocks-hero">
-                <div className="mojblocks-hero__image" style={{
-                        backgroundImage: `url(${ backgroundImage })`,
-                            backgroundSize: 'cover',
-                            backgroundPosition: 'center'
-                    }}>
-                </div>
-
-                <div className={'govuk-width-container'}>
-                    <div className={'govuk-grid-row'}>
-                        <div className="mojblocks-hero__overlay">
-                            <div class="govuk-grid-column-three-quarters">
-                                <RichText.Content
-                                tagName="h2"
-                                className="mojblocks-hero__title"
-                                value={attributes.heroTitle}
-                                />
-                                <div className="mojblocks-hero__content intro">
-                                    <RichText.Content value={attributes.heroText} multiline="p" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-    )
-    }
+    // return null as frontend output is done via PHP
+    save: () => null
 });
