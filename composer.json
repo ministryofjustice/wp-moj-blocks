@@ -1,5 +1,5 @@
 {
-    "name": "ministryofjustice/cookie-compliance-for-wordpress",
+    "name": "ministryofjustice/wp-moj-blocks",
     "description": "WP plugin that adds addtional blocks.",
     "type": "wordpress-plugin",
     "license": "MIT",
