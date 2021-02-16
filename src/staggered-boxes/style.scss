@@ -35,6 +35,7 @@ Block: Staggered Box (Frontend styles)
 		display: block;
 
 		@media screen and (-ms-high-contrast: active) {
+	  -webkit-filter: invert(100%);
       filter: invert(100%);
 		}
 
