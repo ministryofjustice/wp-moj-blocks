@@ -24,56 +24,51 @@ registerBlockType("mojblocks/hero", {
     edit: props => {
         const {
             setAttributes,
-            attributes,
+            attributes: {
+                backgroundImage,
+                heroTitle,
+                heroText
+            },
             className
         } = props;
 
-        const { backgroundImage } = attributes;
+        // Set className attribute for PHP frontend to use
+        setAttributes({ heroClassName: className });
 
-        setAttributes({
-            heroClassName: className
-        });
+        const onChangeBackgroundImage = imageObject => {
+            setAttributes({ backgroundImage: imageObject.sizes.full.url})
+          }
 
-        function onImageSelect(imageObject) {
-            setAttributes({
-                backgroundImage: imageObject.sizes.full.url
-            })
+        const onTitleChange = newTitle => {
+            setAttributes({ heroTitle: newTitle })
         }
-        function onTitleChange(changes) {
-            setAttributes({
-                heroTitle: changes
-            });
-        }
-        function onChangeHeroText(changes) {
-            setAttributes({
-                heroText: changes
-            });
+
+        const onChangeHeroText = newHeroText => {
+            setAttributes({ heroText: newHeroText })
         }
 
         return ([
             <InspectorControls>
-            <div>
-            <strong>Select a background image:</strong>
-
-        <MediaUpload
-            onSelect={onImageSelect}
+            <div className="block-editor-block-card">
+            <MediaUpload
+            onSelect={ onChangeBackgroundImage }
             type="image"
-            value={backgroundImage}
+            value={ backgroundImage }
             render={({ open }) => (
             <button className="button button-primary button-hero" onClick={open}>
-                Upload Image!
+                Upload background image
             </button>
             )}
-        />
+            />
+            </div>
+            </InspectorControls>,
 
-        </div>
-        </InspectorControls>,
         <section className={`${className}  mojblocks-hero`} >
             <div className="mojblocks-hero__image" style={{
             backgroundImage: `url(${ backgroundImage })`,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center'
-        }}>
+            }}>
             </div>
 
             <div className={'govuk-width-container'}>
@@ -83,17 +78,17 @@ registerBlockType("mojblocks/hero", {
                             <RichText
                             tagName="h2"
                             className="mojblocks-hero__title"
-                            value={attributes.heroTitle}
+                            value={ heroTitle }
                             keepPlaceholderOnFocus
-                            onChange={onTitleChange}
-                            placeholder="Enter your hero title here!"
+                            onChange={ onTitleChange }
+                            placeholder="Enter your hero title"
                                 />
                             <div className={'mojblocks-hero__content intro'}>
                                 <RichText
-                                placeholder={__('Enter your hero text here!', 'mojblocks')}
+                                placeholder={__('Enter your hero text', 'mojblocks')}
                                 keepPlaceholderOnFocus
-                                onChange={onChangeHeroText}
-                                value={attributes.heroText}
+                                onChange={ onChangeHeroText }
+                                value={ heroText }
                                 />
                             </div>
                         </div>
@@ -105,5 +100,6 @@ registerBlockType("mojblocks/hero", {
     ])
 
     },
-    save: () => { return null }
+    // return null as frontend output is done via PHP
+    save: () => null
 });

@@ -1,7 +1,11 @@
 <?php
+
 /**
  * Hero block
  * Frontend PHP code
+ *
+ * @package mojblocks
+ *
  */
 
 function hero_dynamic_render_callback($attributes, $content)
