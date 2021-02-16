@@ -3,7 +3,7 @@
     "description": "WP plugin that adds addtional blocks.",
     "type": "wordpress-plugin",
     "license": "MIT",
-    "minimum-stability": "beta",
+    "minimum-stability": "dev",
     "require": {},
     "require-dev": {
         "composer/composer": "*",
