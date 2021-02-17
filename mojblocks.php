@@ -159,9 +159,9 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/quote',
         [
-			'editor_script' => 'mojblocks-editor-script',
-			'render_callback' => 'render_callback_quote_block'
-		]
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_quote_block'
+        ]
     );
 
     register_block_type(
