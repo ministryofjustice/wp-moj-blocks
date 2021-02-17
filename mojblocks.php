@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     1.2.0
+ * Version:     1.2.1
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -126,7 +126,7 @@ function mojblocks_register_blocks()
         'mojblocks/hero',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'dynamic_render_callback_hero_block',
+            'render_callback' => 'render_callback_hero_block',
             'attributes' => [
                 'backgroundImage' => [
                     'type' => 'string'
