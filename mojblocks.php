@@ -126,7 +126,7 @@ function mojblocks_register_blocks()
         'mojblocks/hero',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'dynamic_render_callback_hero_block',
+            'render_callback' => 'render_callback_hero_block',
             'attributes' => [
                 'backgroundImage' => [
                     'type' => 'string'

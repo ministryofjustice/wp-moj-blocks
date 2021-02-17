@@ -4,11 +4,14 @@
  * Hero block
  * Frontend PHP code
  *
+ * Uses WordPress' dynamic block method
+ * https://developer.wordpress.org/block-editor/tutorials/block-tutorial/creating-dynamic-blocks/
+ *
  * @package mojblocks
  *
  */
 
-function hero_dynamic_render_callback($attributes, $content)
+function render_callback_hero_block($attributes, $content)
 {
 
     // Parse attributes found in index.js
