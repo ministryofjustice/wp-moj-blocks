@@ -159,9 +159,29 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/quote',
         [
-			'editor_script' => 'mojblocks-editor-script',
-			'render_callback' => 'render_callback_quote_block'
-		]
+        'editor_script' => 'mojblocks-editor-script',
+        'render_callback' => 'render_callback_quote_block',
+        'attributes' => [
+            'quoteImgURL' => [
+                'type' => 'string'
+            ],
+            'quoteContent' => [
+                'type' => 'string'
+            ],
+            'quoteName' => [
+                'type' => 'string'
+            ],
+            'quoteAlignment' => [
+                'type' => 'string'
+            ],
+            'quoteImgId' => [
+                'type' => 'number'
+			],
+			'quoteClassName' => [
+				'type' => 'string'
+			]
+            ]
+        ]
     );
 
     register_block_type(

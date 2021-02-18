@@ -25,35 +25,40 @@ registerBlockType('mojblocks/quote', {
     ],
     attributes: {
         quoteImgURL: {
-            type: 'string',
-            source: 'attribute',
-            selector: '.mojblocks-quote',
-            attribute: 'data-src'
+            type: 'string'
         },
         quoteContent: {
-            type: 'string',
-            selector: '.mojblocks-quote__content__quote',
-            source: 'html',
+            type: 'string'
         },
         quoteName: {
-            type: 'string',
-            selector: '.mojblocks-quote__content__name',
-            source: 'html',
+            type: 'string'
         },
         quoteAlignment: {
             type: 'string',
         },
         quoteImgId: {
             type: 'number',
+        },
+        quoteClassName: {
+            type: 'string'
         }
     },
     edit: props => {
-        // Setup the attributes
-        let {
+
+        const {
             setAttributes,
-            attributes,
+            attributes: {
+                quoteImgURL,
+                quoteContent,
+                quoteName,
+                quoteAlignment,
+                quoteImgId,
+            },
             className
         } = props;
+
+        // Set className attribute for PHP frontend to use
+        setAttributes({ quoteClassName: className });
 
         const onRemoveImage = () => {
             setAttributes({
@@ -66,27 +71,27 @@ registerBlockType('mojblocks/quote', {
             // Show the alignment toolbar on focus
             <BlockControls key="controls">
                 <AlignmentToolbar
-                    value={attributes.quoteAlignment}
-                    onChange={(value) =>
+                    value={ quoteAlignment }
+                    onChange={ (value) =>
                         setAttributes({ quoteAlignment: value })
                     }
                 />
             </BlockControls>,
-            <div className={`mojblocks-quote`} data-src={attributes.quoteImgURL}>
+            <div className={`mojblocks-quote`} data-src={ quoteImgURL }>
                 <div
                     className={`${className} mojblocks-quote__image ` +
-                    (attributes.quoteImgId
+                    (quoteImgId
                             ? 'mojblocks-quote__image-selected'
                             : ''
                     )}
                     style={{
-                        backgroundImage: `url(${attributes.quoteImgURL})`
+                        backgroundImage: `url(${ quoteImgURL })`
                     }}>
                     <MediaUpload
                         buttonProps={{
                             className: 'change-image',
                         }}
-                        onSelect={(img) =>
+                        onSelect={ (img) =>
                             setAttributes({
                                 quoteImgId: img.id,
                                 quoteImgURL: img.url,
@@ -94,24 +99,24 @@ registerBlockType('mojblocks/quote', {
                         }
                         allowed={ALLOWED_MEDIA_TYPES}
                         type="image"
-                        value={attributes.quoteImgId}
+                        value={ quoteImgId }
                         render={({ open }) => (
                             <Fragment>
                                 <Button
                                     className={'mojblocks-quote__image__button ' +
-                                    (attributes.quoteImgId
+                                    (quoteImgId
                                             ? 'mojblocks-quote__image__button-change'
                                             : 'mojblocks-quote__image__button-add'
                                     )
                                     }
-                                    onClick={open}
+                                    onClick={ open }
                                 >
-                                    {Icons.upload}
+                                    { Icons.upload }
                                 </Button>
-                                {attributes.quoteImgId && (
+                                {quoteImgId && (
                                     <Button
                                         className="mojblocks-quote__image__button mojblocks-quote__image__button-remove"
-                                        onClick={onRemoveImage}
+                                        onClick={ onRemoveImage }
                                     >
                                         <Dashicon icon={'dismiss'}/>
                                     </Button>
@@ -123,7 +128,7 @@ registerBlockType('mojblocks/quote', {
                 <div className="govuk-width-container">
                     <div className="mojblocks-quote__content"
                          style={{
-                             textAlign: attributes.quoteAlignment,
+                             textAlign: quoteAlignment,
                          }}>
                         <div className="mojblocks-quote__content__icon">
                             <Dashicon icon='format-quote'/>
@@ -136,7 +141,7 @@ registerBlockType('mojblocks/quote', {
                                 'mojblocks'
                             )}
                             keepPlaceholderOnFocus
-                            value={attributes.quoteContent}
+                            value={ quoteContent }
                             allowedFormats={[
                                 'core/bold',
                                 'core/italic',
@@ -144,7 +149,7 @@ registerBlockType('mojblocks/quote', {
                                 'core/link',
                             ]}
                             className="mojblocks-quote__content__quote"
-                            onChange={(value) =>
+                            onChange={ (value) =>
                                 setAttributes({ quoteContent: value })
                             }
                         />
@@ -152,9 +157,9 @@ registerBlockType('mojblocks/quote', {
                             tagName="p"
                             placeholder={__('Add name', 'mojblocks')}
                             keepPlaceholderOnFocus
-                            value={attributes.quoteName}
+                            value={ quoteName }
                             className="mojblocks-quote__content__name"
-                            onChange={(value) =>
+                            onChange={ (value) =>
                                 setAttributes({ quoteName: value })
                             }
                         />
@@ -163,46 +168,8 @@ registerBlockType('mojblocks/quote', {
             </div>
         ]);
     },
-    save: props => {
-        const {
-            quoteName,
-            quoteContent,
-            quoteAlignment,
-            quoteImgURL,
-        } = props.attributes;
-
-        return (
-            <div className={'mojblocks-quote'} data-src={quoteImgURL}>
-                {typeof quoteImgURL === "string" && (
-                    <div className="mojblocks-quote__image mojblocks-quote__image-selected"
-                         style={{
-                             backgroundImage: `url(${quoteImgURL})`
-                         }}>
-                    </div>
-                )}
-                <div className="govuk-width-container">
-                    <div className="mojblocks-quote__content"
-                         style={{
-                             textAlign: quoteAlignment,
-                         }}>
-                        <div className="mojblocks-quote__content__icon">
-                            <Dashicon icon='format-quote'/>
-                        </div>
-                        <RichText.Content
-                            tagName="q"
-                            className="mojblocks-quote__content__quote"
-                            value={quoteContent}
-                        />
-                        <RichText.Content
-                            tagName="p"
-                            className="mojblocks-quote__content__name"
-                            value={quoteName}
-                        />
-                    </div>
-                </div>
-            </div>
-        );
-    }
+    // return null as frontend output is done via PHP
+    save: () => null
 });
 
 domReady( function() {

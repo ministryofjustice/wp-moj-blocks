@@ -34,7 +34,12 @@ This plugin follows
 ## Developer notes
 * Run `npm install` in the plugin root directory.
 * Run `npm start` to compile and watch any changes made to the blocks.
-* Run `npm run build` or `npm run watch` to compile and watch the assets such as JS and CSS.
+* Run `npm run build` and `npm run watch` to compile and watch the assets such as JS and CSS.
+
+### Debug
+If you run into NPM issues try
+* Delete `/node_modules` folder and `package-lock.json` in plugin root and then run `npm install`
+* Try `npm rebuild node-sass` or the `npm rebuild <package name causing issues>`
 
 ## Automated linting and PHP code sniffing
 We have a Git Action setup that lints, sniffs and then commits the linted PHP code in this plugin when anything is pushed to the repo.
