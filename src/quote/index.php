@@ -16,11 +16,11 @@ function render_callback_quote_block($attributes, $content)
 
     // Parse attributes found in index.js
     $attribute_quote_className = $attributes['quoteClassName'] ?? '';
-	$attribute_quote_imgURL = $attributes['quoteImgURL'] ?? '';
-	$attribute_quote_quoteContent = $attributes['quoteContent'] ?? '';
-	$attribute_quote_quoteName = $attributes['quoteName'] ?? '';
-	$attribute_quote_quoteAlignment = $attributes['quoteAlignment'] ?? '';
-	$attribute_quote_quoteImgId = $attributes['quoteImgId'] ?? null;
+    $attribute_quote_imgURL = $attributes['quoteImgURL'] ?? '';
+    $attribute_quote_quoteContent = $attributes['quoteContent'] ?? '';
+    $attribute_quote_quoteName = $attributes['quoteName'] ?? '';
+    $attribute_quote_quoteAlignment = $attributes['quoteAlignment'] ?? '';
+    $attribute_quote_quoteImgId = $attributes['quoteImgId'] ?? null;
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -31,7 +31,7 @@ function render_callback_quote_block($attributes, $content)
 
     <div class="<?php _e(esc_html($attribute_quote_className)) ; ?> mojblocks-quote" data-src="<?php _e(esc_url_raw($attribute_quote_imgURL)); ?>">
                     <div class="mojblocks-quote__image mojblocks-quote__image-selected"
-					style="background-image:url('<?php _e(esc_url_raw($attribute_quote_imgURL)); ?>');">
+                    style="background-image:url('<?php _e(esc_url_raw($attribute_quote_imgURL)); ?>');">
                     </div>
                 <div class="govuk-width-container">
                     <div class="mojblocks-quote__content" style="text-align: <?php _e(esc_html($attribute_quote_quoteAlignment)) ; ?>">
@@ -39,13 +39,13 @@ function render_callback_quote_block($attributes, $content)
                             <span class="dashicon dashicons dashicons-format-quote"></span>
                         </div>
 
-						<div class="mojblocks-quote__content__quote">
-						<?php _e(esc_html($attribute_quote_quoteContent)) ; ?>
-						</div>
+                        <div class="mojblocks-quote__content__quote">
+                        <?php _e(esc_html($attribute_quote_quoteContent)) ; ?>
+                        </div>
 
-						<div class="mojblocks-quote__content__name">
-						<?php _e(esc_html($attribute_quote_quoteName)) ; ?>
-						</div>
+                        <div class="mojblocks-quote__content__name">
+                        <?php _e(esc_html($attribute_quote_quoteName)) ; ?>
+                        </div>
 
                     </div>
                 </div>
