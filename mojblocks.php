@@ -146,6 +146,24 @@ function mojblocks_register_blocks()
         ]
     );
 
+
+	register_block_type(
+		'mojblocks/banner',
+		[
+			'editor_script' => 'mojblocks-editor-script',
+			'render_callback' => 'render_callback_banner_block',
+			'attributes' => [
+				'bannerTitle' => [
+					'type' => 'string'
+				],
+				'bannerClassName' => [
+						'type' => 'string'
+
+				]
+			]
+		]
+	);
+
     register_block_type(
         'mojblocks/accordion',
         ['editor_script' => 'mojblocks-editor-script']
@@ -181,6 +199,7 @@ function mojblocks_register_blocks()
  * Load PHP code for each block
  */
 include plugin_dir_path(__FILE__) . 'src/hero/index.php';
+include plugin_dir_path(__FILE__) . 'src/banner/index.php';
 
 /**
  * Queues up the gutenberg editor style
