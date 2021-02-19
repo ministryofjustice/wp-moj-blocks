@@ -4,6 +4,7 @@ MOJ Gutenberg Blocks is a companion WP block plugin to be installed with the WP 
 ## Features
 This plugin adds the following blocks,
 * Accordion
+* Banner
 * Card
 * CTA
 * Hero
