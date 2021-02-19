@@ -145,30 +145,29 @@ function mojblocks_register_blocks()
             ]
         ]
     );
+    
+    register_block_type(
+        'mojblocks/banner',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_banner_block',
+            'attributes' => [
+                'bannerTitle' => [
+                    'type' => 'string'
+                ],
+                'buttonLink' => [
+                    'type' => 'string'
+                ],
+                'buttonLabel' => [
+                    'type' => 'string'
+                ],
+                'bannerClassName' => [
+                        'type' => 'string'
 
-	register_block_type(
-		'mojblocks/banner',
-		[
-			'editor_script' => 'mojblocks-editor-script',
-			'render_callback' => 'render_callback_banner_block',
-			'attributes' => [
-				'bannerTitle' => [
-					'type' => 'string'
-				],
-				'buttonLink' => [
-					'type' => 'string'
-				],
-				'buttonLabel' => [
-					'type' => 'string'
-				],
-				'bannerClassName' => [
-						'type' => 'string'
-
-				]
-			]
-		]
-	);
-
+                ]
+            ]
+        ]
+    );
 
     register_block_type(
         'mojblocks/accordion',
