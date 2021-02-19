@@ -28,31 +28,31 @@ function render_callback_quote_block($attributes, $content)
 
     ?>
 
-	<div class="<?php _e(esc_html($attribute_quote_className)) ; ?> mojblocks-quote"
-		data-src="<?php _e(esc_url_raw($attribute_quote_imgURL)); ?>">
-		<div class="mojblocks-quote__image mojblocks-quote__image-selected"
-			style="background-image:url('<?php _e(esc_url_raw($attribute_quote_imgURL)); ?>');">
-		</div>
-		<div class="govuk-width-container">
-			<div class="mojblocks-quote__content"
-				style="text-align: <?php _e(esc_html($attribute_quote_quoteAlignment)) ; ?>">
-				<div class="mojblocks-quote__content__icon">
-					<span class="dashicon dashicons dashicons-format-quote"></span>
-				</div>
+    <div class="<?php _e(esc_html($attribute_quote_className)) ; ?> mojblocks-quote"
+        data-src="<?php _e(esc_url_raw($attribute_quote_imgURL)); ?>">
+        <div class="mojblocks-quote__image mojblocks-quote__image-selected"
+            style="background-image:url('<?php _e(esc_url_raw($attribute_quote_imgURL)); ?>');">
+        </div>
+        <div class="govuk-width-container">
+            <div class="mojblocks-quote__content"
+                style="text-align: <?php _e(esc_html($attribute_quote_quoteAlignment)) ; ?>">
+                <div class="mojblocks-quote__content__icon">
+                    <span class="dashicon dashicons dashicons-format-quote"></span>
+                </div>
 
-				<div class="mojblocks-quote__content__quote">
-					<?php _e(esc_html($attribute_quote_quoteContent)) ; ?>
-				</div>
+                <div class="mojblocks-quote__content__quote">
+                    <?php _e(esc_html($attribute_quote_quoteContent)) ; ?>
+                </div>
 
-				<div class="mojblocks-quote__content__name">
-					<?php _e(esc_html($attribute_quote_quoteName)) ; ?>
-				</div>
+                <div class="mojblocks-quote__content__name">
+                    <?php _e(esc_html($attribute_quote_quoteName)) ; ?>
+                </div>
 
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 
-<?php
+    <?php
 
     // Get all the html/content that has been captured in the buffer and output via return
     $output = ob_get_contents();
