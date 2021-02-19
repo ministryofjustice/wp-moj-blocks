@@ -145,7 +145,7 @@ function mojblocks_register_blocks()
             ]
         ]
     );
-    
+
     register_block_type(
         'mojblocks/banner',
         [
