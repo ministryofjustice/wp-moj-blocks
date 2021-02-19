@@ -2,7 +2,7 @@ import {URLInputButton} from "@wordpress/block-editor";
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const {  RichText, InspectorControls, MediaUpload, InnerBlocks } = wp.blockEditor;
+const {  RichText } = wp.blockEditor;
 
 registerBlockType("mojblocks/banner", {
     title: __("Banner", "mojblocks"),

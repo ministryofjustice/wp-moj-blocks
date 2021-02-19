@@ -156,6 +156,12 @@ function mojblocks_register_blocks()
 				'bannerTitle' => [
 					'type' => 'string'
 				],
+				'buttonLink' => [
+					'type' => 'string'
+				],
+				'buttonLabel' => [
+					'type' => 'string'
+				],
 				'bannerClassName' => [
 						'type' => 'string'
 
