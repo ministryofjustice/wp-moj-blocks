@@ -174,9 +174,6 @@ function mojblocks_register_blocks()
             'quoteAlignment' => [
                 'type' => 'string'
             ],
-            'quoteImgId' => [
-                'type' => 'number'
-            ],
             'quoteClassName' => [
                 'type' => 'string'
             ]
