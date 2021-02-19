@@ -16,11 +16,11 @@ function render_callback_quote_block($attributes, $content)
 
     // Parse attributes found in index.js
     $attribute_quote_className = $attributes['quoteClassName'] ?? '';
-	$attribute_quote_imgURL = $attributes['quoteImgURL'] ?? '';
-	$attribute_quote_quoteContent = $attributes['quoteContent'] ?? '';
-	$attribute_quote_quoteName = $attributes['quoteName'] ?? '';
-	$attribute_quote_quoteAlignment = $attributes['quoteAlignment'] ?? '';
-	$attribute_quote_quoteImgId = $attributes['quoteImgId'] ?? null;
+    $attribute_quote_imgURL = $attributes['quoteImgURL'] ?? '';
+    $attribute_quote_quoteContent = $attributes['quoteContent'] ?? '';
+    $attribute_quote_quoteName = $attributes['quoteName'] ?? '';
+    $attribute_quote_quoteAlignment = $attributes['quoteAlignment'] ?? '';
+    $attribute_quote_quoteImgId = $attributes['quoteImgId'] ?? null;
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your

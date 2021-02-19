@@ -176,10 +176,10 @@ function mojblocks_register_blocks()
             ],
             'quoteImgId' => [
                 'type' => 'number'
-			],
-			'quoteClassName' => [
-				'type' => 'string'
-			]
+            ],
+            'quoteClassName' => [
+                'type' => 'string'
+            ]
             ]
         ]
     );
