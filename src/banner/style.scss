@@ -1,0 +1,56 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Banner (Frontend styles)
+
+**********************************************************************************************/
+
+.mojblocks-banner {
+
+	padding: 20px 0;
+
+	.govuk-grid-column-two-thirds, .govuk-grid-column-one-third {
+		padding: 0;
+	}
+	&__title {
+		margin-bottom: 18px;
+
+		@include govuk-media-query($from: tablet) {
+			margin-bottom: 0;
+			line-height: 100%;
+		}
+	}
+
+	&__button {
+		background: $mojblocks-color-sunflower-yellow;
+		color: $mojblocks-color-black;
+		padding: 6px 12px;
+		font-weight: bold;
+		text-decoration: none;
+		font-size: 22px;
+		font-size: 1.375rem;
+		display: block;
+		text-align: center;
+		border-radius: 5px;
+
+		@include govuk-media-query($from: tablet) {
+			float: right;
+			font-size: 25px;
+			font-size: 1.5rem;
+			margin-top: 12px;
+			text-align: left;
+			padding: 3px 12px;
+		}
+
+		&:visited {
+			color: $mojblocks-color-black;
+			text-decoration: none;
+		}
+
+		&:hover, &:active, &:focus {
+			background: $mojblocks-color-black;
+			color: $mojblocks-color-white;
+			box-shadow: none;
+		}
+	}
+}
