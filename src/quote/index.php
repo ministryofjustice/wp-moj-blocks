@@ -21,18 +21,18 @@ function render_callback_quote_block($attributes, $content)
     $attribute_quote_quoteName = $attributes['quoteName'] ?? '';
     $attribute_quote_quoteAlignment = $attributes['quoteAlignment'] ?? '';
 
-	// Add data-src only if image has been added
-	$data_src = !empty($attribute_quote_imgURL) ? 'data-src="'.
-	esc_url_raw($attribute_quote_imgURL) .'"' : '';
+    // Add data-src only if image has been added
+    $data_src = !empty($attribute_quote_imgURL) ? 'data-src="' .
+    esc_url_raw($attribute_quote_imgURL) . '"' : '';
 
     // Add alignment value and style only if alignment has been set by an editor
     $quote_alignment = !empty($attribute_quote_quoteAlignment) ? 'style="text-align:' .
-	esc_html($attribute_quote_quoteAlignment) . '"' : '';
+    esc_html($attribute_quote_quoteAlignment) . '"' : '';
 
     // Add image classes and styles only if there is an image set to display
     $img_class = !empty($attribute_quote_imgURL) ?
-	'class="mojblocks-quote__image mojblocks-quote__image-selected" style="background-image:url(' .
-	esc_url_raw($attribute_quote_imgURL) . ');" ' : '';
+    'class="mojblocks-quote__image mojblocks-quote__image-selected" style="background-image:url(' .
+    esc_url_raw($attribute_quote_imgURL) . ');" ' : '';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
