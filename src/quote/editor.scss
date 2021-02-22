@@ -51,6 +51,8 @@ Block: Quote (Gutenberg editor styles)
 
             &-remove {
                 background-color: rgba(0, 0, 0, 0.8);
+				color: white;
+				padding: 5px;
                 left: unset;
                 right: 10px;
                 width: 36px;
@@ -60,7 +62,9 @@ Block: Quote (Gutenberg editor styles)
                     color: white;
                 }
 
-                &:hover > svg,
+                &:hover {
+					color: $mojblocks-color-grey;
+				}
                 &:focus > svg {
                     color: $mojblocks-color-grey;
                 }

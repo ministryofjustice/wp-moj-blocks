@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     1.3.0
+ * Version:     1.4.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -181,7 +181,27 @@ function mojblocks_register_blocks()
 
     register_block_type(
         'mojblocks/quote',
-        ['editor_script' => 'mojblocks-editor-script']
+        [
+        'editor_script' => 'mojblocks-editor-script',
+        'render_callback' => 'render_callback_quote_block',
+        'attributes' => [
+            'quoteImgURL' => [
+                'type' => 'string'
+            ],
+            'quoteContent' => [
+                'type' => 'string'
+            ],
+            'quoteName' => [
+                'type' => 'string'
+            ],
+            'quoteAlignment' => [
+                'type' => 'string'
+            ],
+            'quoteClassName' => [
+                'type' => 'string'
+            ]
+            ]
+        ]
     );
 
     register_block_type(
@@ -204,6 +224,7 @@ function mojblocks_register_blocks()
  * Load PHP code for each block
  */
 include plugin_dir_path(__FILE__) . 'src/hero/index.php';
+include plugin_dir_path(__FILE__) . 'src/quote/index.php';
 include plugin_dir_path(__FILE__) . 'src/banner/index.php';
 
 /**
