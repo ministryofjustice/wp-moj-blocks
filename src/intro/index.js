@@ -13,13 +13,15 @@ registerBlockType('mojblocks/intro', {
     attributes: {
         introText: {
             type: 'string',
-            source: 'html',
-            selector: '.mojblocks-intro__content'
         },
+        introClassName: {
+            type: 'string'
+        }
     },
 
     edit: props => {
-        let {
+
+        const {
             attributes: {
                 introText
             },
@@ -27,8 +29,11 @@ registerBlockType('mojblocks/intro', {
             setAttributes
         } = props;
 
+        // Set className attribute for PHP frontend to use
+        setAttributes({ introClassName: className });
+
         // Grab newIntroText, set the value of introText to newIntroText.
-        let onChangeIntroText = newIntroText => {
+        const onChangeIntroText = newIntroText => {
             setAttributes({ introText: newIntroText });
         };
 
@@ -41,7 +46,7 @@ registerBlockType('mojblocks/intro', {
                                 <div className={'mojblocks-intro__content intro'}>
                                     <RichText
                                     multiline="p"
-                                    placeholder={__('Some compelling text to send the message home!', 'mojblocks')}
+                                    placeholder={__('Some compelling text to send the message home', 'mojblocks')}
                                     keepPlaceholderOnFocus
                                     onChange={onChangeIntroText}
                                     value={introText}
@@ -55,30 +60,7 @@ registerBlockType('mojblocks/intro', {
             </div>
     );
     },
-
-    save: props => {
-        let {
-            attributes: {
-                introText
-            }
-        } = props;
-
-        return (
-            <div className={`mojblocks-intro`}>
-                <div className={'govuk-width-container'}>
-                    <div className={'govuk-grid-row'}>
-                        <div className="govuk-grid-column-three-quarters">
-                            <div className="mojblocks-intro--type">
-
-                                <div className="mojblocks-intro__content intro">
-                                    <RichText.Content value={introText} multiline="p" />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    );
-    }
+    // return null as frontend output is done via PHP
+    save: () => null
 });
 
