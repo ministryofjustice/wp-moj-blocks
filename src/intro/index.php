@@ -23,11 +23,9 @@ function render_callback_intro_block($attributes, $content)
     // code below as you would in any other PHP file rather then having to use the sprintf() syntax
     ob_start();
 
-
-
     ?>
 
-    <div class="<?php _e(esc_html($attribute_quote_className)) ; ?>">
+    <div class="<?php _e(esc_html($attribute_quote_className)); ?>">
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-three-quarters">
