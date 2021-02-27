@@ -258,10 +258,10 @@ add_action('init', 'mojblocks_register_style');
 
 function mojblocks_enqueue_style()
 {
-	// Make Dashicons available on the frontend
-	wp_enqueue_style('dashicons');
+    // Make Dashicons available on the frontend
+    wp_enqueue_style('dashicons');
 
-	// Load MoJ block styles
+    // Load MoJ block styles
     wp_enqueue_style('mojblocks');
 
     // IE specific stylesheet
