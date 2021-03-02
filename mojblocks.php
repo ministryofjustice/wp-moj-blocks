@@ -206,7 +206,18 @@ function mojblocks_register_blocks()
 
     register_block_type(
         'mojblocks/intro',
-        ['editor_script' => 'mojblocks-editor-script']
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_intro_block',
+            'attributes' => [
+                'introClassName' => [
+                    'type' => 'string'
+                ],
+                'introText' => [
+                    'type' => 'string'
+                ]
+            ]
+        ]
     );
 
     register_block_type(
@@ -226,6 +237,7 @@ function mojblocks_register_blocks()
 include plugin_dir_path(__FILE__) . 'src/hero/index.php';
 include plugin_dir_path(__FILE__) . 'src/quote/index.php';
 include plugin_dir_path(__FILE__) . 'src/banner/index.php';
+include plugin_dir_path(__FILE__) . 'src/intro/index.php';
 
 /**
  * Queues up the gutenberg editor style
