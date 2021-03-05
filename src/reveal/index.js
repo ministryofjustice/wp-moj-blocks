@@ -52,7 +52,7 @@ registerBlockType('mojblocks/reveal', {
                         <div className="govuk-grid-column-three-quarters">
                             <details className="govuk-details" data-module="govuk-details" open>
                                 <summary className="govuk-details__summary">
-                                    <span className="mojblocks-reveal__title govuk-details__summary-text" onkeypress="return RestrictSpace()">
+                                    <span className="mojblocks-reveal__title govuk-details__summary-text">
                                         <RichText
                                         value={ revealTitle }
                                         placeholder={ __('Add reveal title', 'mojblocks') }
