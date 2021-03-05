@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Intro block
+ * Reveal block
  * Frontend PHP code
  *
  * Uses WordPress' dynamic block method
@@ -11,12 +11,13 @@
  *
  */
 
-function render_callback_intro_block($attributes, $content)
+function render_callback_reveal_block($attributes, $content)
 {
 
     // Parse attributes found in index.js
-    $attribute_intro_content = $attributes['introText'] ?? '';
-    $attribute_intro_className = $attributes['introClassName'] ?? '';
+    $attribute_reveal_className = $attributes['revealClassName'] ?? '';
+    $attribute_reveal_content = $attributes['revealContent'] ?? '';
+    $attribute_reveal_revealTitle = $attributes['revealTitle'] ?? '';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -25,16 +26,20 @@ function render_callback_intro_block($attributes, $content)
 
     ?>
 
-    <div class="<?php _e(esc_html($attribute_intro_className)); ?>">
+    <div class="<?php _e(esc_html($attribute_reveal_className)); ?>">
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-three-quarters">
-                    <div class="mojblocks-intro--type">
-
-                        <div class="mojblocks-intro__content intro">
-                            <?php _e(esc_html($attribute_intro_content)); ?>
+                    <details class="govuk-details" data-module="govuk-details">
+                        <summary class="govuk-details__summary">
+                            <span class="mojblocks-reveal__title govuk-details__summary-text">
+                            <?php _e(esc_html($attribute_reveal_revealTitle)); ?>
+                            </span>
+                        </summary>
+                        <div class="mojblocks-reveal__content govuk-details__text">
+                        <?php _e(esc_html($attribute_reveal_content)); ?>
                         </div>
-                    </div>
+                    </details>
                 </div>
             </div>
         </div>
