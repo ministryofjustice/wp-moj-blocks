@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     1.5.0
+ * Version:     1.6.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -222,7 +222,22 @@ function mojblocks_register_blocks()
 
     register_block_type(
         'mojblocks/reveal',
-        ['editor_script' => 'mojblocks-editor-script']
+        [
+			'editor_script' => 'mojblocks-editor-script',
+			'render_callback' => 'render_callback_reveal_block',
+            'attributes' => [
+                'revealClassName' => [
+                    'type' => 'string'
+				],
+				'revealTitle' => [
+                    'type' => 'string'
+				],
+				'revealContent' => [
+                    'type' => 'string'
+                ]
+
+            ]
+			]
     );
 
     register_block_type(
@@ -238,6 +253,7 @@ include plugin_dir_path(__FILE__) . 'src/hero/index.php';
 include plugin_dir_path(__FILE__) . 'src/quote/index.php';
 include plugin_dir_path(__FILE__) . 'src/banner/index.php';
 include plugin_dir_path(__FILE__) . 'src/intro/index.php';
+include plugin_dir_path(__FILE__) . 'src/reveal/index.php';
 
 /**
  * Queues up the gutenberg editor style

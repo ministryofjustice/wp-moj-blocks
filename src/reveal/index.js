@@ -2,69 +2,72 @@
  * Reveal
  */
 import { __ } from '@wordpress/i18n';
-import { registerBlockType, registerBlockStyle } from '@wordpress/blocks';
+import { registerBlockType } from '@wordpress/blocks';
 import { RichText } from '@wordpress/block-editor';
 
 registerBlockType('mojblocks/reveal', {
     title: __('Reveal', 'mojblocks'),
+    description: __("Arrow toggle to reveal text", "mojblocks"),
     icon: 'controls-play',
     category: 'mojblocks',
     attributes: {
         revealTitle: {
-            type: 'string',
-            source: 'html',
-            selector: '.mojblocks-reveal__title'
+            type: 'string'
         },
-        revealText: {
-            type: 'string',
-            source: 'html',
-            selector: '.mojblocks-reveal__content'
+        revealContent: {
+            type: 'string'
         },
+        revealClassName: {
+            type: 'string'
+        }
     },
-
     edit: props => {
-        let {
+
+        const {
+            setAttributes,
             attributes: {
                 revealTitle,
-                revealText
+                revealContent
             },
-            className,
-            setAttributes
+            className
         } = props;
 
+        // Set className attribute for PHP frontend to use
+        setAttributes({ revealClassName: className });
+
         // Grab newRevealTitle, set the value of revealTitle to newRevealTitle.
-        let onChangeRevealTitle = newRevealTitle => {
+        const onChangeRevealTitle = newRevealTitle => {
             setAttributes({ revealTitle: newRevealTitle });
         };
 
-        // Grab newRevealText, set the value of revealText to newRevealText.
-        let onChangeRevealText = newRevealText => {
-            setAttributes({ revealText: newRevealText });
+        // Grab newrevealContent, set the value of revealContent to newrevealContent.
+        const onChangeRevealContent = newRevealContent => {
+            setAttributes({ revealContent: newRevealContent });
         };
 
-        return (
+        return ([
             <div className={`mojblocks-reveal`}>
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
                         <div className="govuk-grid-column-three-quarters">
                             <details className="govuk-details" data-module="govuk-details" open>
                                 <summary className="govuk-details__summary">
-                                    <span className="mojblocks-reveal__title govuk-details__summary-text">
-                                            <RichText
-                                        value={revealTitle}
-                                        placeholder={__('Add reveal title', 'mojblocks')}
+                                    <span className="mojblocks-reveal__title govuk-details__summary-text" onkeypress="return RestrictSpace()">
+                                        <RichText
+                                        value={ revealTitle }
+                                        placeholder={ __('Add reveal title', 'mojblocks') }
                                         keepPlaceholderOnFocus
-                                        onChange={onChangeRevealTitle}
+                                        onChange={ onChangeRevealTitle }
                                         />
                                     </span>
                                 </summary>
                                 <div className="mojblocks-reveal__content govuk-details__text">
                                     <RichText
                                     multiline="p"
-                                    placeholder={__('Add reveal content', 'mojblocks')}
+                                    placeholder={ __('Add reveal content', 'mojblocks') }
                                     keepPlaceholderOnFocus
-                                    onChange={onChangeRevealText}
-                                    value={revealText}
+                                    onChange={ onChangeRevealContent }
+                                    value={ revealContent }
                                     />
                                 </div>
                             </details>
@@ -72,40 +75,9 @@ registerBlockType('mojblocks/reveal', {
                      </div>
                  </div>
             </div>
-
-    );
+        ]);
     },
-
-    save: props => {
-        let {
-            attributes: {
-                revealTitle,
-                revealText
-            }
-        } = props;
-
-        return (
-            <div className={`mojblocks-reveal`}>
-                <div className={'govuk-width-container'}>
-                    <div className={'govuk-grid-row'}>
-                        <div className="govuk-grid-column-three-quarters">
-                            <details className="govuk-details" data-module="govuk-details">
-                                <summary className="govuk-details__summary">
-                                    <span className="mojblocks-reveal__title govuk-details__summary-text">
-                                        <RichText.Content
-                                        value={revealTitle}
-                                        />
-                                    </span>
-                                </summary>
-                                <div className="mojblocks-reveal__content govuk-details__text">
-                                <RichText.Content value={revealText} multiline="p" />
-                                </div>
-                            </details>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    );
-    }
+    // return null as frontend output is done via PHP
+    save: () => null
 });
 
