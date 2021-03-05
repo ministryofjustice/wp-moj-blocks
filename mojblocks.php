@@ -223,21 +223,21 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/reveal',
         [
-			'editor_script' => 'mojblocks-editor-script',
-			'render_callback' => 'render_callback_reveal_block',
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_reveal_block',
             'attributes' => [
                 'revealClassName' => [
                     'type' => 'string'
-				],
-				'revealTitle' => [
+                ],
+                'revealTitle' => [
                     'type' => 'string'
-				],
-				'revealContent' => [
+                ],
+                'revealContent' => [
                     'type' => 'string'
                 ]
 
             ]
-			]
+            ]
     );
 
     register_block_type(
