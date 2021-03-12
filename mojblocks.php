@@ -172,28 +172,28 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/accordion',
         [
-			'editor_script' => 'mojblocks-editor-script',
-			'render_callback' => 'render_callback_accordion_block'
-		]
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_accordion_block'
+        ]
     );
 
-	register_block_type(
+    register_block_type(
         'mojblocks/accordion-section',
         [
-			'editor_script' => 'mojblocks-editor-script',
-			'render_callback' => 'render_callback_accordion_block_section',
-			'attributes' => [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_accordion_block_section',
+            'attributes' => [
                 'accordionSectionClassName' => [
                     'type' => 'string'
-				],
-				'accordionSectionTitle' => [
+                ],
+                'accordionSectionTitle' => [
                     'type' => 'string'
                 ],
-				'accordionSectionTextArea' => [
+                'accordionSectionTextArea' => [
                     'type' => 'string'
                 ]
-			]
-		]
+            ]
+        ]
     );
 
     register_block_type(
