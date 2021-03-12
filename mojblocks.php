@@ -114,12 +114,33 @@ function mojblocks_register_blocks()
     // Register blocks
     register_block_type(
         'mojblocks/highlights',
-        ['editor_script' => 'mojblocks-editor-script']
+		['editor_script' => 'mojblocks-editor-script']
     );
 
     register_block_type(
         'mojblocks/cta',
-        ['editor_script' => 'mojblocks-editor-script']
+        [
+        	'editor_script' => 'mojblocks-editor-script',
+			'render_callback' => 'render_callback_cta_block',
+			'attributes' => [
+				'ctaTitle' => [
+					'type' => 'string'
+				],
+				'ctaText' => [
+					'type' => 'string'
+				],
+				'buttonLink' => [
+					'type' => 'string'
+				],
+				'buttonLabel' => [
+					'type' => 'string'
+				],
+				'ctaClassName' => [
+					'type' => 'string'
+
+				]
+			]
+		]
     );
 
     register_block_type(
@@ -254,6 +275,7 @@ include plugin_dir_path(__FILE__) . 'src/quote/index.php';
 include plugin_dir_path(__FILE__) . 'src/banner/index.php';
 include plugin_dir_path(__FILE__) . 'src/intro/index.php';
 include plugin_dir_path(__FILE__) . 'src/reveal/index.php';
+include plugin_dir_path(__FILE__) . 'src/cta/index.php';
 
 /**
  * Queues up the gutenberg editor style
@@ -307,6 +329,7 @@ function mojblocks_enqueue_style()
         '1.0',
         'all'
     );
+
 }
 
 add_action('wp_enqueue_scripts', 'mojblocks_enqueue_style');
