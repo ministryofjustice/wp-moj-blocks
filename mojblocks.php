@@ -114,33 +114,33 @@ function mojblocks_register_blocks()
     // Register blocks
     register_block_type(
         'mojblocks/highlights',
-		['editor_script' => 'mojblocks-editor-script']
+        ['editor_script' => 'mojblocks-editor-script']
     );
 
     register_block_type(
         'mojblocks/cta',
         [
-        	'editor_script' => 'mojblocks-editor-script',
-			'render_callback' => 'render_callback_cta_block',
-			'attributes' => [
-				'ctaTitle' => [
-					'type' => 'string'
-				],
-				'ctaText' => [
-					'type' => 'string'
-				],
-				'buttonLink' => [
-					'type' => 'string'
-				],
-				'buttonLabel' => [
-					'type' => 'string'
-				],
-				'ctaClassName' => [
-					'type' => 'string'
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_cta_block',
+            'attributes' => [
+                'ctaTitle' => [
+                    'type' => 'string'
+                ],
+                'ctaText' => [
+                    'type' => 'string'
+                ],
+                'buttonLink' => [
+                    'type' => 'string'
+                ],
+                'buttonLabel' => [
+                    'type' => 'string'
+                ],
+                'ctaClassName' => [
+                    'type' => 'string'
 
-				]
-			]
-		]
+                ]
+            ]
+        ]
     );
 
     register_block_type(
@@ -329,7 +329,6 @@ function mojblocks_enqueue_style()
         '1.0',
         'all'
     );
-
 }
 
 add_action('wp_enqueue_scripts', 'mojblocks_enqueue_style');

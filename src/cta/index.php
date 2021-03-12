@@ -15,10 +15,10 @@ function render_callback_cta_block($attributes, $content)
 {
 
     // Parse attributes found in index.js
-	$attribute_cta_title = $attributes['ctaTitle'] ?? '';
-	$attribute_cta_text = $attributes['ctaText'] ?? '';
-	$attribute_cta_button_link = $attributes['buttonLink'] ?? '';
-	$attribute_cta_button_label = $attributes['buttonLabel'] ?? '';
+    $attribute_cta_title = $attributes['ctaTitle'] ?? '';
+    $attribute_cta_text = $attributes['ctaText'] ?? '';
+    $attribute_cta_button_link = $attributes['buttonLink'] ?? '';
+    $attribute_cta_button_label = $attributes['buttonLabel'] ?? '';
     $attribute_cta_className = $attributes['ctaClassName'] ?? '';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
@@ -31,21 +31,21 @@ function render_callback_cta_block($attributes, $content)
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-three-quarters">
-					<div class="mojblocks-cta__heading-container">
-						<h2 class="mojblocks-cta__heading">
+                    <div class="mojblocks-cta__heading-container">
+                        <h2 class="mojblocks-cta__heading">
                                 <span role="text">
                                     <span class="mojblocks-cta__heading-text">
                                        <?php _e(esc_html($attribute_cta_title)); ?>
                                     </span>
                                 </span>
-						</h2>
-					</div>
-					<div class="mojblocks-cta__content">
-						<?php _e(esc_html($attribute_cta_text)); ?>
-					</div>
-					<a href="<?php _e(esc_html($attribute_cta_button_link)); ?>" class="mojblocks-button">
-						<?php _e(esc_html($attribute_cta_button_label)); ?>
-					</a>
+                        </h2>
+                    </div>
+                    <div class="mojblocks-cta__content">
+                        <?php _e(esc_html($attribute_cta_text)); ?>
+                    </div>
+                    <a href="<?php _e(esc_html($attribute_cta_button_link)); ?>" class="mojblocks-button">
+                        <?php _e(esc_html($attribute_cta_button_label)); ?>
+                    </a>
                 </div>
             </div>
         </div>
