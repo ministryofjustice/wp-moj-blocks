@@ -51,8 +51,8 @@ function render_callback_accordion_block_section($attributes, $content)
 
     // Parse attributes found in index.js
     $attribute_accordion_section_className = $attributes['accordionSectionClassName'] ?? '';
-	$attribute_accordion_section_Title = $attributes['accordionSectionTitle'] ?? '';
-	$attribute_accordion_section_TextArea = $attributes['accordionSectionTextArea'] ?? '';
+    $attribute_accordion_section_Title = $attributes['accordionSectionTitle'] ?? '';
+    $attribute_accordion_section_TextArea = $attributes['accordionSectionTextArea'] ?? '';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
