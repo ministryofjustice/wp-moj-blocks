@@ -162,7 +162,7 @@ function mojblocks_register_blocks()
                     'type' => 'string'
                 ],
                 'bannerClassName' => [
-                        'type' => 'string'
+                    'type' => 'string'
 
                 ]
             ]
@@ -173,7 +173,8 @@ function mojblocks_register_blocks()
         'mojblocks/accordion',
         [
 			'editor_script' => 'mojblocks-editor-script',
-			'render_callback' => 'render_callback_accordion_block'
+			'render_callback' => 'render_callback_accordion_block',
+			'attributes' => []
 		]
     );
 

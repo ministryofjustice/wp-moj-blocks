@@ -14,8 +14,9 @@ registerBlockType('mojblocks/accordion', {
     icon: "list-view",
     category: 'mojblocks',
     keywords: [ __( 'accordion' ), __( 'sections' ), __( 'lists' ) ],
+    attributes: {},
 
-    edit: props => {
+    edit: () => {
 
         // Load allowed blocks on repeater
         const allowedBlocks = [ 'mojblocks/accordion-section' ];
@@ -25,14 +26,14 @@ registerBlockType('mojblocks/accordion', {
             [ 'mojblocks/accordion-section', {} ]
         ];
 
-        return (
-            <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+        return ([
+            <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default" key="accordion-block">
                 <InnerBlocks
                     template={ templates }
                     allowedBlocks={ allowedBlocks }
                 />
             </div>
-        )
+        ])
       },
 
     // return null as frontend output is done via PHP
@@ -49,7 +50,7 @@ registerBlockType("mojblocks/accordion-section", {
     category: "mojblocks",
     parent: [ 'mojblocks/accordion' ],
     attributes: {
-        accordionSectionTitle: {
+        accordionTitle: {
             type: "string"
         },
         accordionSectionTextArea: {
@@ -64,7 +65,7 @@ registerBlockType("mojblocks/accordion-section", {
 
         const {
             attributes: {
-                accordionSectionTitle,
+                accordionTitle,
                 accordionSectionTextArea
             },
             className,
@@ -77,23 +78,23 @@ registerBlockType("mojblocks/accordion-section", {
         // Load allowed blocks to be added to accordion section body
         const allowedBlocks = [ 'core/heading','core/list', 'core/paragraph' ];
 
-        const onChangeAccordionSectionTitle = newAccordionTitle => {
-            setAttributes({ accordionSectionTitle: newAccordionTitle })
+        const onChangeAccordionTitle = newAccordionTitle => {
+            setAttributes({ accordionTitle: newAccordionTitle })
           }
 
         const onChangeAccordionSectionTextArea = newAccordionSectionTextArea => {
             setAttributes({ accordionSectionTextArea: newAccordionSectionTextArea })
         }
 
-        return (
-            <div className="govuk-accordion__section">
+        return ([
+            <div className={`${className} govuk-accordion__section`} key="accordion-block-section">
                 <div className="govuk-accordion__section-header">
                 <h3 className="govuk-accordion__section-heading">
                     <span className="govuk-accordion__section-button" id="accordion-default-heading-1">
                     <RichText
                         placeholder={__('Add section title', 'mojblocks')}
-                        value={ accordionSectionTitle }
-                        onChange={ onChangeAccordionSectionTitle }
+                        value={ accordionTitle }
+                        onChange={ onChangeAccordionTitle }
                         keepPlaceholderOnFocus={ true }
                     />
                     </span>
@@ -113,7 +114,7 @@ registerBlockType("mojblocks/accordion-section", {
                     </div>
                 </div>
             </div>
-        )
+        ]);
       },
 
     // return null as frontend output is done via PHP
