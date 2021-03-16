@@ -26,26 +26,26 @@ function render_callback_highlights_list_block($attributes, $content)
 
     ?>
 
-	<div class="<?php _e(esc_html($attribute_list_className)) ; ?> mojblocks-highlights-list">
-		<div class="govuk-width-container">
-			<div class="govuk-grid-row">
-				<div class="mojblocks-highlights-list__heading-container">
-					<h2 class="mojblocks-highlights-list__heading">
+    <div class="<?php _e(esc_html($attribute_list_className)) ; ?> mojblocks-highlights-list">
+        <div class="govuk-width-container">
+            <div class="govuk-grid-row">
+                <div class="mojblocks-highlights-list__heading-container">
+                    <h2 class="mojblocks-highlights-list__heading">
                                  <span role="text">
                                     <span class="mojblocks-highlights-list__heading-text">
-										 <?php _e(esc_html($attribute_list_title)); ?>
+                                         <?php _e(esc_html($attribute_list_title)); ?>
                                     </span>
                                   </span>
-					</h2>
-				</div>
-				<div class="mojblocks-highlights-list__content">
-					<ul>
-						<?php _e($attribute_list_items); ?>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+                    </h2>
+                </div>
+                <div class="mojblocks-highlights-list__content">
+                    <ul>
+                        <?php _e($attribute_list_items); ?>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <?php
 

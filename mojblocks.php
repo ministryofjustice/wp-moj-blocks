@@ -114,22 +114,22 @@ function mojblocks_register_blocks()
     // Register blocks
     register_block_type(
         'mojblocks/highlights-list',
-		[
-			'editor_script' => 'mojblocks-editor-script',
-			'render_callback' => 'render_callback_highlights_list_block',
-			'attributes' => [
-				'listTitle' => [
-					'type' => 'string'
-				],
-				'listItems' => [
-						'type' => 'array'
-				],
-				'listClassName' => [
-					'type' => 'string'
-				]
-			]
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_highlights_list_block',
+            'attributes' => [
+                'listTitle' => [
+                    'type' => 'string'
+                ],
+                'listItems' => [
+                        'type' => 'array'
+                ],
+                'listClassName' => [
+                    'type' => 'string'
+                ]
+            ]
 
-		]
+        ]
     );
 
     register_block_type(
