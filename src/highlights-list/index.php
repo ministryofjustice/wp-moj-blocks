@@ -51,11 +51,11 @@ function render_callback_highlights_list_block($attributes, $content)
 
     // Get all the html/content that has been captured in the buffer and output via return
     $output = ob_get_contents();
-    
-	// Decode the output in case editors want to add in hyperlinks or other markup
-	$output = html_entity_decode($output);
 
-	ob_end_clean();
+    // Decode the output in case editors want to add in hyperlinks or other markup
+    $output = html_entity_decode($output);
+
+    ob_end_clean();
 
     return $output;
 }
