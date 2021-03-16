@@ -19,40 +19,35 @@ registerBlockType('mojblocks/highlights-list', {
     attributes: {
         listTitle: {
             type: 'string',
-            source: 'html',
-            selector: '.mojblocks-highlights-list__heading-text'
         },
-        listText: {
+        listItems: {
             type: 'array',
-            source: 'children',
-            multiline: 'li',
-            selector: '.mojblocks-highlights-list__content > ul'
+        },
+        listClassName: {
+            type: 'string'
         }
     },
 
     edit: props => {
-        let {
+        const {
             attributes: {
                 listTitle,
-                listText
+                listItems
             },
             className,
             setAttributes
         } = props;
 
+        setAttributes({ listClassName: className });
+
         // Grab newListTitle, set the value of listTitle to newListTitle.
-        let onChangeListTitle = newListTitle => {
+        const onChangeListTitle = newListTitle => {
             setAttributes({ listTitle: newListTitle });
         };
 
         // Grab newListText, set the value of listText to newListText.
-        let onChangeListText = newListText => {
-            setAttributes({ listText: newListText });
-        };
-
-        // add a class to li
-        let onChangeListTextSetClass = newListText => {
-            setAttributes({ listText: newListText });
+        const onChangeListItems = newListItems => {
+            setAttributes({ listItems: newListItems });
         };
 
         return (
@@ -79,8 +74,8 @@ registerBlockType('mojblocks/highlights-list', {
                                 multiline='li'
                                 placeholder={__('Highlights item', 'mojblocks')}
                                 keepPlaceholderOnFocus
-                                onChange={onChangeListText}
-                                value={listText}
+                                onChange={onChangeListItems}
+                                value={listItems}
                             />
                         </div>
                     </div>
@@ -89,39 +84,7 @@ registerBlockType('mojblocks/highlights-list', {
         );
     },
 
-    save: props => {
-        let {
-            attributes: {
-                listTitle,
-                listText
-            }
-        } = props;
-
-        return (
-            <div className={`mojblocks-highlights-list`}>
-                <div className={'govuk-width-container'}>
-                    <div className={'govuk-grid-row'}>
-                        <div className="mojblocks-highlights-list__heading-container">
-                            <h2 className="mojblocks-highlights-list__heading">
-                                 <span role="text">
-                                    <span className="mojblocks-highlights-list__heading-text">
-                                        <RichText.Content value={listTitle}/>
-                                    </span>
-                                  </span>
-                            </h2>
-                        </div>
-                        <div className={'mojblocks-highlights-list__content'}>
-                            <RichText.Content
-                                tagName='ul'
-                                multiline='li'
-                                value={listText}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+    save: () => null
 });
 
 // style variations
