@@ -21,7 +21,7 @@ registerBlockType('mojblocks/highlights-list', {
             type: 'string',
         },
         listItems: {
-            type: 'array',
+            type: 'string',
         },
         listClassName: {
             type: 'string'
