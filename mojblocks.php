@@ -122,7 +122,7 @@ function mojblocks_register_blocks()
                     'type' => 'string'
                 ],
                 'listItems' => [
-                        'type' => 'array'
+                        'type' => 'string'
                 ],
                 'listClassName' => [
                     'type' => 'string'

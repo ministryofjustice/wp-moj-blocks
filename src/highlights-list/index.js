@@ -13,7 +13,7 @@ registerBlockType('mojblocks/highlights-list', {
     example: {
         attributes: {
             listTitle: 'This is a highlights list title',
-            listText: 'This is a list item',
+            listItems: 'This is a list item',
         },
     },
     attributes: {
@@ -21,7 +21,7 @@ registerBlockType('mojblocks/highlights-list', {
             type: 'string',
         },
         listItems: {
-            type: 'array',
+            type: 'string', //sting due to key error issue with array
         },
         listClassName: {
             type: 'string'
@@ -45,7 +45,7 @@ registerBlockType('mojblocks/highlights-list', {
             setAttributes({ listTitle: newListTitle });
         };
 
-        // Grab newListText, set the value of listText to newListText.
+        // Grab newListItems, set the value of listItems to newListItems.
         const onChangeListItems = newListItems => {
             setAttributes({ listItems: newListItems });
         };
