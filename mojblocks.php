@@ -211,8 +211,36 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/staggered-boxes',
-        ['editor_script' => 'mojblocks-editor-script']
+        'mojblocks/staggered-box',
+        [
+        	'editor_script' => 'mojblocks-editor-script',
+			'render_callback' => 'render_callback_staggered_box_block',
+			'attributes' => [
+				'staggeredBoxTitle' => [
+					'type' => 'string'
+				],
+				'staggeredBoxContent' => [
+					'type' => 'string'
+				],
+				'staggeredBoxButtonText' => [
+					'type' => 'string'
+				],
+				'staggeredBoxButtonLink' => [
+					'type' => 'string'
+				],
+				'staggeredBoxImageURL' => [
+					'type' => 'string'
+				],
+				'staggeredBoxImageAltText' => [
+					'type' => 'string'
+				],
+				'staggeredBoxClassName' => [
+					'type' => 'string'
+				]
+			]
+
+
+		]
     );
 
     register_block_type(
@@ -292,6 +320,7 @@ include plugin_dir_path(__FILE__) . 'src/intro/index.php';
 include plugin_dir_path(__FILE__) . 'src/reveal/index.php';
 include plugin_dir_path(__FILE__) . 'src/highlights-list/index.php';
 include plugin_dir_path(__FILE__) . 'src/cta/index.php';
+include plugin_dir_path(__FILE__) . 'src/staggered-box/index.php';
 
 /**
  * Queues up the gutenberg editor style
