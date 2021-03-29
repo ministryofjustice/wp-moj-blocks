@@ -213,34 +213,34 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/staggered-box',
         [
-        	'editor_script' => 'mojblocks-editor-script',
-			'render_callback' => 'render_callback_staggered_box_block',
-			'attributes' => [
-				'staggeredBoxTitle' => [
-					'type' => 'string'
-				],
-				'staggeredBoxContent' => [
-					'type' => 'string'
-				],
-				'staggeredBoxButtonText' => [
-					'type' => 'string'
-				],
-				'staggeredBoxButtonLink' => [
-					'type' => 'string'
-				],
-				'staggeredBoxImageURL' => [
-					'type' => 'string'
-				],
-				'staggeredBoxImageAltText' => [
-					'type' => 'string'
-				],
-				'staggeredBoxClassName' => [
-					'type' => 'string'
-				]
-			]
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_staggered_box_block',
+            'attributes' => [
+                'staggeredBoxTitle' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxContent' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxButtonText' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxButtonLink' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxImageURL' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxImageAltText' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxClassName' => [
+                    'type' => 'string'
+                ]
+            ]
 
 
-		]
+        ]
     );
 
     register_block_type(

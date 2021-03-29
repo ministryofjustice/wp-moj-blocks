@@ -16,11 +16,11 @@ function render_callback_staggered_box_block($attributes, $content)
 
     // Parse attributes found in index.js
     $attribute_box_title = $attributes['staggeredBoxTitle'] ?? '';
-	$attribute_box_img_url = $attributes['staggeredBoxImageURL'] ?? '';
-	$attribute_box_img_alt_text = $attributes['staggeredBoxImageAltText'] ?? '';
-	$attribute_box_content = $attributes['staggeredBoxContent'] ?? '';
-	$attribute_box_button_link = $attributes['staggeredBoxButtonLink'] ?? '';
-	$attribute_box_button_text = $attributes['staggeredBoxButtonText'] ?? '';
+    $attribute_box_img_url = $attributes['staggeredBoxImageURL'] ?? '';
+    $attribute_box_img_alt_text = $attributes['staggeredBoxImageAltText'] ?? '';
+    $attribute_box_content = $attributes['staggeredBoxContent'] ?? '';
+    $attribute_box_button_link = $attributes['staggeredBoxButtonLink'] ?? '';
+    $attribute_box_button_text = $attributes['staggeredBoxButtonText'] ?? '';
     $attribute_box_className = $attributes['staggeredBoxClassName'] ?? '';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
@@ -33,19 +33,19 @@ function render_callback_staggered_box_block($attributes, $content)
     <div class="<?php _e(esc_html($attribute_box_className)) ; ?> mojblocks-staggered-box">
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
-				<div class="mojblocks-staggered-box__image-container govuk-grid-column-two-thirds ">
-					<img class="mojblocks-staggered-block__image" src="<?php _e(esc_html($attribute_box_img_url)); ?>" alt="<?php _e(esc_html($attribute_box_img_alt_text)); ?>" />
-				</div>
+                <div class="mojblocks-staggered-box__image-container govuk-grid-column-two-thirds ">
+                    <img class="mojblocks-staggered-block__image" src="<?php _e(esc_html($attribute_box_img_url)); ?>" alt="<?php _e(esc_html($attribute_box_img_alt_text)); ?>" />
+                </div>
 
-				<div class="mojblocks-staggered-box__text-container govuk-grid-column-one-half" >
-					<h2 class="mojblocks-staggered-box__title"><?php _e(esc_html($attribute_box_title)); ?></h2>
-					<p class="mojblocks-staggered-box__content" >
-						<?php _e(esc_html($attribute_box_content)); ?>
-					</p>
-					<a href="<?php _e(esc_html($attribute_box_button_link)); ?>" class="mojblocks-staggered-box__button" >
-						<?php _e(esc_html($attribute_box_button_text)); ?>
-					</a>
-				</div>
+                <div class="mojblocks-staggered-box__text-container govuk-grid-column-one-half" >
+                    <h2 class="mojblocks-staggered-box__title"><?php _e(esc_html($attribute_box_title)); ?></h2>
+                    <p class="mojblocks-staggered-box__content" >
+                        <?php _e(esc_html($attribute_box_content)); ?>
+                    </p>
+                    <a href="<?php _e(esc_html($attribute_box_button_link)); ?>" class="mojblocks-staggered-box__button" >
+                        <?php _e(esc_html($attribute_box_button_text)); ?>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
