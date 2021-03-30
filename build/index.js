@@ -161,9 +161,9 @@ registerBlockType('mojblocks/accordion', {
       allowedBlocks: allowedBlocks
     }))];
   },
-  // return null as frontend output is done via PHP
+  // When using InnerBlocks with dynamic blocks, you need to return the content.
   save: function save() {
-    return null;
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks.Content, null);
   }
 });
 /**
@@ -177,7 +177,7 @@ registerBlockType("mojblocks/accordion-section", {
   category: "mojblocks",
   parent: ['mojblocks/accordion'],
   attributes: {
-    accordionTitle: {
+    accordionSectionTitle: {
       type: "string"
     },
     accordionSectionTextArea: {
@@ -189,7 +189,7 @@ registerBlockType("mojblocks/accordion-section", {
   },
   edit: function edit(props) {
     var _props$attributes = props.attributes,
-        accordionTitle = _props$attributes.accordionTitle,
+        accordionSectionTitle = _props$attributes.accordionSectionTitle,
         accordionSectionTextArea = _props$attributes.accordionSectionTextArea,
         className = props.className,
         setAttributes = props.setAttributes; // Set className attribute for PHP frontend to use
@@ -202,7 +202,7 @@ registerBlockType("mojblocks/accordion-section", {
 
     var onChangeAccordionTitle = function onChangeAccordionTitle(newAccordionTitle) {
       setAttributes({
-        accordionTitle: newAccordionTitle
+        accordionSectionTitle: newAccordionTitle
       });
     };
 
@@ -223,8 +223,8 @@ registerBlockType("mojblocks/accordion-section", {
       className: "govuk-accordion__section-button",
       id: "accordion-default-heading-1"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
-      placeholder: __('Add section title', 'mojblocks'),
-      value: accordionTitle,
+      placeholder: __('Add accordion section title', 'mojblocks'),
+      value: accordionSectionTitle,
       onChange: onChangeAccordionTitle,
       keepPlaceholderOnFocus: true
     })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
@@ -234,7 +234,7 @@ registerBlockType("mojblocks/accordion-section", {
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "govuk-body"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
-      placeholder: __('Add section content', 'mojblocks'),
+      placeholder: __('Add accordion section content', 'mojblocks'),
       value: accordionSectionTextArea,
       onChange: onChangeAccordionSectionTextArea,
       keepPlaceholderOnFocus: true
@@ -242,9 +242,9 @@ registerBlockType("mojblocks/accordion-section", {
       allowedBlocks: allowedBlocks
     }))))];
   },
-  // return null as frontend output is done via PHP
+  // When using InnerBlocks with dynamic blocks, you need to return the content.
   save: function save() {
-    return null;
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks.Content, null);
   }
 });
 
