@@ -44,23 +44,23 @@ registerBlockType("mojblocks/staggered-box", {
 
     setAttributes({ staggeredBoxClassName: className });
 
-    const onChangeStaggeredBoxTitle = (newStaggeredBoxTitle) => {
+    const onChangeStaggeredBoxTitle = newStaggeredBoxTitle => {
       setAttributes({ staggeredBoxTitle: newStaggeredBoxTitle})
     }
 
-    const onChangeStaggeredBoxContent = (newStaggeredBoxContent) => {
+    const onChangeStaggeredBoxContent = newStaggeredBoxContent => {
       setAttributes({ staggeredBoxContent: newStaggeredBoxContent })
     }
 
-    const onChangeStaggeredBoxButtonText = (newStaggeredBoxButtonText) => {
+    const onChangeStaggeredBoxButtonText = newStaggeredBoxButtonText => {
       setAttributes({ staggeredBoxButtonText: newStaggeredBoxButtonText })
     }
 
-    const onChangeStaggeredBoxButtonLink = (newStaggeredBoxButtonLink) => {
+    const onChangeStaggeredBoxButtonLink = newStaggeredBoxButtonLink => {
       setAttributes({ staggeredBoxButtonLink: newStaggeredBoxButtonLink })
     }
 
-    const onStaggeredBoxImageSelect = (newStaggeredBoxImageURL) => {
+    const onStaggeredBoxImageSelect = newStaggeredBoxImageURL => {
       setAttributes({ staggeredBoxImageURL: newStaggeredBoxImageURL.sizes.full.url })
       setAttributes({ staggeredBoxImageAltText: newStaggeredBoxImageURL.alt})
     }

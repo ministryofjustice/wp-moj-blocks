@@ -34,7 +34,7 @@ function render_callback_staggered_box_block($attributes, $content)
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="mojblocks-staggered-box__image-container govuk-grid-column-two-thirds ">
-                    <img class="mojblocks-staggered-block__image" src="<?php _e(esc_html($attribute_box_img_url)); ?>" alt="<?php _e(esc_html($attribute_box_img_alt_text)); ?>" />
+                    <img class="mojblocks-staggered-block__image" src="<?php _e(esc_url($attribute_box_img_url)); ?>" alt="<?php _e(esc_html($attribute_box_img_alt_text)); ?>" />
                 </div>
 
                 <div class="mojblocks-staggered-box__text-container govuk-grid-column-one-half" >
@@ -42,7 +42,7 @@ function render_callback_staggered_box_block($attributes, $content)
                     <p class="mojblocks-staggered-box__content" >
                         <?php _e(esc_html($attribute_box_content)); ?>
                     </p>
-                    <a href="<?php _e(esc_html($attribute_box_button_link)); ?>" class="mojblocks-staggered-box__button" >
+                    <a href="<?php _e(esc_url($attribute_box_button_link)); ?>" class="mojblocks-staggered-box__button" >
                         <?php _e(esc_html($attribute_box_button_text)); ?>
                     </a>
                 </div>
