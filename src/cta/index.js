@@ -21,62 +21,59 @@ registerBlockType('mojblocks/cta', {
     },
     attributes: {
         ctaTitle: {
-            type: 'string',
-            source: 'html',
-            selector: '.mojblocks-cta__heading-text'
+            type: 'string'
         },
         ctaText: {
-            type: 'string',
-            source: 'html',
-            selector: '.mojblocks-cta__content'
+            type: 'string'
         },
         buttonLabel: {
-            type: 'string',
-            source: 'html',
-            selector: '.mojblocks-button'
+            type: 'string'
         },
         buttonLink: {
-            type: 'string',
-            source: 'attribute',
-            selector: 'a.mojblocks-button',
-            attribute: 'href'
+            type: 'string'
         },
+        ctaClassName: {
+            type: 'string'
+        }
     },
 
     edit: props => {
-        let {
+        const {
+            setAttributes,
             attributes: {
                 ctaTitle,
                 ctaText,
-                buttonLabel,
-                buttonLink
+                buttonLink,
+                buttonLabel
             },
-            className,
-            setAttributes
+            className
         } = props;
 
+        // Set className attribute for PHP frontend to use
+        setAttributes({ ctaClassName: className });
+
         // Grab newCtaTitle, set the value of ctaTitle to newCtaTitle.
-        let onChangeCtaTitle = newCtaTitle => {
+        const onChangeCtaTitle = newCtaTitle => {
             setAttributes({ ctaTitle: newCtaTitle });
         };
 
         // Grab newCtaText, set the value of ctaText to newCtaText.
-        let onChangeCtaText = newCtaText => {
+        const onChangeCtaText = newCtaText => {
             setAttributes({ ctaText: newCtaText });
         };
 
         // Grab newButtonLabel, set the value of buttonLabel to newButtonLabel.
-        let onChangeButtonLabel = newButtonLabel => {
+        const onChangeButtonLabel = newButtonLabel => {
             setAttributes({ buttonLabel: newButtonLabel });
         };
 
         // Grab newButtonLink, set the value of buttonLink to newButtonLink.
-        let onChangeButtonLink = newButtonLink => {
+        const onChangeButtonLink = newButtonLink => {
             setAttributes({ buttonLink: newButtonLink });
         };
 
         return (
-            <div className={`${className}`}>
+            <div className={`${className}  mojblocks-cta`}>
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
                         <div class="govuk-grid-column-three-quarters">
@@ -122,42 +119,8 @@ registerBlockType('mojblocks/cta', {
         );
     },
 
-    save: props => {
-        let {
-            attributes: {
-                ctaTitle,
-                ctaText,
-                buttonLabel,
-                buttonLink
-            }
-        } = props;
+    save: () => null
 
-        return (
-            <div className={`mojblocks-cta`}>
-                <div className={'govuk-width-container'}>
-                    <div className={'govuk-grid-row'}>
-                        <div class="govuk-grid-column-three-quarters">
-                            <div className="mojblocks-cta__heading-container">
-                                <h2 className="mojblocks-cta__heading">
-                                <span role="text">
-                                    <span className="mojblocks-cta__heading-text">
-                                        <RichText.Content value={ctaTitle}/>
-                                    </span>
-                                </span>
-                                </h2>
-                            </div>
-                            <div className="mojblocks-cta__content">
-                                <RichText.Content value={ctaText} multiline="p"/>
-                            </div>
-                            <a href={buttonLink} className="mojblocks-button">
-                                <RichText.Content value={buttonLabel}/>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
 });
 
 // style variations

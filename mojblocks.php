@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     1.6.0
+ * Version:     1.8.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -113,13 +113,49 @@ function mojblocks_register_blocks()
 
     // Register blocks
     register_block_type(
-        'mojblocks/highlights',
-        ['editor_script' => 'mojblocks-editor-script']
+        'mojblocks/highlights-list',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_highlights_list_block',
+            'attributes' => [
+                'listTitle' => [
+                    'type' => 'string'
+                ],
+                'listItems' => [
+                        'type' => 'string'
+                ],
+                'listClassName' => [
+                    'type' => 'string'
+                ]
+            ]
+
+        ]
     );
 
     register_block_type(
         'mojblocks/cta',
-        ['editor_script' => 'mojblocks-editor-script']
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_cta_block',
+            'attributes' => [
+                'ctaTitle' => [
+                    'type' => 'string'
+                ],
+                'ctaText' => [
+                    'type' => 'string'
+                ],
+                'buttonLink' => [
+                    'type' => 'string'
+                ],
+                'buttonLabel' => [
+                    'type' => 'string'
+                ],
+                'ctaClassName' => [
+                    'type' => 'string'
+
+                ]
+            ]
+        ]
     );
 
     register_block_type(
@@ -198,8 +234,36 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/staggered-boxes',
-        ['editor_script' => 'mojblocks-editor-script']
+        'mojblocks/staggered-box',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_staggered_box_block',
+            'attributes' => [
+                'staggeredBoxTitle' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxContent' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxButtonText' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxButtonLink' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxImageURL' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxImageAltText' => [
+                    'type' => 'string'
+                ],
+                'staggeredBoxClassName' => [
+                    'type' => 'string'
+                ]
+            ]
+
+
+        ]
     );
 
     register_block_type(
@@ -278,6 +342,9 @@ include plugin_dir_path(__FILE__) . 'src/banner/index.php';
 include plugin_dir_path(__FILE__) . 'src/intro/index.php';
 include plugin_dir_path(__FILE__) . 'src/reveal/index.php';
 include plugin_dir_path(__FILE__) . 'src/accordion/index.php';
+include plugin_dir_path(__FILE__) . 'src/highlights-list/index.php';
+include plugin_dir_path(__FILE__) . 'src/cta/index.php';
+include plugin_dir_path(__FILE__) . 'src/staggered-box/index.php';
 
 /**
  * Queues up the gutenberg editor style
