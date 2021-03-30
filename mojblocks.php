@@ -172,10 +172,10 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/accordion',
         [
-			'editor_script' => 'mojblocks-editor-script',
-			'render_callback' => 'render_callback_accordion_block',
-			'attributes' => []
-		]
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_accordion_block',
+            'attributes' => []
+        ]
     );
 
     register_block_type(
