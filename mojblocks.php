@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     1.8.0
+ * Version:     1.9.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -198,7 +198,7 @@ function mojblocks_register_blocks()
                     'type' => 'string'
                 ],
                 'bannerClassName' => [
-                        'type' => 'string'
+                    'type' => 'string'
 
                 ]
             ]
@@ -207,7 +207,30 @@ function mojblocks_register_blocks()
 
     register_block_type(
         'mojblocks/accordion',
-        ['editor_script' => 'mojblocks-editor-script']
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_accordion_block',
+            'attributes' => []
+        ]
+    );
+
+    register_block_type(
+        'mojblocks/accordion-section',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_accordion_block_section',
+            'attributes' => [
+                'accordionSectionClassName' => [
+                    'type' => 'string'
+                ],
+                'accordionSectionTitle' => [
+                    'type' => 'string'
+                ],
+                'accordionSectionTextArea' => [
+                    'type' => 'string'
+                ]
+            ]
+        ]
     );
 
     register_block_type(
@@ -318,6 +341,7 @@ include plugin_dir_path(__FILE__) . 'src/quote/index.php';
 include plugin_dir_path(__FILE__) . 'src/banner/index.php';
 include plugin_dir_path(__FILE__) . 'src/intro/index.php';
 include plugin_dir_path(__FILE__) . 'src/reveal/index.php';
+include plugin_dir_path(__FILE__) . 'src/accordion/index.php';
 include plugin_dir_path(__FILE__) . 'src/highlights-list/index.php';
 include plugin_dir_path(__FILE__) . 'src/cta/index.php';
 include plugin_dir_path(__FILE__) . 'src/staggered-box/index.php';
