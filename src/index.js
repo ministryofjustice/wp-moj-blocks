@@ -6,7 +6,7 @@ import "./highlights-list";
 import "./cta";
 import "./hero";
 import "./accordion";
-import "./staggered-boxes";
+import "./staggered-box";
 import "./quote";
 import "./intro";
 import "./reveal";

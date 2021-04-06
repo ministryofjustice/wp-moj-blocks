@@ -13,61 +13,54 @@ registerBlockType("mojblocks/staggered-box", {
 
   attributes: {
     staggeredBoxTitle: {
-      type: "string",
-      source: "html",
-      selector: ".mojblocks-staggered-box__title"
+      type: "string"
     },
     staggeredBoxContent: {
-      type: "string",
-      source: "html",
-      selector: ".mojblocks-staggered-box__content"
+      type: "string"
     },
     staggeredBoxButtonText: {
-      type: "string",
-      source: "html",
-      selector: ".mojblocks-staggered-box__button"
+      type: "string"
     },
     staggeredBoxButtonLink: {
-      type: 'string',
-      source: 'attribute',
-      attribute: 'href',
-      selector: 'a.mojblocks-staggered-box__button'
+      type: 'string'
     },
     staggeredBoxImageURL: {
-      type: "string",
-      default: ''
+      type: "string"
     },
     staggeredBoxImageAltText: {
-      type: "string",
-      source: "attribute",
-      attribute: "alt",
-      default: ''
+      type: "string"
+    },
+    staggeredBoxClassName: {
+      type: "string"
     }
   },
 
   edit: props => {
     const {
-      attributes: { staggeredBoxContent, staggeredBoxImageURL, staggeredBoxButtonText, staggeredBoxButtonLink, staggeredBoxTitle, staggeredBoxImageAltText, className },
-      setAttributes
+      attributes: { staggeredBoxContent, staggeredBoxImageURL, staggeredBoxButtonText, staggeredBoxButtonLink, staggeredBoxTitle, staggeredBoxImageAltText },
+        className,
+        setAttributes
     } = props
 
-    const onChangeStaggeredBoxTitle = (newStaggeredBoxTitle) => {
+    setAttributes({ staggeredBoxClassName: className });
+
+    const onChangeStaggeredBoxTitle = newStaggeredBoxTitle => {
       setAttributes({ staggeredBoxTitle: newStaggeredBoxTitle})
     }
 
-    const onChangeStaggeredBoxContent = (newStaggeredBoxContent) => {
+    const onChangeStaggeredBoxContent = newStaggeredBoxContent => {
       setAttributes({ staggeredBoxContent: newStaggeredBoxContent })
     }
 
-    const onChangeStaggeredBoxButtonText = (newStaggeredBoxButtonText) => {
+    const onChangeStaggeredBoxButtonText = newStaggeredBoxButtonText => {
       setAttributes({ staggeredBoxButtonText: newStaggeredBoxButtonText })
     }
 
-    const onChangeStaggeredBoxButtonLink = (newStaggeredBoxButtonLink) => {
+    const onChangeStaggeredBoxButtonLink = newStaggeredBoxButtonLink => {
       setAttributes({ staggeredBoxButtonLink: newStaggeredBoxButtonLink })
     }
 
-    const onStaggeredBoxImageSelect = (newStaggeredBoxImageURL) => {
+    const onStaggeredBoxImageSelect = newStaggeredBoxImageURL => {
       setAttributes({ staggeredBoxImageURL: newStaggeredBoxImageURL.sizes.full.url })
       setAttributes({ staggeredBoxImageAltText: newStaggeredBoxImageURL.alt})
     }
@@ -133,33 +126,7 @@ registerBlockType("mojblocks/staggered-box", {
     );
   },
 
-  save: props => {
-    const {
-      attributes: { staggeredBoxTitle, staggeredBoxContent, staggeredBoxButtonText, staggeredBoxButtonLink, staggeredBoxImageURL, staggeredBoxImageAltText }
-    } = props;
-
-    return (
-      <div className="mojblocks-staggered-box">
-        <div className="govuk-width-container">
-          <div className="govuk-grid-row">
-
-            <div className="mojblocks-staggered-box__image-container govuk-grid-column-two-thirds ">
-              <img className="mojblocks-staggered-block__image" src={staggeredBoxImageURL} alt={staggeredBoxImageAltText}/>
-            </div>
-
-            <div className="mojblocks-staggered-box__text-container govuk-grid-column-one-half" >
-              <RichText.Content className="mojblocks-staggered-box__title" tagName="h2" value = { staggeredBoxTitle } />
-              <RichText.Content className="mojblocks-staggered-box__content" tagName="p" value = { staggeredBoxContent } />
-              <a href={staggeredBoxButtonLink} className="mojblocks-staggered-box__button" >
-                <RichText.Content  value={ staggeredBoxButtonText } />
-              </a>
-            </div>
-
-          </div>
-        </div>
-      </div>
-    );
-  }
+    save: () => null
 });
 
 registerBlockStyle('mojblocks/staggered-box',
