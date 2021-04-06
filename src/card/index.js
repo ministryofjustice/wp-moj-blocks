@@ -37,7 +37,10 @@ registerBlockType('mojblocks/card', {
         },
         cardImageId: {
             type: 'number'
-        }
+        },
+        cardClassName: {
+            type: 'string'
+        },
     },
     edit: props => {
 
@@ -51,6 +54,8 @@ registerBlockType('mojblocks/card', {
         },
         className
     } = props;
+
+    setAttributes({ cardClassName: className });
 
     const onRemoveImage = () => {
         setAttributes({

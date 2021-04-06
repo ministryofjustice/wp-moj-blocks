@@ -283,6 +283,9 @@ function mojblocks_register_blocks()
             'render_callback' =>
             'render_callback_card_block',
             'attributes' => [
+				'cardClassName' => [
+					'type' => 'string'
+				],
                 'cardTitle' => [
                     'type' => 'string'
                 ],
@@ -291,9 +294,6 @@ function mojblocks_register_blocks()
                 ],
                 'cardImageURL' => [
                     'type' => 'string'
-                ],
-                'cardImageID' => [
-                    'type' => 'number'
                 ]
             ]
         ]

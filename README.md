@@ -44,3 +44,6 @@ If you run into NPM issues try
 
 ## Automated linting and PHP code sniffing
 We have a Git Action setup that lints, sniffs and then commits the linted PHP code in this plugin when anything is pushed to the repo.
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="Est. reading time">
+	<meta name="twitter:data1" content="6 minutes">
