@@ -18,7 +18,7 @@ function render_callback_card_block($attributes, $content)
     $attribute_card_title = $attributes['cardTitle'] ?? '';
     $attribute_card_excerpt = $attributes['cardExcerpt'] ?? '';
     $attribute_card_image_URL = $attributes['cardImageURL'] ?? '';
-	$attribute_card_className = $attributes['cardClassName'] ?? '';
+    $attribute_card_className = $attributes['cardClassName'] ?? '';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -28,10 +28,10 @@ function render_callback_card_block($attributes, $content)
     ?>
 
     <div class="<?php _e(esc_html($attribute_card_className)) ; ?> mojblocks-card" data-src="<?php _e(esc_url_raw($attribute_card_image_URL)); ?>">
-		<?php if(!empty($attribute_card_image_URL)) {  ?>
-		  <div class="mojblocks-card__image mojblocks-card__image-selected" style="background-image: url(<?php _e(esc_url_raw($attribute_card_image_URL)); ?>)">
-		  </div>
-		<?php } ?>
+        <?php if (!empty($attribute_card_image_URL)) {  ?>
+          <div class="mojblocks-card__image mojblocks-card__image-selected" style="background-image: url(<?php _e(esc_url_raw($attribute_card_image_URL)); ?>)">
+          </div>
+        <?php } ?>
       <h2><?php _e(esc_html($attribute_card_title)); ?></h2>
       <p><?php _e(esc_html($attribute_card_excerpt)); ?></p>
     </div>
