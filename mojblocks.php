@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     1.9.0
+ * Version:     2.0.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -324,12 +324,30 @@ function mojblocks_register_blocks()
                 ]
 
             ]
-            ]
+        ]
     );
 
     register_block_type(
         'mojblocks/card',
-        ['editor_script' => 'mojblocks-editor-script' ]
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' =>
+            'render_callback_card_block',
+            'attributes' => [
+                'cardClassName' => [
+                    'type' => 'string'
+                ],
+                'cardTitle' => [
+                    'type' => 'string'
+                ],
+                'cardExcerpt' => [
+                    'type' => 'string'
+                ],
+                'cardImageURL' => [
+                    'type' => 'string'
+                ]
+            ]
+        ]
     );
 }
 
@@ -344,6 +362,7 @@ include plugin_dir_path(__FILE__) . 'src/reveal/index.php';
 include plugin_dir_path(__FILE__) . 'src/accordion/index.php';
 include plugin_dir_path(__FILE__) . 'src/highlights-list/index.php';
 include plugin_dir_path(__FILE__) . 'src/cta/index.php';
+include plugin_dir_path(__FILE__) . 'src/card/index.php';
 include plugin_dir_path(__FILE__) . 'src/staggered-box/index.php';
 
 /**

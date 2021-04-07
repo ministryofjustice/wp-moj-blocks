@@ -27,24 +27,20 @@ registerBlockType('mojblocks/card', {
     },
     attributes: {
         cardTitle: {
-            type: 'string',
-            source: 'html',
-            selector: '.mojblocks-card-title'
+            type: 'string'
         },
         cardExcerpt: {
-            type: 'string',
-            source: 'html',
-            selector: '.mojblocks-card-excerpt'
+            type: 'string'
         },
         cardImageURL: {
-            type: 'string',
-            source: 'attribute',
-            selector: '.mojblocks-card-image',
-            attribute: 'data-src'
+            type: 'string'
         },
         cardImageId: {
             type: 'number'
-        }
+        },
+        cardClassName: {
+            type: 'string'
+        },
     },
     edit: props => {
 
@@ -58,6 +54,8 @@ registerBlockType('mojblocks/card', {
         },
         className
     } = props;
+
+    setAttributes({ cardClassName: className });
 
     const onRemoveImage = () => {
         setAttributes({
@@ -120,37 +118,5 @@ registerBlockType('mojblocks/card', {
        </div>
     );
     },
-    save: props => {
-
-        const {
-            attributes: {
-                cardTitle,
-                cardExcerpt,
-                cardImageURL
-            },
-            className
-        } = props;
-
-        return (
-            <div className={`${className} mojblocks-card mojblocks-card-image`} data-src={cardImageURL}>
-            {typeof cardImageURL === "string" && (
-                <div className="mojblocks-card__image mojblocks-card__image-selected"
-                        style={{
-                            backgroundImage: `url(${cardImageURL})`
-                        }}>
-                </div>
-            )}
-            <RichText.Content
-                tagName="h2"
-                value={cardTitle}
-                className="mojblocks-card-title"
-            />
-            <RichText.Content
-                tagName="p"
-                value={cardExcerpt}
-                className="mojblocks-card-excerpt"
-            />
-           </div>
-        )
-    }
+    save: () => null
 });
