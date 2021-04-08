@@ -32,7 +32,7 @@ function render_callback_card_block($attributes, $content)
           <div class="mojblocks-card__image mojblocks-card__image-selected" style="background-image: url(<?php _e(esc_url_raw($attribute_card_image_URL)); ?>)">
           </div>
         <?php } ?>
-      <h2><?php _e(esc_html($attribute_card_title)); ?></h2>
+      <h2><?php _e($attribute_card_title); ?></h2>
       <p><?php _e(esc_html($attribute_card_excerpt)); ?></p>
     </div>
 
