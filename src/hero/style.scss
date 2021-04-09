@@ -13,6 +13,11 @@ Block: Hero (Frontend styles)
   margin-left: -50vw;
   margin-right: -50vw;
 
+	.govuk-grid-row {
+		margin-left:0;
+		margin-right:0;
+	}
+
   &__image {
     background: #336C83;
     width: 100vw;
