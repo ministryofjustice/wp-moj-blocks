@@ -112,17 +112,6 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 			}
 		}
 
-    // Remove "mustaches" underline caused by NHS styles conflicting with Gov UK
-    &__section-button,
-    &__open-all {
-        box-shadow: none;
-        border-radius: 0;
-
-        &:active {
-            top: 0;
-        }
-    }
-
     // Remove +/- that comes with accordion (replaced with arrows).
     &__icon {
         display: none;
