@@ -410,7 +410,7 @@ function mojblocks_enqueue_style()
     );
     wp_style_add_data('mojblocks-ie', 'conditional', 'IE');
 
-	// This script is dequeue when using this plugin in the Hale theme, blocking it from loading.
+    // This script is dequeue when using this plugin in the Hale theme, blocking it from loading.
     wp_enqueue_script(
         'mojblocks-govuk-js',
         plugins_url('build/mojblocks.min.js', __FILE__),
