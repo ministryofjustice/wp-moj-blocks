@@ -36,7 +36,7 @@ function render_callback_banner_block($attributes, $content)
                     </h1>
                 </div>
                 <div class="govuk-grid-column-one-third">
-                    <a href="<?php _e($attribute_button_link); ?>" class="mojblocks-banner__button">
+                    <a href="<?php _e($attribute_button_link); ?>" class="mojblocks-banner__button govuk-button">
                         <?php _e(esc_html($attribute_button_label)); ?>
                     </a>
                 </div>
