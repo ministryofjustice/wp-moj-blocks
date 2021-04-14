@@ -102,7 +102,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     }
 
 		//set font sizes - overriding the GDS defaults
-		&__section-button {
+		.govuk-accordion__section-heading &__section-button {
 			font-size: 24px;
 			font-size: govuk-px-to-rem(24);
 
