@@ -21,7 +21,7 @@ Block: Staggered Box (Frontend styles)
 		@include govuk-clearfix;
 	}
 
-	&__image-container {
+	& &__image-container {
 		padding: 0;
 		line-height: 0;
 
