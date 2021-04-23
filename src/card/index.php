@@ -41,8 +41,8 @@ function render_callback_card_block($attributes, $content)
     // Get all the html/content that has been captured in the buffer and output via return
     $output = ob_get_contents();
 
-	// decode escaped html so users can add markup to content
-	$output = html_entity_decode($output);
+    // decode escaped html so users can add markup to content
+    $output = html_entity_decode($output);
 
     ob_end_clean();
 
