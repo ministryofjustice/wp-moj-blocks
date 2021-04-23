@@ -36,6 +36,11 @@ Block: Highlights List (Frontend styles)
         }
 
         &__content {
+
+			a {
+				color: $mojblocks-color-white !important;
+			}
+
             ul {
                 list-style: none;
                 padding: 0;
