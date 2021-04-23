@@ -21,7 +21,7 @@ Block: Staggered Box (Frontend styles)
 		@include govuk-clearfix;
 	}
 
-	&__image-container {
+	& &__image-container {
 		padding: 0;
 		line-height: 0;
 
@@ -41,7 +41,7 @@ Block: Staggered Box (Frontend styles)
 
 	}
 
-	&__text-container {
+	&__text-container.govuk-grid-column-one-half {
 
 		z-index: 1;
 		background-color: $mojblocks-color-grey;

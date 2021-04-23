@@ -65,7 +65,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
             font-family: inherit;
             font-size: inherit;
         }
-	}
+    }
 
     &__section-content {
         // Decrease padding causes by NHS styles around accordion content
@@ -101,16 +101,16 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 
     }
 
-    // Remove "mustaches" underline caused by NHS styles conflicting with Gov UK
-    &__section-button,
-    &__open-all {
-        box-shadow: none;
-        border-radius: 0;
+		//set font sizes - overriding the GDS defaults
+		.govuk-accordion__section-heading &__section-button {
+			font-size: 24px;
+			font-size: govuk-px-to-rem(24);
 
-        &:active {
-            top: 0;
-        }
-    }
+			@include govuk-media-query($from: tablet) {
+				font-size: 32px;
+				font-size: govuk-px-to-rem(32);
+			}
+		}
 
     // Remove +/- that comes with accordion (replaced with arrows).
     &__icon {

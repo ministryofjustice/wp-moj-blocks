@@ -39,7 +39,7 @@ function render_callback_highlights_list_block($attributes, $content)
                     </h2>
                 </div>
                 <div class="mojblocks-highlights-list__content">
-                    <ul>
+                    <ul class="mojblocks-highlights-list__list">
                         <?php _e($attribute_list_items); ?>
                     </ul>
                 </div>
