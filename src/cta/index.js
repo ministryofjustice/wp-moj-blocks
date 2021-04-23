@@ -13,9 +13,9 @@ registerBlockType('mojblocks/cta', {
     keywords: [ __( 'cta' ), __( 'Call to Action' ), __( 'banner' ) ],
     example: {
         attributes: {
-            ctaTitle: 'Interact with this amazing CTA!',
-            ctaText: 'This is the CTA text',
-            buttonLabel: 'Click me now!',
+            ctaTitle: 'Add a Call to Action banner to your site',
+            ctaText: 'Call To Action text',
+            buttonLabel: 'Click me now',
             buttonLink: 'https://intranet.justice.gov.uk/'
         },
     },
@@ -82,7 +82,7 @@ registerBlockType('mojblocks/cta', {
                                 <span role="text">
                                     <span className="mojblocks-cta__heading-text">
                                         <RichText
-                                            placeholder={__('A great call-to-action title', 'mojblocks')}
+                                            placeholder={__('Add a Call To Action title', 'mojblocks')}
                                             keepPlaceholderOnFocus
                                             value={ctaTitle}
                                             onChange={onChangeCtaTitle}
@@ -94,7 +94,7 @@ registerBlockType('mojblocks/cta', {
                             <div className={'mojblocks-cta__content'}>
                                 <RichText
                                     multiline="p"
-                                    placeholder={__('Some compelling text to send the message home!', 'mojblocks')}
+                                    placeholder={__('Add compelling text to send the message home', 'mojblocks')}
                                     keepPlaceholderOnFocus
                                     onChange={onChangeCtaText}
                                     value={ctaText}
@@ -123,17 +123,10 @@ registerBlockType('mojblocks/cta', {
 
 });
 
-// style variations
 registerBlockStyle('mojblocks/cta',
     {
-        name: 'moj-blue',
-        label: 'MoJ Blue',
+        name: 'cta-default',
+        label: 'CTA default',
         isDefault: true
-    }
-);
-registerBlockStyle('mojblocks/cta',
-    {
-        name: 'judicial-teal',
-        label: 'Judicial Teal',
     }
 );

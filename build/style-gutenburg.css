@@ -5502,6 +5502,12 @@ Block: Staggered Box (Frontend styles)
   font-size: 1.25rem;
 }
 
+.edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-cta__content p a,
+.block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-cta__content p a,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-cta__content p a {
+  color: #ffffff !important;
+}
+
 @media (min-width: 40.0625em) {
   .edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-cta__content p,
   .block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-cta__content p,
@@ -5597,9 +5603,9 @@ Block: Staggered Box (Frontend styles)
   box-shadow: none;
 }
 
-.edit-post-visual-editor .wp-block-mojblocks-cta.is-style-judicial-teal,
-.block-editor-block-styles .wp-block-mojblocks-cta.is-style-judicial-teal,
-.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-judicial-teal {
+.edit-post-visual-editor .wp-block-mojblocks-cta.is-style-cta-default,
+.block-editor-block-styles .wp-block-mojblocks-cta.is-style-cta-default,
+.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-cta-default {
   background-color: #336C83;
   width: 100vw;
   position: relative;
@@ -5610,48 +5616,18 @@ Block: Staggered Box (Frontend styles)
 }
 
 @media (min-width: 40.0625em) {
-  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-judicial-teal,
-  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-judicial-teal,
-  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-judicial-teal {
+  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-cta-default,
+  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-cta-default,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-cta-default {
     padding: 25px 0 25px;
   }
 }
 
 @media (min-width: 48.0625em) {
-  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-judicial-teal,
-  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-judicial-teal,
-  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-judicial-teal {
+  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-cta-default,
+  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-cta-default,
+  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-cta-default {
     padding: 35px 0 50px;
-  }
-}
-
-.edit-post-visual-editor .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading,
-.block-editor-block-styles .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading,
-.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading {
-  margin: 12px -75px 15px;
-  padding: 12px 75px;
-  background-color: #0B0C0C;
-}
-
-.edit-post-visual-editor .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading-text,
-.block-editor-block-styles .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading-text,
-.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading-text {
-  color: #ffffff;
-}
-
-@media (min-width: 40.0625em) {
-  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-moj-blue,
-  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-moj-blue,
-  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-moj-blue {
-    padding: 25px 0 25px 35px;
-  }
-}
-
-@media (min-width: 48.0625em) {
-  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-moj-blue,
-  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-moj-blue,
-  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-moj-blue {
-    padding: 35px 75px 50px 75px;
   }
 }
 

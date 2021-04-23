@@ -3130,6 +3130,10 @@ Block: Call to Action (Frontend styles)
   font-size: 1.25rem;
 }
 
+.wp-block-mojblocks-cta .mojblocks-cta__content p a {
+  color: #ffffff !important;
+}
+
 @media (min-width: 40.0625em) {
   .wp-block-mojblocks-cta .mojblocks-cta__content p {
     font-size: 1.1rem;
@@ -3195,7 +3199,7 @@ Block: Call to Action (Frontend styles)
   box-shadow: none;
 }
 
-.wp-block-mojblocks-cta.is-style-judicial-teal {
+.wp-block-mojblocks-cta.is-style-cta-default {
   background-color: #336C83;
   width: 100vw;
   position: relative;
@@ -3206,36 +3210,14 @@ Block: Call to Action (Frontend styles)
 }
 
 @media (min-width: 40.0625em) {
-  .wp-block-mojblocks-cta.is-style-judicial-teal {
+  .wp-block-mojblocks-cta.is-style-cta-default {
     padding: 25px 0 25px;
   }
 }
 
 @media (min-width: 48.0625em) {
-  .wp-block-mojblocks-cta.is-style-judicial-teal {
+  .wp-block-mojblocks-cta.is-style-cta-default {
     padding: 35px 0 50px;
-  }
-}
-
-.wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading {
-  margin: 12px -75px 15px;
-  padding: 12px 75px;
-  background-color: #0B0C0C;
-}
-
-.wp-block-mojblocks-cta.is-style-moj-blue .mojblocks-cta__heading-text {
-  color: #ffffff;
-}
-
-@media (min-width: 40.0625em) {
-  .wp-block-mojblocks-cta.is-style-moj-blue {
-    padding: 25px 0 25px 35px;
-  }
-}
-
-@media (min-width: 48.0625em) {
-  .wp-block-mojblocks-cta.is-style-moj-blue {
-    padding: 35px 75px 50px 75px;
   }
 }
 

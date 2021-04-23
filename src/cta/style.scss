@@ -37,6 +37,11 @@ Block: Call to Action (Frontend styles)
                 font-size: 20px;
                 font-size: govuk-px-to-rem(20);
 
+				a {
+					// get around #primary a:link:not([class]) directive
+					color:$mojblocks-color-white !important;
+				}
+
                 @include govuk-media-query($from: tablet) {
                     font-size: 1.1rem;
                     font-size: govuk-px-to-rem(18);
@@ -91,7 +96,7 @@ Block: Call to Action (Frontend styles)
 		}
     }
 
-    &.is-style-judicial-teal {
+    &.is-style-cta-default {
         background-color: $mojblocks-color-teal;
         width: 100vw;
         position: relative;
@@ -106,29 +111,6 @@ Block: Call to Action (Frontend styles)
 
         @include govuk-media-query($from: desktop) {
             padding: 35px 0 50px;
-        }
-    }
-
-    &.is-style-moj-blue {
-        .mojblocks-cta {
-            &__heading {
-                margin: 12px -75px 15px;
-                padding: 12px 75px;
-                background-color: $mojblocks-color-black;
-            }
-            &__heading-text {
-                color: $mojblocks-color-white;
-            }
-            &__content {
-            }
-        }
-
-        @include govuk-media-query($from: tablet) {
-            padding: 25px 0 25px 35px;
-        }
-
-        @include govuk-media-query($from: desktop) {
-            padding: 35px 75px 50px 75px;
         }
     }
 
