@@ -47,7 +47,6 @@ function render_callback_hero_block($attributes, $content)
                     </div>
                 </div>
             </div>
-        </div>
     </section>
 
     <?php
