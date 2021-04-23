@@ -32,7 +32,7 @@ function render_callback_card_block($attributes, $content)
           <div class="mojblocks-card__image mojblocks-card__image-selected" style="background-image: url(<?php _e(esc_url_raw($attribute_card_image_URL)); ?>)">
           </div>
         <?php } ?>
-      <h2><?php _e($attribute_card_title); ?></h2>
+      <h2><?php _e(esc_html($attribute_card_title)); ?></h2>
       <p><?php _e(esc_html($attribute_card_excerpt)); ?></p>
     </div>
 
@@ -40,6 +40,10 @@ function render_callback_card_block($attributes, $content)
 
     // Get all the html/content that has been captured in the buffer and output via return
     $output = ob_get_contents();
+
+	// decode escaped html so users can add markup to content
+	$output = html_entity_decode($output);
+
     ob_end_clean();
 
     return $output;
