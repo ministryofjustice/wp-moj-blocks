@@ -59,7 +59,7 @@ registerBlockType('mojblocks/highlights-list', {
                                 <span role="text">
                                     <span className="mojblocks-highlights-list__heading-text">
                                         <RichText
-                                            placeholder={__('Highlights title', 'mojblocks')}
+                                            placeholder={__('Add highlights title', 'mojblocks')}
                                             keepPlaceholderOnFocus
                                             value={listTitle}
                                             onChange={onChangeListTitle}
@@ -72,7 +72,7 @@ registerBlockType('mojblocks/highlights-list', {
                             <RichText
                                 tagName='ul'
                                 multiline='li'
-                                placeholder={__('Highlights item', 'mojblocks')}
+                                placeholder={__('Add list item', 'mojblocks')}
                                 keepPlaceholderOnFocus
                                 onChange={onChangeListItems}
                                 value={listItems}
@@ -90,14 +90,8 @@ registerBlockType('mojblocks/highlights-list', {
 // style variations
 registerBlockStyle('mojblocks/highlights-list',
     {
-        name: 'moj-blue',
-        label: 'MoJ Blue',
+        name: 'highlights-list',
+        label: 'Highlights-list default',
         isDefault: true,
-    }
-);
-registerBlockStyle('mojblocks/highlights-list',
-    {
-        name: 'judicial-teal',
-        label: 'Judicial Teal',
     }
 );
