@@ -30,17 +30,20 @@ Block: Call to Action (Frontend styles)
             padding-top: 1px;
             padding-bottom: 1px;
 
+			a:link:not([class]),
+			a:link:not([class]):visited, {
+			color: $mojblocks-color-white;
+				&:focus {
+					color: black;
+				}
+			}
+
             p {
                 color:$mojblocks-color-white;
                 margin-top: 15px;
                 margin-bottom: 15px;
                 font-size: 20px;
                 font-size: govuk-px-to-rem(20);
-
-				a {
-					// get around #primary a:link:not([class]) directive
-					color:$mojblocks-color-white !important;
-				}
 
                 @include govuk-media-query($from: tablet) {
                     font-size: 1.1rem;

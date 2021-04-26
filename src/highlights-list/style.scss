@@ -36,9 +36,12 @@ Block: Highlights List (Frontend styles)
         }
 
         &__content {
-
-			a {
-				color: $mojblocks-color-white !important;
+			a:link:not([class]),
+			a:link:not([class]):visited {
+			color: $mojblocks-color-white;
+				&:focus {
+					color: black;
+				}
 			}
 
             ul {
