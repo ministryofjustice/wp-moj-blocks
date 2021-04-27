@@ -5429,8 +5429,13 @@ Block: Staggered Box (Frontend styles)
 .block-editor-block-styles .wp-block-mojblocks-cta,
 .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta {
   padding: 15px;
-  margin: auto -15px;
-  background-color: #1d70b8;
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  background-color: #336C83;
 }
 
 .edit-post-visual-editor .wp-block-mojblocks-cta .govuk-grid-row,
@@ -5456,8 +5461,7 @@ Block: Staggered Box (Frontend styles)
 .edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-cta__content,
 .block-editor-block-styles .wp-block-mojblocks-cta .mojblocks-cta__content,
 .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta .mojblocks-cta__content {
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding: 1px 0 1px;
 }
 
 .edit-post-visual-editor .wp-block-mojblocks-cta .mojblocks-cta__content a:link:not([class]),
@@ -5533,7 +5537,6 @@ Block: Staggered Box (Frontend styles)
   position: relative;
   text-align: center;
   text-decoration: none;
-  vertical-align: top;
   width: 100%;
   border-radius: 5px;
 }
@@ -5581,34 +5584,6 @@ Block: Staggered Box (Frontend styles)
   background: #0B0C0C;
   color: #ffffff;
   box-shadow: none;
-}
-
-.edit-post-visual-editor .wp-block-mojblocks-cta.is-style-cta-default,
-.block-editor-block-styles .wp-block-mojblocks-cta.is-style-cta-default,
-.block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-cta-default {
-  background-color: #336C83;
-  width: 100vw;
-  position: relative;
-  left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-}
-
-@media (min-width: 40.0625em) {
-  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-cta-default,
-  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-cta-default,
-  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-cta-default {
-    padding: 25px 0 25px;
-  }
-}
-
-@media (min-width: 48.0625em) {
-  .edit-post-visual-editor .wp-block-mojblocks-cta.is-style-cta-default,
-  .block-editor-block-styles .wp-block-mojblocks-cta.is-style-cta-default,
-  .block-editor-inserter__menu-help-panel .wp-block-mojblocks-cta.is-style-cta-default {
-    padding: 35px 0 50px;
-  }
 }
 
 @media (min-width: 40.0625em) {
