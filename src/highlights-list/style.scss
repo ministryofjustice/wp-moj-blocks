@@ -7,8 +7,13 @@ Block: Highlights List (Frontend styles)
 
 .wp-block-mojblocks-highlights-list {
     padding: 15px;
-    margin: auto -15px;
-    background-color: $mojblocks-color-light-blue;
+	background-color: $mojblocks-color-teal;
+	width: 100vw;
+	position: relative;
+	left: 50%;
+	right: 50%;
+	margin-left: -50vw;
+	margin-right: -50vw;
 
     @include govuk-media-query($from: tablet) {
         padding: 25px 0 25px;
@@ -141,25 +146,6 @@ Block: Highlights List (Frontend styles)
                     }
                 }
             }
-        }
-    }
-
-    &.is-style-highlights-list {
-        background-color: $mojblocks-color-teal;
-
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-
-        @include govuk-media-query($from: tablet) {
-            padding: 25px 0 25px;
-        }
-
-        @include govuk-media-query($from: desktop) {
-            padding: 35px 0 25px;
         }
     }
 }
