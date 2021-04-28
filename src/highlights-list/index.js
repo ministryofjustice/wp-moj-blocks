@@ -87,11 +87,3 @@ registerBlockType('mojblocks/highlights-list', {
     save: () => null
 });
 
-// style variations
-registerBlockStyle('mojblocks/highlights-list',
-    {
-        name: 'highlights-list',
-        label: 'Highlights-list default',
-        isDefault: true,
-    }
-);

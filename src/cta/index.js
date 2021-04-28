@@ -3,7 +3,7 @@
  * A stylised call to action displaying a title, text and cta button
  */
 import { __ } from '@wordpress/i18n';
-import { registerBlockType, registerBlockStyle } from '@wordpress/blocks';
+import { registerBlockType } from '@wordpress/blocks';
 import { RichText, URLInputButton } from '@wordpress/block-editor';
 
 registerBlockType('mojblocks/cta', {
@@ -122,11 +122,3 @@ registerBlockType('mojblocks/cta', {
     save: () => null
 
 });
-
-registerBlockStyle('mojblocks/cta',
-    {
-        name: 'cta-default',
-        label: 'CTA default',
-        isDefault: true
-    }
-);
