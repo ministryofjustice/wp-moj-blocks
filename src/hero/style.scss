@@ -13,9 +13,14 @@ Block: Hero (Frontend styles)
   margin-left: -50vw;
   margin-right: -50vw;
 
+	.govuk-grid-row {
+		margin-left:0;
+		margin-right:0;
+	}
+
   &__image {
     background: #336C83;
-    width: 100vw;
+    width: 101vw;
     min-height: 250px;
     min-height: govuk-px-to-rem(250);
 

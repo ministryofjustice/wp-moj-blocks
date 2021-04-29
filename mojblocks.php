@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     2.0.1
+ * Version:     2.0.2
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -410,8 +410,9 @@ function mojblocks_enqueue_style()
     );
     wp_style_add_data('mojblocks-ie', 'conditional', 'IE');
 
+    // This script is dequeue when using this plugin in the Hale theme, blocking it from loading.
     wp_enqueue_script(
-        'mojblocks-js',
+        'mojblocks-govuk-js',
         plugins_url('build/mojblocks.min.js', __FILE__),
         false,
         '1.0',
