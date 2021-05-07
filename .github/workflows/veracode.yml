@@ -26,7 +26,7 @@ jobs:
       with:
         appname: 'wp-moj-blocks'
         version: '${{ github.run_id }}'
-        filepath: '/'
+        filepath: 'target/'
         vid: '${{ secrets.VERACODE_API_ID }}'
         vkey: '${{ secrets.VERACODE_API_KEY }}'
         createprofile: 'true'
