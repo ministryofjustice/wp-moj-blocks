@@ -1,0 +1,32 @@
+name: Master Branch Workflow
+
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a job to build and submit pipeline scan, you will need to customize the build process accordingly and make sure the artifact you build is used as the file input to the pipeline scan file parameter
+  build-and-security-scan:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+    steps:
+
+    # Checks-out your repository under $GITHUB_WORKSPACE
+    - uses: actions/checkout@v2
+
+    # Upload and Scan with Veracode (Sandbox scan)
+    - name: Veracode Upload and Scan Action Step
+      uses: veracode/veracode-uploadandscan-action@master
+      id: upload_and_scan
+      with:
+        appname: 'wp-moj-blocks'
+        version: '${{ github.run_id }}'
+        filepath: 'target/verademo.war'
+        vid: '${{ secrets.VERACODE_API_ID }}'
+        vkey: '${{ secrets.VERACODE_API_KEY }}'
+        scantimeout: 15
