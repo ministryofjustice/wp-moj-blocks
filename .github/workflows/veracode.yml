@@ -1,4 +1,4 @@
-name: Main Branch Workflow
+name: Veracode scan
 
 on: [ push ]
 # on:
