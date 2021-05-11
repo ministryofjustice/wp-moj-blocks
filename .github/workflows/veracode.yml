@@ -1,13 +1,11 @@
 name: Veracode scan
 # Veracode GA docs https://github.com/marketplace/actions/veracode-upload-and-scan
 
-on: push
-# on:
-#   push:
-#     branches: [ main ]
-#   pull_request:
-#     branches: [ main ]
-
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
