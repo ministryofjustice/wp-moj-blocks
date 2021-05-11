@@ -23,7 +23,7 @@
 
 defined('ABSPATH') || exit;
 
-$password="12345";
+$password = "12345";
 
 /**
  * Load translations (if any) for the plugin from the /languages/ folder.
