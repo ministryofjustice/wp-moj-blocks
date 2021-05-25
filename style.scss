@@ -13,6 +13,7 @@ Text Domain: mojblocks
 // Target frontend styles
 @import 'node_modules/govuk-frontend/govuk/base';
 @import 'node_modules/govuk-frontend/govuk/core/all';
+@import 'node_modules/govuk-frontend/govuk/components/all';
 @import 'node_modules/govuk-frontend/govuk/objects/all';
 
 /// components should be loaded here, before utilities and overrides

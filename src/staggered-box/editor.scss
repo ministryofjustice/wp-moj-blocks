@@ -6,3 +6,13 @@ Block: Staggered Box (Gutenberg editor styles)
 **********************************************************************************************/
 
 @import 'style.scss';
+
+.mojblocks-staggered-box {
+
+	&__text-container.govuk-grid-column-one-half {
+
+		@include govuk-media-query($from: tablet) {
+			margin-top: -5%;
+		}
+	}
+}
