@@ -107,7 +107,7 @@ registerBlockType('mojblocks/cta', {
                                 url={buttonLink}
                             />
                             <RichText
-                                className="mojblocks-button"
+                                className="mojblocks-button govuk-button"
                                 value={buttonLabel}
                                 onChange={onChangeButtonLabel}
                                 placeholder="Button label"

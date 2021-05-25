@@ -1,8 +1,19 @@
 @charset "UTF-8";
 /*********************************************************************************************
 
-Block: Hero (Gutenberg editor styles)
+Block: Banner (Gutenberg editor styles)
 
 **********************************************************************************************/
 
 @import 'style.scss';
+
+
+.mojblocks-banner {
+	&__button.govuk-button {
+
+		@include govuk-media-query($from: tablet) {
+			float: left;
+			margin-top: 0px;
+		}
+	}
+}

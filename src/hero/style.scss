@@ -19,7 +19,7 @@ Block: Hero (Frontend styles)
 	}
 
   &__image {
-    background: #336C83;
+    background: $mojblocks-color-light-grey;
     width: 101vw;
     min-height: 250px;
     min-height: govuk-px-to-rem(250);

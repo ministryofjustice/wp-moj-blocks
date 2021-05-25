@@ -13,7 +13,6 @@ Block: Call to Action (Frontend styles)
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
-    background-color: $mojblocks-color-teal;
 
     .govuk-grid-row {
         // Gov UK override keeping the block within the container.
@@ -28,16 +27,12 @@ Block: Call to Action (Frontend styles)
             padding: 0;
         }
 
-        &__heading-text {
-            color: $mojblocks-color-yellow;
-        }
-
         &__content {
             padding: 1px 0 1px;
 
             a:link:not([class]),
             a:link:not([class]):visited {
-                color: $mojblocks-color-white;
+				color: black;
 
                 &:focus {
                     color: black;
@@ -45,7 +40,6 @@ Block: Call to Action (Frontend styles)
             }
 
             p {
-                color: $mojblocks-color-white;
                 margin-top: 15px;
                 margin-bottom: 15px;
                 font-size: 20px;
@@ -64,14 +58,8 @@ Block: Call to Action (Frontend styles)
         }
     }
 
-    button.components-button.components-toolbar__control.has-icon {
-        background-color: white;
-    }
-
     .mojblocks-button,
     a.mojblocks-button {
-        background-color: $mojblocks-color-yellow;
-        color: $mojblocks-color-black;
         box-sizing: border-box;
         cursor: pointer;
         display: block;
@@ -94,15 +82,12 @@ Block: Call to Action (Frontend styles)
         }
 
         &:visited {
-            color: $mojblocks-color-black;
             text-decoration: none;
         }
 
         &:hover,
         &:active,
         &:focus {
-            background: $mojblocks-color-black;
-            color: $mojblocks-color-white;
             box-shadow: none;
         }
     }
