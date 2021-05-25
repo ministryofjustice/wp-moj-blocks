@@ -6,3 +6,14 @@ Block: Call to Action (Gutenberg editor styles)
 **********************************************************************************************/
 
 @import 'style.scss';
+
+.wp-block-mojblocks-cta {
+	padding: 15px;
+	width: 100%;
+	position: static;
+	left: 0;
+	right: 0;
+	margin-left: 0;
+	margin-right: 0;
+
+}

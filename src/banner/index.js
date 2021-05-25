@@ -73,7 +73,7 @@ registerBlockType("mojblocks/banner", {
                             url={buttonLink}
                             />
                             <RichText
-                            className="mojblocks-banner__button"
+                            className="mojblocks-banner__button govuk-button"
                             value={buttonLabel}
                             onChange={onChangeButtonLabel}
                             placeholder="Button label"

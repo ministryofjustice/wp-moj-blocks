@@ -6,3 +6,21 @@ Block: Highlights List (Gutenberg editor styles)
 **********************************************************************************************/
 
 @import 'style.scss';
+
+.wp-block-mojblocks-highlights-list {
+	padding: 15px;
+	width: 100%;
+	position: static;
+	left: 0;
+	right: 0;
+	margin-left: 0;
+	margin-right: 0;
+
+	@include govuk-media-query($from: tablet) {
+		padding: 25px 15px 25px;
+	}
+
+	@include govuk-media-query($from: desktop) {
+		padding: 35px 15px 25px;
+	}
+}

@@ -43,7 +43,7 @@ function render_callback_cta_block($attributes, $content)
                     <div class="mojblocks-cta__content">
                         <?php _e(esc_html($attribute_cta_text)); ?>
                     </div>
-                    <a href="<?php _e(esc_html($attribute_cta_button_link)); ?>" class="mojblocks-button">
+                    <a href="<?php _e(esc_html($attribute_cta_button_link)); ?>" class="mojblocks-button govuk-button">
                         <?php _e(esc_html($attribute_cta_button_label)); ?>
                     </a>
                 </div>

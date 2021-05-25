@@ -7,7 +7,6 @@ Block: Highlights List (Frontend styles)
 
 .wp-block-mojblocks-highlights-list {
     padding: 15px;
-	background-color: $mojblocks-color-teal;
 	width: 100vw;
 	position: relative;
 	left: 50%;
@@ -36,14 +35,10 @@ Block: Highlights List (Frontend styles)
             padding: 0;
         }
 
-        &__heading-text {
-            color: $mojblocks-color-yellow;
-        }
-
         &__content {
 			a:link:not([class]),
 			a:link:not([class]):visited {
-			color: $mojblocks-color-white;
+				color: black;
 				&:focus {
 					color: black;
 				}
@@ -115,7 +110,7 @@ Block: Highlights List (Frontend styles)
 
             li {
                 position:relative;
-                color: $mojblocks-color-white;
+				color: black;
                 padding: 16px 0;
                 margin-bottom: 0;
                 font-style: normal;
@@ -130,7 +125,7 @@ Block: Highlights List (Frontend styles)
                     content: '';
                     width: 100%;
                     height: 1px;
-                    background: $mojblocks-color-yellow;
+                    background: black;
                     position: absolute;
                     top: 0;
                     left: 0;
