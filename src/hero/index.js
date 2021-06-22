@@ -35,6 +35,9 @@ registerBlockType("mojblocks/hero", {
         // Set className attribute for PHP frontend to use
         setAttributes({ heroClassName: className });
 
+        // Load allowed blocks to be added to accordion section body
+        const allowedBlocks = [ 'core/heading','core/list', 'core/paragraph', 'mojblocks/intro' ];
+
         const onChangeBackgroundImage = imageObject => {
             setAttributes({ backgroundImage: imageObject.sizes.full.url})
           }
@@ -75,22 +78,10 @@ registerBlockType("mojblocks/hero", {
                 <div className={'govuk-grid-row'}>
                     <div className="mojblocks-hero__overlay">
                         <div className="govuk-grid-column-three-quarters">
-                            <RichText
-                            tagName="h2"
-                            className="mojblocks-hero__title"
-                            value={ heroTitle }
-                            keepPlaceholderOnFocus
-                            onChange={ onTitleChange }
-                            placeholder="Enter your hero title"
+                                    <InnerBlocks
+                                allowedBlocks={ allowedBlocks }
                                 />
-                            <div className={'mojblocks-hero__content intro'}>
-                                <RichText
-                                placeholder={__('Enter your hero text', 'mojblocks')}
-                                keepPlaceholderOnFocus
-                                onChange={ onChangeHeroText }
-                                value={ heroText }
-                                />
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -101,5 +92,7 @@ registerBlockType("mojblocks/hero", {
 
     },
     // return null as frontend output is done via PHP
-    save: () => null
+    save: () => {
+        return <InnerBlocks.Content />;
+    }
 });
