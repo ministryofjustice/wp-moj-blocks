@@ -35,7 +35,7 @@ registerBlockType("mojblocks/hero", {
         // Set className attribute for PHP frontend to use
         setAttributes({ heroClassName: className });
 
-        // Load allowed blocks to be added to accordion section body
+        // Load allowed blocks to be added to hero content
         const allowedBlocks = [ 'core/heading','core/list', 'core/paragraph', 'mojblocks/intro' ];
 
         const onChangeBackgroundImage = imageObject => {
