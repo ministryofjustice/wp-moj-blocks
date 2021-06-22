@@ -38,7 +38,7 @@ registerBlockType('mojblocks/intro', {
         };
 
         return (
-            <div className={`${className}`}>
+            <div className={`${className} mojblocks-intro`}>
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
                         <div className="govuk-grid-column-three-quarters">

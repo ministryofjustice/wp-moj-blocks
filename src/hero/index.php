@@ -36,13 +36,7 @@ function render_callback_hero_block($attributes, $content)
                 <div class="govuk-grid-row">
                     <div class="mojblocks-hero__overlay">
                         <div class="govuk-grid-column-three-quarters">
-                            <h2 class="mojblocks-hero__title">
-                            <?php _e(esc_html($attribute_hero_title)); ?>
-                            </h2>
-
-                            <div class="mojblocks-hero__content intro">
-                            <p><?php _e(esc_html($attribute_hero_text)); ?></p>
-                            </div>
+							<?php _e(esc_html($content)); ?>
                         </div>
                     </div>
                 </div>

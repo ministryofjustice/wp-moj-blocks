@@ -55,9 +55,15 @@ Block: Hero (Frontend styles)
       background: $mojblocks-color-white;
     }
 
-    h2 {
-      margin-top: 0;
+    h1, h2 {
+      margin: 0;
     }
   }
+	.mojblocks-intro {
+		.govuk-grid-column-three-quarters {
+			padding: 0;
+			width: 100%;
+		}
+	}
 
 }
