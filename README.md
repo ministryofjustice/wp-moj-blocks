@@ -7,6 +7,7 @@ This plugin adds the following blocks,
 * Banner
 * Card
 * CTA
+* File-download
 * Hero
 * Highlights-list
 * Intro
@@ -41,6 +42,10 @@ This plugin follows
 If you run into NPM issues try
 * Delete `/node_modules` folder and `package-lock.json` in plugin root and then run `npm install`
 * Try `npm rebuild node-sass` or the `npm rebuild <package name causing issues>`
+
+#### Block not registering?
+If you are using this plugin in the Hale theme, make sure you've added your new block to the allowlist,
+found in Hale ~/inc/restrict-blocks.php.
 
 ## Automated linting and PHP code sniffing
 We have a Git Action setup that lints, sniffs and then commits the linted PHP code in this plugin when anything is pushed to the repo.

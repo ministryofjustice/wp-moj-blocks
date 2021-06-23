@@ -111,24 +111,78 @@ function mojblocks_register_blocks()
         true
     );
 
-    // Register blocks
+     // Register blocks
     register_block_type(
-        'mojblocks/highlights-list',
+        'mojblocks/accordion',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_highlights_list_block',
+            'render_callback' => 'render_callback_accordion_block',
+            'attributes' => []
+        ]
+    );
+
+    register_block_type(
+        'mojblocks/accordion-section',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_accordion_block_section',
             'attributes' => [
-                'listTitle' => [
+                'accordionSectionClassName' => [
                     'type' => 'string'
                 ],
-                'listItems' => [
-                        'type' => 'string'
+                'accordionSectionTitle' => [
+                    'type' => 'string'
                 ],
-                'listClassName' => [
+                'accordionSectionTextArea' => [
                     'type' => 'string'
                 ]
             ]
+        ]
+    );
 
+    register_block_type(
+        'mojblocks/banner',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_banner_block',
+            'attributes' => [
+                'bannerTitle' => [
+                    'type' => 'string'
+                ],
+                'buttonLink' => [
+                    'type' => 'string'
+                ],
+                'buttonLabel' => [
+                    'type' => 'string'
+                ],
+                'bannerClassName' => [
+                    'type' => 'string'
+
+                ]
+            ]
+        ]
+    );
+
+    register_block_type(
+        'mojblocks/card',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' =>
+            'render_callback_card_block',
+            'attributes' => [
+                'cardClassName' => [
+                    'type' => 'string'
+                ],
+                'cardTitle' => [
+                    'type' => 'string'
+                ],
+                'cardExcerpt' => [
+                    'type' => 'string'
+                ],
+                'cardImageURL' => [
+                    'type' => 'string'
+                ]
+            ]
         ]
     );
 
@@ -159,6 +213,20 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
+        'mojblocks/file-download',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_file_download_block',
+            'attributes' => [
+                'fileDownloadClassName' => [
+                    'type' => 'string'
+                ]
+            ]
+        ]
+    );
+
+
+    register_block_type(
         'mojblocks/hero',
         [
             'editor_script' => 'mojblocks-editor-script',
@@ -183,52 +251,82 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/banner',
+        'mojblocks/highlights-list',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_banner_block',
+            'render_callback' => 'render_callback_highlights_list_block',
             'attributes' => [
-                'bannerTitle' => [
+                'listTitle' => [
                     'type' => 'string'
                 ],
-                'buttonLink' => [
-                    'type' => 'string'
+                'listItems' => [
+                        'type' => 'string'
                 ],
-                'buttonLabel' => [
+                'listClassName' => [
                     'type' => 'string'
-                ],
-                'bannerClassName' => [
-                    'type' => 'string'
+                ]
+            ]
 
+        ]
+    );
+
+    register_block_type(
+        'mojblocks/intro',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_intro_block',
+            'attributes' => [
+                'introClassName' => [
+                    'type' => 'string'
+                ],
+                'introText' => [
+                    'type' => 'string'
                 ]
             ]
         ]
     );
 
     register_block_type(
-        'mojblocks/accordion',
+        'mojblocks/quote',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_accordion_block',
-            'attributes' => []
+        'editor_script' => 'mojblocks-editor-script',
+        'render_callback' => 'render_callback_quote_block',
+        'attributes' => [
+            'quoteImgURL' => [
+                'type' => 'string'
+            ],
+            'quoteContent' => [
+                'type' => 'string'
+            ],
+            'quoteName' => [
+                'type' => 'string'
+            ],
+            'quoteAlignment' => [
+                'type' => 'string'
+            ],
+            'quoteClassName' => [
+                'type' => 'string'
+            ]
+          ]
         ]
     );
 
     register_block_type(
-        'mojblocks/accordion-section',
+        'mojblocks/reveal',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_accordion_block_section',
+            'render_callback' => 'render_callback_reveal_block',
             'attributes' => [
-                'accordionSectionClassName' => [
+                'revealClassName' => [
                     'type' => 'string'
                 ],
-                'accordionSectionTitle' => [
+                'revealTitle' => [
                     'type' => 'string'
                 ],
-                'accordionSectionTextArea' => [
+                'revealContent' => [
                     'type' => 'string'
                 ]
+
             ]
         ]
     );
@@ -261,92 +359,6 @@ function mojblocks_register_blocks()
                     'type' => 'string'
                 ]
             ]
-
-
-        ]
-    );
-
-    register_block_type(
-        'mojblocks/quote',
-        [
-        'editor_script' => 'mojblocks-editor-script',
-        'render_callback' => 'render_callback_quote_block',
-        'attributes' => [
-            'quoteImgURL' => [
-                'type' => 'string'
-            ],
-            'quoteContent' => [
-                'type' => 'string'
-            ],
-            'quoteName' => [
-                'type' => 'string'
-            ],
-            'quoteAlignment' => [
-                'type' => 'string'
-            ],
-            'quoteClassName' => [
-                'type' => 'string'
-            ]
-            ]
-        ]
-    );
-
-    register_block_type(
-        'mojblocks/intro',
-        [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_intro_block',
-            'attributes' => [
-                'introClassName' => [
-                    'type' => 'string'
-                ],
-                'introText' => [
-                    'type' => 'string'
-                ]
-            ]
-        ]
-    );
-
-    register_block_type(
-        'mojblocks/reveal',
-        [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_reveal_block',
-            'attributes' => [
-                'revealClassName' => [
-                    'type' => 'string'
-                ],
-                'revealTitle' => [
-                    'type' => 'string'
-                ],
-                'revealContent' => [
-                    'type' => 'string'
-                ]
-
-            ]
-        ]
-    );
-
-    register_block_type(
-        'mojblocks/card',
-        [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' =>
-            'render_callback_card_block',
-            'attributes' => [
-                'cardClassName' => [
-                    'type' => 'string'
-                ],
-                'cardTitle' => [
-                    'type' => 'string'
-                ],
-                'cardExcerpt' => [
-                    'type' => 'string'
-                ],
-                'cardImageURL' => [
-                    'type' => 'string'
-                ]
-            ]
         ]
     );
 }
@@ -354,15 +366,17 @@ function mojblocks_register_blocks()
 /**
  * Load PHP code for each block
  */
-include plugin_dir_path(__FILE__) . 'src/hero/index.php';
-include plugin_dir_path(__FILE__) . 'src/quote/index.php';
-include plugin_dir_path(__FILE__) . 'src/banner/index.php';
-include plugin_dir_path(__FILE__) . 'src/intro/index.php';
-include plugin_dir_path(__FILE__) . 'src/reveal/index.php';
+
 include plugin_dir_path(__FILE__) . 'src/accordion/index.php';
-include plugin_dir_path(__FILE__) . 'src/highlights-list/index.php';
-include plugin_dir_path(__FILE__) . 'src/cta/index.php';
+include plugin_dir_path(__FILE__) . 'src/banner/index.php';
 include plugin_dir_path(__FILE__) . 'src/card/index.php';
+include plugin_dir_path(__FILE__) . 'src/cta/index.php';
+include plugin_dir_path(__FILE__) . 'src/file-download/index.php';
+include plugin_dir_path(__FILE__) . 'src/hero/index.php';
+include plugin_dir_path(__FILE__) . 'src/highlights-list/index.php';
+include plugin_dir_path(__FILE__) . 'src/intro/index.php';
+include plugin_dir_path(__FILE__) . 'src/quote/index.php';
+include plugin_dir_path(__FILE__) . 'src/reveal/index.php';
 include plugin_dir_path(__FILE__) . 'src/staggered-box/index.php';
 
 /**

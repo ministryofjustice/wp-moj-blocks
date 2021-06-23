@@ -4,6 +4,7 @@
 
 import "./highlights-list";
 import "./cta";
+import "./file-download";
 import "./hero";
 import "./accordion";
 import "./staggered-box";
