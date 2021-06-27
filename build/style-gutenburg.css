@@ -17621,6 +17621,21 @@ Block: Staggered Box (Frontend styles)
   margin-right: 0;
 }
 
+.edit-post-visual-editor .mojblocks-file-download .rich-text,
+.block-editor-block-styles .mojblocks-file-download .rich-text,
+.block-editor-inserter__menu-help-panel .mojblocks-file-download .rich-text {
+  color: blue;
+  text-decoration: underline;
+}
+
+.edit-post-visual-editor .mojblocks-file-download::before,
+.block-editor-block-styles .mojblocks-file-download::before,
+.block-editor-inserter__menu-help-panel .mojblocks-file-download::before {
+  content: "[Icon here] ";
+  float: left;
+  margin-right: 8px;
+}
+
 .edit-post-visual-editor .mojblocks-hero,
 .block-editor-block-styles .mojblocks-hero,
 .block-editor-inserter__menu-help-panel .mojblocks-hero {

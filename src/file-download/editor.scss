@@ -7,5 +7,17 @@ Block: File download (Gutenberg editor styles)
 
 @import 'style.scss';
 
+
 .mojblocks-file-download {
+
+	.rich-text {
+		color: blue;
+		text-decoration: underline;
+	}
+
+	&::before {
+		content: "[Icon here] ";
+		float: left;
+		margin-right: 8px;
+	  }
 }

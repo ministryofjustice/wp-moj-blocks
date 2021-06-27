@@ -117,21 +117,6 @@ Icons.upload = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createEle
 
 /***/ }),
 
-/***/ "./node_modules/@babel/runtime/helpers/objectDestructuringEmpty.js":
-/*!*************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/objectDestructuringEmpty.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _objectDestructuringEmpty(obj) {
-  if (obj == null) throw new TypeError("Cannot destructure undefined");
-}
-
-module.exports = _objectDestructuringEmpty;
-
-/***/ }),
-
 /***/ "./src/accordion/index.js":
 /*!********************************!*\
   !*** ./src/accordion/index.js ***!
@@ -661,69 +646,146 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('moj
 /*!************************************!*\
   !*** ./src/file-download/index.js ***!
   \************************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _babel_runtime_helpers_objectDestructuringEmpty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/objectDestructuringEmpty */ "./node_modules/@babel/runtime/helpers/objectDestructuringEmpty.js");
-/* harmony import */ var _babel_runtime_helpers_objectDestructuringEmpty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_objectDestructuringEmpty__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
-/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
-/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
-/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
-/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__);
-
-
+// const { addFilter } = wp.hooks;
+// const { createHigherOrderComponent } = wp.compose;
+// const { RichText } = wp.blockEditor;
+// /**
+//  * Set download button default to off
+//  */
+// function setDownloadButtonDefault( settings, name ) {
+//     // Check this only applies to the file block
+//     if ( 'core/file' !== name ) {
+//         // Return without change
+//         return settings;
+//     }
+//     console.log(settings)
+//     // Modify the registerBlockType object
+//     settings = lodash.assign( {}, settings, {
+//         attributes: lodash.assign( {}, settings.attributes, {
+//             showDownloadButton: { default: false },
+//         }),
+//     });
+//     return settings;
+// }
+// addFilter(
+//     'blocks.registerBlockType',
+//     'core/file',
+//     setDownloadButtonDefault
+// );
 
 /**
- * File download block
- * Extended version of the default WP File block
+ * Add file extention to file name
  */
-
-
-
-Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_3__["registerBlockType"])('mojblocks/file-download', {
-  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('File download', 'mojblocks'),
-  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])("Add a file to page or post to be downloaded.", "mojblocks"),
-  category: "mojblocks",
-  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('file'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('download'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_2__["__"])('document')],
-  icon: "schedule",
-  attributes: {
-    fileDownloadClassName: {
-      type: 'string'
-    }
-  },
-  edit: function edit(props) {
-    var setAttributes = props.setAttributes;
-
-    _babel_runtime_helpers_objectDestructuringEmpty__WEBPACK_IMPORTED_MODULE_0___default()(props.attributes);
-
-    var className = props.className; // Set className attribute for PHP frontend to use
-
-    setAttributes({
-      fileDownloadClassName: className
-    }); // Load allowed blocks to be added to file download
-
-    var allowedBlocks = ['core/file', 'core/list'];
-    return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("section", {
-      className: "".concat(className, "  mojblocks-file-download")
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-      className: 'govuk-width-container'
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])("div", {
-      className: 'govuk-grid-row'
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InnerBlocks"], {
-      allowedBlocks: allowedBlocks
-    }))))];
-  },
-  // return innerblock to allow reuse of default wp blocks
-  save: function save() {
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_1__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_4__["InnerBlocks"].Content, null);
-  }
-});
+// const addFileExtention = createHigherOrderComponent( ( BlockEdit ) => {
+//     return ( props ) => {
+//         // Do nothing if it's another block than our defined ones.
+//         if ( 'core/file' !== props.name ) {
+//             // Return without change
+//             return props;
+//         }
+//         console.log('hello pusheen')
+//         // const {
+//         //     setAttributes,
+//         //     attributes: {
+//         //         fileName,
+//         //     },
+//         //     className
+//         // } = props;
+//         //lodash.merge(props.attributes, { fileName: props.attributes.fileName + ' ' + '(pusheen)'})
+//         //setAttributes({ fileName: fileName + ' ' + '(pusheen)' });
+//         //console.dir(XMLHttpRequestEventTarget)
+//         // // add has-spacing-xy class to block
+//         // if ( fileName ) {
+//         //     props.attributes.className = `has-spacing-${ fileName }`;
+//         // }
+//         return ([
+//             <BlockEdit {...props} />,
+//         ]);
+//     };
+// }, 'addFileExtention' );
+// addFilter( 'editor.BlockEdit',
+// 'core/file',
+// addFileExtention );
+// const { createHigherOrderComponent } = wp.compose;
+// const { Fragment } = wp.element;
+// const { InspectorControls } = wp.blockEditor;
+// const { PanelBody } = wp.components;
+// const { InspectorControls } = wp.editor;
+// const { PanelBody, SelectControl } = wp.components;
+// import { RichText, MediaUpload, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
+// // Enable spacing control on the following blocks
+// const enableSpacingControlOnBlocks = [
+//     'core/file',
+// ];
+// /**
+//  * Create HOC to add spacing control to inspector controls of block.
+//  */
+// const withSpacingControl = createHigherOrderComponent( ( BlockEdit ) => {
+//     return ( props ) => {
+//         // Do nothing if it's another block than our defined ones.
+//         if ( ! enableSpacingControlOnBlocks.includes( props.name ) ) {
+//             return (
+//                 <BlockEdit { ...props } />
+//             );
+//         }
+//         const {
+//             setAttributes,
+//             attributes: {
+//                 fileName,
+//             },
+//             className
+//         } = props;
+//         lodash.merge(props.attributes, { fileName: props.attributes.fileName + ' ' + '(pusheen)'})
+//         //setAttributes({ fileName: fileName + ' ' + '(pusheen)' });
+//         console.dir(XMLHttpRequestEventTarget)
+//         // // add has-spacing-xy class to block
+//         // if ( fileName ) {
+//         //     props.attributes.className = `has-spacing-${ fileName }`;
+//         // }
+//         return (
+//             <BlockEdit {...props} />
+//         );
+//     };
+// }, 'withSpacingControl' );
+// addFilter( 'editor.BlockEdit',
+// 'core/file',
+// withSpacingControl );
+// function getFileExtension(file) {
+//     return file.slice((file.lastIndexOf(".") - 1 >>> 0) + 2);
+//   }
+// // Add in our own custom class
+// function setBlockCustomClassName( className, blockName ) {
+//     return blockName === 'core/file' ? 'mojblocks-file-download' : className;
+// }
+// // Adding the filter
+// addFilter(
+//     'blocks.getBlockDefaultClassName',
+//     'core/file',
+//     setBlockCustomClassName
+// );
+// const withInspectorControls = createHigherOrderComponent( ( BlockEdit ) => {
+//     return ( props ) => {
+//         // console.log(props)
+//         const name = props.attributes.fileName + ' ' + '(' + getFileExtension(props.attributes.href).toUpperCase() + ')'
+//         const newName = settings.attributes.title + name
+//         return (
+//         <Fragment>
+//             <div className="customClass">
+//               <BlockEdit { ...props }/>
+//             </div>
+//             <div>{ newName }</div>
+//         </Fragment>
+//         );
+//     };
+// }, 'withInspectorControl' );
+// wp.hooks.addFilter(
+//     'editor.BlockEdit',
+//     'core/file',
+//     withInspectorControls
+// );
 
 /***/ }),
 
@@ -959,6 +1021,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _highlights_list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./highlights-list */ "./src/highlights-list/index.js");
 /* harmony import */ var _cta__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cta */ "./src/cta/index.js");
 /* harmony import */ var _file_download__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./file-download */ "./src/file-download/index.js");
+/* harmony import */ var _file_download__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_file_download__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _hero__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./hero */ "./src/hero/index.js");
 /* harmony import */ var _accordion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./accordion */ "./src/accordion/index.js");
 /* harmony import */ var _staggered_box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./staggered-box */ "./src/staggered-box/index.js");

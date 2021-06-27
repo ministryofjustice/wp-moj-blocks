@@ -92,7 +92,7 @@ function mojblocks_register_blocks()
         $meta = require_once('build/index.asset.php');
     } else {
         $meta = [
-            'dependencies' => array('wp-blocks', 'wp-dom-ready', 'wp-edit-post'),
+            'dependencies' => array('wp-blocks', 'wp-dom-ready', 'wp-edit-post', 'wp-hooks'),
             'version' => '20200723'
         ];
 

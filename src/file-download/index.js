@@ -1,53 +1,204 @@
+
+// const { addFilter } = wp.hooks;
+// const { createHigherOrderComponent } = wp.compose;
+// const { RichText } = wp.blockEditor;
+
+// /**
+//  * Set download button default to off
+//  */
+// function setDownloadButtonDefault( settings, name ) {
+
+//     // Check this only applies to the file block
+//     if ( 'core/file' !== name ) {
+
+//         // Return without change
+//         return settings;
+//     }
+
+//     console.log(settings)
+
+
+//     // Modify the registerBlockType object
+//     settings = lodash.assign( {}, settings, {
+//         attributes: lodash.assign( {}, settings.attributes, {
+//             showDownloadButton: { default: false },
+//         }),
+//     });
+
+//     return settings;
+// }
+
+// addFilter(
+//     'blocks.registerBlockType',
+//     'core/file',
+//     setDownloadButtonDefault
+// );
+
+
 /**
- * File download block
- * Extended version of the default WP File block
+ * Add file extention to file name
  */
+// const addFileExtention = createHigherOrderComponent( ( BlockEdit ) => {
+//     return ( props ) => {
 
-import { __ } from '@wordpress/i18n';
-import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, MediaUpload, InnerBlocks } from '@wordpress/block-editor';
+//         // Do nothing if it's another block than our defined ones.
+//         if ( 'core/file' !== props.name ) {
 
-registerBlockType('mojblocks/file-download', {
-    title: __('File download', 'mojblocks'),
-    description: __("Add a file to page or post to be downloaded.", "mojblocks"),
-    category: "mojblocks",
-    keywords: [ __( 'file' ), __( 'download' ), __( 'document' ) ],
-    icon: "schedule",
-    attributes: {
-        fileDownloadClassName: {
-            type: 'string'
-        }
-    },
-    edit: props => {
-        const {
-            setAttributes,
-            attributes: {
-            },
-            className
-        } = props;
+//             // Return without change
+//             return props;
+//         }
 
-        // Set className attribute for PHP frontend to use
-        setAttributes({ fileDownloadClassName: className });
+//         console.log('hello pusheen')
 
-        // Load allowed blocks to be added to file download
-        const allowedBlocks = [ 'core/file', 'core/list' ];
+//         // const {
+//         //     setAttributes,
+//         //     attributes: {
+//         //         fileName,
+//         //     },
+//         //     className
+//         // } = props;
 
-        return ([
 
-        <section className={`${className}  mojblocks-file-download`} >
+//         //lodash.merge(props.attributes, { fileName: props.attributes.fileName + ' ' + '(pusheen)'})
+//         //setAttributes({ fileName: fileName + ' ' + '(pusheen)' });
 
-            <div className={'govuk-width-container'}>
-                <div className={'govuk-grid-row'}>
-                   <InnerBlocks allowedBlocks={ allowedBlocks } />
-                </div>
-            </div>
+//         //console.dir(XMLHttpRequestEventTarget)
 
-        </section>
-    ])
+//         // // add has-spacing-xy class to block
+//         // if ( fileName ) {
+//         //     props.attributes.className = `has-spacing-${ fileName }`;
+//         // }
 
-    },
-    // return innerblock to allow reuse of default wp blocks
-    save: () => {
-        return <InnerBlocks.Content />;
-    }
-});
+//         return ([
+//             <BlockEdit {...props} />,
+//         ]);
+//     };
+// }, 'addFileExtention' );
+
+
+// addFilter( 'editor.BlockEdit',
+// 'core/file',
+// addFileExtention );
+
+
+
+
+
+
+
+
+
+
+
+// const { createHigherOrderComponent } = wp.compose;
+// const { Fragment } = wp.element;
+// const { InspectorControls } = wp.blockEditor;
+// const { PanelBody } = wp.components;
+
+
+// const { InspectorControls } = wp.editor;
+// const { PanelBody, SelectControl } = wp.components;
+// import { RichText, MediaUpload, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
+
+// // Enable spacing control on the following blocks
+// const enableSpacingControlOnBlocks = [
+//     'core/file',
+// ];
+// /**
+//  * Create HOC to add spacing control to inspector controls of block.
+//  */
+// const withSpacingControl = createHigherOrderComponent( ( BlockEdit ) => {
+//     return ( props ) => {
+//         // Do nothing if it's another block than our defined ones.
+//         if ( ! enableSpacingControlOnBlocks.includes( props.name ) ) {
+//             return (
+//                 <BlockEdit { ...props } />
+//             );
+//         }
+
+//         const {
+//             setAttributes,
+//             attributes: {
+//                 fileName,
+//             },
+//             className
+//         } = props;
+
+
+//         lodash.merge(props.attributes, { fileName: props.attributes.fileName + ' ' + '(pusheen)'})
+//         //setAttributes({ fileName: fileName + ' ' + '(pusheen)' });
+
+//         console.dir(XMLHttpRequestEventTarget)
+
+//         // // add has-spacing-xy class to block
+//         // if ( fileName ) {
+//         //     props.attributes.className = `has-spacing-${ fileName }`;
+//         // }
+
+//         return (
+//             <BlockEdit {...props} />
+//         );
+//     };
+// }, 'withSpacingControl' );
+
+// addFilter( 'editor.BlockEdit',
+// 'core/file',
+// withSpacingControl );
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// function getFileExtension(file) {
+//     return file.slice((file.lastIndexOf(".") - 1 >>> 0) + 2);
+//   }
+
+// // Add in our own custom class
+// function setBlockCustomClassName( className, blockName ) {
+//     return blockName === 'core/file' ? 'mojblocks-file-download' : className;
+// }
+
+// // Adding the filter
+// addFilter(
+//     'blocks.getBlockDefaultClassName',
+//     'core/file',
+//     setBlockCustomClassName
+// );
+
+
+
+// const withInspectorControls = createHigherOrderComponent( ( BlockEdit ) => {
+//     return ( props ) => {
+
+//         // console.log(props)
+
+//         const name = props.attributes.fileName + ' ' + '(' + getFileExtension(props.attributes.href).toUpperCase() + ')'
+
+//         const newName = settings.attributes.title + name
+
+//         return (
+//         <Fragment>
+//             <div className="customClass">
+//               <BlockEdit { ...props }/>
+//             </div>
+//             <div>{ newName }</div>
+//         </Fragment>
+//         );
+//     };
+// }, 'withInspectorControl' );
+
+// wp.hooks.addFilter(
+//     'editor.BlockEdit',
+//     'core/file',
+//     withInspectorControls
+// );
