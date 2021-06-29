@@ -642,10 +642,10 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('moj
 
 /***/ }),
 
-/***/ "./src/file-download/index.js":
-/*!************************************!*\
-  !*** ./src/file-download/index.js ***!
-  \************************************/
+/***/ "./src/extended-core-blocks/file/index.js":
+/*!************************************************!*\
+  !*** ./src/extended-core-blocks/file/index.js ***!
+  \************************************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -654,10 +654,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
 
+
+/**
+ *  Extend core WP file block
+ *  https://wordpress.org/support/article/file-block/
+ *
+ * This makes use of WP Blocks extention filters
+ * https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/
+ *
+ */
 var addFilter = wp.hooks.addFilter;
 var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
 /**
- * Get file extention
+ * Extention utility
+ * Parse file href to get a file's extention (.pdf, .doc, .xml)
+ *
  */
 
 function getFileExtension() {
@@ -665,20 +676,26 @@ function getFileExtension() {
   return file.slice((file.lastIndexOf(".") - 1 >>> 0) + 2);
 }
 /**
- * Add file extention to file name
+ * Append the file's extention type to the end of the file
+ *
+ * @param {Object} BlockEdit BlockEdit for the block.
+ *
+ * @return {Object} BlockEdit Modified settings.
  */
 
 
 var addFileExtention = createHigherOrderComponent(function (BlockEdit) {
   return function (props) {
-    // Do nothing if it's another block than our defined ones.
+    // Apply to core file block only
     if ('core/file' !== props.name) {
-      // Return without change
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props);
     }
 
-    var extention = '(' + getFileExtension(props.attributes.href).toUpperCase() + ')';
-    props.attributes.downloadButtonText = extention;
+    var appendedFile = '(' + getFileExtension(props.attributes.href).toUpperCase() + ')'; // I'm recycling the downloadButtonText here
+    // as we are not using it as part of our design
+    // and its helpful to use it to display the extention format
+
+    props.attributes.downloadButtonText = appendedFile;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props);
   };
 }, 'addFileExtention');
@@ -917,15 +934,15 @@ Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('moj
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _highlights_list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./highlights-list */ "./src/highlights-list/index.js");
 /* harmony import */ var _cta__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cta */ "./src/cta/index.js");
-/* harmony import */ var _file_download__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./file-download */ "./src/file-download/index.js");
-/* harmony import */ var _hero__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./hero */ "./src/hero/index.js");
-/* harmony import */ var _accordion__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./accordion */ "./src/accordion/index.js");
-/* harmony import */ var _staggered_box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./staggered-box */ "./src/staggered-box/index.js");
-/* harmony import */ var _quote__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./quote */ "./src/quote/index.js");
-/* harmony import */ var _intro__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./intro */ "./src/intro/index.js");
-/* harmony import */ var _reveal__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./reveal */ "./src/reveal/index.js");
-/* harmony import */ var _card__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./card */ "./src/card/index.js");
-/* harmony import */ var _banner__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./banner */ "./src/banner/index.js");
+/* harmony import */ var _hero__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hero */ "./src/hero/index.js");
+/* harmony import */ var _accordion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./accordion */ "./src/accordion/index.js");
+/* harmony import */ var _staggered_box__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./staggered-box */ "./src/staggered-box/index.js");
+/* harmony import */ var _quote__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./quote */ "./src/quote/index.js");
+/* harmony import */ var _intro__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./intro */ "./src/intro/index.js");
+/* harmony import */ var _reveal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./reveal */ "./src/reveal/index.js");
+/* harmony import */ var _card__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./card */ "./src/card/index.js");
+/* harmony import */ var _banner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./banner */ "./src/banner/index.js");
+/* harmony import */ var _extended_core_blocks_file__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./extended-core-blocks/file */ "./src/extended-core-blocks/file/index.js");
 /**
  * Import blocks as components.
  */
@@ -938,6 +955,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+/**
+ * Import extended block code
+ */
 
 
 

@@ -212,19 +212,6 @@ function mojblocks_register_blocks()
         ]
     );
 
-    register_block_type(
-        'mojblocks/file-download',
-        [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_file_download_block',
-            'attributes' => [
-                'fileDownloadClassName' => [
-                    'type' => 'string'
-                ]
-            ]
-        ]
-    );
-
 
     register_block_type(
         'mojblocks/hero',
@@ -371,13 +358,18 @@ include plugin_dir_path(__FILE__) . 'src/accordion/index.php';
 include plugin_dir_path(__FILE__) . 'src/banner/index.php';
 include plugin_dir_path(__FILE__) . 'src/card/index.php';
 include plugin_dir_path(__FILE__) . 'src/cta/index.php';
-include plugin_dir_path(__FILE__) . 'src/file-download/index.php';
 include plugin_dir_path(__FILE__) . 'src/hero/index.php';
 include plugin_dir_path(__FILE__) . 'src/highlights-list/index.php';
 include plugin_dir_path(__FILE__) . 'src/intro/index.php';
 include plugin_dir_path(__FILE__) . 'src/quote/index.php';
 include plugin_dir_path(__FILE__) . 'src/reveal/index.php';
 include plugin_dir_path(__FILE__) . 'src/staggered-box/index.php';
+
+
+/**
+ * Load PHP extended core block code
+ */
+include plugin_dir_path(__FILE__) . 'src/extended-core-blocks/file/index.php';
 
 /**
  * Queues up the gutenberg editor style

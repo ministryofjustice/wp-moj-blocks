@@ -4,7 +4,6 @@
 
 import "./highlights-list";
 import "./cta";
-import "./file-download";
 import "./hero";
 import "./accordion";
 import "./staggered-box";
@@ -13,3 +12,9 @@ import "./intro";
 import "./reveal";
 import "./card";
 import "./banner";
+
+
+/**
+ * Import extended block code
+ */
+import "./extended-core-blocks/file";
