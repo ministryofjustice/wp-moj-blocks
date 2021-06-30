@@ -354,17 +354,16 @@ function mojblocks_register_blocks()
  * Load PHP code for each custom MoJ block
  */
 
-include plugin_dir_path(__FILE__) . 'src/accordion/index.php';
-include plugin_dir_path(__FILE__) . 'src/banner/index.php';
-include plugin_dir_path(__FILE__) . 'src/card/index.php';
-include plugin_dir_path(__FILE__) . 'src/cta/index.php';
-include plugin_dir_path(__FILE__) . 'src/hero/index.php';
-include plugin_dir_path(__FILE__) . 'src/highlights-list/index.php';
-include plugin_dir_path(__FILE__) . 'src/intro/index.php';
-include plugin_dir_path(__FILE__) . 'src/quote/index.php';
-include plugin_dir_path(__FILE__) . 'src/reveal/index.php';
-include plugin_dir_path(__FILE__) . 'src/staggered-box/index.php';
-
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/accordion/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/banner/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/card/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/cta/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/hero/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/highlights-list/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/intro/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/quote/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/reveal/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/staggered-box/index.php';
 
 /**
  * Load PHP extended core blocks

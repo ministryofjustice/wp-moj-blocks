@@ -10,7 +10,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { Fragment } from '@wordpress/element';
 import { Button, Dashicon } from '@wordpress/components';
 import { RichText, MediaUpload } from '@wordpress/block-editor';
-import Icons from '../../assets/svg/index';
+import Icons from '../../../assets/svg/index';
 
 const ALLOWED_MEDIA_TYPES = ['image'];
 
