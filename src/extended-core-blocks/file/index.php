@@ -9,19 +9,17 @@
  * @version   2.0
  */
 
-
-add_filter( 'render_block', 'hale_filter_blocks', 10, 2 );
-
+add_filter( 'render_block', 'mojblocks_filter_file_block', 10, 2 );
 
 /**
- * Filter the blocks through our own method.
+ * Filter the file block through our own method.
  *
  * @param array $block_content the contents of the block itself.
  * @param array $block         information about block being modified.
  *
  * @return function hale_block_renderer to send back the modified block content.
  */
-function hale_filter_blocks( $block_content, $block ) {
+function mojblocks_filter_file_block( $block_content, $block ) {
 
 	if ( is_admin() ) {
 		return;
@@ -31,7 +29,7 @@ function hale_filter_blocks( $block_content, $block ) {
 		return $block_content;
 	}
 
-	return hale_block_renderer( $block['blockName'], $block['attrs'] );
+	return mojblocks_file_block_renderer( $block['blockName'], $block['attrs'] );
 }
 
 /**
@@ -42,10 +40,7 @@ function hale_filter_blocks( $block_content, $block ) {
  *
  * @return string $object.
  */
-function hale_block_renderer( $name, $attributes ) {
-
-	// change template name slash to scores.
-	$template_name = str_replace( '/', '-', $name );
+function mojblocks_file_block_renderer( $name, $attributes ) {
 
 	// Set query vars so they are accessible to the template part.
 	foreach ( $attributes as $attribute_name => $attribute_value ) {
@@ -53,25 +48,36 @@ function hale_block_renderer( $name, $attributes ) {
 	}
 
     $file = get_attached_file($attributes["id"]);
-    $filesize = file_exists($file) ? ", " . size_format(filesize($file)) : null;
+    $filesize = file_exists($file) ? "&#44; " . size_format(filesize($file)) : null;
     $filename = basename(get_the_title($attributes["id"]));
     $filetype = wp_check_filetype($attributes["href"]);
+	$extention = strtoupper($filetype["ext"]);
 
-    $output = '<div class="mojblocks-file">';
-    $output .= '<a href="' . $attributes["href"] . '">' . $filename .'</a>';
-    $output .= ' <div class="mojblocks-file__extention">(' . strtoupper($filetype["ext"]) . $filesize . ')</div>';
-	$output .= '</div>';
-    $output .= '<br>';
+	// Turn on buffering so we can collect all the html markup below and load it via the return
+    // This is an alternative method to using sprintf(). By using buffering you can write your
+    // code below as you would in any other PHP file rather then having to use the sprintf() syntax
+    ob_start();
 
-	// Load the template part in an output buffer.
-	ob_start();
-	get_template_part( "template-parts/{$template_name}" );
-	$output .= ob_get_clean();
+    ?>
+
+	<div class="mojblocks-file">
+		<a href="<?php echo $attributes["href"]; ?>"><?php echo $filename; ?></a>
+
+		<div class="mojblocks-file__extention">
+			<span>&#40;</span><?php echo esc_attr($extention); ?><?php echo esc_attr($filesize); ?><span>&#41;</span>
+		</div>
+	</div>
+
+	<?php
 
 	// Clear the query vars so they don't bleed into subsequent instances of the same block type.
 	foreach ( $attributes as $attribute_name => $attribute_value ) {
 		set_query_var( $name . '/' . $attribute_name, null );
 	}
+
+	// Get all the html/content that has been captured in the buffer and output via return
+	$output = ob_get_contents();
+	ob_end_clean();
 
 	return $output;
 }

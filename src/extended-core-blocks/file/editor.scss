@@ -9,6 +9,7 @@ Core block: File (Gutenberg editor styles)
 // to prevent getting a rendering/broken block message.
 
 .wp-block-file {
+	margin-top: 5px;
 
 	.rich-text {
 		color: rgb(0, 89, 255);
