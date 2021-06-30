@@ -38,9 +38,9 @@ const addFileExtention = createHigherOrderComponent( ( BlockEdit ) => {
 
         const appendedFile = '(' + getFileExtension(props.attributes.href).toUpperCase() + ')';
 
-        // I'm recycling the downloadButtonText here
-        // as we are not using it as part of our design
-        // and its helpful to use it to display the extention format
+        // The downloadButtonText is not being used as part
+        // of our design, so we are using it to append the
+        // extention.
         props.attributes.downloadButtonText = appendedFile;
 
         return <BlockEdit {...props}  />;

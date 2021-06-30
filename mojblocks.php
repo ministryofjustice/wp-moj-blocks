@@ -351,7 +351,7 @@ function mojblocks_register_blocks()
 }
 
 /**
- * Load PHP code for each block
+ * Load PHP code for each custom MoJ block
  */
 
 include plugin_dir_path(__FILE__) . 'src/accordion/index.php';
@@ -367,7 +367,7 @@ include plugin_dir_path(__FILE__) . 'src/staggered-box/index.php';
 
 
 /**
- * Load PHP extended core block code
+ * Load PHP extended core blocks
  */
 include plugin_dir_path(__FILE__) . 'src/extended-core-blocks/file/index.php';
 

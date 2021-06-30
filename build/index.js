@@ -691,9 +691,9 @@ var addFileExtention = createHigherOrderComponent(function (BlockEdit) {
       return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props);
     }
 
-    var appendedFile = '(' + getFileExtension(props.attributes.href).toUpperCase() + ')'; // I'm recycling the downloadButtonText here
-    // as we are not using it as part of our design
-    // and its helpful to use it to display the extention format
+    var appendedFile = '(' + getFileExtension(props.attributes.href).toUpperCase() + ')'; // The downloadButtonText is not being used as part
+    // of our design, so we are using it to append the
+    // extention.
 
     props.attributes.downloadButtonText = appendedFile;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props);
