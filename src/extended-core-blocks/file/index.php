@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Modify core blocks in Hale
+ * Modify core file block in Hale
  * This hooks into and modifies the frontend of core
  *
  * @package   Hale
@@ -9,7 +10,7 @@
  * @version   2.0
  */
 
-add_filter( 'render_block', 'mojblocks_filter_file_block', 10, 2 );
+add_filter('render_block', 'mojblocks_filter_file_block', 10, 2);
 
 /**
  * Filter the file block through our own method.
@@ -19,17 +20,18 @@ add_filter( 'render_block', 'mojblocks_filter_file_block', 10, 2 );
  *
  * @return function hale_block_renderer to send back the modified block content.
  */
-function mojblocks_filter_file_block( $block_content, $block ) {
+function mojblocks_filter_file_block($block_content, $block)
+{
 
-	if ( is_admin() ) {
-		return;
-	}
+    if (is_admin()) {
+        return;
+    }
 
-	if ( 'core/file' !== $block['blockName'] ) {
-		return $block_content;
-	}
+    if ('core/file' !== $block['blockName']) {
+        return $block_content;
+    }
 
-	return mojblocks_file_block_renderer( $block['blockName'], $block['attrs'] );
+    return mojblocks_file_block_renderer($block['blockName'], $block['attrs'], $block_content);
 }
 
 /**
@@ -40,44 +42,53 @@ function mojblocks_filter_file_block( $block_content, $block ) {
  *
  * @return string $object.
  */
-function mojblocks_file_block_renderer( $name, $attributes ) {
+function mojblocks_file_block_renderer($name, $attributes, $block_content)
+{
 
-	// Set query vars so they are accessible to the template part.
-	foreach ( $attributes as $attribute_name => $attribute_value ) {
-		set_query_var( $name . '/' . $attribute_name, $attribute_value );
-	}
+    // Set query vars so they are accessible to the template part.
+    foreach ($attributes as $attribute_name => $attribute_value) {
+        set_query_var($name . '/' . $attribute_name, $attribute_value);
+    }
 
     $file = get_attached_file($attributes["id"]);
     $filesize = file_exists($file) ? "&#44; " . size_format(filesize($file)) : null;
-    $filename = basename(get_the_title($attributes["id"]));
     $filetype = wp_check_filetype($attributes["href"]);
-	$extention = strtoupper($filetype["ext"]);
+    $extention = strtoupper($filetype["ext"]);
 
-	// Turn on buffering so we can collect all the html markup below and load it via the return
+    // File Block returns HTML file link
+    $parsedHTML = strip_tags($block_content);
+
+    // Find last left hand parenthesis and strip removing extention
+    $pattern = "/\(\w*\D$/";
+
+    // Return a file name with the extention removed and no trailing whitespace
+    $filename = trim(preg_replace($pattern, '', $parsedHTML, 1));
+
+    // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
     // code below as you would in any other PHP file rather then having to use the sprintf() syntax
     ob_start();
 
     ?>
 
-	<div class="mojblocks-file">
-		<a href="<?php echo $attributes["href"]; ?>"><?php echo $filename; ?></a>
+    <div class="mojblocks-file">
+        <a href="<?php echo $attributes["href"]; ?>"><?php _e($filename, 'mojblocks'); ?></a>
 
-		<div class="mojblocks-file__extention">
-			<span>&#40;</span><?php echo esc_attr($extention); ?><?php echo esc_attr($filesize); ?><span>&#41;</span>
-		</div>
-	</div>
+        <div class="mojblocks-file__extention">
+            <span>&#40;</span><?php echo esc_attr($extention); ?><?php echo esc_attr($filesize); ?><span>&#41;</span>
+        </div>
+    </div>
 
-	<?php
+    <?php
 
-	// Clear the query vars so they don't bleed into subsequent instances of the same block type.
-	foreach ( $attributes as $attribute_name => $attribute_value ) {
-		set_query_var( $name . '/' . $attribute_name, null );
-	}
+    // Clear the query vars so they don't bleed into subsequent instances of the same block type.
+    foreach ($attributes as $attribute_name => $attribute_value) {
+        set_query_var($name . '/' . $attribute_name, null);
+    }
 
-	// Get all the html/content that has been captured in the buffer and output via return
-	$output = ob_get_contents();
-	ob_end_clean();
+    // Get all the html/content that has been captured in the buffer and output via return
+    $output = ob_get_contents();
+    ob_end_clean();
 
-	return $output;
+    return $output;
 }
