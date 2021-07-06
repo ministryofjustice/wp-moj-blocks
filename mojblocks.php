@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     2.2.0
+ * Version:     2.3.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -92,7 +92,7 @@ function mojblocks_register_blocks()
         $meta = require_once('build/index.asset.php');
     } else {
         $meta = [
-            'dependencies' => array('wp-blocks', 'wp-dom-ready', 'wp-edit-post'),
+            'dependencies' => array('wp-blocks', 'wp-dom-ready', 'wp-edit-post', 'wp-hooks'),
             'version' => '20200723'
         ];
 
@@ -111,72 +111,30 @@ function mojblocks_register_blocks()
         true
     );
 
-    // Register blocks
+     // Register blocks
     register_block_type(
-        'mojblocks/highlights-list',
+        'mojblocks/accordion',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_highlights_list_block',
-            'attributes' => [
-                'listTitle' => [
-                    'type' => 'string'
-                ],
-                'listItems' => [
-                        'type' => 'string'
-                ],
-                'listClassName' => [
-                    'type' => 'string'
-                ]
-            ]
-
+            'render_callback' => 'render_callback_accordion_block',
+            'attributes' => []
         ]
     );
 
     register_block_type(
-        'mojblocks/cta',
+        'mojblocks/accordion-section',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_cta_block',
+            'render_callback' => 'render_callback_accordion_block_section',
             'attributes' => [
-                'ctaTitle' => [
+                'accordionSectionClassName' => [
                     'type' => 'string'
                 ],
-                'ctaText' => [
+                'accordionSectionTitle' => [
                     'type' => 'string'
                 ],
-                'buttonLink' => [
+                'accordionSectionTextArea' => [
                     'type' => 'string'
-                ],
-                'buttonLabel' => [
-                    'type' => 'string'
-                ],
-                'ctaClassName' => [
-                    'type' => 'string'
-
-                ]
-            ]
-        ]
-    );
-
-    register_block_type(
-        'mojblocks/hero',
-        [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_hero_block',
-            'attributes' => [
-                'backgroundImage' => [
-                    'type' => 'string'
-                ],
-                'heroTitle' => [
-                    'type' => 'string'
-                ],
-                [
-                'heroText' => [
-                    'type' => 'string'
-                ],
-                'heroClassName' => [
-                    'type' => 'string'
-                ]
                 ]
             ]
         ]
@@ -206,29 +164,156 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/accordion',
+        'mojblocks/card',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_accordion_block',
-            'attributes' => []
+            'render_callback' =>
+            'render_callback_card_block',
+            'attributes' => [
+                'cardClassName' => [
+                    'type' => 'string'
+                ],
+                'cardTitle' => [
+                    'type' => 'string'
+                ],
+                'cardExcerpt' => [
+                    'type' => 'string'
+                ],
+                'cardImageURL' => [
+                    'type' => 'string'
+                ]
+            ]
         ]
     );
 
     register_block_type(
-        'mojblocks/accordion-section',
+        'mojblocks/cta',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_accordion_block_section',
+            'render_callback' => 'render_callback_cta_block',
             'attributes' => [
-                'accordionSectionClassName' => [
+                'ctaTitle' => [
                     'type' => 'string'
                 ],
-                'accordionSectionTitle' => [
+                'ctaText' => [
                     'type' => 'string'
                 ],
-                'accordionSectionTextArea' => [
+                'buttonLink' => [
+                    'type' => 'string'
+                ],
+                'buttonLabel' => [
+                    'type' => 'string'
+                ],
+                'ctaClassName' => [
+                    'type' => 'string'
+
+                ]
+            ]
+        ]
+    );
+
+
+    register_block_type(
+        'mojblocks/hero',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_hero_block',
+            'attributes' => [
+                'backgroundImage' => [
+                    'type' => 'string'
+                ],
+                'heroTitle' => [
+                    'type' => 'string'
+                ],
+                [
+                'heroText' => [
+                    'type' => 'string'
+                ],
+                'heroClassName' => [
                     'type' => 'string'
                 ]
+                ]
+            ]
+        ]
+    );
+
+    register_block_type(
+        'mojblocks/highlights-list',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_highlights_list_block',
+            'attributes' => [
+                'listTitle' => [
+                    'type' => 'string'
+                ],
+                'listItems' => [
+                        'type' => 'string'
+                ],
+                'listClassName' => [
+                    'type' => 'string'
+                ]
+            ]
+
+        ]
+    );
+
+    register_block_type(
+        'mojblocks/intro',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_intro_block',
+            'attributes' => [
+                'introClassName' => [
+                    'type' => 'string'
+                ],
+                'introText' => [
+                    'type' => 'string'
+                ]
+            ]
+        ]
+    );
+
+    register_block_type(
+        'mojblocks/quote',
+        [
+        'editor_script' => 'mojblocks-editor-script',
+        'render_callback' => 'render_callback_quote_block',
+        'attributes' => [
+            'quoteImgURL' => [
+                'type' => 'string'
+            ],
+            'quoteContent' => [
+                'type' => 'string'
+            ],
+            'quoteName' => [
+                'type' => 'string'
+            ],
+            'quoteAlignment' => [
+                'type' => 'string'
+            ],
+            'quoteClassName' => [
+                'type' => 'string'
+            ]
+          ]
+        ]
+    );
+
+    register_block_type(
+        'mojblocks/reveal',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_reveal_block',
+            'attributes' => [
+                'revealClassName' => [
+                    'type' => 'string'
+                ],
+                'revealTitle' => [
+                    'type' => 'string'
+                ],
+                'revealContent' => [
+                    'type' => 'string'
+                ]
+
             ]
         ]
     );
@@ -261,109 +346,29 @@ function mojblocks_register_blocks()
                     'type' => 'string'
                 ]
             ]
-
-
-        ]
-    );
-
-    register_block_type(
-        'mojblocks/quote',
-        [
-        'editor_script' => 'mojblocks-editor-script',
-        'render_callback' => 'render_callback_quote_block',
-        'attributes' => [
-            'quoteImgURL' => [
-                'type' => 'string'
-            ],
-            'quoteContent' => [
-                'type' => 'string'
-            ],
-            'quoteName' => [
-                'type' => 'string'
-            ],
-            'quoteAlignment' => [
-                'type' => 'string'
-            ],
-            'quoteClassName' => [
-                'type' => 'string'
-            ]
-            ]
-        ]
-    );
-
-    register_block_type(
-        'mojblocks/intro',
-        [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_intro_block',
-            'attributes' => [
-                'introClassName' => [
-                    'type' => 'string'
-                ],
-                'introText' => [
-                    'type' => 'string'
-                ]
-            ]
-        ]
-    );
-
-    register_block_type(
-        'mojblocks/reveal',
-        [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_reveal_block',
-            'attributes' => [
-                'revealClassName' => [
-                    'type' => 'string'
-                ],
-                'revealTitle' => [
-                    'type' => 'string'
-                ],
-                'revealContent' => [
-                    'type' => 'string'
-                ]
-
-            ]
-        ]
-    );
-
-    register_block_type(
-        'mojblocks/card',
-        [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' =>
-            'render_callback_card_block',
-            'attributes' => [
-                'cardClassName' => [
-                    'type' => 'string'
-                ],
-                'cardTitle' => [
-                    'type' => 'string'
-                ],
-                'cardExcerpt' => [
-                    'type' => 'string'
-                ],
-                'cardImageURL' => [
-                    'type' => 'string'
-                ]
-            ]
         ]
     );
 }
 
 /**
- * Load PHP code for each block
+ * Load PHP code for each custom MoJ block
  */
-include plugin_dir_path(__FILE__) . 'src/hero/index.php';
-include plugin_dir_path(__FILE__) . 'src/quote/index.php';
-include plugin_dir_path(__FILE__) . 'src/banner/index.php';
-include plugin_dir_path(__FILE__) . 'src/intro/index.php';
-include plugin_dir_path(__FILE__) . 'src/reveal/index.php';
-include plugin_dir_path(__FILE__) . 'src/accordion/index.php';
-include plugin_dir_path(__FILE__) . 'src/highlights-list/index.php';
-include plugin_dir_path(__FILE__) . 'src/cta/index.php';
-include plugin_dir_path(__FILE__) . 'src/card/index.php';
-include plugin_dir_path(__FILE__) . 'src/staggered-box/index.php';
+
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/accordion/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/banner/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/card/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/cta/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/hero/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/highlights-list/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/intro/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/quote/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/reveal/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/staggered-box/index.php';
+
+/**
+ * Load PHP extended core blocks
+ */
+include plugin_dir_path(__FILE__) . 'src/extended-core-blocks/file/index.php';
 
 /**
  * Queues up the gutenberg editor style

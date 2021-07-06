@@ -2,7 +2,8 @@
 MOJ Gutenberg Blocks is a companion WP block plugin to be installed with the WP and the Hale theme. It allows for greater customisation and enhancements unique to our websites.
 
 ## Features
-This plugin adds the following blocks,
+
+This plugin adds the following custom blocks,
 * Accordion
 * Banner
 * Card
@@ -13,6 +14,9 @@ This plugin adds the following blocks,
 * Quote
 * Reveal
 * Staggered-boxes
+
+Extends the following core blocks
+* File
 
 Note: This plugin suppresses and [unregisters](https://github.com/ministryofjustice/wp-moj-blocks/blob/main/src/quote/index.js#L208-L210) the default WP quote block.
 
@@ -41,6 +45,10 @@ This plugin follows
 If you run into NPM issues try
 * Delete `/node_modules` folder and `package-lock.json` in plugin root and then run `npm install`
 * Try `npm rebuild node-sass` or the `npm rebuild <package name causing issues>`
+
+#### Block not registering?
+If you are using this plugin in the Hale theme, make sure you've added your new block to the allowlist,
+found in Hale ~/inc/restrict-blocks.php.
 
 ## Automated linting and PHP code sniffing
 We have a Git Action setup that lints, sniffs and then commits the linted PHP code in this plugin when anything is pushed to the repo.

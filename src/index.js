@@ -1,14 +1,6 @@
 /**
- * Import blocks as components.
+ * Import all JS from modules
  */
 
-import "./highlights-list";
-import "./cta";
-import "./hero";
-import "./accordion";
-import "./staggered-box";
-import "./quote";
-import "./intro";
-import "./reveal";
-import "./card";
-import "./banner";
+import "./custom-blocks/index";
+import "./extended-core-blocks/index";
