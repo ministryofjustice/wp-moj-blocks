@@ -5,7 +5,6 @@ import { __ } from "@wordpress/i18n";
 import { Fragment } from "@wordpress/element";
 import { RichText,  InnerBlocks, MediaUpload } from "@wordpress/block-editor";
 import { Button, Dashicon } from '@wordpress/components';
-import { select, dispatch, useSelect } from '@wordpress/data';
 
 /**
  * Internal dependencies
@@ -21,17 +20,15 @@ export default function CardBlockEdit( props ) {
 
         const {
             setAttributes,
-            clientId,
             className,
         } = props;
 
         const {
+            cardTitle,
             cardExcerpt,
             cardImageURL,
-            cardImageId
+            cardImageId,
         } = props.attributes;
-
-        //setAttributes({ cardClassName: className });
 
         const onRemoveImage = () => {
             setAttributes({
@@ -39,30 +36,6 @@ export default function CardBlockEdit( props ) {
                 cardImageId: null,
             });
         };
-
-        console.log(className)
-
-        // Preseverve data during conversion from old card block to new card block
-
-        // const headingObject = select('core/editor').getBlocks(clientId).filter( obj => {
-        //     return obj.name == 'core/heading';
-        // });
-
-        // const getInnerHeadingBlockId = headingObject.map((item) => {
-        //     return item.clientId;
-        // });
-
-        // const innerHeadingBlockId = getInnerHeadingBlockId.toString();
-
-        // useSelect((select) => {
-        //     const headerContent = select('core/editor').getBlockAttributes(innerHeadingBlockId).content;
-
-        //     if (headerContent === "") {
-        //         dispatch( 'core/editor' ).updateBlockAttributes( innerHeadingBlockId, { content: cardTitle } );
-        //     }
-
-        //     return select;
-        // })
 
         return (
             <div className={`${className} mojblocks-card mojblocks-card-image`} data-src={cardImageURL}>
@@ -102,6 +75,14 @@ export default function CardBlockEdit( props ) {
             <InnerBlocks
             template={ templateCardBlock }
             templateLock="all"
+        />
+        <RichText
+            tagName="h2"
+            placeholder={__('Add header text...', 'mojblocks')}
+            keepPlaceholderOnFocus
+            value={cardTitle}
+            className="mojblocks-card-title"
+            onChange={(value) => setAttributes({ cardTitle: value })}
         />
         <RichText
             tagName="p"
