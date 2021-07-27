@@ -30,7 +30,7 @@ function render_callback_hero_block($attributes, $content)
         <div class="mojblocks-hero__image"
         style="background-image:url('<?php _e(esc_url_raw($attribute_hero_image)) ; ?>');
         background-size: cover; background-position: center;"></div>
-        <?php if ($content) { ?>
+        <?php if (trim($content)) { ?>
             <div class="govuk-width-container">
                 <div class="govuk-grid-row">
                     <div class="mojblocks-hero__overlay">
