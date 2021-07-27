@@ -43,7 +43,7 @@ function mojblocks_load_textdomain()
  *
  * @link https://wordpress.org/gutenberg/handbook/designers-developers/developers/filters/block-filters/#managing-block-categories
  */
-add_filter('block_categories', 'mojblocks_block_categories', 10, 2);
+add_filter('block_categories_all', 'mojblocks_block_categories', 10, 2);
 
 /**
  * Create the category.
