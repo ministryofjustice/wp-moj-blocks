@@ -24,23 +24,23 @@ function render_callback_hero_block($attributes, $content)
     // This is an alternative method to using sprintf(). By using buffering you can write your
     // code below as you would in any other PHP file rather then having to use the sprintf() syntax
     ob_start();
-
     ?>
 
     <section class="<?php _e(esc_html($attribute_hero_className)) ; ?> mojblocks-hero">
         <div class="mojblocks-hero__image"
         style="background-image:url('<?php _e(esc_url_raw($attribute_hero_image)) ; ?>');
         background-size: cover; background-position: center;"></div>
-
+        <?php if (trim($content)) { ?>
             <div class="govuk-width-container">
                 <div class="govuk-grid-row">
                     <div class="mojblocks-hero__overlay">
                         <div class="govuk-grid-column-three-quarters">
-							<?php _e(esc_html($content)); ?>
+                            <?php _e(esc_html($content)); ?>
                         </div>
                     </div>
                 </div>
             </div>
+        <?php } ?>
     </section>
 
     <?php
