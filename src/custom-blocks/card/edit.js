@@ -24,7 +24,6 @@ export default function CardBlockEdit( props ) {
         } = props;
 
         const {
-            cardTitle,
             cardExcerpt,
             cardImageURL,
             cardImageId,
@@ -75,14 +74,6 @@ export default function CardBlockEdit( props ) {
             <InnerBlocks
             template={ templateCardBlock }
             templateLock="all"
-        />
-        <RichText
-            tagName="h2"
-            placeholder={__('Add header text...', 'mojblocks')}
-            keepPlaceholderOnFocus
-            value={cardTitle}
-            className="mojblocks-card-title"
-            onChange={(value) => setAttributes({ cardTitle: value })}
         />
         <RichText
             tagName="p"

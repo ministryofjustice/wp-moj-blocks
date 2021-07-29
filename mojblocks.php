@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     3.0.0
+ * Version:     3.1.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -43,7 +43,7 @@ function mojblocks_load_textdomain()
  *
  * @link https://wordpress.org/gutenberg/handbook/designers-developers/developers/filters/block-filters/#managing-block-categories
  */
-add_filter('block_categories', 'mojblocks_block_categories', 10, 2);
+add_filter('block_categories_all', 'mojblocks_block_categories', 10, 2);
 
 /**
  * Create the category.
