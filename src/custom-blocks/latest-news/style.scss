@@ -71,6 +71,31 @@ Block: Staggered Box (Frontend styles)
 		display:none;
 	}
 
+	.mojblocks-latest-news-hide-image .mojblocks-latest-news__image {
+		display:none;
+	}
+
+	.mojblocks-latest-news-shew-image .mojblocks-latest-news__image {
+		background-color: black;
+		background-image:url("https://regia.org/images/about/EmbroideryWychurst2014-MjB.JPG");
+	}
+
+	.mojblocks-latest-news__image {
+		width:80%;
+		max-width:400px;
+		background-repeat: no-repeat;
+		background-size: cover;
+		max-height: 267px;
+		aspect-ratio: 3/2;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+
+		&.mojblocks-latest-news__image--no-bespoke-image {
+			background-size: contain;
+		}
+	}
+
 	.mojblocks-latest-news--item-count- {
 		&1 {
 			.mojblocks-latest-news__item:nth-child(n+2) {
@@ -87,6 +112,26 @@ Block: Staggered Box (Frontend styles)
 				display:none;
 			}
 		}
+		&4 {
+			.mojblocks-latest-news__item:nth-child(n+5) {
+				display:none;
+			}
+		}
+		&5 {
+			.mojblocks-latest-news__item:nth-child(n+6) {
+				display:none;
+			}
+		}
+		&6 {
+			.mojblocks-latest-news__item:nth-child(n+7) {
+				display:none;
+			}
+		}
 	}
 
+}
+
+//IE 11 support for image sizes
+*::-ms-backdrop, :root.mojblocks-latest-news__image {
+	height:250px;
 }
