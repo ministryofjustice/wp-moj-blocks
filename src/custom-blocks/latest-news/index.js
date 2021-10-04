@@ -80,11 +80,11 @@ registerBlockType("mojblocks/latest-news", {
               value= {newsNumber}
               options={ [
                 { label: 'One', value: '1' },
-                { label: 'A couple', value: '2' },
-                { label: 'A trio', value: '3' },
+                { label: 'Two', value: '2' },
+                { label: 'Three', value: '3' },
                 { label: 'Four', value: '4' },
                 { label: 'Five', value: '5' },
-                { label: 'Half a dozen', value: '6' },
+                { label: 'Six', value: '6' },
               ] }
               onChange={ setAttributes({ latestNewsNumber: newsNumber } ) }
               onChange={ (newNewsNumber) => setNewsNumber(newNewsNumber) }
@@ -136,7 +136,7 @@ registerBlockType("mojblocks/latest-news", {
               placeholder={__('Add latest news section title', 'mojblocks')}
               keepPlaceholderOnFocus={true}
             />
-            <div className={`mojblocks-latest-news--item-count-${newsNumber} govuk-grid-row ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ${hasImage ? 'mojblocks-latest-news-shew-image' : 'mojblocks-latest-news-hide-image'}` }>
+            <div className={`govuk-grid-row mojblocks-latest-news--item-count-${newsNumber} ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ${hasImage ? 'mojblocks-latest-news-shew-image' : 'mojblocks-latest-news-hide-image'}` }>
               <div className="mojblocks-latest-news__item">
                 <div className="mojblocks-latest-news__image"></div>
                 <div className="mojblocks-latest-news__headline" >
