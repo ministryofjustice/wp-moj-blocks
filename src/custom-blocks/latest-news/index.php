@@ -16,12 +16,9 @@ function render_callback_latest_news_block($attributes, $content)
 
     // Parse attributes found in index.js
     $attribute_box_title = $attributes['latestNewsTitle'] ?? '';
-    $attribute_box_img_url = $attributes['latestNewsImageURL'] ?? '';
-    $attribute_box_img_alt_text = $attributes['laterstNewsImageAltText'] ?? '';
     $attribute_box_content = $attributes['latestNewsHeadline'] ?? '';
     $attribute_box_numberItems = $attributes['latestNewsNumber'] ?? 3;
     $attribute_box_hasDate = $attributes['latestNewsHasDate'] ?? 'true';
-    $attribute_box_hasImage = $attributes['latestNewsHasImage'] ?? 'true';
     $attribute_box_expiryWeeks = $attributes['latestNewsExpiry'] ?? 0;
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
@@ -59,24 +56,6 @@ function render_callback_latest_news_block($attributes, $content)
         }
         /* Restore original Post Data */
         wp_reset_postdata();
-
-        if ($attribute_box_hasImage) {
-            $hasImage = false;
-            for ($j = 0; $j < count($news_array); $j++) {
-                if ($news_array[$j]["image"]) {
-                    $hasImage = true;
-                    //set placeholder for absent image
-                    if ( has_custom_logo() ) {
-                        $custom_logo_id = get_theme_mod( 'custom_logo' );
-                        $image = wp_get_attachment_image( $custom_logo_id , 'full' );
-                    } else {
-                        //placeholder TO CHANGE
-                        $image = 'https://design-system.service.gov.uk/assets/images/govuk-crest-2x.png';
-                    }
-                    break;
-                }
-            }
-        }
     ?>
 
     <div class="mojblocks-latest-news">
@@ -95,18 +74,6 @@ function render_callback_latest_news_block($attributes, $content)
                         $news_array[$i]["date"] = $dateString;
                 ?>
                         <div class="mojblocks-latest-news__item">
-                            <?php if($attribute_box_hasImage && $hasImage) { 
-                                $extraClass = "";
-                                if ($news_array[$i]["image"]) {
-                                    $thumbnail_image = esc_html($news_array[$i]["image"]);
-                                } else {
-                                    $extraClass = "mojblocks-latest-news__image--no-bespoke-image";
-                                    $thumbnail_image = $image;
-                                }
-                                ?>
-                                <div class="mojblocks-latest-news__image <?php _e($extraClass);?>" role="img" aria-label="Cover image for article" style="background-image:url('<?php _e($thumbnail_image);?>');">
-                                </div>
-                            <?php } ?>
                             <div class="mojblocks-latest-news__headline" >
                                 <a href="<?php _e(esc_html($news_array[$i]["link"]));?>"><?php _e(esc_html($news_array[$i]["title"]));?></a>
                             </div>

@@ -24,19 +24,10 @@ registerBlockType("mojblocks/latest-news", {
     latestNewsLink: {
       type: "string"
     },
-    latestNewsImageURL: {
-      type: "string"
-    },
-    laterstNewsImageAltText: {
-      type: "string"
-    },
     latestNewsNumber: {
       type: "string"
     },
     latestNewsHasDate: {
-      type: "boolean"
-    },
-    latestNewsHasImage: {
       type: "boolean"
     },
     latestNewsCutOff: {
@@ -61,7 +52,6 @@ registerBlockType("mojblocks/latest-news", {
     const [ newsNumber, setNewsNumber ] = useState( '3' );
     const [ expiry, setExpiry ] = useState( 0 );
     const [ hasDate, setHasDate ] = useState( true );
-    const [ hasImage, setHasImage ] = useState( true );
 
     return (
       <Fragment >
@@ -81,19 +71,6 @@ registerBlockType("mojblocks/latest-news", {
               onChange={ setAttributes({ latestNewsHasDate: hasDate } ) }
               onChange={ () => {
                 setHasDate( ( state ) => ! state );
-              } }
-            />
-            <ToggleControl
-              label="Show/hide images"
-              help={
-                hasImage
-                ? 'Images will be shown if present'
-                : 'Images will be hidden'
-              }
-              checked={ hasImage }
-              onChange={ setAttributes({ latestNewsHasImage: hasImage } ) }
-              onChange={ () => {
-                setHasImage( ( state ) => ! state );
               } }
             />
             <NumberControl
@@ -117,9 +94,8 @@ registerBlockType("mojblocks/latest-news", {
               placeholder={__('Add latest news section title', 'mojblocks')}
               keepPlaceholderOnFocus={true}
             />
-            <div className={`govuk-grid-row mojblocks-latest-news--item-count-${newsNumber} ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ${hasImage ? 'mojblocks-latest-news-shew-image' : 'mojblocks-latest-news-hide-image'}` }>
+            <div className={`govuk-grid-row mojblocks-latest-news--item-count-${newsNumber} ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ` }>
               <div className="mojblocks-latest-news__item">
-                <div className="mojblocks-latest-news__image"></div>
                 <div className="mojblocks-latest-news__headline" >
                   <a href="#">News Headline Automatically Populated</a>
                 </div>
@@ -128,7 +104,6 @@ registerBlockType("mojblocks/latest-news", {
                 </div>
               </div>
               <div className="mojblocks-latest-news__item">
-                <div className="mojblocks-latest-news__image"></div>
                 <div className="mojblocks-latest-news__headline" >
                   <a href="#">News Headline Automatically Populated</a>
                 </div>
@@ -137,7 +112,6 @@ registerBlockType("mojblocks/latest-news", {
                 </div>
               </div>
               <div className="mojblocks-latest-news__item">
-                <div className="mojblocks-latest-news__image"></div>
                 <div className="mojblocks-latest-news__headline" >
                   <a href="#">News Headline Automatically Populated</a>
                 </div>

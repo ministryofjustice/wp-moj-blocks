@@ -51,34 +51,4 @@ Block: Staggered Box (Frontend styles)
 	.mojblocks-latest-news-hide-date .mojblocks-latest-news__date {
 		display:none;
 	}
-
-	.mojblocks-latest-news-hide-image .mojblocks-latest-news__image {
-		display:none;
-	}
-
-	.mojblocks-latest-news-shew-image .mojblocks-latest-news__image {
-		background-color: black;
-		background-image:url("https://regia.org/images/about/EmbroideryWychurst2014-MjB.JPG");
-	}
-
-	.mojblocks-latest-news__image {
-		width:80%;
-		max-width:400px;
-		background-repeat: no-repeat;
-		background-size: cover;
-		max-height: 267px;
-		aspect-ratio: 3/2;
-		background-position: center;
-		background-repeat: no-repeat;
-		background-size: cover;
-
-		&.mojblocks-latest-news__image--no-bespoke-image {
-			background-size: contain;
-		}
-	}
-}
-
-//IE 11 support for image sizes
-*::-ms-backdrop, :root.mojblocks-latest-news__image {
-	height:250px;
 }
