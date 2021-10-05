@@ -60,7 +60,7 @@ function render_callback_latest_news_block($attributes, $content)
 
     <div class="mojblocks-latest-news">
         <div class="govuk-width-container">
-            <h2><?php _e(esc_html($attribute_box_title)); ?></h2>
+            <h2 class="govuk-heading-m mojblocks-latest-news__title"><?php _e(esc_html($attribute_box_title)); ?></h2>
             <div class="govuk-grid-row">
                 <?php
                     $i = 0;
@@ -74,7 +74,7 @@ function render_callback_latest_news_block($attributes, $content)
                         $news_array[$i]["date"] = $dateString;
                 ?>
                         <div class="mojblocks-latest-news__item">
-                            <div class="mojblocks-latest-news__headline" >
+                            <div class="govuk-body mojblocks-latest-news__headline" >
                                 <a href="<?php _e(esc_html($news_array[$i]["link"]));?>"><?php _e(esc_html($news_array[$i]["title"]));?></a>
                             </div>
                             <?php if ($attribute_box_hasDate) { ?>

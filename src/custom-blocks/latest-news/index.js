@@ -90,13 +90,13 @@ registerBlockType("mojblocks/latest-news", {
               tagName="h2"
               value={latestNewsTitle}
               onChange={onChangeLatestNewsTitle}
-              className="mojblocks-latest-news__title"
+              className="mojblocks-latest-news__title govuk-heading-m"
               placeholder={__('Add latest news section title', 'mojblocks')}
               keepPlaceholderOnFocus={true}
             />
             <div className={`govuk-grid-row mojblocks-latest-news--item-count-${newsNumber} ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ` }>
               <div className="mojblocks-latest-news__item">
-                <div className="mojblocks-latest-news__headline" >
+                <div className="govuk-body mojblocks-latest-news__headline" >
                   <a href="#">News Headline Automatically Populated</a>
                 </div>
                 <div className="mojblocks-latest-news__date" >
@@ -104,7 +104,7 @@ registerBlockType("mojblocks/latest-news", {
                 </div>
               </div>
               <div className="mojblocks-latest-news__item">
-                <div className="mojblocks-latest-news__headline" >
+                <div className="govuk-body mojblocks-latest-news__headline" >
                   <a href="#">News Headline Automatically Populated</a>
                 </div>
                 <div className="mojblocks-latest-news__date" >
@@ -112,7 +112,7 @@ registerBlockType("mojblocks/latest-news", {
                 </div>
               </div>
               <div className="mojblocks-latest-news__item">
-                <div className="mojblocks-latest-news__headline" >
+                <div className="govuk-body mojblocks-latest-news__headline" >
                   <a href="#">News Headline Automatically Populated</a>
                 </div>
                 <div className="mojblocks-latest-news__date" >
