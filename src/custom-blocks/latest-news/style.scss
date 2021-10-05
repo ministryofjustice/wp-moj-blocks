@@ -31,8 +31,8 @@ Block: Staggered Box (Frontend styles)
 	&__headline {
 		margin-top: 16px;
 		margin-top: govuk-px-to-rem(16);
-		margin-bottom: 24px;
-		margin-bottom: govuk-px-to-rem(24);
+		margin-bottom: 16px;
+		margin-bottom: govuk-px-to-rem(16);
 		padding-top: 16px;
 		padding-top: govuk-px-to-rem(16);
 
@@ -44,27 +44,8 @@ Block: Staggered Box (Frontend styles)
 	}
 
 	&__date {
-		color:grey;
+		color:red;
 		font-size: 80%;
-	}
-
-	&.is-style-news-columns{
-
-		&--i {
-			@include govuk-media-query($from: tablet) {
-				.mojblocks-latest-news__item {
-					width:99%;
-				}
-			}
-		}
-		&--ii {
-			@include govuk-media-query($from: tablet) {
-				.mojblocks-latest-news__item {
-					width:49%;
-					padding-right:6%;
-				}
-			}
-		}
 	}
 
 	.mojblocks-latest-news-hide-date .mojblocks-latest-news__date {
@@ -95,40 +76,6 @@ Block: Staggered Box (Frontend styles)
 			background-size: contain;
 		}
 	}
-
-	.mojblocks-latest-news--item-count- {
-		&1 {
-			.mojblocks-latest-news__item:nth-child(n+2) {
-				display:none;
-			}
-		}
-		&2 {
-			.mojblocks-latest-news__item:nth-child(n+3) {
-				display:none;
-			}
-		}
-		&3 {
-			.mojblocks-latest-news__item:nth-child(n+4) {
-				display:none;
-			}
-		}
-		&4 {
-			.mojblocks-latest-news__item:nth-child(n+5) {
-				display:none;
-			}
-		}
-		&5 {
-			.mojblocks-latest-news__item:nth-child(n+6) {
-				display:none;
-			}
-		}
-		&6 {
-			.mojblocks-latest-news__item:nth-child(n+7) {
-				display:none;
-			}
-		}
-	}
-
 }
 
 //IE 11 support for image sizes

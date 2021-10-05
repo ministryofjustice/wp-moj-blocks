@@ -19,11 +19,10 @@ function render_callback_latest_news_block($attributes, $content)
     $attribute_box_img_url = $attributes['latestNewsImageURL'] ?? '';
     $attribute_box_img_alt_text = $attributes['laterstNewsImageAltText'] ?? '';
     $attribute_box_content = $attributes['latestNewsHeadline'] ?? '';
-    $attribute_box_className = $attributes['latestNewsClassName'] ?? '';
     $attribute_box_numberItems = $attributes['latestNewsNumber'] ?? 3;
     $attribute_box_hasDate = $attributes['latestNewsHasDate'] ?? 'true';
     $attribute_box_hasImage = $attributes['latestNewsHasImage'] ?? 'true';
-    $attribute_box_expiryWeeks = $attributes['latestNewsExpiry'] ?? 8;
+    $attribute_box_expiryWeeks = $attributes['latestNewsExpiry'] ?? 0;
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -33,6 +32,36 @@ function render_callback_latest_news_block($attributes, $content)
     ?>
 
     <?php
+
+        if ($attribute_box_expiryWeeks && is_numeric($attribute_box_expiryWeeks)) {
+            $expiryDateDays = -7*$attribute_box_expiryWeeks;
+            $expiryDate = strtotime($expiryDateDays." day", strtotime("now"));
+        }
+        // The Query
+        $query = new WP_Query( array( 'post_type' => 'news' ) );
+
+        // The Loop
+        $news_array = array();
+        if ( $query->have_posts() ) {
+            while ( $query->have_posts() ) {
+                $query->the_post();
+                if (count($news_array) > $attribute_box_numberItems) break;
+                if ($attribute_box_expiryWeeks && strtotime(get_the_date()) < $expiryDate) break;
+
+                if (has_post_thumbnail( $post -> get_the_ID() )) {
+                    $image = wp_get_attachment_image_src( get_post_thumbnail_id( )) ;
+                }
+                $news_array[] = [get_the_title(), get_the_date('d F Y'), get_permalink(get_the_ID()), $image[0] ];
+                if (has_post_thumbnail(get_the_ID())) {
+                    $news_array[3] = hale_post_thumbnail();                    ;
+                };
+            }
+        } else {
+            // no posts found
+        }
+        /* Restore original Post Data */
+        wp_reset_postdata();
+/*
         //placeholders TO CHANGE
         $news_array = array(
             array("Capt. Kirk gaoled for splitting infinitive", "1 October", "https://regia.org/wychurst/", ""),
@@ -41,17 +70,11 @@ function render_callback_latest_news_block($attributes, $content)
             array("William Longespée, Earl of Salisbury, issues statement", "3 September", "https://regia.org/members/armorial.php", "https://regia.org/members/armorial/EK.png"),
             array("Man digs trench on a weekend", "31 August", "https://regia.org/wychurst/", "https://regia.org/wychurst/images/pic2.jpg")
         );
+*/
 
-        if ($attribute_box_expiryWeeks && is_numeric($attribute_box_expiryWeeks)) {
-            $expiryDateDays = -7*$attribute_box_expiryWeeks;
-            $expiryDate = strtotime($expiryDateDays." day", strtotime("now"));
-        }
-
-        if (count($news_array) < $attribute_box_numberItems) $attribute_box_numberItems = count($news_array); //makes sure the array cannot be shorter than the news articles to display
-        
         if ($attribute_box_hasImage) {
             $hasImage = false;
-            for ($j = 0; $j < $attribute_box_numberItems; $j++) {
+            for ($j = 0; $j < count($news_array); $j++) {
                 if ($news_array[$j][3]) {
                     $hasImage = true;
                     //set placeholder for absent image
@@ -68,26 +91,21 @@ function render_callback_latest_news_block($attributes, $content)
         }
     ?>
 
-    <div class="<?php _e(esc_html($attribute_box_className)) ; ?> mojblocks-latest-news">
+    <div class="mojblocks-latest-news">
         <div class="govuk-width-container">
             <h2><?php _e(esc_html($attribute_box_title)); ?></h2>
             <div class="govuk-grid-row">
                 <?php
                     $i = 0;
-                    while ($i < $attribute_box_numberItems) {
+                    while ($i < count($news_array)) {
                         $articleDate = strtotime($news_array[$i][1]);
-                        if ($articleDate < $expiryDate) {
-                            echo "<!-- Next news article dated: ".$news_array[$i][1].", which is before cut-off date of " . date("j F Y",$expiryDate).".-->";
-                            break;
+                        if (date("Y") == date("Y",$articleDate)) {
+                            $dateString = date("j F",$articleDate);
                         } else {
-                            if (date("Y") == date("Y",$articleDate)) {
-                                $dateString = date("j F",$articleDate);
-                            } else {
-                                $dateString = date("j F Y",$articleDate);
-                            }
+                            $dateString = date("j F Y",$articleDate);
                         }
                         $news_array[$i][1] = $dateString;
-                    ?>
+                ?>
                         <div class="mojblocks-latest-news__item">
                             <?php if($attribute_box_hasImage && $hasImage) { 
                                 $extraClass = "";
