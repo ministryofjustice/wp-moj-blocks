@@ -48,34 +48,22 @@ function render_callback_latest_news_block($attributes, $content)
                 if (count($news_array) > $attribute_box_numberItems) break;
                 if ($attribute_box_expiryWeeks && strtotime(get_the_date()) < $expiryDate) break;
 
-                if (has_post_thumbnail( $post -> get_the_ID() )) {
-                    $image = wp_get_attachment_image_src( get_post_thumbnail_id( )) ;
-                }
-                $news_array[] = [get_the_title(), get_the_date('d F Y'), get_permalink(get_the_ID()), $image[0] ];
-                if (has_post_thumbnail(get_the_ID())) {
-                    $news_array[3] = hale_post_thumbnail();                    ;
-                };
+                $news_array[] = [
+                    "title" => get_the_title(),
+                    "date" => get_the_date('d F Y'),
+                    "link" => get_permalink(get_the_ID()),
+                ];
             }
         } else {
             // no posts found
         }
         /* Restore original Post Data */
         wp_reset_postdata();
-/*
-        //placeholders TO CHANGE
-        $news_array = array(
-            array("Capt. Kirk gaoled for splitting infinitive", "1 October", "https://regia.org/wychurst/", ""),
-            array("Vikings sail down river", "21 September", "https://regia.org/fleet/fleet.php", "https://regia.org/fleet/images/Pershore2015-HelenBowsteadStallybrass.jpg"), 
-            array("Embriodery workshop moves outdoors", "09 September", "https://regia.org/about.php", "https://regia.org/images/about/EmbroideryWychurst2014-MjB.JPG"),
-            array("William Longespée, Earl of Salisbury, issues statement", "3 September", "https://regia.org/members/armorial.php", "https://regia.org/members/armorial/EK.png"),
-            array("Man digs trench on a weekend", "31 August", "https://regia.org/wychurst/", "https://regia.org/wychurst/images/pic2.jpg")
-        );
-*/
 
         if ($attribute_box_hasImage) {
             $hasImage = false;
             for ($j = 0; $j < count($news_array); $j++) {
-                if ($news_array[$j][3]) {
+                if ($news_array[$j]["image"]) {
                     $hasImage = true;
                     //set placeholder for absent image
                     if ( has_custom_logo() ) {
@@ -98,19 +86,19 @@ function render_callback_latest_news_block($attributes, $content)
                 <?php
                     $i = 0;
                     while ($i < count($news_array)) {
-                        $articleDate = strtotime($news_array[$i][1]);
+                        $articleDate = strtotime($news_array[$i]["date"]);
                         if (date("Y") == date("Y",$articleDate)) {
                             $dateString = date("j F",$articleDate);
                         } else {
                             $dateString = date("j F Y",$articleDate);
                         }
-                        $news_array[$i][1] = $dateString;
+                        $news_array[$i]["date"] = $dateString;
                 ?>
                         <div class="mojblocks-latest-news__item">
                             <?php if($attribute_box_hasImage && $hasImage) { 
                                 $extraClass = "";
-                                if ($news_array[$i][3]) {
-                                    $thumbnail_image = esc_html($news_array[$i][3]);
+                                if ($news_array[$i]["image"]) {
+                                    $thumbnail_image = esc_html($news_array[$i]["image"]);
                                 } else {
                                     $extraClass = "mojblocks-latest-news__image--no-bespoke-image";
                                     $thumbnail_image = $image;
@@ -120,11 +108,11 @@ function render_callback_latest_news_block($attributes, $content)
                                 </div>
                             <?php } ?>
                             <div class="mojblocks-latest-news__headline" >
-                                <a href="<?php _e(esc_html($news_array[$i][2]));?>"><?php _e(esc_html($news_array[$i][0]));?></a>
+                                <a href="<?php _e(esc_html($news_array[$i]["link"]));?>"><?php _e(esc_html($news_array[$i]["title"]));?></a>
                             </div>
                             <?php if ($attribute_box_hasDate) { ?>
                                 <div class="mojblocks-latest-news__date" >
-                                    <?php _e(esc_html($news_array[$i][1]));?>
+                                    <?php _e(esc_html($news_array[$i]["date"]));?>
                                 </div>
                             <?php } ?>
                         </div>
