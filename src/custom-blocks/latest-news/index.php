@@ -40,7 +40,7 @@ function render_callback_latest_news_block($attributes, $content)
 
         // The Loop
         $news_array = array();
-        if ( !$query->have_posts() ) {
+        if ( $query->have_posts() ) {
             while ( $query->have_posts() ) {
                 $query->the_post();
                 if (count($news_array) >= $attribute_box_numberItems) break;
