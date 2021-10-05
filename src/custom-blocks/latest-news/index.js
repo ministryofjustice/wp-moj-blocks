@@ -5,6 +5,7 @@ const { RichText, MediaUpload, InspectorControls, URLInputButton } = wp.blockEdi
 const ALLOWED_MEDIA_TYPES = ['image'];
 const { PanelBody } = wp.components;
 
+import { TextControl } from '@wordpress/components';
 import { SelectControl } from '@wordpress/components';
 import { ToggleControl } from '@wordpress/components';
 import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
@@ -33,6 +34,9 @@ registerBlockType("mojblocks/latest-news", {
     latestNewsCutOff: {
       type: "numeric"
     },
+    latestNewsEmptyText: {
+      type: "string"
+    },
     latestNewsExpiry: {
       type: "numeric"
     }
@@ -51,6 +55,7 @@ registerBlockType("mojblocks/latest-news", {
     
     const [ newsNumber, setNewsNumber ] = useState( '3' );
     const [ expiry, setExpiry ] = useState( 0 );
+    const [ emptyText, setEmptyText ] = useState( "No news to display." );
     const [ hasDate, setHasDate ] = useState( true );
 
     return (
@@ -72,6 +77,12 @@ registerBlockType("mojblocks/latest-news", {
               onChange={ () => {
                 setHasDate( ( state ) => ! state );
               } }
+            />
+            <TextControl
+              label="Text for no news"
+              value={ emptyText }
+              onChange={ setAttributes({ latestNewsEmptyText: emptyText } ) }
+              onChange={ setEmptyText }
             />
             <NumberControl
               label="Auto-hide after how many weeks"

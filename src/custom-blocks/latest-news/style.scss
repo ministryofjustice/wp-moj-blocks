@@ -15,7 +15,7 @@ Block: Staggered Box (Frontend styles)
 		// Gov UK override keeping the block within the container.
 		margin-right: 0;
 		margin-left: 0;
-	}
+	}	
 
 	@include govuk-media-query($from: tablet) {
 		@include govuk-clearfix;
@@ -52,3 +52,8 @@ Block: Staggered Box (Frontend styles)
 		display:none;
 	}
 }
+
+.wp-block-column:not([style="flex-basis:66.66%"]) .mojblocks-latest-news__item {
+	display: block;
+}
+

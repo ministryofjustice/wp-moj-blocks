@@ -20,6 +20,7 @@ function render_callback_latest_news_block($attributes, $content)
     $attribute_box_numberItems = $attributes['latestNewsNumber'] ?? 3;
     $attribute_box_hasDate = $attributes['latestNewsHasDate'] ?? 'true';
     $attribute_box_expiryWeeks = $attributes['latestNewsExpiry'] ?? 0;
+    $attribute_box_emptyText = $attributes['latestNewsEmptyText'] ?? 'No news to display.';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -39,20 +40,20 @@ function render_callback_latest_news_block($attributes, $content)
 
         // The Loop
         $news_array = array();
-        if ( $query->have_posts() ) {
+        if ( !$query->have_posts() ) {
             while ( $query->have_posts() ) {
                 $query->the_post();
-                if (count($news_array) > $attribute_box_numberItems) break;
+                if (count($news_array) >= $attribute_box_numberItems) break;
                 if ($attribute_box_expiryWeeks && strtotime(get_the_date()) < $expiryDate) break;
 
+                if (!get_the_title() || !get_the_date() || !get_permalink(get_the_ID())) continue;
+                
                 $news_array[] = [
                     "title" => get_the_title(),
                     "date" => get_the_date('d F Y'),
                     "link" => get_permalink(get_the_ID()),
                 ];
             }
-        } else {
-            // no posts found
         }
         /* Restore original Post Data */
         wp_reset_postdata();
@@ -64,27 +65,31 @@ function render_callback_latest_news_block($attributes, $content)
             <div class="govuk-grid-row">
                 <?php
                     $i = 0;
-                    while ($i < count($news_array)) {
-                        $articleDate = strtotime($news_array[$i]["date"]);
-                        if (date("Y") == date("Y",$articleDate)) {
-                            $dateString = date("j F",$articleDate);
-                        } else {
-                            $dateString = date("j F Y",$articleDate);
-                        }
-                        $news_array[$i]["date"] = $dateString;
-                ?>
-                        <div class="mojblocks-latest-news__item">
-                            <div class="govuk-body mojblocks-latest-news__headline" >
-                                <a href="<?php _e(esc_html($news_array[$i]["link"]));?>"><?php _e(esc_html($news_array[$i]["title"]));?></a>
-                            </div>
-                            <?php if ($attribute_box_hasDate) { ?>
-                                <div class="mojblocks-latest-news__date" >
-                                    <?php _e(esc_html($news_array[$i]["date"]));?>
+                    if (count($news_array)) {
+                        while ($i < count($news_array)) {
+                            $articleDate = strtotime($news_array[$i]["date"]);
+                            if (date("Y") == date("Y",$articleDate)) {
+                                $dateString = date("j F",$articleDate);
+                            } else {
+                                $dateString = date("j F Y",$articleDate);
+                            }
+                            $news_array[$i]["date"] = $dateString;
+                    ?>
+                            <div class="mojblocks-latest-news__item">
+                                <div class="govuk-body mojblocks-latest-news__headline" >
+                                    <a href="<?php _e(esc_html($news_array[$i]["link"]));?>"><?php _e(esc_html($news_array[$i]["title"]));?></a>
                                 </div>
-                            <?php } ?>
-                        </div>
-                    <?php
-                        $i++;
+                                <?php if ($attribute_box_hasDate) { ?>
+                                    <div class="mojblocks-latest-news__date" >
+                                        <?php _e(esc_html($news_array[$i]["date"]));?>
+                                    </div>
+                                <?php } ?>
+                            </div>
+                        <?php
+                            $i++;
+                        }
+                    } else {
+                        _e("<p class='govuk-body'>".esc_html($attribute_box_emptyText)."</p>");
                     }
                 ?>
             </div>
