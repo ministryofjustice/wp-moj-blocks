@@ -7,22 +7,36 @@ const { PanelBody } = wp.components;
 const templateLatestNewsBlock = [
   [ 'core/heading', { placeholder: 'Add latest news section title' } ]
 ];
-let title0 = 'ABC';
-let title1 = '';
-let title2 = '';
-let date0 = '';
-let date1 = '';
-let date2 = '';
+let title0 = 'Title automatically updated';
+let title1 = 'Title automatically updated';
+let title2 = 'Title automatically updated';
+let date0 = 'Date';
+let date1 = 'Date';
+let date2 = 'Date';
+
+var month = new Array();
+month["01"] = "January";
+month["02"] = "February";
+month["03"] = "March";
+month["04"] = "April";
+month["05"] = "May";
+month["06"] = "June";
+month["07"] = "July";
+month["08"] = "August";
+month["09"] = "September";
+month["10"] = "October";
+month["11"] = "November";
+month["12"] = "December";
 
 wp.apiFetch( { path: '/wp/v2/news?per_page=3' } ).then( function( posts ){
   console.log( 'Title of the first item is: ' + posts[0].title.rendered );
   console.log( posts[0] );
-title0 = posts[0].title.rendered;
-title1 = posts[1].title.rendered;
-title2 = posts[2].title.rendered;
-date0 = posts[0].date;
-date1 = posts[1].date;
-date2 = posts[2].date;
+  document.querySelector('.mojblocks-latest-news__title-0').innerHTML = posts[0].title.rendered;
+  document.querySelector('.mojblocks-latest-news__title-1').innerHTML = posts[1].title.rendered;
+  document.querySelector('.mojblocks-latest-news__title-2').innerHTML = posts[2].title.rendered;
+  document.querySelector('.mojblocks-latest-news__date-0').innerHTML = posts[0].date.split("-")[2].substring(0, 2) + " " + month[posts[0].date.split("-")[1]];
+  document.querySelector('.mojblocks-latest-news__date-1').innerHTML = posts[1].date.split("-")[2].substring(0, 2) + " " + month[posts[1].date.split("-")[1]];
+  document.querySelector('.mojblocks-latest-news__date-2').innerHTML = posts[2].date.split("-")[2].substring(0, 2) + " " + month[posts[2].date.split("-")[1]];
 } );
 
 
@@ -122,28 +136,28 @@ registerBlockType("mojblocks/latest-news", {
               template={ templateLatestNewsBlock }
               templateLock="all"
             />
-            <div className={`govuk-grid-row mojblocks-latest-news--item-count-${newsNumber} ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ` }>
+            <div className={`govuk-grid-row mojblocks-latest-news--expiry-weeks-${expiry} ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ` }>
               <div className="mojblocks-latest-news__item">
                 <div className="govuk-body mojblocks-latest-news__headline" >
-                  <a href="#">{title0}</a>
+                  <a className="mojblocks-latest-news__title-0" href="#">{title0}</a>
                 </div>
-                <div className="mojblocks-latest-news__date" >
+                <div className="mojblocks-latest-news__date mojblocks-latest-news__date-0" >
                   {date0.toLocaleString('en-GB', {day: '2-digit', month: 'long' }) + ''}
                 </div>
               </div>
               <div className="mojblocks-latest-news__item">
                 <div className="govuk-body mojblocks-latest-news__headline" >
-                  <a href="#">{title1}</a>
+                  <a className="mojblocks-latest-news__title-1" href="#">{title1}</a>
                 </div>
-                <div className="mojblocks-latest-news__date" >
+                <div className="mojblocks-latest-news__date mojblocks-latest-news__date-1" >
                   {date1.toLocaleString('en-GB', {day: '2-digit', month: 'long' }) + ''}
                 </div>
               </div>
               <div className="mojblocks-latest-news__item">
                 <div className="govuk-body mojblocks-latest-news__headline" >
-                  <a href="#">{title2}</a>
+                  <a className="mojblocks-latest-news__title-2" href="#">{title2}</a>
                 </div>
-                <div className="mojblocks-latest-news__date" >
+                <div className="mojblocks-latest-news__date mojblocks-latest-news__date-2" >
                   {date2.toLocaleString('en-GB', {day: '2-digit', month: 'long' }) + ''}
                 </div>
               </div>
