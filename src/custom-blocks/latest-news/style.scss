@@ -8,7 +8,26 @@ Block: Staggered Box (Frontend styles)
 .mojblocks-latest-news {
 	margin: 48px 0;
 	margin: govuk-px-to-rem(48) 0;
-
+/*
+	h1 {
+		@extend .govuk-heading-xl;
+	}
+	h2 {
+		@extend .govuk-heading-l;
+	}
+	h3 {
+		@extend .govuk-heading-m;
+	}
+	h4 {
+		@extend .govuk-heading-s;
+	}
+	h5 {
+		@extend .govuk-body;
+	}
+	h6 {
+		@extend .govuk-body-s;
+	}
+*/
 	& .govuk-grid-row {
 		position: relative;
 
