@@ -46,7 +46,7 @@ function render_callback_latest_news_block($attributes, $content)
                 if (count($news_array) >= $attribute_box_numberItems) break;
                 if ($attribute_box_expiryWeeks && strtotime(get_the_date()) < $expiryDate) break;
 
-                if (!get_the_title() || !get_the_date() || !get_permalink(get_the_ID())) continue;
+                if (!get_the_title() || !get_the_date() || !get_permalink(get_the_ID())) continue; //in case any of the required items is missing, we skip this entry
                 
                 $news_array[] = [
                     "title" => get_the_title(),
@@ -55,7 +55,7 @@ function render_callback_latest_news_block($attributes, $content)
                 ];
             }
         }
-        /* Restore original Post Data */
+        // Restore original Post Data
         wp_reset_postdata();
     ?>
 
