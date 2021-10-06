@@ -7,10 +7,27 @@ const { PanelBody } = wp.components;
 const templateLatestNewsBlock = [
   [ 'core/heading', { placeholder: 'Add latest news section title' } ]
 ];
+let title0 = 'ABC';
+let title1 = '';
+let title2 = '';
+let date0 = '';
+let date1 = '';
+let date2 = '';
+
+wp.apiFetch( { path: '/wp/v2/news?per_page=3' } ).then( function( posts ){
+  console.log( 'Title of the first item is: ' + posts[0].title.rendered );
+  console.log( posts[0] );
+title0 = posts[0].title.rendered;
+title1 = posts[1].title.rendered;
+title2 = posts[2].title.rendered;
+date0 = posts[0].date;
+date1 = posts[1].date;
+date2 = posts[2].date;
+} );
+
 
 import { InnerBlocks } from "@wordpress/block-editor";
 import { TextControl } from '@wordpress/components';
-import { SelectControl } from '@wordpress/components';
 import { ToggleControl } from '@wordpress/components';
 import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
@@ -50,6 +67,8 @@ registerBlockType("mojblocks/latest-news", {
     const [ emptyText, setEmptyText ] = useState( "No news to display." );
     const [ hasDate, setHasDate ] = useState( true );
 
+   
+  
     return (
       <Fragment >
         <InspectorControls>
@@ -106,26 +125,26 @@ registerBlockType("mojblocks/latest-news", {
             <div className={`govuk-grid-row mojblocks-latest-news--item-count-${newsNumber} ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ` }>
               <div className="mojblocks-latest-news__item">
                 <div className="govuk-body mojblocks-latest-news__headline" >
-                  <a href="#">News Headline Automatically Populated</a>
+                  <a href="#">{title0}</a>
                 </div>
                 <div className="mojblocks-latest-news__date" >
-                  {new Date().toLocaleString('en-GB', {day: '2-digit', month: 'long' }) + ''}
+                  {date0.toLocaleString('en-GB', {day: '2-digit', month: 'long' }) + ''}
                 </div>
               </div>
               <div className="mojblocks-latest-news__item">
                 <div className="govuk-body mojblocks-latest-news__headline" >
-                  <a href="#">News Headline Automatically Populated</a>
+                  <a href="#">{title1}</a>
                 </div>
                 <div className="mojblocks-latest-news__date" >
-                  {new Date().toLocaleString('en-GB', {day: '2-digit', month: 'long' }) + ''}
+                  {date1.toLocaleString('en-GB', {day: '2-digit', month: 'long' }) + ''}
                 </div>
               </div>
               <div className="mojblocks-latest-news__item">
                 <div className="govuk-body mojblocks-latest-news__headline" >
-                  <a href="#">News Headline Automatically Populated</a>
+                  <a href="#">{title2}</a>
                 </div>
                 <div className="mojblocks-latest-news__date" >
-                  {new Date().toLocaleString('en-GB', {day: '2-digit', month: 'long' }) + ''}
+                  {date2.toLocaleString('en-GB', {day: '2-digit', month: 'long' }) + ''}
                 </div>
               </div>
             </div>
