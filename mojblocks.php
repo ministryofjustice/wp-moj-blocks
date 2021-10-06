@@ -92,8 +92,8 @@ function mojblocks_register_blocks()
         $meta = require_once('build/index.asset.php');
     } else {
         $meta = [
-            'dependencies' => array('wp-blocks', 'wp-dom-ready', 'wp-edit-post', 'wp-hooks'),
-            'version' => '20200723'
+            'dependencies' => array('wp-data', 'wp-blocks', 'wp-dom-ready', 'wp-edit-post', 'wp-hooks'),
+            'version' => '20211006'
         ];
 
         trigger_error(
@@ -355,23 +355,17 @@ function mojblocks_register_blocks()
             'editor_script' => 'mojblocks-editor-script',
             'render_callback' => 'render_callback_latest_news_block',
             'attributes' => [
-                'latestNewsTitle' => [
-                    'type' => 'string'
-                ],
-                'latestNewsImageURL' => [
-                    'type' => 'string'
-                ],
-                'laterstNewsImageAltText' => [
-                    'type' => 'string'
-                ],
-                'latestNewsHeadline' => [
-                    'type' => 'string'
-                ],
                 'latestNewsNumber' => [
                     'type' => 'integer'
                 ],
                 'latestNewsHasDate' => [
                     'type' => 'boolean'
+                ],
+                'latestNewsExpiry' => [
+                    'type' => 'string'
+                ],
+                'latestNewsEmptyText' => [
+                    'type' => 'string'
                 ],
                 'latestNewsClassName' => [
                     'type' => 'string'
