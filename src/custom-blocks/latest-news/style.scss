@@ -47,6 +47,13 @@ Block: Staggered Box (Frontend styles)
 		}
 	}
 
+	.post-expired, .empty-text {
+		display:none;
+	}
+	.empty-text.is-empty {
+		display:block;
+	}
+
 	&__headline {
 		margin-top: 16px;
 		margin-top: govuk-px-to-rem(16);

@@ -13,8 +13,9 @@ let title2 = 'Title automatically updated';
 let date0 = 'Date';
 let date1 = 'Date';
 let date2 = 'Date';
+const d = new Date();
 
-function datify(x) {
+function datify(x,d) {
   var month = new Array();
   month[1] = "January";
   month[2] = "February";
@@ -30,7 +31,6 @@ function datify(x) {
   month[12] = "December";
 
   var x = x.split("-");
-  const d = new Date();
 
   if (x.length != 3) {
     //wrong format, return today
@@ -49,15 +49,48 @@ function datify(x) {
 
 }
 
-function checkExpired() {
-  //loop through all dates
-  let dates = document.querySelector('.mojblocks-latest-news__date');
-
-  for (i=0; i<dates.length;i++) {
-
+function checkExpired(d) {
+  let allBlocks = document.querySelectorAll('.mojblocks-latest-news');
+  for (let i=0; i<allBlocks.length;i++) {
+    let classes = allBlocks[i].classList;
+    let dates = allBlocks[i].querySelectorAll('.mojblocks-latest-news__date');
+    if (!classes.contains("mojblocks-latest-news--expiry-weeks-0")) {
+      //extract the expiry from the class - always in position [1]
+      let expiryLength = classes[1].replace("mojblocks-latest-news--expiry-weeks-","");
+      for (let j=0; j<dates.length;j++) {
+        let articleDate;
+        if (new Date(dates[j].innerHTML).getFullYear() > 2001) {
+          articleDate = Date.parse(dates[j].innerHTML); //if greater than 2001, the year is specified
+        } else {
+          articleDate = Date.parse(dates[j].innerHTML + " " + d.getFullYear()); //else, use current year
+        }
+        let todaysDate = Date.parse(d);
+        //add or remove a class that will hide expired posts
+        if (Math.round((todaysDate - articleDate) / (7 * 24 * 60 * 60 * 1000) > parseInt(expiryLength))) {
+          dates[j].parentElement.classList.add("post-expired");
+        } else {
+          dates[j].parentElement.classList.remove("post-expired");
+        }
+      }    
+    } else {
+      for (let j=0; j<dates.length;j++) {
+        //if set to 0, we have to remove any instances of the hide post class
+        dates[j].parentElement.classList.remove("post-expired");
+      }
+    }
+    checkEmpty();
   }
+}
 
-
+function checkEmpty() {
+  let allBlocks = document.querySelectorAll('.mojblocks-latest-news');
+  for (let i=0; i<allBlocks.length;i++) {
+    if (allBlocks[i].querySelectorAll(".post-expired").length === allBlocks[i].querySelectorAll(".mojblocks-latest-news__item").length) {
+      allBlocks[i].querySelector(".empty-text").classList.add("is-empty");
+    } else {
+      allBlocks[i].querySelector(".empty-text").classList.remove("is-empty");
+    }
+  }
 }
 
 wp.apiFetch( { path: '/wp/v2/news?per_page=3' } ).then( function( posts ){
@@ -66,11 +99,13 @@ wp.apiFetch( { path: '/wp/v2/news?per_page=3' } ).then( function( posts ){
   document.querySelector('.mojblocks-latest-news__title-0').innerHTML = posts[0].title.rendered;
   document.querySelector('.mojblocks-latest-news__title-1').innerHTML = posts[1].title.rendered;
   document.querySelector('.mojblocks-latest-news__title-2').innerHTML = posts[2].title.rendered;
-  document.querySelector('.mojblocks-latest-news__date-0').innerHTML = datify(posts[0].date);
-  document.querySelector('.mojblocks-latest-news__date-1').innerHTML = datify(posts[1].date);
-  document.querySelector('.mojblocks-latest-news__date-2').innerHTML = datify(posts[2].date);
+  document.querySelector('.mojblocks-latest-news__date-0').innerHTML = datify(posts[0].date,d);
+  document.querySelector('.mojblocks-latest-news__date-1').innerHTML = datify(posts[1].date,d);
+  document.querySelector('.mojblocks-latest-news__date-2').innerHTML = datify(posts[2].date,d);
 
-} );
+  checkExpired(d);
+
+});
 
 
 import { InnerBlocks } from "@wordpress/block-editor";
@@ -151,6 +186,7 @@ registerBlockType("mojblocks/latest-news", {
               value= {expiry}
               min="0"
               onChange={ setAttributes({ latestNewsExpiry: expiry } ) }
+              onChange={ checkExpired(d) }
               onChange={ setExpiry }
             />
             <Text>
@@ -163,13 +199,14 @@ registerBlockType("mojblocks/latest-news", {
           </PanelBody>
         </InspectorControls>
 
-        <div className={`${className} mojblocks-latest-news`}>
+        <div className={`mojblocks-latest-news mojblocks-latest-news--expiry-weeks-${expiry} ${className}`}>
           <div className="govuk-width-container">
             <InnerBlocks
               template={ templateLatestNewsBlock }
               templateLock="all"
             />
-            <div className={`govuk-grid-row mojblocks-latest-news--expiry-weeks-${expiry} ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ` }>
+            <div className={`govuk-grid-row ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ` }>
+              <p class="empty-text">{emptyText}</p>
               <div className="mojblocks-latest-news__item">
                 <div className="govuk-body mojblocks-latest-news__headline" >
                   <a className="mojblocks-latest-news__title-0" href="#">{title0}</a>
@@ -190,7 +227,7 @@ registerBlockType("mojblocks/latest-news", {
                 <div className="govuk-body mojblocks-latest-news__headline" >
                   <a className="mojblocks-latest-news__title-2" href="#">{title2}</a>
                 </div>
-                <div className="mojblocks-latest-news__date mojblocks-latest-news__date-2" >
+                <div className="mojblocks-latest-news__date mojblocks-latest-news__date-2">
                   {date2.toLocaleString('en-GB', {day: '2-digit', month: 'long' }) + ''}
                 </div>
               </div>
