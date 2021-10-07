@@ -362,7 +362,7 @@ function mojblocks_register_blocks()
                     'type' => 'boolean'
                 ],
                 'latestNewsExpiry' => [
-                    'type' => 'string'
+                    'type' => 'integer'
                 ],
                 'latestNewsEmptyText' => [
                     'type' => 'string'
