@@ -14,19 +14,51 @@ let date0 = 'Date';
 let date1 = 'Date';
 let date2 = 'Date';
 
-var month = new Array();
-month["01"] = "January";
-month["02"] = "February";
-month["03"] = "March";
-month["04"] = "April";
-month["05"] = "May";
-month["06"] = "June";
-month["07"] = "July";
-month["08"] = "August";
-month["09"] = "September";
-month["10"] = "October";
-month["11"] = "November";
-month["12"] = "December";
+function datify(x) {
+  var month = new Array();
+  month[1] = "January";
+  month[2] = "February";
+  month[3] = "March";
+  month[4] = "April";
+  month[5] = "May";
+  month[6] = "June";
+  month[7] = "July";
+  month[8] = "August";
+  month[9] = "September";
+  month[10] = "October";
+  month[11] = "November";
+  month[12] = "December";
+
+  var x = x.split("-");
+  const d = new Date();
+
+  if (x.length != 3) {
+    //wrong format, return today
+    return d.toLocaleString('en-GB', {day: '2-digit', month: 'long' });
+  }
+
+  var day = x[2].substring(0, 2);
+  var month = " " + month[parseInt(x[1])];
+  var year = " " + x[0];
+
+  if (d.getFullYear() == x[0]) {
+    return day + month;
+  } else {
+    return day + month + year;
+  }
+
+}
+
+function checkExpired() {
+  //loop through all dates
+  let dates = document.querySelector('.mojblocks-latest-news__date');
+
+  for (i=0; i<dates.length;i++) {
+
+  }
+
+
+}
 
 wp.apiFetch( { path: '/wp/v2/news?per_page=3' } ).then( function( posts ){
   console.log( 'Title of the first item is: ' + posts[0].title.rendered );
@@ -34,9 +66,10 @@ wp.apiFetch( { path: '/wp/v2/news?per_page=3' } ).then( function( posts ){
   document.querySelector('.mojblocks-latest-news__title-0').innerHTML = posts[0].title.rendered;
   document.querySelector('.mojblocks-latest-news__title-1').innerHTML = posts[1].title.rendered;
   document.querySelector('.mojblocks-latest-news__title-2').innerHTML = posts[2].title.rendered;
-  document.querySelector('.mojblocks-latest-news__date-0').innerHTML = posts[0].date.split("-")[2].substring(0, 2) + " " + month[posts[0].date.split("-")[1]];
-  document.querySelector('.mojblocks-latest-news__date-1').innerHTML = posts[1].date.split("-")[2].substring(0, 2) + " " + month[posts[1].date.split("-")[1]];
-  document.querySelector('.mojblocks-latest-news__date-2').innerHTML = posts[2].date.split("-")[2].substring(0, 2) + " " + month[posts[2].date.split("-")[1]];
+  document.querySelector('.mojblocks-latest-news__date-0').innerHTML = datify(posts[0].date);
+  document.querySelector('.mojblocks-latest-news__date-1').innerHTML = datify(posts[1].date);
+  document.querySelector('.mojblocks-latest-news__date-2').innerHTML = datify(posts[2].date);
+
 } );
 
 
