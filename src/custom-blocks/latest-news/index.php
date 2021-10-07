@@ -29,13 +29,28 @@ function render_callback_latest_news_block($attributes, $content)
     ?>
 
     <?php
-
+        $expiryDate = strtotime("01 Jan 1970");
         if ($attribute_box_expiryWeeks && is_numeric($attribute_box_expiryWeeks)) {
             $expiryDateDays = -7*$attribute_box_expiryWeeks;
             $expiryDate = strtotime($expiryDateDays." day", strtotime("now"));
         }
+
         // The Query
-        $query = new WP_Query( array( 'post_type' => 'news', 'posts_per_page' => 5 ) ); //only 3 are used, pulling through 5 gives 2 extra in case one is corrupted somehow
+        $args = array(
+            'date_query' => array(
+                array(
+                    'after'    => array(
+                        'year'  => date("Y",$expiryDate),
+                        'month' => date("m",$expiryDate),
+                        'day'   => date("j",$expiryDate),
+                    ),
+                    'inclusive' => true,
+                ),
+            ),
+            'post_type' => 'news', 
+            'posts_per_page' => 5, //only 3 are used, pulling through 5 gives 2 extra in case one is corrupted somehow
+        );
+        $query = new WP_Query( $args ); 
 
         // The Loop
         $news_array = array();
@@ -43,8 +58,7 @@ function render_callback_latest_news_block($attributes, $content)
             while ( $query->have_posts() ) {
                 $query->the_post();
                 if (count($news_array) >= $attribute_box_numberItems) break;
-                if ($attribute_box_expiryWeeks && strtotime(get_the_date()) < $expiryDate) break;
-
+                
                 if (!get_the_title() || !get_the_date() || !get_permalink(get_the_ID())) continue; //in case any of the required items is missing, we skip this entry
                 
                 $news_array[] = [

@@ -183,12 +183,12 @@ registerBlockType("mojblocks/latest-news", {
               label="Auto-hide after how many weeks"
               value= {expiry}
               min="0"
-              onChange={ setAttributes({ latestNewsExpiry: expiry } ) }
               onChange={ checkExpired(d) }
+              onChange={ setAttributes({ latestNewsExpiry: expiry } ) }
               onChange={ setExpiry }
             />
             <Text>
-             { expiry === 0 
+             { expiry == 0 
                 ? "Articles will not expire."
                 : "Articles will expire after " + expiry + " weeks."
               }
