@@ -94,8 +94,6 @@ function checkEmpty() {
 }
 
 wp.apiFetch( { path: '/wp/v2/news?per_page=3' } ).then( function( posts ){
-  console.log( 'Title of the first item is: ' + posts[0].title.rendered );
-  console.log( posts[0] );
   document.querySelector('.mojblocks-latest-news__title-0').innerHTML = posts[0].title.rendered;
   document.querySelector('.mojblocks-latest-news__title-1').innerHTML = posts[1].title.rendered;
   document.querySelector('.mojblocks-latest-news__title-2').innerHTML = posts[2].title.rendered;
