@@ -15,8 +15,6 @@ function render_callback_hero_block($attributes, $content)
 {
 
     // Parse attributes found in index.js
-    $attribute_hero_title = $attributes['heroTitle'] ?? '';
-    $attribute_hero_text = $attributes['heroText'] ?? '';
     $attribute_hero_image = $attributes['backgroundImage'] ?? '';
     $attribute_hero_className = $attributes['heroClassName'] ?? '';
 
