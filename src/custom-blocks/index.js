@@ -12,4 +12,4 @@ import "./intro";
 import "./reveal";
 import "./card";
 import "./banner";
-
+import "./latest-news";
