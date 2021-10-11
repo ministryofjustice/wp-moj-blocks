@@ -92,8 +92,8 @@ function mojblocks_register_blocks()
         $meta = require_once('build/index.asset.php');
     } else {
         $meta = [
-            'dependencies' => array('wp-blocks', 'wp-dom-ready', 'wp-edit-post', 'wp-hooks'),
-            'version' => '20200723'
+            'dependencies' => array('wp-data', 'wp-blocks', 'wp-dom-ready', 'wp-edit-post', 'wp-hooks'),
+            'version' => '20211006'
         ];
 
         trigger_error(
@@ -348,6 +348,31 @@ function mojblocks_register_blocks()
             ]
         ]
     );
+
+    register_block_type(
+        'mojblocks/latest-news',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_latest_news_block',
+            'attributes' => [
+                'latestNewsNumber' => [
+                    'type' => 'integer'
+                ],
+                'latestNewsHasDate' => [
+                    'type' => 'boolean'
+                ],
+                'latestNewsExpiry' => [
+                    'type' => 'integer'
+                ],
+                'latestNewsEmptyText' => [
+                    'type' => 'string'
+                ],
+                'latestNewsClassName' => [
+                    'type' => 'string'
+                ]
+            ]
+        ]
+    );
 }
 
 /**
@@ -364,6 +389,7 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/intro/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/quote/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/reveal/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/staggered-box/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/latest-news/index.php';
 
 /**
  * Load PHP extended core blocks
