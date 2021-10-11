@@ -83,19 +83,21 @@ function render_callback_latest_news_block($attributes, $content)
                     $i = 0;
                     if (count($news_array)) {
                         while ($i < count($news_array)) {
-                            $articleDate = strtotime($news_array[$i]["date"]);
-                            if (date("Y") == date("Y",$articleDate)) {
-                                $dateString = date("j F",$articleDate);
-                            } else {
-                                $dateString = date("j F Y",$articleDate);
-                            }
-                            $news_array[$i]["date"] = $dateString;
-                    ?>
+                ?>
                             <div class="mojblocks-latest-news__item">
                                 <div class="govuk-body mojblocks-latest-news__headline" >
                                     <a href="<?php _e(esc_html($news_array[$i]["link"]));?>"><?php _e(esc_html($news_array[$i]["title"]));?></a>
                                 </div>
-                                <?php if ($attribute_box_hasDate) { ?>
+                                <?php
+                                if ($attribute_box_hasDate) {
+                                    $articleDate = strtotime($news_array[$i]["date"]);
+                                    if (date("Y") == date("Y",$articleDate)) {
+                                        $dateString = date("j F",$articleDate);
+                                    } else {
+                                        $dateString = date("j F Y",$articleDate);
+                                    }
+                                    $news_array[$i]["date"] = $dateString;
+                                ?>
                                     <div class="mojblocks-latest-news__date" >
                                         <?php _e(esc_html($news_array[$i]["date"]));?>
                                     </div>
