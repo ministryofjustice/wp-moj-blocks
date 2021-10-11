@@ -36,8 +36,8 @@ registerBlockType("mojblocks/hero", {
 
            var imageSizes = imageObject.sizes;
 
-           // determine the image size displayed and outputted to the PHP frontend
-           var image = imageSizes.hero.url.length > 0 || imageSizes.hero == undefined
+           // determine the image size displayed with fallback
+           var image = (typeof imageSizes.hero !== 'undefined')
            ? imageSizes.hero.url
            : imageSizes.full.url;
 
@@ -46,7 +46,7 @@ registerBlockType("mojblocks/hero", {
 
         return ([
             <InspectorControls>
-                <PanelBody title={ __( 'Choose hero block background image', 'mojblocks' ) } initialOpen={true} >
+                <PanelBody title={ __( 'Choose hero block banner image', 'mojblocks' ) } initialOpen={true} >
                 <label className="block-editor-block-hero"><p>For best results, uploaded images must meet a minimum
                  size of 1366x683 pixels (or aspect ratio of 2:1).
                  </p></label>
