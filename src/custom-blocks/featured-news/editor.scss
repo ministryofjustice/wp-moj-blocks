@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Latest News (Gutenberg editor styles)
+
+**********************************************************************************************/
+
+@import 'style.scss';
+
+.mojblocks-latest-news {
+
+	&__text-container.govuk-grid-column-one-half {
+
+		@include govuk-media-query($from: tablet) {
+			margin-top: -5%;
+		}
+	}
+}
