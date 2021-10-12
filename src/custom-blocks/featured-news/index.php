@@ -48,14 +48,14 @@ function render_callback_featured_news_block($attributes, $content)
         $query = new WP_Query( $args ); 
 
         // The Loop
-        $news_array = array();
         if ( $query->have_posts() ) {
             while ( $query->have_posts() ) {
                 $query->the_post();
                 
                 if (get_the_ID() == $attribute_box_featuredID) {
-                    $news_array[] = [
+                    $news_array = [
                         "title" => get_the_title(),
+                        "summary" => get_the_excerpt(),
                         "date" => get_the_date('d F Y'),
                         "link" => get_permalink(get_the_ID()),
                         "image" => "",
@@ -70,7 +70,7 @@ function render_callback_featured_news_block($attributes, $content)
     ?>
 
     <?php
-        if (count($news_array)) {
+        if ($news_array && count($news_array)) {
     ?>
         <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-featured-news">
             <div class="govuk-width-container">
@@ -79,32 +79,28 @@ function render_callback_featured_news_block($attributes, $content)
                     echo $content;
                 ?>
                 <div class="govuk-grid-row">
-                                <div class="mojblocks-featured-news__item">
-                                    <div class="govuk-body mojblocks-featured-news__headline" >
-                                        <a href="<?php _e(esc_html($news_array[$i]["link"]));?>"><?php _e(esc_html($news_array[$i]["title"]));?></a>
-                                    </div>
-                                    <?php
-                                    if ($attribute_box_hasDate) {
-                                        $articleDate = strtotime($news_array[$i]["date"]);
-                                        if (date("Y") == date("Y",$articleDate)) {
-                                            $dateString = date("j F",$articleDate);
-                                        } else {
-                                            $dateString = date("j F Y",$articleDate);
-                                        }
-                                        $news_array[$i]["date"] = $dateString;
-                                    ?>
-                                        <div class="mojblocks-featured-news__date" >
-                                            <?php _e(esc_html($news_array[$i]["date"]));?>
-                                        </div>
-                                    <?php } ?>
-                                </div>
-                            <?php
-                                $i++;
+                    <a href="<?php _e(esc_html($news_array["link"]));?>" class="mojblocks-featured-news__item">
+                        <div class="govuk-body-l mojblocks-featured-news__headline" >
+                            <?php _e(esc_html($news_array["title"]));?>
+                        </div>
+                        <div class="govuk-body mojblocks-featured-news__summary" >
+                            <?php _e(esc_html($news_array["summary"]));?>
+                        </div>
+                        <?php
+                        if ($attribute_box_hasDate) {
+                            $articleDate = strtotime($news_array[$i]["date"]);
+                            if (date("Y") == date("Y",$articleDate)) {
+                                $dateString = date("j F",$articleDate);
+                            } else {
+                                $dateString = date("j F Y",$articleDate);
                             }
-                        } else {
-                            _e("<p class='govuk-body'>".esc_html($attribute_box_emptyText)."</p>");
-                        }
-                    ?>
+                            $news_array["date"] = $dateString;
+                        ?>
+                            <div class="mojblocks-featured-news__date" >
+                                <?php _e(esc_html($news_array["date"]));?>
+                            </div>
+                        <?php } ?>
+                    </a>
                 </div>
             </div>
         </div>

@@ -122,7 +122,7 @@ registerBlockType("mojblocks/featured-news", {
                   { summary }
                 </div>
                 <div className="mojblocks-featured-news__date" >
-                  { date0 }
+                  { datify(date,d) }
                 </div>
               </a>
             </div>
