@@ -5,6 +5,8 @@ Block: Card (Gutenberg editor styles)
 
 **********************************************************************************************/
 
+@import 'style.scss';
+
 .mojblocks-card {
 
 	h2, p {
@@ -79,6 +81,4 @@ Block: Card (Gutenberg editor styles)
 	}
 }
 
-
-@import 'style.scss';
 

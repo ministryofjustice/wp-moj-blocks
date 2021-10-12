@@ -1,6 +1,7 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {  RichText, InspectorControls, MediaUpload, InnerBlocks } = wp.blockEditor;
+const { PanelBody, PanelRow } = wp.components;
 
 registerBlockType("mojblocks/hero", {
     title: __("Hero", "mojblocks"),
@@ -9,12 +10,6 @@ registerBlockType("mojblocks/hero", {
     icon: "schedule",
     attributes: {
         backgroundImage: {
-            type: 'string'
-        },
-        heroTitle: {
-            type: 'string'
-        },
-        heroText: {
             type: 'string'
         },
         heroClassName: {
@@ -26,8 +21,6 @@ registerBlockType("mojblocks/hero", {
             setAttributes,
             attributes: {
                 backgroundImage,
-                heroTitle,
-                heroText
             },
             className
         } = props;
@@ -38,32 +31,38 @@ registerBlockType("mojblocks/hero", {
         // Load allowed blocks to be added to hero content
         const allowedBlocks = [ 'core/heading','core/list', 'core/paragraph', 'mojblocks/intro' ];
 
+
         const onChangeBackgroundImage = imageObject => {
-            setAttributes({ backgroundImage: imageObject.sizes.full.url})
+
+           var imageSizes = imageObject.sizes;
+
+           // determine the image size displayed with fallback
+           var image = (typeof imageSizes.hero !== 'undefined')
+           ? imageSizes.hero.url
+           : imageSizes.full.url;
+
+            setAttributes({ backgroundImage: image })
           }
-
-        const onTitleChange = newTitle => {
-            setAttributes({ heroTitle: newTitle })
-        }
-
-        const onChangeHeroText = newHeroText => {
-            setAttributes({ heroText: newHeroText })
-        }
 
         return ([
             <InspectorControls>
-            <div className="block-editor-block-card">
+                <PanelBody title={ __( 'Choose hero block banner image', 'mojblocks' ) } initialOpen={true} >
+                <label className="block-editor-block-hero"><p>For best results, uploaded images must meet a minimum
+                 size of 1366x683 pixels (or aspect ratio of 2:1).
+                 </p></label>
+                <PanelRow>
             <MediaUpload
             onSelect={ onChangeBackgroundImage }
             type="image"
             value={ backgroundImage }
             render={({ open }) => (
-            <button className="button button-primary button-hero" onClick={open}>
-                Upload background image
-            </button>
-            )}
+                <button className="button button-primary button-hero" onClick={open}>
+                    Upload image
+                </button>
+                )}
             />
-            </div>
+            </PanelRow>
+            </PanelBody>
             </InspectorControls>,
 
         <section className={`${className}  mojblocks-hero`} >
