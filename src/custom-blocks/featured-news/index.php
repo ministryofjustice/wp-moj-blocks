@@ -79,7 +79,7 @@ function render_callback_featured_news_block($attributes, $content)
                     echo $content;
                 ?>
                 <div class="govuk-grid-row">
-                    <a href="<?php _e(esc_html($news_array["link"]));?>" class="mojblocks-featured-news__item">
+                    <div class="mojblocks-featured-news__item">
                         <div class="govuk-body-l mojblocks-featured-news__headline" >
                             <?php _e(esc_html($news_array["title"]));?>
                         </div>
@@ -96,11 +96,14 @@ function render_callback_featured_news_block($attributes, $content)
                             }
                             $news_array["date"] = $dateString;
                         ?>
-                            <div class="mojblocks-featured-news__date" >
+                            <div class="govuk-body-s mojblocks-featured-news__date" >
                                 <?php _e(esc_html($news_array["date"]));?>
                             </div>
                         <?php } ?>
-                    </a>
+                        <a href="<?php _e(esc_html($news_array["link"]));?>" class="mojblocks-featured-news__link">
+                            Read full article
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>

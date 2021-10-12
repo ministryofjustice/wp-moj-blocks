@@ -114,7 +114,7 @@ registerBlockType("mojblocks/featured-news", {
               templateLock="all"
             />
             <div className={`govuk-grid-row ${hasDate ? '' : 'mojblocks-featured-news-hide-date'} ` }>
-              <a href="#" className="mojblocks-featured-news__item">
+              <div href="#" className="mojblocks-featured-news__item">
                 <div className="govuk-body mojblocks-featured-news__headline" >
                   { title }
                 </div>
@@ -124,7 +124,17 @@ registerBlockType("mojblocks/featured-news", {
                 <div className="mojblocks-featured-news__date" >
                   { datify(date,d) }
                 </div>
-              </a>
+                <a class="mojblocks-featured-news__link" href="#">
+                  <RichText
+                    tagName="span"
+                    value={featuredNewsLink ? 'Read full article' : featuredNewsLink }
+                    onChange={onChangefeaturedNewsLink}
+                    className="mojblocks-featured-news__link-text"
+                    placeholder={__('Add link text', 'mojblocks')}
+                    keepPlaceholderOnFocus={true}
+                  />  
+                </a>
+              </div>
             </div>
           </div>
         </div>
