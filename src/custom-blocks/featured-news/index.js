@@ -7,12 +7,6 @@ const { PanelBody } = wp.components;
 const templateLatestNewsBlock = [
   [ 'core/heading', { placeholder: 'Add latest news section title' } ]
 ];
-let title0 = 'Title automatically updated on preview page';
-let title1 = 'Title automatically updated on preview page';
-let title2 = 'Title automatically updated on preview page';
-let date0 = 'Date';
-let date1 = 'Date';
-let date2 = 'Date';
 const d = new Date();
 
 function datify(x,d) {
@@ -50,44 +44,37 @@ function datify(x,d) {
 }
 
 import { InnerBlocks } from "@wordpress/block-editor";
-import { TextControl } from '@wordpress/components';
+import { DateTimePicker } from '@wordpress/components';
 import { ToggleControl } from '@wordpress/components';
-import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
-import { __experimentalText as Text } from '@wordpress/components';
 
-registerBlockType("mojblocks/latest-news", {
-  title: __("Latest News", "mojblocks"),
-  description: __('Display latest news items'),
+registerBlockType("mojblocks/featured-news", {
+  title: __("Featured News", "mojblocks"),
+  description: __('Display featured news item'),
   category: "mojblocks",
-  icon: "slides",
-  keywords: [__('latest news'), __('recent news'), __('headlines')],
+  icon: "dashicons-id-alt",
+  keywords: [__('featured news'), __('headline news'), __('headlines')],
 
   attributes: {
-    latestNewsNumber: {
-      type: "string"
-    },
-    latestNewsHasDate: {
+    featuredNewsHasDate: {
       type: "boolean"
     },
-    latestNewsExpiry: {
-      type: "numeric"
+    featuredNewsExpiry: {
+      type: "datetime"
     },
-    latestNewsEmptyText: {
+    featuredNewsEmptyText: {
       type: "string"
     }
   },
 
   edit: props => {
     const {
-      attributes: { latestNewsTitle },
+      attributes: { featuredNewsTitle },
         className,
         setAttributes
     } = props
 
-    const [ newsNumber, setNewsNumber ] = useState( '3' );
-    const [ expiry, setExpiry ] = useState( 0 );
-    const [ emptyText, setEmptyText ] = useState( "No news to display." );
+    const [ expiry, setExpiry ] = useState( '' );
     const [ hasDate, setHasDate ] = useState( true );
 
    
@@ -103,73 +90,41 @@ registerBlockType("mojblocks/latest-news", {
               label="Show/hide article dates"
               help={
                 hasDate
-                ? 'Dates will be displayed'
-                : 'Dates will be hidden'
+                ? 'The date will be displayed'
+                : 'The date will be hidden'
               }
               checked={ hasDate }
-              onChange={ setAttributes({ latestNewsHasDate: hasDate } ) }
+              onChange={ setAttributes({ featuredNewsHasDate: hasDate } ) }
               onChange={ () => {
                 setHasDate( ( state ) => ! state );
               } }
             />
-            <TextControl
-              label="Text for no news"
-              help={ !emptyText 
-                ? "If there are no news articles to display, the block will be blank."
-                : "This will be shown if there are no articles to display."
-              }
-              value={ emptyText }
-              onChange={ setAttributes({ latestNewsEmptyText: emptyText } ) }
-              onChange={ setEmptyText }
-            />
-            <NumberControl
-              label="Auto-hide after how many weeks"
-              value= {expiry}
-              min="0"
+            <DateTimePicker
+              currentDate={ expiry }
               onChange={ setAttributes({ latestNewsExpiry: expiry } ) }
-              onChange={ setExpiry }
+              onChange={ ( newExpiry ) => setExpiry( newExpiry ) }
             />
-            <Text>
-             { expiry == 0 
-                ? "Articles will not expire."
-                : "Articles will expire after " + expiry + " weeks."
-              }
-            </Text>
-
           </PanelBody>
         </InspectorControls>
 
-        <div className={`mojblocks-latest-news mojblocks-latest-news--expiry-weeks-${expiry} ${className}`}>
+        <div className={`mojblocks-featured-news mojblocks-featured-news--expiry-${expiry} ${className}`}>
           <div className="govuk-width-container">
             <InnerBlocks
-              template={ templateLatestNewsBlock }
+              template={ templateFeaturedNewsBlock }
               templateLock="all"
             />
-            <div className={`govuk-grid-row ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ` }>
-              <div className="mojblocks-latest-news__item">
-                <div className="govuk-body mojblocks-latest-news__headline" >
-                  <a href="#">{title0}</a>
+            <div className={`govuk-grid-row ${hasDate ? '' : 'mojblocks-featured-news-hide-date'} ` }>
+              <a href="#" className="mojblocks-featured-news__item">
+                <div className="govuk-body mojblocks-featured-news__headline" >
+                  { title }
                 </div>
-                <div className="mojblocks-latest-news__date" >
+                <div className="govuk-body mojblocks-featured-news__summary" >
+                  { summary }
+                </div>
+                <div className="mojblocks-featured-news__date" >
                   { date0 }
                 </div>
-              </div>
-              <div className="mojblocks-latest-news__item">
-                <div className="govuk-body mojblocks-latest-news__headline" >
-                  <a href="#">{title1}</a>
-                </div>
-                <div className="mojblocks-latest-news__date" >
-                  { date1 }
-                </div>
-              </div>
-              <div className="mojblocks-latest-news__item">
-                <div className="govuk-body mojblocks-latest-news__headline" >
-                  <a href="#">{title2}</a>
-                </div>
-                <div className="mojblocks-latest-news__date">
-                  { date2 }
-                </div>
-              </div>
+              </a>
             </div>
           </div>
         </div>
