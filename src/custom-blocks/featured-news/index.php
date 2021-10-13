@@ -17,7 +17,7 @@ function render_callback_featured_news_block($attributes, $content)
     // Parse attributes found in index.js
     $attribute_box_featuredID = $attributes['featuredNewsID'] ?? '';
     $attribute_box_hasDate = $attributes['featuredNewsHasDate'] ?? 'true';
-    $attribute_box_expiry = $attributes['featuredNewsExpiry'] ?? '';
+    $attribute_box_expiry = $attributes['featuredNewsExpiry'] ?? NULL;
     $attribute_box_className = $attributes['featuredNewsClassName'] ?? '';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
@@ -35,15 +35,15 @@ function render_callback_featured_news_block($attributes, $content)
             'date_query' => array(
                 array(
                     'after'    => array(
-                        'year'  => date("Y",$expiryDate),
-                        'month' => date("m",$expiryDate),
-                        'day'   => date("j",$expiryDate),
+                        'year'  => date("Y",$attribute_box_expiry),
+                        'month' => date("m",$attribute_box_expiry),
+                        'day'   => date("j",$attribute_box_expiry),
                     ),
                     'inclusive' => true,
                 ),
             ),
             'post_type' => 'news', 
-            'posts_per_page' => 5, //only 3 are used, pulling through 5 gives 2 extra in case one is corrupted somehow
+            'posts_per_page' => 1,
         );
         $query = new WP_Query( $args ); 
 
@@ -55,10 +55,10 @@ function render_callback_featured_news_block($attributes, $content)
                 if (get_the_ID() == $attribute_box_featuredID) {
                     $news_array = [
                         "title" => get_the_title(),
-                        "summary" => get_the_excerpt(),
+                        "summary" => get_post_meta( get_the_ID(), 'news_story_summary', TRUE ),
                         "date" => get_the_date('d F Y'),
                         "link" => get_permalink(get_the_ID()),
-                        "image" => "",
+                        "image" => get_the_post_thumbnail_url(),
                     ];
                     break; //found our story, so we don't continue
                 }
@@ -70,7 +70,7 @@ function render_callback_featured_news_block($attributes, $content)
     ?>
 
     <?php
-        if ($news_array && count($news_array)) {
+        if (isset($news_array) && count($news_array)) {
     ?>
         <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-featured-news">
             <div class="govuk-width-container">
@@ -80,29 +80,35 @@ function render_callback_featured_news_block($attributes, $content)
                 ?>
                 <div class="govuk-grid-row">
                     <div class="mojblocks-featured-news__item">
-                        <div class="govuk-body-l mojblocks-featured-news__headline" >
-                            <?php _e(esc_html($news_array["title"]));?>
+                        <div class="mojblocks-featured-news__image" style="background:url('<?php _e($news_array["image"]); ?>')">
+                            <span role="img" aria-label="Cover image for featured news story"></span>
                         </div>
-                        <div class="govuk-body mojblocks-featured-news__summary" >
-                            <?php _e(esc_html($news_array["summary"]));?>
-                        </div>
-                        <?php
-                        if ($attribute_box_hasDate) {
-                            $articleDate = strtotime($news_array[$i]["date"]);
-                            if (date("Y") == date("Y",$articleDate)) {
-                                $dateString = date("j F",$articleDate);
-                            } else {
-                                $dateString = date("j F Y",$articleDate);
-                            }
-                            $news_array["date"] = $dateString;
-                        ?>
-                            <div class="govuk-body-s mojblocks-featured-news__date" >
-                                <?php _e(esc_html($news_array["date"]));?>
+                        <div class="mojblocks-featured-news__text">
+                            <div class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline" >
+                                <?php _e(esc_html($news_array["title"]));?>
+                                <?php _e(esc_html($attribute_box_expiry));?>
                             </div>
-                        <?php } ?>
-                        <a href="<?php _e(esc_html($news_array["link"]));?>" class="mojblocks-featured-news__link">
-                            Read full article
-                        </a>
+                            <div class="govuk-body mojblocks-featured-news__summary" >
+                                <?php _e(esc_html($news_array["summary"]));?>
+                            </div>
+                            <?php
+                            if ($attribute_box_hasDate) {
+                                $articleDate = strtotime($news_array["date"]);
+                                if (date("Y") == date("Y",$articleDate)) {
+                                    $dateString = date("j F",$articleDate);
+                                } else {
+                                    $dateString = date("j F Y",$articleDate);
+                                }
+                                $news_array["date"] = $dateString;
+                            ?>
+                                <div class="govuk-body-s mojblocks-featured-news__date" >
+                                    <?php _e(esc_html($news_array["date"]));?>
+                                </div>
+                            <?php } ?>
+                            <a class="govuk-button mojblocks-featured-news__link" href="<?php _e(esc_html($news_array["link"]));?>" class="mojblocks-featured-news__link">
+                                Read full article
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>

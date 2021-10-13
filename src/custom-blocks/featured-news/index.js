@@ -4,12 +4,18 @@ const { Fragment } = wp.element;
 const { RichText, MediaUpload, InspectorControls, URLInputButton } = wp.blockEditor;
 const ALLOWED_MEDIA_TYPES = ['image'];
 const { PanelBody } = wp.components;
-const templateLatestNewsBlock = [
-  [ 'core/heading', { placeholder: 'Add latest news section title' } ]
+const templateFeaturedNewsBlock = [
+  [ 'core/heading', { placeholder: 'Add featured news section title' } ]
 ];
 const d = new Date();
 
+let title = "News Headline!!!";
+let summary = "The summary will appear here";
+let date;
+
 function datify(x,d) {
+  if (!x) return "Date";
+
   var month = new Array();
   month[1] = "January";
   month[2] = "February";
@@ -62,6 +68,10 @@ registerBlockType("mojblocks/featured-news", {
     featuredNewsExpiry: {
       type: "datetime"
     },
+    featuredNewsLink: {
+      value: "Read full article",
+      type: "string"
+    },
     featuredNewsEmptyText: {
       type: "string"
     }
@@ -69,10 +79,14 @@ registerBlockType("mojblocks/featured-news", {
 
   edit: props => {
     const {
-      attributes: { featuredNewsTitle },
+      attributes: { featuredNewsLink },
         className,
         setAttributes
     } = props
+
+    const onChangefeaturedNewsLink = newFeaturedNewsLink => {
+      setAttributes({ featuredNewsLink: newFeaturedNewsLink})
+    }
 
     const [ expiry, setExpiry ] = useState( '' );
     const [ hasDate, setHasDate ] = useState( true );
@@ -98,10 +112,11 @@ registerBlockType("mojblocks/featured-news", {
               onChange={ () => {
                 setHasDate( ( state ) => ! state );
               } }
-            />
+              />
             <DateTimePicker
+              label="Featured news auto-disappear date"
               currentDate={ expiry }
-              onChange={ setAttributes({ latestNewsExpiry: expiry } ) }
+              onChange={ setAttributes({ featuredNewsExpiry: expiry } ) }
               onChange={ ( newExpiry ) => setExpiry( newExpiry ) }
             />
           </PanelBody>
@@ -114,26 +129,30 @@ registerBlockType("mojblocks/featured-news", {
               templateLock="all"
             />
             <div className={`govuk-grid-row ${hasDate ? '' : 'mojblocks-featured-news-hide-date'} ` }>
-              <div href="#" className="mojblocks-featured-news__item">
-                <div className="govuk-body mojblocks-featured-news__headline" >
-                  { title }
+              <div class="mojblocks-featured-news__item">
+                <div class="mojblocks-featured-news__image">
                 </div>
-                <div className="govuk-body mojblocks-featured-news__summary" >
-                  { summary }
-                </div>
-                <div className="mojblocks-featured-news__date" >
-                  { datify(date,d) }
-                </div>
-                <a class="mojblocks-featured-news__link" href="#">
+                <div className="mojblocks-featured-news__text">
+                  <div className="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline" >
+                    { title }
+                  </div>
+                  <div className="govuk-body mojblocks-featured-news__summary" >
+                    { summary }
+                  </div>
+                  <div className="govuk-body-s mojblocks-featured-news__date" >
+                    { datify(date,d) }
+                    { title }
+                    { featuredNewsLink }
+                  </div>
                   <RichText
-                    tagName="span"
+                    tagName="div"
                     value={featuredNewsLink ? 'Read full article' : featuredNewsLink }
                     onChange={onChangefeaturedNewsLink}
-                    className="mojblocks-featured-news__link-text"
-                    placeholder={__('Add link text', 'mojblocks')}
+                    className="govuk-button mojblocks-featured-news__link"
+                    placeholder={__('Read full article', 'mojblocks')}
                     keepPlaceholderOnFocus={true}
                   />  
-                </a>
+                </div>
               </div>
             </div>
           </div>
