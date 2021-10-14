@@ -13,6 +13,12 @@ let title = "News Headline!!!";
 let summary = "The summary will appear here";
 let date;
 
+let optionList = [
+  { label: 'None', value: 'none' },
+]
+
+optionList.push({label: "Latest", value: "latest"});
+
 function datify(x,d) {
   if (!x) return "Date";
 
@@ -50,7 +56,7 @@ function datify(x,d) {
 }
 
 import { InnerBlocks } from "@wordpress/block-editor";
-import { DateTimePicker } from '@wordpress/components';
+import { SelectControl } from '@wordpress/components';
 import { ToggleControl } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
@@ -85,18 +91,22 @@ registerBlockType("mojblocks/featured-news", {
       setAttributes({ featuredNewsLink: newFeaturedNewsLink})
     }
 
-    const [ expiry, setExpiry ] = useState( '' );
     const [ hasDate, setHasDate ] = useState( true );
+    const [ story, setStory ] = useState( 'none' );
 
-   
-  
     return (
       <Fragment >
         <InspectorControls>
           <PanelBody
             title={__('News settings')}
             initialOpen={true}
-        >
+          >
+            <SelectControl
+              label="Select news"
+              value={ story }
+              options={ optionList }
+              onChange={ ( newStory ) => setStory( newStory ) }
+            />
             <ToggleControl
               label="Show/hide article dates"
               help={
@@ -113,7 +123,7 @@ registerBlockType("mojblocks/featured-news", {
           </PanelBody>
         </InspectorControls>
 
-        <div className={`mojblocks-featured-news mojblocks-featured-news--expiry-${expiry} ${className}`}>
+        <div className={`mojblocks-featured-news mojblocks-featured-news--${story} ${className}`}>
           <div className="govuk-width-container">
             <InnerBlocks
               template={ templateFeaturedNewsBlock }
