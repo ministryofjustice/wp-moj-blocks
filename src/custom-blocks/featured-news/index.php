@@ -17,7 +17,6 @@ function render_callback_featured_news_block($attributes, $content)
     // Parse attributes found in index.js
     $attribute_box_featuredID = $attributes['featuredNewsID'] ?? '';
     $attribute_box_hasDate = $attributes['featuredNewsHasDate'] ?? 'true';
-    $attribute_box_expiry = $attributes['featuredNewsExpiry'] ?? NULL;
     $attribute_box_className = $attributes['featuredNewsClassName'] ?? '';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
@@ -28,20 +27,8 @@ function render_callback_featured_news_block($attributes, $content)
     ?>
 
     <?php
-        $featureExpires = ($attribute_box_expiry && is_a($attribute_box_expiry, 'DateTime'));
-
         // The Query
         $args = array(
-            'date_query' => array(
-                array(
-                    'after'    => array(
-                        'year'  => date("Y",$attribute_box_expiry),
-                        'month' => date("m",$attribute_box_expiry),
-                        'day'   => date("j",$attribute_box_expiry),
-                    ),
-                    'inclusive' => true,
-                ),
-            ),
             'post_type' => 'news', 
             'posts_per_page' => 1,
         );
@@ -52,7 +39,7 @@ function render_callback_featured_news_block($attributes, $content)
             while ( $query->have_posts() ) {
                 $query->the_post();
                 
-                if (get_the_ID() == $attribute_box_featuredID) {
+                if (get_the_ID() == $attribute_box_featuredID || 1==1 /* 1==1 for dev work */) {
                     $news_array = [
                         "title" => get_the_title(),
                         "summary" => get_post_meta( get_the_ID(), 'news_story_summary', TRUE ),
@@ -86,7 +73,6 @@ function render_callback_featured_news_block($attributes, $content)
                         <div class="mojblocks-featured-news__text">
                             <div class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline" >
                                 <?php _e(esc_html($news_array["title"]));?>
-                                <?php _e(esc_html($attribute_box_expiry));?>
                             </div>
                             <div class="govuk-body mojblocks-featured-news__summary" >
                                 <?php _e(esc_html($news_array["summary"]));?>

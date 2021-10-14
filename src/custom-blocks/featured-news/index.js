@@ -65,9 +65,6 @@ registerBlockType("mojblocks/featured-news", {
     featuredNewsHasDate: {
       type: "boolean"
     },
-    featuredNewsExpiry: {
-      type: "datetime"
-    },
     featuredNewsLink: {
       value: "Read full article",
       type: "string"
@@ -112,12 +109,6 @@ registerBlockType("mojblocks/featured-news", {
               onChange={ () => {
                 setHasDate( ( state ) => ! state );
               } }
-              />
-            <DateTimePicker
-              label="Featured news auto-disappear date"
-              currentDate={ expiry }
-              onChange={ setAttributes({ featuredNewsExpiry: expiry } ) }
-              onChange={ ( newExpiry ) => setExpiry( newExpiry ) }
             />
           </PanelBody>
         </InspectorControls>
@@ -141,8 +132,6 @@ registerBlockType("mojblocks/featured-news", {
                   </div>
                   <div className="govuk-body-s mojblocks-featured-news__date" >
                     { datify(date,d) }
-                    { title }
-                    { featuredNewsLink }
                   </div>
                   <RichText
                     tagName="div"
