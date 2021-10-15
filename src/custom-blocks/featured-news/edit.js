@@ -17,28 +17,17 @@ import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
  
 const { Fragment } = wp.element;
-// const { RichText, MediaUpload, InspectorControls, URLInputButton } = wp.blockEditor;
-// const { PanelBody } = wp.components;
 const d = new Date();
 const templateFeaturedNewsBlock = [
 	[ 'core/heading', { placeholder: 'Add featured news section title' } ]
-  ];
+];
 
 export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
-	console.log("ABC");
+
 	const {
 		featuredNewsLink,
 		className,
 	} = attributes;
-	/*
-	const onChangefeaturedNewsLink = newFeaturedNewsLink => {
-		setAttributes({ featuredNewsLink: newFeaturedNewsLink})
-	}
-	
-	  const [ hasDate, setHasDate ] = useState( true );
-	  const [ story, setStory ] = useState( 'none' );
-	
-	*/
 
 	const {
 		latestNews,
@@ -59,33 +48,27 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 				? posts
 				: posts
 			};
-		},
-		[]
+		}
 	);
-	console.log(latestNews);
-	console.log("XYZ");
-	//	return ("something" + latestNews);
-	/* */
 	let optionList = [
 		{ label: "None", value: '0' },
 	]
 	let newsList = [
-		{ title: "No news article selected", summary: "", date: "date"}
+		{ title: "No news article selected", summary: "", date: "date", image: ""}
 	];
 	if (Array.isArray( latestNews )) {
 		for (let i=0;i<latestNews.length;i++) {
-			newsList[latestNews[i].id] = {
-				title: latestNews[i].title.rendered,
-				summary: "Summary",
-				date: latestNews[i].date,
+			if (latestNews[i].featured_media && latestNews[i].summary_meta.news_story_summary) {
+				newsList[latestNews[i].id] = {
+					title: latestNews[i].title.rendered,
+					summary: latestNews[i].summary_meta.news_story_summary,
+					date: latestNews[i].date,
+					image: latestNews[i].featured_image_url,
+				}
+				optionList.push({label: latestNews[i].title.rendered, value: latestNews[i].id});
 			}
-			optionList.push({label: latestNews[i].title.rendered, value: latestNews[i].id});
-			console.log("PQR");
-			
 		}
 	}
-	console.log(newsList);
-	
 	const onChangefeaturedNewsLink = newFeaturedNewsLink => {
 		setAttributes({ featuredNewsLink: newFeaturedNewsLink})
 	}
@@ -100,6 +83,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			>
 				<SelectControl
 					label="Select news"
+					help="Only those with images and a summary are available"
 					value={ story }
 					options={ optionList }
 					onChange={ setAttributes({ featuredNewsID: story } ) }
@@ -121,23 +105,27 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			</PanelBody>
 		</InspectorControls>
 	);
-if (!Array.isArray( latestNews ) || !Array.isArray(newsList)) {
-	return (
-		<div class="mojblocks-loading">Loading</div>
-	);
+	if (!Array.isArray( latestNews ) || !Array.isArray(newsList)) {
+		return (
+			<Fragment >
+				<div class="mojblocks-spinner"></div>
+				<div class="mojblocks-spinner-text govuk-body">Loading</div>
+			</Fragment >
+		);
 	} else {
 		return (
 			<Fragment >
 				{ inspectorControls }
-				<div className={`mojblocks-featured-news mojblocks-featured-news-- ${className}`}>
+				<div className={`mojblocks-featured-news mojblocks-featured-news--${story} ${className}`}>
 					<div className="govuk-width-container">
 						<InnerBlocks
 							template={ templateFeaturedNewsBlock }
 							templateLock="all"
 						/>
-						<div className={`govuk-grid-row` }>
+						<div className={`govuk-grid-row ${hasDate ? '' : 'mojblocks-featured-news-hide-date'} `}>
 							<div class="mojblocks-featured-news__item">
-								<div class="mojblocks-featured-news__image" >
+								<div className="mojblocks-featured-news__image" styles={`background:url('${newsList[story].image}')`}>
+									<img src={newsList[story].image} alt="Feature image for news article" />
 								</div>
 								<div className="mojblocks-featured-news__text">
 									<div className="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline" >
@@ -153,7 +141,7 @@ if (!Array.isArray( latestNews ) || !Array.isArray(newsList)) {
 										tagName="div"
 										value={featuredNewsLink  }
 										onChange={onChangefeaturedNewsLink}
-										className="govuk-button mojblocks-featured-news__link"
+										className="govuk-button moj-blocks-button mojblocks-featured-news__link"
 										placeholder={__('Read full article', 'mojblocks')}
 										keepPlaceholderOnFocus={true}
 									/>  
@@ -163,77 +151,9 @@ if (!Array.isArray( latestNews ) || !Array.isArray(newsList)) {
 					</div>
 				</div>
 			</Fragment>
-	);
-   
+		);
+	}
 }
-	//*/
-
-/*
-    return (
-		<Fragment >
-		  <InspectorControls>
-			<PanelBody
-			  title={__('News settings')}
-			  initialOpen={true}
-			>
-			  <SelectControl
-				label="Select news"
-				value={ story }
-				options={ optionList }
-				onChange={ ( newStory ) => setStory( newStory ) }
-			  />
-			  <ToggleControl
-				label="Show/hide article dates"
-				help={
-				  hasDate
-				  ? 'The date will be displayed'
-				  : 'The date will be hidden'
-				}
-				checked={ hasDate }
-				onChange={ setAttributes({ featuredNewsHasDate: hasDate } ) }
-				onChange={ () => {
-				  setHasDate( ( state ) => ! state );
-				} }
-			  />
-			</PanelBody>
-		  </InspectorControls>
-  
-		  <div className={`mojblocks-featured-news mojblocks-featured-news--${story} ${className}`}>
-			<div className="govuk-width-container">
-			  <InnerBlocks
-				template={ templateFeaturedNewsBlock }
-				templateLock="all"
-			  />
-			  <div className={`govuk-grid-row ${hasDate ? '' : 'mojblocks-featured-news-hide-date'} ` }>
-				<div class="mojblocks-featured-news__item">
-				  <div class="mojblocks-featured-news__image">
-				  </div>
-				  <div className="mojblocks-featured-news__text">
-					<div className="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline" >
-					  { title }
-					</div>
-					<div className="govuk-body mojblocks-featured-news__summary" >
-					  { summary }
-					</div>
-					<div className="govuk-body-s mojblocks-featured-news__date" >
-					  { datify(date,d) }
-					</div>
-					<RichText
-					  tagName="div"
-					  value={featuredNewsLink ? 'Read full article' : featuredNewsLink }
-					  onChange={onChangefeaturedNewsLink}
-					  className="govuk-button mojblocks-featured-news__link"
-					  placeholder={__('Read full article', 'mojblocks')}
-					  keepPlaceholderOnFocus={true}
-					/>  
-				  </div>
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</Fragment>
-	  );*/
-  }
 
 
   function datify(x,d) {

@@ -6,13 +6,3 @@ Block: Featured News (Gutenberg editor styles)
 **********************************************************************************************/
 
 @import 'style.scss';
-
-.mojblocks-featured-news {
-
-	&__text-container.govuk-grid-column-one-half {
-
-		@include govuk-media-query($from: tablet) {
-			margin-top: -5%;
-		}
-	}
-}

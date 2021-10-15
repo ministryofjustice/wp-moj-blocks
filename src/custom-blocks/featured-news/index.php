@@ -30,7 +30,6 @@ function render_callback_featured_news_block($attributes, $content)
         // The Query
         $args = array(
             'post_type' => 'news', 
-            'posts_per_page' => 1,
         );
         $query = new WP_Query( $args ); 
 
@@ -38,7 +37,6 @@ function render_callback_featured_news_block($attributes, $content)
         if ( $query->have_posts() ) {
             while ( $query->have_posts() ) {
                 $query->the_post();
-                
                 if (get_the_ID() == $attribute_box_featuredID /* || 1==1 /* 1==1 for dev work */) {
                     $news_array = [
                         "title" => get_the_title(),
@@ -113,3 +111,4 @@ function render_callback_featured_news_block($attributes, $content)
 
     return $output;
 }
+?>
