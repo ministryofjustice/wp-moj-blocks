@@ -10,21 +10,9 @@ const templateFeaturedNewsBlock = [
 ];
 const d = new Date();
 */
-let title = "News Headline!!!";
-let summary = "The summary will appear here";
-let date;
 
-let optionList = [
-  { label: 'None', value: 'none' },
-]
-
-
-optionList.push({label: "Latest", value: "latest"});
 
 import { InnerBlocks } from "@wordpress/block-editor";
-import { SelectControl } from '@wordpress/components';
-import { ToggleControl } from '@wordpress/components';
-import { useState } from '@wordpress/element';
 
 import edit from './edit';
 
@@ -32,7 +20,7 @@ registerBlockType("mojblocks/featured-news", {
   title: __("Featured News", "mojblocks"),
   description: __('Display featured news item'),
   category: "mojblocks",
-  icon: "dashicons-id-alt",
+  icon: "id-alt",
   keywords: [__('featured news'), __('headline news'), __('headlines')],
 
   attributes: {

@@ -1,45 +1,23 @@
- /**
-  * External dependencies
- */
-import { get, includes, invoke, isUndefined, pickBy } from 'lodash';
-import classnames from 'classnames';
-
-/**
- * WordPress dependencies
- */
-import { RawHTML } from '@wordpress/element';
 import {
-	BaseControl,
 	PanelBody,
-	Placeholder,
-	QueryControls,
-	RadioControl,
 	SelectControl,
-	RangeControl,
-	Spinner,
 	ToggleControl,
-	ToolbarGroup,
 } from '@wordpress/components';
-import { __, sprintf } from '@wordpress/i18n';
+import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { dateI18n, format, __experimentalGetSettings } from '@wordpress/date';
+import { __experimentalGetSettings } from '@wordpress/date';
 import {
 	RichText,
 	InnerBlocks,
 	InspectorControls,
-	BlockAlignmentToolbar,
-	BlockControls,
 	__experimentalImageSizeControl as ImageSizeControl,
-	useBlockProps,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
-import { pin, list, grid } from '@wordpress/icons';
 import { store as coreStore } from '@wordpress/core-data';
  
 const { Fragment } = wp.element;
 // const { RichText, MediaUpload, InspectorControls, URLInputButton } = wp.blockEditor;
-const ALLOWED_MEDIA_TYPES = ['image'];
 // const { PanelBody } = wp.components;
 const d = new Date();
 const templateFeaturedNewsBlock = [
@@ -108,7 +86,9 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 	}
 	console.log(newsList);
 	
-	
+	const onChangefeaturedNewsLink = newFeaturedNewsLink => {
+		setAttributes({ featuredNewsLink: newFeaturedNewsLink})
+	}
 	const [ hasDate, setHasDate ] = useState( true );
     const [ story, setStory ] = useState( '0' );
 
@@ -144,37 +124,45 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 if (!Array.isArray( latestNews ) || !Array.isArray(newsList)) {
 	return (
 		<div class="mojblocks-loading">Loading</div>
-		);
+	);
 	} else {
 		return (
 			<Fragment >
 				{ inspectorControls }
-		<div className={`mojblocks-featured-news mojblocks-featured-news-- ${className}`}>
-		<div className="govuk-width-container">
-		  <InnerBlocks
-			template={ templateFeaturedNewsBlock }
-			templateLock="all"
-			/>
-		  <div className={`govuk-grid-row` }>
-			<div class="mojblocks-featured-news__item">
-			  <div class="mojblocks-featured-news__image" >
-			  </div>
-			  <div className="mojblocks-featured-news__text">
-				<div className="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline" >
-					{newsList[story].title}
+				<div className={`mojblocks-featured-news mojblocks-featured-news-- ${className}`}>
+					<div className="govuk-width-container">
+						<InnerBlocks
+							template={ templateFeaturedNewsBlock }
+							templateLock="all"
+						/>
+						<div className={`govuk-grid-row` }>
+							<div class="mojblocks-featured-news__item">
+								<div class="mojblocks-featured-news__image" >
+								</div>
+								<div className="mojblocks-featured-news__text">
+									<div className="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline" >
+										{newsList[story].title}
+									</div>
+									<div className="govuk-body mojblocks-featured-news__summary" >
+										{newsList[story].summary}
+									</div>
+									<div className="govuk-body-s mojblocks-featured-news__date" >
+										{ datify(newsList[story].date,d) }
+									</div>
+									<RichText
+										tagName="div"
+										value={featuredNewsLink  }
+										onChange={onChangefeaturedNewsLink}
+										className="govuk-button mojblocks-featured-news__link"
+										placeholder={__('Read full article', 'mojblocks')}
+										keepPlaceholderOnFocus={true}
+									/>  
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div className="govuk-body mojblocks-featured-news__summary" >
-					{newsList[story].summary}
-				</div>
-				<div className="govuk-body-s mojblocks-featured-news__date" >
-					{ datify(newsList[story].date,d) }
-				</div>
-			  </div>
-			</div>
-		  </div>
-		</div>
-	  </div>
-	</Fragment>
+			</Fragment>
 	);
    
 }
