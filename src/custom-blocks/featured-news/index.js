@@ -1,5 +1,5 @@
-const { __ } = wp.i18n;
 const { registerBlockType, registerBlockStyle } = wp.blocks;
+const { __ } = wp.i18n;
 /*
 const { Fragment } = wp.element;
 // const { RichText, MediaUpload, InspectorControls, URLInputButton } = wp.blockEditor;
@@ -18,43 +18,8 @@ let optionList = [
   { label: 'None', value: 'none' },
 ]
 
+
 optionList.push({label: "Latest", value: "latest"});
-
-function datify(x,d) {
-  if (!x) return "Date";
-
-  var month = new Array();
-  month[1] = "January";
-  month[2] = "February";
-  month[3] = "March";
-  month[4] = "April";
-  month[5] = "May";
-  month[6] = "June";
-  month[7] = "July";
-  month[8] = "August";
-  month[9] = "September";
-  month[10] = "October";
-  month[11] = "November";
-  month[12] = "December";
-
-  var x = x.split("-");
-
-  if (x.length != 3) {
-    //wrong format, return today
-    return d.toLocaleString('en-GB', {day: '2-digit', month: 'long' });
-  }
-
-  var day = x[2].substring(0, 2);
-  var month = " " + month[parseInt(x[1])];
-  var year = " " + x[0];
-
-  if (d.getFullYear() == x[0]) {
-    return day + month;
-  } else {
-    return day + month + year;
-  }
-
-}
 
 import { InnerBlocks } from "@wordpress/block-editor";
 import { SelectControl } from '@wordpress/components';
@@ -79,6 +44,9 @@ registerBlockType("mojblocks/featured-news", {
       type: "string"
     },
     featuredNewsEmptyText: {
+      type: "string"
+    },
+    featuredNewsID: {
       type: "string"
     }
   },
