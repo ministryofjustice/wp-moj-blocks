@@ -65,7 +65,7 @@ function render_callback_featured_news_block($attributes, $content)
                 ?>
                 <div class="govuk-grid-row">
                     <div class="mojblocks-featured-news__item">
-                        <div class="mojblocks-featured-news__image" style="background:url('<?php _e($news_array["image"]); ?>')">
+                        <div class="mojblocks-featured-news__image" style="background-image:url('<?php _e($news_array["image"]); ?>')">
                             <span role="img" aria-label="Cover image for featured news story"></span>
                         </div>
                         <div class="mojblocks-featured-news__text">

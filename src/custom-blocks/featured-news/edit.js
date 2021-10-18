@@ -83,7 +83,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			>
 				<SelectControl
 					label="Select news"
-					help="Only those with images and a summary are available"
+					help="Only news articles with both an image and a summary are available for selection"
 					value={ story }
 					options={ optionList }
 					onChange={ setAttributes({ featuredNewsID: story } ) }
@@ -141,7 +141,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 										tagName="div"
 										value={featuredNewsLink  }
 										onChange={onChangefeaturedNewsLink}
-										className="govuk-button moj-blocks-button mojblocks-featured-news__link"
+										className="govuk-button mojblocks-button mojblocks-featured-news__link"
 										placeholder={__('Read full article', 'mojblocks')}
 										keepPlaceholderOnFocus={true}
 									/>  
