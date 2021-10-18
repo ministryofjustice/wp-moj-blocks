@@ -82,12 +82,6 @@ Block: Featured News (Frontend styles)
 		justify-content: center;
 		align-items: center;
 		overflow: hidden;
-
-		img { /*editor only*/
-			flex-shrink: 0;
-			min-width: 100%;
-			min-height: 100%
-		}
 	}
 	&__text {
 		display:block;
