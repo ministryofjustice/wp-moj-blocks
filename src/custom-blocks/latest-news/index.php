@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Featured News block
+ * Latest News block
  * Frontend PHP code
  *
  * Uses WordPress' dynamic block method
