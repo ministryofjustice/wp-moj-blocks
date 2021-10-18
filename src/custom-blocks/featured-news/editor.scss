@@ -10,3 +10,8 @@ Block: Featured News (Gutenberg editor styles)
 .govuk-button {
 	border-radius: 4px;
 }
+.mojblocks-featured-news__image img {
+    max-width: initial;
+    max-height: 100%;
+    min-height: auto;
+}

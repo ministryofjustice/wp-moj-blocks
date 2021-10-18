@@ -72,6 +72,8 @@ Block: Featured News (Frontend styles)
 	&__image {
 		background-repeat: no-repeat;
 		background-size: cover;
+		background-position: center;
+		max-height:400px;
 		display:block;
 		width:100%;
 		height:230px;
