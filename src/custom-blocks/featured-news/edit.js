@@ -189,6 +189,4 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 	} else {
 	  return day + month + year;
 	}
-  
   }
-  
