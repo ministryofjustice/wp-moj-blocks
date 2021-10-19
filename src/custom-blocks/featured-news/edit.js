@@ -44,9 +44,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			);
 
 			return {
-				latestNews: ! Array.isArray( posts )
-				? posts
-				: posts
+				latestNews: posts
 			};
 		}
 	);
