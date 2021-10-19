@@ -40,7 +40,8 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			const { imageSizes, imageDimensions } = getSettings();
 			const posts = getEntityRecords(
 				'postType',
-				'news'
+				'news',
+				{ per_page: -1 }
 			);
 
 			return {
