@@ -27,35 +27,14 @@ function render_callback_featured_news_block($attributes, $content)
     ?>
 
     <?php
-        // The Query
-        $args = array(
-            'post_type' => 'news', 
-        );
-        $query = new WP_Query( $args ); 
-
-        // The Loop
-        if ( $query->have_posts() ) {
-            while ( $query->have_posts() ) {
-                $query->the_post();
-                if (get_the_ID() == $attribute_box_featuredID /* || 1==1 /* 1==1 for dev work */) {
-                    $news_array = [
-                        "title" => get_the_title(),
-                        "summary" => get_post_meta( get_the_ID(), 'news_story_summary', TRUE ),
-                        "date" => get_the_date('d F Y'),
-                        "link" => get_permalink(get_the_ID()),
-                        "image" => get_the_post_thumbnail_url(),
-                    ];
-                    break; //found our story, so we don't continue
-                }
-                
-            }
-        }
-        // Restore original Post Data
-        wp_reset_postdata();
-    ?>
-
-    <?php
-        if (isset($news_array) && count($news_array)) {
+        if (get_post_type($attribute_box_featuredID) == "news") {
+            $news_array = [
+                "title" => get_the_title($attribute_box_featuredID),
+                "summary" => get_post_meta( $attribute_box_featuredID, 'news_story_summary', TRUE ),
+                "date" => get_the_date('d F Y',$attribute_box_featuredID),
+                "link" => get_permalink($attribute_box_featuredID),
+                "image" => get_the_post_thumbnail_url($attribute_box_featuredID),
+            ];
     ?>
         <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-featured-news">
             <div class="govuk-width-container">
