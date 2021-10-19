@@ -105,6 +105,15 @@ Block: Featured News (Frontend styles)
 		}
 	}
 
+	&--no-image {
+		.mojblocks-featured-news__image {
+			display:none;
+		}
+		.mojblocks-featured-news__text {
+			padding: 0;
+		}
+	}
+
 	&__link.govuk-button {
 		padding-right: 32px;
 		position:relative;
@@ -154,16 +163,27 @@ Block: Featured News (Frontend styles)
 	}
 }
 
-.wp-block-column:not([style="flex-basis:66.66%"]) .mojblocks-featured-news__item,
-.wp-block-column:not([style="flex-basis:66.66%"]) .mojblocks-featured-news__text {
-	display: block;
-	width:100%;
-	padding: 2em 0;
-}
-.wp-block-column:not([style="flex-basis:66.66%"]) .mojblocks-featured-news__image {
-	display: block;
-	width:100%;
-	height:230px;
-	min-height:0.3vw;
-	padding:0;
+.wp-block-column:not([style="flex-basis:66.66%"]) {
+
+	.mojblocks-featured-news__item,
+	.mojblocks-featured-news__text {
+		display: block;
+		width:100%;
+		padding: 2em 0;
+	}
+	.mojblocks-featured-news__image {
+		display: block;
+		width:100%;
+		height:230px;
+		min-height:0.3vw;
+		padding:0;
+	}
+	.mojblocks-featured-news--no-image {
+		.mojblocks-featured-news__image {
+			display:none;
+		}
+		.mojblocks-featured-news__text {
+			padding: 0;
+		}
+	}
 }

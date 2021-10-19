@@ -57,7 +57,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 	];
 	if (Array.isArray( latestNews )) {
 		for (let i=0;i<latestNews.length;i++) {
-			if (latestNews[i].featured_media && latestNews[i].summary_meta.news_story_summary) {
+			if (latestNews[i].summary_meta.news_story_summary) {
 				newsList[latestNews[i].id] = {
 					title: latestNews[i].title.rendered,
 					summary: latestNews[i].summary_meta.news_story_summary,
@@ -82,7 +82,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			>
 				<SelectControl
 					label="Select news"
-					help="Only news articles with both an image and a summary are available for selection"
+					help="Only news articles with a summary are available for selection"
 					value={ story }
 					options={ optionList }
 					onChange={ setAttributes({ featuredNewsID: story } ) }
@@ -121,7 +121,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 							template={ templateFeaturedNewsBlock }
 							templateLock="all"
 						/>
-						<div className={`govuk-grid-row ${hasDate ? '' : 'mojblocks-featured-news-hide-date'} `}>
+						<div className={`govuk-grid-row ${hasDate ? '' : 'mojblocks-featured-news-hide-date'} ${(story!="0" && !newsList[story].image) ? 'mojblocks-featured-news--no-image' : ''} `}>
 							<div class="mojblocks-featured-news__item">
 								<div className="mojblocks-featured-news__image" styles={`background:url('${newsList[story].image}')`}>
 									<img src={newsList[story].image} alt="Feature image for news article" />
