@@ -373,24 +373,26 @@ function mojblocks_register_blocks()
             ]
         ]
     );
-register_block_type(
-        'mojblocks/featured-news',
-        [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_featured_news_block',
-            'attributes' => [
-                'featuredNewsHasDate' => [
-                    'type' => 'boolean'
-                ],
-                'featuredNewsID' => [
-                    'type' => 'string'
-                ],
-                'featuredNewsClassName' => [
-                    'type' => 'string'
+    if (post_type_exists("news")) {
+        register_block_type(
+            'mojblocks/featured-news',
+            [
+                'editor_script' => 'mojblocks-editor-script',
+                'render_callback' => 'render_callback_featured_news_block',
+                'attributes' => [
+                    'featuredNewsHasDate' => [
+                        'type' => 'boolean'
+                    ],
+                    'featuredNewsID' => [
+                        'type' => 'string'
+                    ],
+                    'featuredNewsClassName' => [
+                        'type' => 'string'
+                    ]
                 ]
             ]
-        ]
-    );
+        );
+    }
 }
 
 /**
@@ -472,25 +474,19 @@ function mojblocks_enqueue_style()
 
 add_action('wp_enqueue_scripts', 'mojblocks_enqueue_style');
 
-function post_featured_image_json( $data, $post, $context ) {
+function mojblocks_extend_wp_api($data, $post, $context) {
     $featured_image_id = $data->data['featured_media']; // get featured image id
-	$featured_image_url = wp_get_attachment_image_src( $featured_image_id, 'original' ); // get url of the original size
+    $featured_image_url = wp_get_attachment_image_src( $featured_image_id, 'original' ); // get url of the original size
 
-	if( $featured_image_url ) {
-		$data->data['featured_image_url'] = $featured_image_url[0];
-	}
-	return $data;
+    if( $featured_image_url ) {
+        $data->data['featured_image_url'] = $featured_image_url[0];
+    }
+    $summary = get_post_meta( get_the_ID(), 'news_story_summary', TRUE); // get the value from the meta field
+
+    if( $summary ) { // include it in the response if not empty
+        $data->data['summary_meta'] = array( 'news_story_summary' => $summary );
+    }
+
+    return $data;
 }
-add_filter( 'rest_prepare_news', 'post_featured_image_json', 10, 3 );
-
-function filter_post_json( $data, $post, $context ) {
-	$summary = get_post_meta( get_the_ID(), 'news_story_summary', TRUE); // get the value from the meta field
-  
-	  if( $summary ) { // include it in the response if not empty
-          $data->data['summary_meta'] = array( 'news_story_summary' => $summary );
-	  }
-	  
-	  return $data;
-  }
-  add_filter( 'rest_prepare_news', 'filter_post_json', 10, 3 );
-
+add_filter( 'rest_prepare_news', 'mojblocks_extend_wp_api', 10, 3 );
