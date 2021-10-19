@@ -16,13 +16,6 @@ registerBlockType("mojblocks/featured-news", {
     featuredNewsHasDate: {
       type: "boolean"
     },
-    featuredNewsLink: {
-      value: "Read full article",
-      type: "string"
-    },
-    featuredNewsEmptyText: {
-      type: "string"
-    },
     featuredNewsID: {
       type: "string"
     }
