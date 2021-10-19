@@ -480,11 +480,15 @@ function mojblocks_extend_wp_api($data, $post, $context) {
 
     if( $featured_image_url ) {
         $data->data['featured_image_url'] = $featured_image_url[0];
+    } else {
+        $data->data['featured_image_url'] = "";
     }
-    $summary = get_post_meta( get_the_ID(), 'news_story_summary', TRUE); // get the value from the meta field
 
+    $summary = get_post_meta( get_the_ID(), 'news_story_summary', TRUE); // get the value from the meta field
     if( $summary ) { // include it in the response if not empty
         $data->data['summary_meta'] = array( 'news_story_summary' => $summary );
+    } else {
+        $data->data['summary_meta'] = array( 'news_story_summary' => '' );
     }
 
     return $data;
