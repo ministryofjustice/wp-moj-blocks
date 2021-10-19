@@ -382,6 +382,9 @@ register_block_type(
                 'featuredNewsHasDate' => [
                     'type' => 'boolean'
                 ],
+                'featuredNewsID' => [
+                    'type' => 'string'
+                ],
                 'featuredNewsClassName' => [
                     'type' => 'string'
                 ]
