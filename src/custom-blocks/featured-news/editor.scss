@@ -1,0 +1,18 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Featured News (Gutenberg editor styles)
+
+**********************************************************************************************/
+
+@import 'style.scss';
+
+.govuk-button {
+	border-radius: 4px;
+}
+.mojblocks-featured-news__image img {
+    flex-shrink: 0;
+	max-height: 100%;
+    min-height: auto;
+	
+}
