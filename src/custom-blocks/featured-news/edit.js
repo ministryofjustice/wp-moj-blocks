@@ -68,9 +68,6 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			}
 		}
 	}
-	const onChangefeaturedNewsLink = newFeaturedNewsLink => {
-		setAttributes({ featuredNewsLink: newFeaturedNewsLink})
-	}
 	const [ hasDate, setHasDate ] = useState( true );
     const [ story, setStory ] = useState( '0' );
 
@@ -136,14 +133,9 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 									<div className="govuk-body-s mojblocks-featured-news__date" >
 										{ datify(newsList[story].date,d) }
 									</div>
-									<RichText
-										tagName="div"
-										value={featuredNewsLink  }
-										onChange={onChangefeaturedNewsLink}
-										className="govuk-button mojblocks-button mojblocks-featured-news__link"
-										placeholder={__('Read full article', 'mojblocks')}
-										keepPlaceholderOnFocus={true}
-									/>  
+									<div className="govuk-button mojblocks-button mojblocks-featured-news__link" >
+										Read full article
+									</div>
 								</div>
 							</div>
 						</div>

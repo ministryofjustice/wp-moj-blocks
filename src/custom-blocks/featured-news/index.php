@@ -17,6 +17,7 @@ function render_callback_featured_news_block($attributes, $content)
     // Parse attributes found in index.js
     $attribute_box_featuredID = $attributes['featuredNewsID'] ?? '';
     $attribute_box_hasDate = $attributes['featuredNewsHasDate'] ?? 'true';
+    $attribute_box_newsLinkText = $attributes['featuredNewsLink'] ?? 'Read full article';
     $attribute_box_className = $attributes['featuredNewsClassName'] ?? '';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
@@ -71,7 +72,9 @@ function render_callback_featured_news_block($attributes, $content)
                                 </div>
                             <?php } ?>
                             <a class="govuk-button mojblocks-featured-news__link" href="<?php _e(esc_html($news_array["link"]));?>" class="mojblocks-featured-news__link">
-                                Read full article
+                                <?php
+                                    _e(esc_html($attribute_box_newsLinkText));
+                                ?>
                             </a>
                         </div>
                     </div>
