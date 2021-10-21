@@ -51,8 +51,10 @@ function render_callback_featured_news_block($attributes, $content)
                         </div>
                         <?php } ?>
                         <div class="mojblocks-featured-news__text">
-                            <div class="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline" >
-                                <?php _e(esc_html($news_array["title"]));?>
+                            <div class="mojblocks-featured-news__headline">
+                                <a class="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline-link" href="<?php _e(esc_html($news_array["link"]));?>" >
+                                    <?php _e(esc_html($news_array["title"]));?>
+                                </a>
                             </div>
                             <div class="govuk-body mojblocks-featured-news__summary" >
                                 <?php _e(esc_html($news_array["summary"]));?>
@@ -71,11 +73,13 @@ function render_callback_featured_news_block($attributes, $content)
                                     <?php _e(esc_html($news_array["date"]));?>
                                 </div>
                             <?php } ?>
-                            <a class="govuk-button mojblocks-featured-news__link" href="<?php _e(esc_html($news_array["link"]));?>" class="mojblocks-featured-news__link">
-                                <?php
-                                    _e(esc_html($attribute_box_newsLinkText));
-                                ?>
-                            </a>
+                            <div class="mojblocks-featured-news__link">
+                                <a class="govuk-link" href="<?php _e(esc_html($news_array["link"]));?>">
+                                    <?php
+                                        _e(esc_html($attribute_box_newsLinkText));
+                                    ?>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -124,8 +124,10 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 									<img src={newsList[story].image} alt="Feature image for news article" />
 								</div>
 								<div className="mojblocks-featured-news__text">
-									<div className="govuk-body govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline" >
-										{newsList[story].title}
+									<div className="mojblocks-featured-news__headline" >
+										<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline-link" >
+											{newsList[story].title}
+										</a>
 									</div>
 									<div className="govuk-body mojblocks-featured-news__summary" >
 										{newsList[story].summary}
@@ -133,8 +135,10 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 									<div className="govuk-body-s mojblocks-featured-news__date" >
 										{ datify(newsList[story].date,d) }
 									</div>
-									<div className="govuk-button mojblocks-button mojblocks-featured-news__link" >
-										Read full article
+									<div className="mojblocks-featured-news__link">
+										<a className="govuk-link" >
+											Read full article
+										</a>
 									</div>
 								</div>
 							</div>
