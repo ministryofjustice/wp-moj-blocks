@@ -95,8 +95,8 @@ Block: Featured News (Frontend styles)
 	&__text {
 		display:block;
 		width:100%;
-		padding: 32px 0 0 0;
-		padding: govuk-px-to-rem(32) 0 0 0;
+		padding: 40px 0 0 0;
+		padding: govuk-px-to-rem(40) 0 0 0;
 	}
 
 	@include govuk-media-query($from: tablet) {
@@ -129,8 +129,9 @@ Block: Featured News (Frontend styles)
 		margin: 16px 0;
 		margin: govuk-px-to-rem(16) 0;
 
-		&-link{
+		&-link.govuk-link{
 			position: relative;
+			text-decoration: none;
 
 			&:before { //bar above headline
 				content: "";
@@ -172,8 +173,8 @@ Block: Featured News (Frontend styles)
 		padding:0;
 	}
 	.mojblocks-featured-news__text {
-		padding: 32px 0 0 0;
-		padding: govuk-px-to-rem(32) 0 0 0;
+		padding: 40px 0 0 0;
+		padding: govuk-px-to-rem(40) 0 0 0;
 	}
 	.mojblocks-featured-news--no-image {
 		.mojblocks-featured-news__image {
