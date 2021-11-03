@@ -416,6 +416,7 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-news/index.php';
  * Load PHP extended core blocks
  */
 include plugin_dir_path(__FILE__) . 'src/extended-core-blocks/file/index.php';
+include plugin_dir_path(__FILE__) . 'src/extended-core-blocks/button/index.php';
 
 /**
  * Queues up the gutenberg editor style
@@ -426,7 +427,7 @@ function mojblocks_gutenberg_editor_styles()
         'mojblocks-block-editor-styles',
         plugins_url('build/style-gutenburg.css', __FILE__),
         false,
-        '1.1',
+        '1.2',
         'all'
     );
 }

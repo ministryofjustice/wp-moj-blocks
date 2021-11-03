@@ -1,1 +1,2322 @@
-!function(e){var t={};function a(o){if(t[o])return t[o].exports;var n=t[o]={i:o,l:!1,exports:{}};return e[o].call(n.exports,n,n.exports,a),n.l=!0,n.exports}a.m=e,a.c=t,a.d=function(e,t,o){a.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:o})},a.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},a.t=function(e,t){if(1&t&&(e=a(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var o=Object.create(null);if(a.r(o),Object.defineProperty(o,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var n in e)a.d(o,n,function(t){return e[t]}.bind(null,n));return o},a.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return a.d(t,"a",t),t},a.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},a.p="",a(a.s=16)}([function(e,t){e.exports=window.wp.element},function(e,t){e.exports=window.wp.blockEditor},function(e,t){e.exports=window.wp.i18n},function(e,t){e.exports=window.wp.components},function(e,t){e.exports=window.wp.blocks},function(e,t,a){var o=a(10),n=a(11),c=a(12),l=a(14);e.exports=function(e,t){return o(e)||n(e,t)||c(e,t)||l()},e.exports.default=e.exports,e.exports.__esModule=!0},function(e,t){e.exports=function(e,t,a){return t in e?Object.defineProperty(e,t,{value:a,enumerable:!0,configurable:!0,writable:!0}):e[t]=a,e},e.exports.default=e.exports,e.exports.__esModule=!0},function(e,t){e.exports=window.wp.domReady},function(e,t){e.exports=window.wp.data},function(e,t){e.exports=window.wp.coreData},function(e,t){e.exports=function(e){if(Array.isArray(e))return e},e.exports.default=e.exports,e.exports.__esModule=!0},function(e,t){e.exports=function(e,t){var a=null==e?null:"undefined"!=typeof Symbol&&e[Symbol.iterator]||e["@@iterator"];if(null!=a){var o,n,c=[],l=!0,r=!1;try{for(a=a.call(e);!(l=(o=a.next()).done)&&(c.push(o.value),!t||c.length!==t);l=!0);}catch(e){r=!0,n=e}finally{try{l||null==a.return||a.return()}finally{if(r)throw n}}return c}},e.exports.default=e.exports,e.exports.__esModule=!0},function(e,t,a){var o=a(13);e.exports=function(e,t){if(e){if("string"==typeof e)return o(e,t);var a=Object.prototype.toString.call(e).slice(8,-1);return"Object"===a&&e.constructor&&(a=e.constructor.name),"Map"===a||"Set"===a?Array.from(e):"Arguments"===a||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(a)?o(e,t):void 0}},e.exports.default=e.exports,e.exports.__esModule=!0},function(e,t){e.exports=function(e,t){(null==t||t>e.length)&&(t=e.length);for(var a=0,o=new Array(t);a<t;a++)o[a]=e[a];return o},e.exports.default=e.exports,e.exports.__esModule=!0},function(e,t){e.exports=function(){throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")},e.exports.default=e.exports,e.exports.__esModule=!0},function(e,t){e.exports=window.wp.date},function(e,t,a){"use strict";a.r(t);var o=a(0),n=a(2),c=a(4),l=a(1);Object(c.registerBlockType)("mojblocks/highlights-list",{title:Object(n.__)("Highlights List","mojblocks"),icon:"list-view",category:"mojblocks",example:{attributes:{listTitle:"This is a highlights list title",listItems:"This is a list item"}},attributes:{listTitle:{type:"string"},listItems:{type:"string"},listClassName:{type:"string"}},edit:function(e){var t=e.attributes,a=t.listTitle,c=t.listItems,r=e.className,s=e.setAttributes;return s({listClassName:r}),Object(o.createElement)("div",{className:"".concat(r,"  mojblocks-highlights-list")},Object(o.createElement)("div",{className:"govuk-width-container"},Object(o.createElement)("div",{className:"govuk-grid-row"},Object(o.createElement)("div",{className:"mojblocks-highlights-list__heading-container"},Object(o.createElement)("h2",{className:"mojblocks-highlights-list__heading"},Object(o.createElement)("span",{role:"text"},Object(o.createElement)("span",{className:"mojblocks-highlights-list__heading-text"},Object(o.createElement)(l.RichText,{placeholder:Object(n.__)("Add highlights title","mojblocks"),keepPlaceholderOnFocus:!0,value:a,onChange:function(e){s({listTitle:e})}}))))),Object(o.createElement)("div",{className:"mojblocks-highlights-list__content"},Object(o.createElement)(l.RichText,{tagName:"ul",multiline:"li",placeholder:Object(n.__)("Add list item","mojblocks"),keepPlaceholderOnFocus:!0,onChange:function(e){s({listItems:e})},value:c})))))},save:function(){return null}}),Object(c.registerBlockType)("mojblocks/cta",{title:Object(n.__)("Call to Action","mojblocks"),icon:"megaphone",category:"mojblocks",keywords:[Object(n.__)("cta"),Object(n.__)("Call to Action"),Object(n.__)("banner")],example:{attributes:{ctaTitle:"Add a Call to Action banner to your site",ctaText:"Call To Action text",buttonLabel:"Click me now",buttonLink:"https://intranet.justice.gov.uk/"}},attributes:{ctaTitle:{type:"string"},ctaText:{type:"string"},buttonLabel:{type:"string"},buttonLink:{type:"string"},ctaClassName:{type:"string"}},edit:function(e){var t=e.setAttributes,a=e.attributes,c=a.ctaTitle,r=a.ctaText,s=a.buttonLink,i=a.buttonLabel,m=e.className;return t({ctaClassName:m}),Object(o.createElement)("div",{className:"".concat(m,"  mojblocks-cta")},Object(o.createElement)("div",{className:"govuk-width-container"},Object(o.createElement)("div",{className:"govuk-grid-row"},Object(o.createElement)("div",{class:"govuk-grid-column-three-quarters"},Object(o.createElement)("div",{className:"mojblocks-cta__heading-container"},Object(o.createElement)("h2",{className:"mojblocks-cta__heading"},Object(o.createElement)("span",{role:"text"},Object(o.createElement)("span",{className:"mojblocks-cta__heading-text"},Object(o.createElement)(l.RichText,{placeholder:Object(n.__)("Add a Call To Action title","mojblocks"),keepPlaceholderOnFocus:!0,value:c,onChange:function(e){t({ctaTitle:e})}}))))),Object(o.createElement)("div",{className:"mojblocks-cta__content"},Object(o.createElement)(l.RichText,{multiline:"p",placeholder:Object(n.__)("Add compelling text to send the message home","mojblocks"),keepPlaceholderOnFocus:!0,onChange:function(e){t({ctaText:e})},value:r})),Object(o.createElement)(l.URLInputButton,{className:"mojblocks-dropdown__input",label:Object(n.__)("CTA Link","mojblocks"),onChange:function(e){t({buttonLink:e})},url:s}),Object(o.createElement)(l.RichText,{className:"mojblocks-button govuk-button",value:i,onChange:function(e){t({buttonLabel:e})},placeholder:"Button label"})))))},save:function(){return null}});var r=wp.i18n.__,s=wp.blocks.registerBlockType,i=wp.blockEditor,m=(i.RichText,i.InspectorControls),u=i.MediaUpload,b=i.InnerBlocks,d=wp.components,g=d.PanelBody,j=d.PanelRow;s("mojblocks/hero",{title:r("Hero","mojblocks"),description:r("Full width hero banner with title and text","mojblocks"),category:"mojblocks",icon:"schedule",attributes:{backgroundImage:{type:"string"},heroClassName:{type:"string"}},edit:function(e){var t=e.setAttributes,a=e.attributes.backgroundImage,n=e.className;return t({heroClassName:n}),[Object(o.createElement)(m,null,Object(o.createElement)(g,{title:r("Choose hero block banner image","mojblocks"),initialOpen:!0},Object(o.createElement)("label",{className:"block-editor-block-hero"},Object(o.createElement)("p",null,"For best results, uploaded images must meet a minimum size of 1366x683 pixels (or aspect ratio of 2:1).")),Object(o.createElement)(j,null,Object(o.createElement)(u,{onSelect:function(e){var a=e.sizes,o=void 0!==a.hero?a.hero.url:a.full.url;t({backgroundImage:o})},type:"image",value:a,render:function(e){var t=e.open;return Object(o.createElement)("button",{className:"button button-primary button-hero",onClick:t},"Upload image")}})))),Object(o.createElement)("section",{className:"".concat(n,"  mojblocks-hero")},Object(o.createElement)("div",{className:"mojblocks-hero__image",style:{backgroundImage:"url(".concat(a,")"),backgroundSize:"cover",backgroundPosition:"center"}}),Object(o.createElement)("div",{className:"govuk-width-container"},Object(o.createElement)("div",{className:"govuk-grid-row"},Object(o.createElement)("div",{className:"mojblocks-hero__overlay"},Object(o.createElement)("div",{className:"govuk-grid-column-three-quarters"},Object(o.createElement)(b,{allowedBlocks:["core/heading","core/list","core/paragraph","mojblocks/intro"]}))))))]},save:function(){return Object(o.createElement)(b.Content,null)}});var p=wp.i18n.__,k=wp.blocks.registerBlockType,h=wp.blockEditor.RichText,v=wp.blockEditor.InnerBlocks;k("mojblocks/accordion",{title:p("Accordion","mojblocks"),description:p("Display content in an accordion component."),icon:"list-view",category:"mojblocks",keywords:[p("accordion"),p("sections"),p("lists")],attributes:{},edit:function(){return[Object(o.createElement)("div",{className:"govuk-accordion","data-module":"govuk-accordion",id:"accordion-default",key:"accordion-block"},Object(o.createElement)(v,{template:[["mojblocks/accordion-section",{}]],allowedBlocks:["mojblocks/accordion-section"]}))]},save:function(){return Object(o.createElement)(v.Content,null)}}),k("mojblocks/accordion-section",{title:p("Accordion Section","mojblocks"),category:"mojblocks",parent:["mojblocks/accordion"],attributes:{accordionSectionTitle:{type:"string"},accordionSectionTextArea:{type:"string"},accordionSectionClassName:{type:"string"}},edit:function(e){var t=e.attributes,a=t.accordionSectionTitle,n=t.accordionSectionTextArea,c=e.className,l=e.setAttributes;return l({accordionSectionClassName:c}),[Object(o.createElement)("div",{className:"".concat(c," govuk-accordion__section"),key:"accordion-block-section"},Object(o.createElement)("div",{className:"govuk-accordion__section-header"},Object(o.createElement)("h3",{className:"govuk-accordion__section-heading"},Object(o.createElement)("span",{className:"govuk-accordion__section-button",id:"accordion-default-heading-1"},Object(o.createElement)(h,{placeholder:p("Add accordion section title","mojblocks"),value:a,onChange:function(e){l({accordionSectionTitle:e})},keepPlaceholderOnFocus:!0})))),Object(o.createElement)("div",{id:"accordion-default-content-1",className:"govuk-accordion__section-content","aria-labelledby":"accordion-default-heading-1"},Object(o.createElement)("div",{className:"govuk-body"},Object(o.createElement)(h,{placeholder:p("Add accordion section content","mojblocks"),value:n,onChange:function(e){l({accordionSectionTextArea:e})},keepPlaceholderOnFocus:!0}),Object(o.createElement)(v,{allowedBlocks:["core/heading","core/list","core/paragraph"]}))))]},save:function(){return Object(o.createElement)(v.Content,null)}});var _=wp.i18n.__,O=wp.blocks,f=O.registerBlockType,w=O.registerBlockStyle,y=wp.element.Fragment,E=wp.blockEditor,N=E.RichText,x=E.MediaUpload,C=E.InspectorControls,T=E.URLInputButton,B=["image"];f("mojblocks/staggered-box",{title:_("Staggered Box","mojblocks"),description:_("Display content on top of a staggered background image"),category:"mojblocks",icon:"admin-page",keywords:[_("staggered box"),_("photo block")],attributes:{staggeredBoxTitle:{type:"string"},staggeredBoxContent:{type:"string"},staggeredBoxButtonText:{type:"string"},staggeredBoxButtonLink:{type:"string"},staggeredBoxImageURL:{type:"string"},staggeredBoxImageAltText:{type:"string"},staggeredBoxClassName:{type:"string"}},edit:function(e){var t=e.attributes,a=t.staggeredBoxContent,n=t.staggeredBoxImageURL,c=t.staggeredBoxButtonText,l=t.staggeredBoxButtonLink,r=t.staggeredBoxTitle,s=t.staggeredBoxImageAltText,i=e.className,m=e.setAttributes;return m({staggeredBoxClassName:i}),Object(o.createElement)(y,null,Object(o.createElement)(C,null,Object(o.createElement)(x,{onSelect:function(e){m({staggeredBoxImageURL:e.sizes.full.url}),m({staggeredBoxImageAltText:e.alt})},allowedTypes:B,type:"image",value:n,render:function(e){var t=e.open;return Object(o.createElement)("button",{className:"button button-primary button-hero",onClick:t},"Open Media Library")}})),Object(o.createElement)("div",{className:"".concat(i," mojblocks-staggered-box")},Object(o.createElement)("div",{className:"govuk-width-container"},Object(o.createElement)("div",{className:"govuk-grid-row"},Object(o.createElement)("div",{className:"mojblocks-staggered-box__image-container govuk-grid-column-two-thirds "},Object(o.createElement)("img",{className:"mojblocks-staggered-block__image",src:n,alt:s})),Object(o.createElement)("div",{className:"mojblocks-staggered-box__text-container govuk-grid-column-one-half"},Object(o.createElement)(N,{tagName:"h2",value:r,onChange:function(e){m({staggeredBoxTitle:e})},className:"mojblocks-staggered-box__title",placeholder:_("Add staggered box title","mojblocks"),keepPlaceholderOnFocus:!0}),Object(o.createElement)(N,{tagName:"p",value:a,onChange:function(e){m({staggeredBoxContent:e})},className:"mojblocks-staggered-box__content",placeholder:_("Add staggered box content","mojblocks"),keepPlaceholderOnFocus:!0}),Object(o.createElement)(T,{label:_("Button link","mojblocks"),onChange:function(e){m({staggeredBoxButtonLink:e})},url:l}),Object(o.createElement)(N,{value:c,onChange:function(e){m({staggeredBoxButtonText:e})},className:"mojblocks-staggered-box__button",placeholder:_("Add staggered box button","mojblocks")}))))))},save:function(){return null}}),w("mojblocks/staggered-box",{name:"image-left",label:"Image aligned on the left",isDefault:!0}),w("mojblocks/staggered-box",{name:"staggered-box-image-right",label:"Image aligned on right"});var A=a(3),I=a(7),q=a.n(I),S={};S.upload=Object(o.createElement)("svg",{width:"32px",height:"32px",viewBox:"0 0 100 100",xmlns:"http://www.w3.org/2000/svg"},Object(o.createElement)("path",{d:"m77.945 91.453h-72.371c-3.3711 0-5.5742-2.3633-5.5742-5.2422v-55.719c0-3.457 2.1172-6.0703 5.5742-6.0703h44.453v11.051l-38.98-0.003906v45.008h60.977v-17.133l11.988-0.007812v22.875c0 2.8789-2.7812 5.2422-6.0664 5.2422z"}),Object(o.createElement)("path",{d:"m16.543 75.48l23.25-22.324 10.441 9.7773 11.234-14.766 5.5039 10.539 0.039063 16.773z"}),Object(o.createElement)("path",{d:"m28.047 52.992c-3.168 0-5.7422-2.5742-5.7422-5.7461 0-3.1758 2.5742-5.75 5.7422-5.75 3.1797 0 5.7539 2.5742 5.7539 5.75 0 3.1719-2.5742 5.7461-5.7539 5.7461z"}),Object(o.createElement)("path",{d:"m84.043 30.492v22.02h-12.059l-0.015625-22.02h-15.852l21.941-21.945 21.941 21.945z"}));var L=S,R=["image"];Object(c.registerBlockType)("mojblocks/quote",{title:Object(n.__)("Quote","mojblocks"),description:Object(n.__)("A user quote block with an optional image background, quote text and name","mojblocks"),category:"mojblocks",icon:"format-quote",keywords:[Object(n.__)("quote","mojblocks"),Object(n.__)("testimonial","mojblocks"),Object(n.__)("moj","mojblocks")],attributes:{quoteImgURL:{type:"string"},quoteContent:{type:"string"},quoteName:{type:"string"},quoteAlignment:{type:"string"},quoteImgId:{type:"number"},quoteClassName:{type:"string"}},edit:function(e){var t=e.setAttributes,a=e.attributes,c=a.quoteImgURL,r=a.quoteContent,s=a.quoteName,i=a.quoteAlignment,m=a.quoteImgId,u=e.className;t({quoteClassName:u});var b=function(){t({quoteImgURL:null,quoteImgId:null})};return[Object(o.createElement)(l.BlockControls,{key:"controls"},Object(o.createElement)(l.AlignmentToolbar,{value:i,onChange:function(e){return t({quoteAlignment:e})}})),Object(o.createElement)("div",{className:"mojblocks-quote","data-src":c},Object(o.createElement)("div",{className:"".concat(u," mojblocks-quote__image ")+(m?"mojblocks-quote__image-selected":""),style:{backgroundImage:"url(".concat(c,")")}},Object(o.createElement)(l.MediaUpload,{buttonProps:{className:"change-image"},onSelect:function(e){return t({quoteImgId:e.id,quoteImgURL:e.url})},allowed:R,type:"image",value:m,render:function(e){var t=e.open;return Object(o.createElement)(o.Fragment,null,Object(o.createElement)(A.Button,{className:"mojblocks-quote__image__button "+(m?"mojblocks-quote__image__button-change":"mojblocks-quote__image__button-add"),onClick:t},L.upload),m&&Object(o.createElement)(A.Button,{className:"mojblocks-quote__image__button mojblocks-quote__image__button-remove",onClick:b},Object(o.createElement)(A.Dashicon,{icon:"dismiss"})))}})),Object(o.createElement)("div",{className:"govuk-width-container"},Object(o.createElement)("div",{className:"mojblocks-quote__content",style:{textAlign:i}},Object(o.createElement)("div",{className:"mojblocks-quote__content__icon"},Object(o.createElement)(A.Dashicon,{icon:"format-quote"})),Object(o.createElement)(l.RichText,{tagName:"q",multiline:"span",placeholder:Object(n.__)("Add quotation text...","mojblocks"),keepPlaceholderOnFocus:!0,value:r,allowedFormats:["core/bold","core/italic","core/strikethrough","core/link"],className:"mojblocks-quote__content__quote",onChange:function(e){return t({quoteContent:e})}}),Object(o.createElement)(l.RichText,{tagName:"p",placeholder:Object(n.__)("Add name","mojblocks"),keepPlaceholderOnFocus:!0,value:s,className:"mojblocks-quote__content__name",onChange:function(e){return t({quoteName:e})}}))))]},save:function(){return null}}),q()((function(){Object(c.unregisterBlockType)("core/quote")})),Object(c.registerBlockType)("mojblocks/intro",{title:Object(n.__)("Intro Text","mojblocks"),icon:"editor-paragraph",category:"mojblocks",attributes:{introText:{type:"string"},introClassName:{type:"string"}},edit:function(e){var t=e.attributes.introText,a=e.className,c=e.setAttributes;return c({introClassName:a}),Object(o.createElement)("div",{className:"".concat(a," mojblocks-intro")},Object(o.createElement)("div",{className:"govuk-width-container"},Object(o.createElement)("div",{className:"govuk-grid-row"},Object(o.createElement)("div",{className:"govuk-grid-column-three-quarters"},Object(o.createElement)("div",{className:"mojblocks-intro--type"},Object(o.createElement)("div",{className:"mojblocks-intro__content intro"},Object(o.createElement)(l.RichText,{multiline:"p",placeholder:Object(n.__)("Some compelling text to send the message home","mojblocks"),keepPlaceholderOnFocus:!0,onChange:function(e){c({introText:e})},value:t})))))))},save:function(){return null}}),Object(c.registerBlockType)("mojblocks/reveal",{title:Object(n.__)("Reveal","mojblocks"),description:Object(n.__)("Arrow toggle to reveal text","mojblocks"),icon:"controls-play",category:"mojblocks",attributes:{revealTitle:{type:"string"},revealContent:{type:"string"},revealClassName:{type:"string"}},edit:function(e){var t=e.setAttributes,a=e.attributes,c=a.revealTitle,r=a.revealContent,s=e.className;return t({revealClassName:s}),[Object(o.createElement)("div",{className:"mojblocks-reveal"},Object(o.createElement)("div",{className:"govuk-width-container"},Object(o.createElement)("div",{className:"govuk-grid-row"},Object(o.createElement)("div",{className:"govuk-grid-column-three-quarters"},Object(o.createElement)("details",{className:"govuk-details","data-module":"govuk-details",open:!0},Object(o.createElement)("summary",{className:"govuk-details__summary"},Object(o.createElement)("span",{className:"mojblocks-reveal__title govuk-details__summary-text"},Object(o.createElement)(l.RichText,{value:c,placeholder:Object(n.__)("Add reveal title","mojblocks"),keepPlaceholderOnFocus:!0,onChange:function(e){t({revealTitle:e})}}))),Object(o.createElement)("div",{className:"mojblocks-reveal__content govuk-details__text"},Object(o.createElement)(l.RichText,{multiline:"p",placeholder:Object(n.__)("Add reveal content","mojblocks"),keepPlaceholderOnFocus:!0,onChange:function(e){t({revealContent:e})},value:r})))))))]},save:function(){return null}});var F=["image"],P=[["core/heading",{placeholder:"Card heading"}]];Object(c.registerBlockType)("mojblocks/card",{apiVersion:1,title:Object(n.__)("Card","mojblocks"),description:Object(n.__)("Add a card pattern to a default page","mojblocks"),category:"mojblocks",icon:"table-row-after",keywords:[Object(n.__)("card","navigation","mojblocks")],supports:{align:["wide","full"],html:!1},attributes:{cardTitle:{type:"string"},cardExcerpt:{type:"string"},cardImageURL:{type:"string"},cardImageId:{type:"number"},cardClassName:{type:"string"}},edit:function(e){var t=e.setAttributes,a=e.className,c=e.attributes,r=c.cardExcerpt,s=c.cardImageURL,i=c.cardImageId,m=function(){t({cardImageURL:null,cardImageId:null})};return Object(o.createElement)("div",{className:"".concat(a," mojblocks-card mojblocks-card-image"),"data-src":s},Object(o.createElement)("div",{className:"".concat(a," mojblocks-card__image")+" "+(i?"mojblocks-card__image-selected":""),style:{backgroundImage:"url(".concat(s,")")}},Object(o.createElement)(l.MediaUpload,{buttonProps:{className:"change-image"},onSelect:function(e){return t({cardImageId:e.id,cardImageURL:e.url})},allowedTypes:F,type:"image",value:i,render:function(e){var t=e.open;return Object(o.createElement)(o.Fragment,null,Object(o.createElement)(A.Button,{className:"mojblocks-card__image__button "+(i?"mojblocks-card__image__button-change":"mojblocks-card__image__button-add"),onClick:t},L.upload),i&&Object(o.createElement)(A.Button,{className:"mojblocks-card__image__button mojblocks-card__image__button-remove",onClick:m},Object(o.createElement)(A.Dashicon,{icon:"dismiss"})))}})),Object(o.createElement)(l.InnerBlocks,{template:P,templateLock:"all"}),Object(o.createElement)(l.RichText,{tagName:"p",placeholder:Object(n.__)("Add excerpt text...","mojblocks"),keepPlaceholderOnFocus:!0,value:r,className:"mojblocks-card-excerpt",onChange:function(e){return t({cardExcerpt:e})}}))},save:function(){return Object(o.createElement)(l.InnerBlocks.Content,null)}});var D=wp.i18n.__,U=wp.blocks.registerBlockType,M=wp.blockEditor.RichText;U("mojblocks/banner",{title:D("Banner","mojblocks"),description:D("Banner with title and button","mojblocks"),category:"mojblocks",icon:"schedule",attributes:{bannerTitle:{type:"string"},buttonLink:{type:"string"},buttonLabel:{type:"string"},bannerClassName:{type:"string"}},edit:function(e){var t=e.setAttributes,a=e.attributes,n=a.bannerTitle,c=a.buttonLink,r=a.buttonLabel,s=e.className;return t({bannerClassName:s}),[Object(o.createElement)("div",{className:"".concat(s,"  mojblocks-banner")},Object(o.createElement)("div",{className:"govuk-width-container"},Object(o.createElement)("div",{className:"govuk-grid-row"},Object(o.createElement)("div",{className:"govuk-grid-column-two-thirds"},Object(o.createElement)(M,{tagName:"h1",className:"mojblocks-banner__title",value:n,keepPlaceholderOnFocus:!0,onChange:function(e){t({bannerTitle:e})},placeholder:"Enter your banner title"})),Object(o.createElement)("div",{className:"govuk-grid-column-one-third"},Object(o.createElement)(l.URLInputButton,{className:"mojblocks-dropdown__input",label:D("Button Link","mojblocks"),onChange:function(e){t({buttonLink:e})},url:c}),Object(o.createElement)(M,{className:"mojblocks-banner__button govuk-button",value:r,onChange:function(e){t({buttonLabel:e})},placeholder:"Button label"})))))]},save:function(){return null}});var z=a(6),H=a.n(z),J=a(5),G=a.n(J),Q=wp.i18n.__,V=wp.blocks,Y=V.registerBlockType,$=(V.registerBlockStyle,wp.element.Fragment),K=wp.blockEditor,W=(K.RichText,K.MediaUpload,K.InspectorControls),X=(K.URLInputButton,wp.components.PanelBody),Z=[["core/heading",{placeholder:"Add latest news section title"}]];new Date,Y("mojblocks/latest-news",{title:Q("Latest News","mojblocks"),description:Q("Display latest news items"),category:"mojblocks",icon:"slides",keywords:[Q("latest news"),Q("recent news"),Q("headlines")],attributes:{latestNewsNumber:{type:"string"},latestNewsHasDate:{type:"boolean"},latestNewsExpiry:{type:"numeric"},latestNewsEmptyText:{type:"string"}},edit:function(e){e.attributes.latestNewsTitle;var t=e.className,a=e.setAttributes,n=Object(o.useState)("3"),c=G()(n,2),r=(c[0],c[1],Object(o.useState)(0)),s=G()(r,2),i=s[0],m=s[1],u=Object(o.useState)("No news to display."),b=G()(u,2),d=b[0],g=b[1],j=Object(o.useState)(!0),p=G()(j,2),k=p[0],h=p[1];return Object(o.createElement)($,null,Object(o.createElement)(W,null,Object(o.createElement)(X,{title:Q("News settings"),initialOpen:!0},Object(o.createElement)(A.ToggleControl,H()({label:"Show/hide article dates",help:k?"Dates will be displayed":"Dates will be hidden",checked:k,onChange:a({latestNewsHasDate:k})},"onChange",(function(){h((function(e){return!e}))}))),Object(o.createElement)(A.TextControl,H()({label:"Text for no news",help:d?"This will be shown if there are no articles to display.":"If there are no news articles to display, the block will be blank.",value:d,onChange:a({latestNewsEmptyText:d})},"onChange",g)),Object(o.createElement)(A.__experimentalNumberControl,H()({label:"Auto-hide after how many weeks",value:i,min:"0",onChange:a({latestNewsExpiry:i})},"onChange",m)),Object(o.createElement)(A.__experimentalText,null,0==i?"Articles will not expire.":"Articles will expire after "+i+" weeks."))),Object(o.createElement)("div",{className:"mojblocks-latest-news mojblocks-latest-news--expiry-weeks-".concat(i," ").concat(t)},Object(o.createElement)("div",{className:"govuk-width-container"},Object(o.createElement)(l.InnerBlocks,{template:Z,templateLock:"all"}),Object(o.createElement)("div",{className:"govuk-grid-row ".concat(k?"":"mojblocks-latest-news-hide-date"," ")},Object(o.createElement)("div",{className:"mojblocks-latest-news__item"},Object(o.createElement)("div",{className:"govuk-body mojblocks-latest-news__headline"},Object(o.createElement)("a",{href:"#"},"Title automatically updated on preview page")),Object(o.createElement)("div",{className:"mojblocks-latest-news__date"},"Date")),Object(o.createElement)("div",{className:"mojblocks-latest-news__item"},Object(o.createElement)("div",{className:"govuk-body mojblocks-latest-news__headline"},Object(o.createElement)("a",{href:"#"},"Title automatically updated on preview page")),Object(o.createElement)("div",{className:"mojblocks-latest-news__date"},"Date")),Object(o.createElement)("div",{className:"mojblocks-latest-news__item"},Object(o.createElement)("div",{className:"govuk-body mojblocks-latest-news__headline"},Object(o.createElement)("a",{href:"#"},"Title automatically updated on preview page")),Object(o.createElement)("div",{className:"mojblocks-latest-news__date"},"Date"))))))},save:function(){return Object(o.createElement)(l.InnerBlocks.Content,null)}}),a(15);var ee=a(8),te=a(9),ae=wp.element.Fragment,oe=new Date,ne=[["core/heading",{placeholder:"Add featured news section title"}]],ce=wp.blocks,le=ce.registerBlockType,re=(ce.registerBlockStyle,wp.i18n.__);le("mojblocks/featured-news",{title:re("Featured News","mojblocks"),description:re("Display featured news item"),category:"mojblocks",icon:"id-alt",keywords:[re("featured news"),re("headline news"),re("headlines")],attributes:{featuredNewsHasDate:{type:"boolean"},featuredNewsID:{type:"string"}},edit:function(e){var t=e.attributes,a=e.setAttributes,c=(t.featuredNewsLink,t.className),r=Object(ee.useSelect)((function(e){var t=e(te.store),a=t.getEntityRecords,o=(t.getMedia,t.getUsers,(0,e(l.store).getSettings)());return o.imageSizes,o.imageDimensions,{latestNews:a("postType","news",{per_page:-1})}})).latestNews,s=[{label:"None",value:"0"}],i=[{title:"No news article selected",summary:"",date:"date",image:""}];if(Array.isArray(r))for(var m=0;m<r.length;m++)r[m].summary_meta.news_story_summary&&(i[r[m].id]={title:r[m].title.rendered,summary:r[m].summary_meta.news_story_summary,date:r[m].date,image:r[m].featured_image_url},s.push({label:r[m].title.rendered,value:r[m].id}));var u=Object(o.useState)(!0),b=G()(u,2),d=b[0],g=b[1],j=Object(o.useState)("0"),p=G()(j,2),k=p[0],h=p[1],v=Object(o.createElement)(l.InspectorControls,null,Object(o.createElement)(A.PanelBody,{title:Object(n.__)("News settings"),initialOpen:!0},Object(o.createElement)(A.SelectControl,H()({label:"Select news",help:"Only news articles with a summary are available for selection",value:k,options:s,onChange:a({featuredNewsID:k})},"onChange",(function(e){return h(e)}))),Object(o.createElement)(A.ToggleControl,H()({label:"Show/hide article dates",help:d?"The date will be displayed":"The date will be hidden",checked:d,onChange:a({featuredNewsHasDate:d})},"onChange",(function(){g((function(e){return!e}))})))));return Array.isArray(r)&&Array.isArray(i)?Object(o.createElement)(ae,null,v,Object(o.createElement)("div",{className:"mojblocks-featured-news mojblocks-featured-news--".concat(k," ").concat(c)},Object(o.createElement)("div",{className:"govuk-width-container"},Object(o.createElement)(l.InnerBlocks,{template:ne,templateLock:"all"}),Object(o.createElement)("div",{className:"govuk-grid-row ".concat(d?"":"mojblocks-featured-news-hide-date"," ").concat("0"==k||i[k].image?"":"mojblocks-featured-news--no-image"," ")},Object(o.createElement)("div",{class:"mojblocks-featured-news__item"},Object(o.createElement)("div",{className:"mojblocks-featured-news__image",styles:"background:url('".concat(i[k].image,"')")},Object(o.createElement)("img",{src:i[k].image,alt:"Feature image for news article"})),Object(o.createElement)("div",{className:"mojblocks-featured-news__text"},Object(o.createElement)("div",{className:"mojblocks-featured-news__headline"},Object(o.createElement)("a",{href:"#",className:"govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline-link"},i[k].title)),Object(o.createElement)("div",{className:"govuk-body mojblocks-featured-news__summary"},i[k].summary),Object(o.createElement)("div",{className:"govuk-body-s mojblocks-featured-news__date"},function(e,t){if(!e)return"Date";if((o=new Array)[1]="January",o[2]="February",o[3]="March",o[4]="April",o[5]="May",o[6]="June",o[7]="July",o[8]="August",o[9]="September",o[10]="October",o[11]="November",o[12]="December",3!=(e=e.split("-")).length)return t.toLocaleString("en-GB",{day:"2-digit",month:"long"});var a=e[2].substring(0,2),o=" "+o[parseInt(e[1])],n=" "+e[0];return t.getFullYear()==e[0]?a+o:a+o+n}(i[k].date,oe)),Object(o.createElement)("div",{className:"mojblocks-featured-news__link"},Object(o.createElement)("a",{className:"govuk-link"},"Read full article")))))))):Object(o.createElement)(ae,null,Object(o.createElement)("div",{class:"mojblocks-spinner"}),Object(o.createElement)("div",{class:"mojblocks-spinner-text govuk-body"},"Loading"))},save:function(){return Object(o.createElement)(l.InnerBlocks.Content,null)}}),(0,wp.hooks.addFilter)("editor.BlockEdit","core/file",(0,wp.compose.createHigherOrderComponent)((function(e){return function(t){if("core/file"!==t.name)return Object(o.createElement)(e,t);var a="("+function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"";return e.slice(2+(e.lastIndexOf(".")-1>>>0))}(t.attributes.href).toUpperCase()+")";return t.attributes.downloadButtonText=a,Object(o.createElement)(e,t)}}),"addFileExtention"))}]);
+/******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId]) {
+/******/ 			return installedModules[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			i: moduleId,
+/******/ 			l: false,
+/******/ 			exports: {}
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.l = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// define getter function for harmony exports
+/******/ 	__webpack_require__.d = function(exports, name, getter) {
+/******/ 		if(!__webpack_require__.o(exports, name)) {
+/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
+/******/ 		}
+/******/ 	};
+/******/
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = function(exports) {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
+/******/
+/******/ 	// create a fake namespace object
+/******/ 	// mode & 1: value is a module id, require it
+/******/ 	// mode & 2: merge all properties of value into the ns
+/******/ 	// mode & 4: return value when already ns object
+/******/ 	// mode & 8|1: behave like require
+/******/ 	__webpack_require__.t = function(value, mode) {
+/******/ 		if(mode & 1) value = __webpack_require__(value);
+/******/ 		if(mode & 8) return value;
+/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
+/******/ 		var ns = Object.create(null);
+/******/ 		__webpack_require__.r(ns);
+/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
+/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
+/******/ 		return ns;
+/******/ 	};
+/******/
+/******/ 	// getDefaultExport function for compatibility with non-harmony modules
+/******/ 	__webpack_require__.n = function(module) {
+/******/ 		var getter = module && module.__esModule ?
+/******/ 			function getDefault() { return module['default']; } :
+/******/ 			function getModuleExports() { return module; };
+/******/ 		__webpack_require__.d(getter, 'a', getter);
+/******/ 		return getter;
+/******/ 	};
+/******/
+/******/ 	// Object.prototype.hasOwnProperty.call
+/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(__webpack_require__.s = "./src/index.js");
+/******/ })
+/************************************************************************/
+/******/ ({
+
+/***/ "./assets/svg/index.js":
+/*!*****************************!*\
+  !*** ./assets/svg/index.js ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+var Icons = {};
+Icons.upload = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("svg", {
+  width: "32px",
+  height: "32px",
+  viewBox: "0 0 100 100",
+  xmlns: "http://www.w3.org/2000/svg"
+}, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("path", {
+  d: "m77.945 91.453h-72.371c-3.3711 0-5.5742-2.3633-5.5742-5.2422v-55.719c0-3.457 2.1172-6.0703 5.5742-6.0703h44.453v11.051l-38.98-0.003906v45.008h60.977v-17.133l11.988-0.007812v22.875c0 2.8789-2.7812 5.2422-6.0664 5.2422z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("path", {
+  d: "m16.543 75.48l23.25-22.324 10.441 9.7773 11.234-14.766 5.5039 10.539 0.039063 16.773z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("path", {
+  d: "m28.047 52.992c-3.168 0-5.7422-2.5742-5.7422-5.7461 0-3.1758 2.5742-5.75 5.7422-5.75 3.1797 0 5.7539 2.5742 5.7539 5.75 0 3.1719-2.5742 5.7461-5.7539 5.7461z"
+}), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("path", {
+  d: "m84.043 30.492v22.02h-12.059l-0.015625-22.02h-15.852l21.941-21.945 21.941 21.945z"
+}));
+/* harmony default export */ __webpack_exports__["default"] = (Icons);
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+
+  return arr2;
+}
+
+module.exports = _arrayLikeToArray;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+module.exports = _arrayWithHoles;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/defineProperty.js":
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js":
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(arr, i) {
+  var _i = arr == null ? null : typeof Symbol !== "undefined" && arr[Symbol.iterator] || arr["@@iterator"];
+
+  if (_i == null) return;
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+
+  var _s, _e;
+
+  try {
+    for (_i = _i.call(arr); !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+module.exports = _iterableToArrayLimit;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/nonIterableRest.js":
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+module.exports = _nonIterableRest;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/slicedToArray.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ "./node_modules/@babel/runtime/helpers/arrayWithHoles.js");
+
+var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit.js */ "./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js");
+
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js");
+
+var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ "./node_modules/@babel/runtime/helpers/nonIterableRest.js");
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ "./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js":
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ "./node_modules/@babel/runtime/helpers/arrayLikeToArray.js");
+
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+
+module.exports = _unsupportedIterableToArray;
+module.exports["default"] = module.exports, module.exports.__esModule = true;
+
+/***/ }),
+
+/***/ "./src/custom-blocks/accordion/index.js":
+/*!**********************************************!*\
+  !*** ./src/custom-blocks/accordion/index.js ***!
+  \**********************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+var __ = wp.i18n.__;
+var registerBlockType = wp.blocks.registerBlockType;
+var RichText = wp.blockEditor.RichText;
+var InnerBlocks = wp.blockEditor.InnerBlocks;
+/**
+ * MOJBLOCKS: Accordion
+ *
+ * Display content in accordion layout.
+ */
+
+registerBlockType('mojblocks/accordion', {
+  title: __('Accordion', 'mojblocks'),
+  description: __('Display content in an accordion component.'),
+  icon: "list-view",
+  category: 'mojblocks',
+  keywords: [__('accordion'), __('sections'), __('lists')],
+  attributes: {},
+  edit: function edit() {
+    // Load allowed blocks on repeater
+    var allowedBlocks = ['mojblocks/accordion-section']; // Load template/block when block is selected
+
+    var templates = [['mojblocks/accordion-section', {}]];
+    return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "govuk-accordion",
+      "data-module": "govuk-accordion",
+      id: "accordion-default",
+      key: "accordion-block"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks, {
+      template: templates,
+      allowedBlocks: allowedBlocks
+    }))];
+  },
+  // When using InnerBlocks with dynamic blocks, you need to return the content.
+  save: function save() {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks.Content, null);
+  }
+});
+/**
+ * MOJBLOCKS: Accordion section
+ *
+ * Inner-block. Displayed only in the parent accordion block.
+ */
+
+registerBlockType("mojblocks/accordion-section", {
+  title: __("Accordion Section", "mojblocks"),
+  category: "mojblocks",
+  parent: ['mojblocks/accordion'],
+  attributes: {
+    accordionSectionTitle: {
+      type: "string"
+    },
+    accordionSectionTextArea: {
+      type: "string"
+    },
+    accordionSectionClassName: {
+      type: "string"
+    }
+  },
+  edit: function edit(props) {
+    var _props$attributes = props.attributes,
+        accordionSectionTitle = _props$attributes.accordionSectionTitle,
+        accordionSectionTextArea = _props$attributes.accordionSectionTextArea,
+        className = props.className,
+        setAttributes = props.setAttributes; // Set className attribute for PHP frontend to use
+
+    setAttributes({
+      accordionSectionClassName: className
+    }); // Load allowed blocks to be added to accordion section body
+
+    var allowedBlocks = ['core/heading', 'core/list', 'core/paragraph'];
+
+    var onChangeAccordionTitle = function onChangeAccordionTitle(newAccordionTitle) {
+      setAttributes({
+        accordionSectionTitle: newAccordionTitle
+      });
+    };
+
+    var onChangeAccordionSectionTextArea = function onChangeAccordionSectionTextArea(newAccordionSectionTextArea) {
+      setAttributes({
+        accordionSectionTextArea: newAccordionSectionTextArea
+      });
+    };
+
+    return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "".concat(className, " govuk-accordion__section"),
+      key: "accordion-block-section"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "govuk-accordion__section-header"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h3", {
+      className: "govuk-accordion__section-heading"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+      className: "govuk-accordion__section-button",
+      id: "accordion-default-heading-1"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      placeholder: __('Add accordion section title', 'mojblocks'),
+      value: accordionSectionTitle,
+      onChange: onChangeAccordionTitle,
+      keepPlaceholderOnFocus: true
+    })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      id: "accordion-default-content-1",
+      className: "govuk-accordion__section-content",
+      "aria-labelledby": "accordion-default-heading-1"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "govuk-body"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      placeholder: __('Add accordion section content', 'mojblocks'),
+      value: accordionSectionTextArea,
+      onChange: onChangeAccordionSectionTextArea,
+      keepPlaceholderOnFocus: true
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks, {
+      allowedBlocks: allowedBlocks
+    }))))];
+  },
+  // When using InnerBlocks with dynamic blocks, you need to return the content.
+  save: function save() {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks.Content, null);
+  }
+});
+
+/***/ }),
+
+/***/ "./src/custom-blocks/banner/index.js":
+/*!*******************************************!*\
+  !*** ./src/custom-blocks/banner/index.js ***!
+  \*******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var __ = wp.i18n.__;
+var registerBlockType = wp.blocks.registerBlockType;
+var RichText = wp.blockEditor.RichText;
+registerBlockType("mojblocks/banner", {
+  title: __("Banner", "mojblocks"),
+  description: __("Banner with title and button", "mojblocks"),
+  category: "mojblocks",
+  icon: "schedule",
+  attributes: {
+    bannerTitle: {
+      type: 'string'
+    },
+    buttonLink: {
+      type: 'string'
+    },
+    buttonLabel: {
+      type: 'string'
+    },
+    bannerClassName: {
+      type: 'string'
+    }
+  },
+  edit: function edit(props) {
+    var setAttributes = props.setAttributes,
+        _props$attributes = props.attributes,
+        bannerTitle = _props$attributes.bannerTitle,
+        buttonLink = _props$attributes.buttonLink,
+        buttonLabel = _props$attributes.buttonLabel,
+        className = props.className; // Set className attribute for PHP frontend to use
+
+    setAttributes({
+      bannerClassName: className
+    });
+
+    var onTitleChange = function onTitleChange(newTitle) {
+      setAttributes({
+        bannerTitle: newTitle
+      });
+    };
+
+    var onChangeButtonLink = function onChangeButtonLink(newButtonLink) {
+      setAttributes({
+        buttonLink: newButtonLink
+      });
+    };
+
+    var onChangeButtonLabel = function onChangeButtonLabel(newButtonLabel) {
+      setAttributes({
+        buttonLabel: newButtonLabel
+      });
+    };
+
+    return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "".concat(className, "  mojblocks-banner")
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-width-container'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-grid-row'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "govuk-grid-column-two-thirds"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      tagName: "h1",
+      className: "mojblocks-banner__title",
+      value: bannerTitle,
+      keepPlaceholderOnFocus: true,
+      onChange: onTitleChange,
+      placeholder: "Enter your banner title"
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "govuk-grid-column-one-third"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["URLInputButton"], {
+      className: "mojblocks-dropdown__input",
+      label: __('Button Link', 'mojblocks'),
+      onChange: onChangeButtonLink,
+      url: buttonLink
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      className: "mojblocks-banner__button govuk-button",
+      value: buttonLabel,
+      onChange: onChangeButtonLabel,
+      placeholder: "Button label"
+    })))))];
+  },
+  // return null as frontend output is done via PHP
+  save: function save() {
+    return null;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/custom-blocks/card/edit.js":
+/*!****************************************!*\
+  !*** ./src/custom-blocks/card/edit.js ***!
+  \****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return CardBlockEdit; });
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _assets_svg_index__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../assets/svg/index */ "./assets/svg/index.js");
+
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+var allowedMediaTypes = ['image'];
+var templateCardBlock = [['core/heading', {
+  placeholder: 'Card heading'
+}]];
+function CardBlockEdit(props) {
+  var setAttributes = props.setAttributes,
+      className = props.className;
+  var _props$attributes = props.attributes,
+      cardExcerpt = _props$attributes.cardExcerpt,
+      cardImageURL = _props$attributes.cardImageURL,
+      cardImageId = _props$attributes.cardImageId;
+
+  var onRemoveImage = function onRemoveImage() {
+    setAttributes({
+      cardImageURL: null,
+      cardImageId: null
+    });
+  };
+
+  return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "".concat(className, " mojblocks-card mojblocks-card-image"),
+    "data-src": cardImageURL
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+    className: "".concat(className, " mojblocks-card__image") + ' ' + (cardImageId ? 'mojblocks-card__image-selected' : ''),
+    style: {
+      backgroundImage: "url(".concat(cardImageURL, ")")
+    }
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["MediaUpload"], {
+    buttonProps: {
+      className: 'change-image'
+    },
+    onSelect: function onSelect(image) {
+      return setAttributes({
+        cardImageId: image.id,
+        cardImageURL: image.url
+      });
+    },
+    allowedTypes: allowedMediaTypes,
+    type: "image",
+    value: cardImageId,
+    render: function render(_ref) {
+      var open = _ref.open;
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+        className: 'mojblocks-card__image__button ' + (cardImageId ? 'mojblocks-card__image__button-change' : 'mojblocks-card__image__button-add'),
+        onClick: open
+      }, _assets_svg_index__WEBPACK_IMPORTED_MODULE_4__["default"].upload), cardImageId && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Button"], {
+        className: "mojblocks-card__image__button mojblocks-card__image__button-remove",
+        onClick: onRemoveImage
+      }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["Dashicon"], {
+        icon: 'dismiss'
+      })));
+    }
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["InnerBlocks"], {
+    template: templateCardBlock,
+    templateLock: "all"
+  }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__["RichText"], {
+    tagName: "p",
+    placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Add excerpt text...', 'mojblocks'),
+    keepPlaceholderOnFocus: true,
+    value: cardExcerpt,
+    className: "mojblocks-card-excerpt",
+    onChange: function onChange(value) {
+      return setAttributes({
+        cardExcerpt: value
+      });
+    }
+  }));
+}
+
+/***/ }),
+
+/***/ "./src/custom-blocks/card/index.js":
+/*!*****************************************!*\
+  !*** ./src/custom-blocks/card/index.js ***!
+  \*****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./edit */ "./src/custom-blocks/card/edit.js");
+
+
+/**
+ * Card block
+ *
+ * Create a flexible card pattern on the page,
+ * with an image, hyperlink title and body content.
+ */
+
+/**
+ * WordPress dependencies
+ */
+
+
+
+/**
+ * Internal dependencies
+ */
+
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('mojblocks/card', {
+  apiVersion: 1,
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Card', 'mojblocks'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Add a card pattern to a default page', 'mojblocks'),
+  category: 'mojblocks',
+  icon: 'table-row-after',
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('card', 'navigation', 'mojblocks')],
+  supports: {
+    align: ['wide', 'full'],
+    html: false
+  },
+  attributes: {
+    cardTitle: {
+      type: 'string'
+    },
+    cardExcerpt: {
+      type: 'string'
+    },
+    cardImageURL: {
+      type: 'string'
+    },
+    cardImageId: {
+      type: 'number'
+    },
+    cardClassName: {
+      type: 'string'
+    }
+  },
+  edit: _edit__WEBPACK_IMPORTED_MODULE_4__["default"],
+  save: function save() {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InnerBlocks"].Content, null);
+  }
+});
+
+/***/ }),
+
+/***/ "./src/custom-blocks/cta/index.js":
+/*!****************************************!*\
+  !*** ./src/custom-blocks/cta/index.js ***!
+  \****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+
+
+/**
+ * CTA
+ * A stylised call to action displaying a title, text and cta button
+ */
+
+
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('mojblocks/cta', {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Call to Action', 'mojblocks'),
+  icon: 'megaphone',
+  category: 'mojblocks',
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('cta'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Call to Action'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('banner')],
+  example: {
+    attributes: {
+      ctaTitle: 'Add a Call to Action banner to your site',
+      ctaText: 'Call To Action text',
+      buttonLabel: 'Click me now',
+      buttonLink: 'https://intranet.justice.gov.uk/'
+    }
+  },
+  attributes: {
+    ctaTitle: {
+      type: 'string'
+    },
+    ctaText: {
+      type: 'string'
+    },
+    buttonLabel: {
+      type: 'string'
+    },
+    buttonLink: {
+      type: 'string'
+    },
+    ctaClassName: {
+      type: 'string'
+    }
+  },
+  edit: function edit(props) {
+    var setAttributes = props.setAttributes,
+        _props$attributes = props.attributes,
+        ctaTitle = _props$attributes.ctaTitle,
+        ctaText = _props$attributes.ctaText,
+        buttonLink = _props$attributes.buttonLink,
+        buttonLabel = _props$attributes.buttonLabel,
+        className = props.className; // Set className attribute for PHP frontend to use
+
+    setAttributes({
+      ctaClassName: className
+    }); // Grab newCtaTitle, set the value of ctaTitle to newCtaTitle.
+
+    var onChangeCtaTitle = function onChangeCtaTitle(newCtaTitle) {
+      setAttributes({
+        ctaTitle: newCtaTitle
+      });
+    }; // Grab newCtaText, set the value of ctaText to newCtaText.
+
+
+    var onChangeCtaText = function onChangeCtaText(newCtaText) {
+      setAttributes({
+        ctaText: newCtaText
+      });
+    }; // Grab newButtonLabel, set the value of buttonLabel to newButtonLabel.
+
+
+    var onChangeButtonLabel = function onChangeButtonLabel(newButtonLabel) {
+      setAttributes({
+        buttonLabel: newButtonLabel
+      });
+    }; // Grab newButtonLink, set the value of buttonLink to newButtonLink.
+
+
+    var onChangeButtonLink = function onChangeButtonLink(newButtonLink) {
+      setAttributes({
+        buttonLink: newButtonLink
+      });
+    };
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "".concat(className, "  mojblocks-cta")
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-width-container'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-grid-row'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      class: "govuk-grid-column-three-quarters"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-cta__heading-container"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", {
+      className: "mojblocks-cta__heading"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+      role: "text"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+      className: "mojblocks-cta__heading-text"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["RichText"], {
+      placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Add a Call To Action title', 'mojblocks'),
+      keepPlaceholderOnFocus: true,
+      value: ctaTitle,
+      onChange: onChangeCtaTitle
+    }))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'mojblocks-cta__content'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["RichText"], {
+      multiline: "p",
+      placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Add compelling text to send the message home', 'mojblocks'),
+      keepPlaceholderOnFocus: true,
+      onChange: onChangeCtaText,
+      value: ctaText
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["URLInputButton"], {
+      className: "mojblocks-dropdown__input",
+      label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('CTA Link', 'mojblocks'),
+      onChange: onChangeButtonLink,
+      url: buttonLink
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["RichText"], {
+      className: "mojblocks-button govuk-button",
+      value: buttonLabel,
+      onChange: onChangeButtonLabel,
+      placeholder: "Button label"
+    })))));
+  },
+  save: function save() {
+    return null;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/custom-blocks/featured-news/edit.js":
+/*!*************************************************!*\
+  !*** ./src/custom-blocks/featured-news/edit.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return FeaturedNewsEdit; });
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/date */ "@wordpress/date");
+/* harmony import */ var _wordpress_date__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_date__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @wordpress/core-data */ "@wordpress/core-data");
+/* harmony import */ var _wordpress_core_data__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_8__);
+
+
+
+
+
+
+
+
+
+
+var Fragment = wp.element.Fragment;
+var d = new Date();
+var templateFeaturedNewsBlock = [['core/heading', {
+  placeholder: 'Add featured news section title'
+}]];
+function FeaturedNewsEdit(_ref) {
+  var attributes = _ref.attributes,
+      setAttributes = _ref.setAttributes;
+  var featuredNewsLink = attributes.featuredNewsLink,
+      className = attributes.className;
+
+  var _useSelect = Object(_wordpress_data__WEBPACK_IMPORTED_MODULE_7__["useSelect"])(function (select) {
+    var _select = select(_wordpress_core_data__WEBPACK_IMPORTED_MODULE_8__["store"]),
+        getEntityRecords = _select.getEntityRecords,
+        getMedia = _select.getMedia,
+        getUsers = _select.getUsers;
+
+    var _select2 = select(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["store"]),
+        getSettings = _select2.getSettings;
+
+    var _getSettings = getSettings(),
+        imageSizes = _getSettings.imageSizes,
+        imageDimensions = _getSettings.imageDimensions;
+
+    var posts = getEntityRecords('postType', 'news', {
+      per_page: -1
+    });
+    return {
+      latestNews: posts
+    };
+  }),
+      latestNews = _useSelect.latestNews;
+
+  var optionList = [{
+    label: "None",
+    value: '0'
+  }];
+  var newsList = [{
+    title: "No news article selected",
+    summary: "",
+    date: "date",
+    image: ""
+  }];
+
+  if (Array.isArray(latestNews)) {
+    for (var i = 0; i < latestNews.length; i++) {
+      if (latestNews[i].summary_meta.news_story_summary) {
+        newsList[latestNews[i].id] = {
+          title: latestNews[i].title.rendered,
+          summary: latestNews[i].summary_meta.news_story_summary,
+          date: latestNews[i].date,
+          image: latestNews[i].featured_image_url
+        };
+        optionList.push({
+          label: latestNews[i].title.rendered,
+          value: latestNews[i].id
+        });
+      }
+    }
+  }
+
+  var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["useState"])(true),
+      _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState, 2),
+      hasDate = _useState2[0],
+      setHasDate = _useState2[1];
+
+  var _useState3 = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["useState"])('0'),
+      _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState3, 2),
+      story = _useState4[0],
+      setStory = _useState4[1];
+
+  var inspectorControls = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["InspectorControls"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["PanelBody"], {
+    title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_4__["__"])('News settings'),
+    initialOpen: true
+  }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["SelectControl"], _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({
+    label: "Select news",
+    help: "Only news articles with a summary are available for selection",
+    value: story,
+    options: optionList,
+    onChange: setAttributes({
+      featuredNewsID: story
+    })
+  }, "onChange", function onChange(newStory) {
+    return setStory(newStory);
+  })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__["ToggleControl"], _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({
+    label: "Show/hide article dates",
+    help: hasDate ? 'The date will be displayed' : 'The date will be hidden',
+    checked: hasDate,
+    onChange: setAttributes({
+      featuredNewsHasDate: hasDate
+    })
+  }, "onChange", function onChange() {
+    setHasDate(function (state) {
+      return !state;
+    });
+  }))));
+
+  if (!Array.isArray(latestNews) || !Array.isArray(newsList)) {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      class: "mojblocks-spinner"
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      class: "mojblocks-spinner-text govuk-body"
+    }, "Loading"));
+  } else {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Fragment, null, inspectorControls, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-featured-news mojblocks-featured-news--".concat(story, " ").concat(className)
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "govuk-width-container"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_6__["InnerBlocks"], {
+      template: templateFeaturedNewsBlock,
+      templateLock: "all"
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "govuk-grid-row ".concat(hasDate ? '' : 'mojblocks-featured-news-hide-date', " ").concat(story != "0" && !newsList[story].image ? 'mojblocks-featured-news--no-image' : '', " ")
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      class: "mojblocks-featured-news__item"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-featured-news__image",
+      styles: "background:url('".concat(newsList[story].image, "')")
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("img", {
+      src: newsList[story].image,
+      alt: "Feature image for news article"
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-featured-news__text"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-featured-news__headline"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", {
+      href: "#",
+      className: "govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline-link"
+    }, newsList[story].title)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "govuk-body mojblocks-featured-news__summary"
+    }, newsList[story].summary), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "govuk-body-s mojblocks-featured-news__date"
+    }, datify(newsList[story].date, d)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-featured-news__link"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", {
+      className: "govuk-link"
+    }, "Read full article"))))))));
+  }
+}
+
+function datify(x, d) {
+  if (!x) return "Date";
+  var month = new Array();
+  month[1] = "January";
+  month[2] = "February";
+  month[3] = "March";
+  month[4] = "April";
+  month[5] = "May";
+  month[6] = "June";
+  month[7] = "July";
+  month[8] = "August";
+  month[9] = "September";
+  month[10] = "October";
+  month[11] = "November";
+  month[12] = "December";
+  var x = x.split("-");
+
+  if (x.length != 3) {
+    //wrong format, return today
+    return d.toLocaleString('en-GB', {
+      day: '2-digit',
+      month: 'long'
+    });
+  }
+
+  var day = x[2].substring(0, 2);
+  var month = " " + month[parseInt(x[1])];
+  var year = " " + x[0];
+
+  if (d.getFullYear() == x[0]) {
+    return day + month;
+  } else {
+    return day + month + year;
+  }
+}
+
+/***/ }),
+
+/***/ "./src/custom-blocks/featured-news/index.js":
+/*!**************************************************!*\
+  !*** ./src/custom-blocks/featured-news/index.js ***!
+  \**************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _edit__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./edit */ "./src/custom-blocks/featured-news/edit.js");
+
+var _wp$blocks = wp.blocks,
+    registerBlockType = _wp$blocks.registerBlockType,
+    registerBlockStyle = _wp$blocks.registerBlockStyle;
+var __ = wp.i18n.__;
+
+
+registerBlockType("mojblocks/featured-news", {
+  title: __("Featured News", "mojblocks"),
+  description: __('Display featured news item'),
+  category: "mojblocks",
+  icon: "id-alt",
+  keywords: [__('featured news'), __('headline news'), __('headlines')],
+  attributes: {
+    featuredNewsHasDate: {
+      type: "boolean"
+    },
+    featuredNewsID: {
+      type: "string"
+    }
+  },
+  edit: _edit__WEBPACK_IMPORTED_MODULE_2__["default"],
+  save: function save() {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__["InnerBlocks"].Content, null);
+  }
+});
+
+/***/ }),
+
+/***/ "./src/custom-blocks/hero/index.js":
+/*!*****************************************!*\
+  !*** ./src/custom-blocks/hero/index.js ***!
+  \*****************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+var __ = wp.i18n.__;
+var registerBlockType = wp.blocks.registerBlockType;
+var _wp$blockEditor = wp.blockEditor,
+    RichText = _wp$blockEditor.RichText,
+    InspectorControls = _wp$blockEditor.InspectorControls,
+    MediaUpload = _wp$blockEditor.MediaUpload,
+    InnerBlocks = _wp$blockEditor.InnerBlocks;
+var _wp$components = wp.components,
+    PanelBody = _wp$components.PanelBody,
+    PanelRow = _wp$components.PanelRow;
+registerBlockType("mojblocks/hero", {
+  title: __("Hero", "mojblocks"),
+  description: __("Full width hero banner with title and text", "mojblocks"),
+  category: "mojblocks",
+  icon: "schedule",
+  attributes: {
+    backgroundImage: {
+      type: 'string'
+    },
+    heroClassName: {
+      type: 'string'
+    }
+  },
+  edit: function edit(props) {
+    var setAttributes = props.setAttributes,
+        backgroundImage = props.attributes.backgroundImage,
+        className = props.className; // Set className attribute for PHP frontend to use
+
+    setAttributes({
+      heroClassName: className
+    }); // Load allowed blocks to be added to hero content
+
+    var allowedBlocks = ['core/heading', 'core/list', 'core/paragraph', 'mojblocks/intro'];
+
+    var onChangeBackgroundImage = function onChangeBackgroundImage(imageObject) {
+      var imageSizes = imageObject.sizes; // determine the image size displayed with fallback
+
+      var image = typeof imageSizes.hero !== 'undefined' ? imageSizes.hero.url : imageSizes.full.url;
+      setAttributes({
+        backgroundImage: image
+      });
+    };
+
+    return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelBody, {
+      title: __('Choose hero block banner image', 'mojblocks'),
+      initialOpen: true
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
+      className: "block-editor-block-hero"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "For best results, uploaded images must meet a minimum size of 1366x683 pixels (or aspect ratio of 2:1).")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelRow, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
+      onSelect: onChangeBackgroundImage,
+      type: "image",
+      value: backgroundImage,
+      render: function render(_ref) {
+        var open = _ref.open;
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
+          className: "button button-primary button-hero",
+          onClick: open
+        }, "Upload image");
+      }
+    })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
+      className: "".concat(className, "  mojblocks-hero")
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-hero__image",
+      style: {
+        backgroundImage: "url(".concat(backgroundImage, ")"),
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
+      }
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-width-container'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-grid-row'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-hero__overlay"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "govuk-grid-column-three-quarters"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks, {
+      allowedBlocks: allowedBlocks
+    }))))))];
+  },
+  // return null as frontend output is done via PHP
+  save: function save() {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InnerBlocks.Content, null);
+  }
+});
+
+/***/ }),
+
+/***/ "./src/custom-blocks/highlights-list/index.js":
+/*!****************************************************!*\
+  !*** ./src/custom-blocks/highlights-list/index.js ***!
+  \****************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+
+
+/**
+ * Highlights List
+ * A stylised list displaying bullet points and a title
+ */
+
+
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('mojblocks/highlights-list', {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Highlights List', 'mojblocks'),
+  icon: 'list-view',
+  category: 'mojblocks',
+  example: {
+    attributes: {
+      listTitle: 'This is a highlights list title',
+      listItems: 'This is a list item'
+    }
+  },
+  attributes: {
+    listTitle: {
+      type: 'string'
+    },
+    listItems: {
+      type: 'string' //sting due to key error issue with array
+
+    },
+    listClassName: {
+      type: 'string'
+    }
+  },
+  edit: function edit(props) {
+    var _props$attributes = props.attributes,
+        listTitle = _props$attributes.listTitle,
+        listItems = _props$attributes.listItems,
+        className = props.className,
+        setAttributes = props.setAttributes;
+    setAttributes({
+      listClassName: className
+    }); // Grab newListTitle, set the value of listTitle to newListTitle.
+
+    var onChangeListTitle = function onChangeListTitle(newListTitle) {
+      setAttributes({
+        listTitle: newListTitle
+      });
+    }; // Grab newListItems, set the value of listItems to newListItems.
+
+
+    var onChangeListItems = function onChangeListItems(newListItems) {
+      setAttributes({
+        listItems: newListItems
+      });
+    };
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "".concat(className, "  mojblocks-highlights-list")
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-width-container'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-grid-row'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-highlights-list__heading-container"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h2", {
+      className: "mojblocks-highlights-list__heading"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+      role: "text"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+      className: "mojblocks-highlights-list__heading-text"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["RichText"], {
+      placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Add highlights title', 'mojblocks'),
+      keepPlaceholderOnFocus: true,
+      value: listTitle,
+      onChange: onChangeListTitle
+    }))))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'mojblocks-highlights-list__content'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["RichText"], {
+      tagName: "ul",
+      multiline: "li",
+      placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Add list item', 'mojblocks'),
+      keepPlaceholderOnFocus: true,
+      onChange: onChangeListItems,
+      value: listItems
+    })))));
+  },
+  save: function save() {
+    return null;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/custom-blocks/index.js":
+/*!************************************!*\
+  !*** ./src/custom-blocks/index.js ***!
+  \************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _highlights_list__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./highlights-list */ "./src/custom-blocks/highlights-list/index.js");
+/* harmony import */ var _cta__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./cta */ "./src/custom-blocks/cta/index.js");
+/* harmony import */ var _hero__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./hero */ "./src/custom-blocks/hero/index.js");
+/* harmony import */ var _accordion__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./accordion */ "./src/custom-blocks/accordion/index.js");
+/* harmony import */ var _staggered_box__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./staggered-box */ "./src/custom-blocks/staggered-box/index.js");
+/* harmony import */ var _quote__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./quote */ "./src/custom-blocks/quote/index.js");
+/* harmony import */ var _intro__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./intro */ "./src/custom-blocks/intro/index.js");
+/* harmony import */ var _reveal__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./reveal */ "./src/custom-blocks/reveal/index.js");
+/* harmony import */ var _card__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./card */ "./src/custom-blocks/card/index.js");
+/* harmony import */ var _banner__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./banner */ "./src/custom-blocks/banner/index.js");
+/* harmony import */ var _latest_news__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./latest-news */ "./src/custom-blocks/latest-news/index.js");
+/* harmony import */ var _featured_news__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./featured-news */ "./src/custom-blocks/featured-news/index.js");
+/**
+ * Import blocks as components.
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/custom-blocks/intro/index.js":
+/*!******************************************!*\
+  !*** ./src/custom-blocks/intro/index.js ***!
+  \******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+
+
+/**
+ * Intro
+ * A stylised intro section
+ */
+
+
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('mojblocks/intro', {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Intro Text', 'mojblocks'),
+  icon: 'editor-paragraph',
+  category: 'mojblocks',
+  attributes: {
+    introText: {
+      type: 'string'
+    },
+    introClassName: {
+      type: 'string'
+    }
+  },
+  edit: function edit(props) {
+    var introText = props.attributes.introText,
+        className = props.className,
+        setAttributes = props.setAttributes; // Set className attribute for PHP frontend to use
+
+    setAttributes({
+      introClassName: className
+    }); // Grab newIntroText, set the value of introText to newIntroText.
+
+    var onChangeIntroText = function onChangeIntroText(newIntroText) {
+      setAttributes({
+        introText: newIntroText
+      });
+    };
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "".concat(className, " mojblocks-intro")
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-width-container'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-grid-row'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "govuk-grid-column-three-quarters"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-intro--type"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'mojblocks-intro__content intro'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["RichText"], {
+      multiline: "p",
+      placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Some compelling text to send the message home', 'mojblocks'),
+      keepPlaceholderOnFocus: true,
+      onChange: onChangeIntroText,
+      value: introText
+    })))))));
+  },
+  // return null as frontend output is done via PHP
+  save: function save() {
+    return null;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/custom-blocks/latest-news/index.js":
+/*!************************************************!*\
+  !*** ./src/custom-blocks/latest-news/index.js ***!
+  \************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/defineProperty */ "./node_modules/@babel/runtime/helpers/defineProperty.js");
+/* harmony import */ var _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ "./node_modules/@babel/runtime/helpers/slicedToArray.js");
+/* harmony import */ var _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+
+
+
+var __ = wp.i18n.__;
+var _wp$blocks = wp.blocks,
+    registerBlockType = _wp$blocks.registerBlockType,
+    registerBlockStyle = _wp$blocks.registerBlockStyle;
+var Fragment = wp.element.Fragment;
+var _wp$blockEditor = wp.blockEditor,
+    RichText = _wp$blockEditor.RichText,
+    MediaUpload = _wp$blockEditor.MediaUpload,
+    InspectorControls = _wp$blockEditor.InspectorControls,
+    URLInputButton = _wp$blockEditor.URLInputButton;
+var ALLOWED_MEDIA_TYPES = ['image'];
+var PanelBody = wp.components.PanelBody;
+var templateLatestNewsBlock = [['core/heading', {
+  placeholder: 'Add latest news section title'
+}]];
+var title0 = 'Title automatically updated on preview page';
+var title1 = 'Title automatically updated on preview page';
+var title2 = 'Title automatically updated on preview page';
+var date0 = 'Date';
+var date1 = 'Date';
+var date2 = 'Date';
+var d = new Date();
+
+function datify(x, d) {
+  var month = new Array();
+  month[1] = "January";
+  month[2] = "February";
+  month[3] = "March";
+  month[4] = "April";
+  month[5] = "May";
+  month[6] = "June";
+  month[7] = "July";
+  month[8] = "August";
+  month[9] = "September";
+  month[10] = "October";
+  month[11] = "November";
+  month[12] = "December";
+  var x = x.split("-");
+
+  if (x.length != 3) {
+    //wrong format, return today
+    return d.toLocaleString('en-GB', {
+      day: '2-digit',
+      month: 'long'
+    });
+  }
+
+  var day = x[2].substring(0, 2);
+  var month = " " + month[parseInt(x[1])];
+  var year = " " + x[0];
+
+  if (d.getFullYear() == x[0]) {
+    return day + month;
+  } else {
+    return day + month + year;
+  }
+}
+
+
+
+
+
+
+
+registerBlockType("mojblocks/latest-news", {
+  title: __("Latest News", "mojblocks"),
+  description: __('Display latest news items'),
+  category: "mojblocks",
+  icon: "slides",
+  keywords: [__('latest news'), __('recent news'), __('headlines')],
+  attributes: {
+    latestNewsNumber: {
+      type: "string"
+    },
+    latestNewsHasDate: {
+      type: "boolean"
+    },
+    latestNewsExpiry: {
+      type: "numeric"
+    },
+    latestNewsEmptyText: {
+      type: "string"
+    }
+  },
+  edit: function edit(props) {
+    var latestNewsTitle = props.attributes.latestNewsTitle,
+        className = props.className,
+        setAttributes = props.setAttributes;
+
+    var _useState = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["useState"])('3'),
+        _useState2 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState, 2),
+        newsNumber = _useState2[0],
+        setNewsNumber = _useState2[1];
+
+    var _useState3 = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["useState"])(0),
+        _useState4 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState3, 2),
+        expiry = _useState4[0],
+        setExpiry = _useState4[1];
+
+    var _useState5 = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["useState"])("No news to display."),
+        _useState6 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState5, 2),
+        emptyText = _useState6[0],
+        setEmptyText = _useState6[1];
+
+    var _useState7 = Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["useState"])(true),
+        _useState8 = _babel_runtime_helpers_slicedToArray__WEBPACK_IMPORTED_MODULE_1___default()(_useState7, 2),
+        hasDate = _useState8[0],
+        setHasDate = _useState8[1];
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(PanelBody, {
+      title: __('News settings'),
+      initialOpen: true
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["ToggleControl"], _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({
+      label: "Show/hide article dates",
+      help: hasDate ? 'Dates will be displayed' : 'Dates will be hidden',
+      checked: hasDate,
+      onChange: setAttributes({
+        latestNewsHasDate: hasDate
+      })
+    }, "onChange", function onChange() {
+      setHasDate(function (state) {
+        return !state;
+      });
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["TextControl"], _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({
+      label: "Text for no news",
+      help: !emptyText ? "If there are no news articles to display, the block will be blank." : "This will be shown if there are no articles to display.",
+      value: emptyText,
+      onChange: setAttributes({
+        latestNewsEmptyText: emptyText
+      })
+    }, "onChange", setEmptyText)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["__experimentalNumberControl"], _babel_runtime_helpers_defineProperty__WEBPACK_IMPORTED_MODULE_0___default()({
+      label: "Auto-hide after how many weeks",
+      value: expiry,
+      min: "0",
+      onChange: setAttributes({
+        latestNewsExpiry: expiry
+      })
+    }, "onChange", setExpiry)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["__experimentalText"], null, expiry == 0 ? "Articles will not expire." : "Articles will expire after " + expiry + " weeks."))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-latest-news mojblocks-latest-news--expiry-weeks-".concat(expiry, " ").concat(className)
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "govuk-width-container"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InnerBlocks"], {
+      template: templateLatestNewsBlock,
+      templateLock: "all"
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "govuk-grid-row ".concat(hasDate ? '' : 'mojblocks-latest-news-hide-date', " ")
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-latest-news__item"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "govuk-body mojblocks-latest-news__headline"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", {
+      href: "#"
+    }, title0)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-latest-news__date"
+    }, date0)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-latest-news__item"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "govuk-body mojblocks-latest-news__headline"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", {
+      href: "#"
+    }, title1)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-latest-news__date"
+    }, date1)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-latest-news__item"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "govuk-body mojblocks-latest-news__headline"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("a", {
+      href: "#"
+    }, title2)), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])("div", {
+      className: "mojblocks-latest-news__date"
+    }, date2))))));
+  },
+  save: function save() {
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_2__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["InnerBlocks"].Content, null);
+  }
+});
+
+/***/ }),
+
+/***/ "./src/custom-blocks/quote/index.js":
+/*!******************************************!*\
+  !*** ./src/custom-blocks/quote/index.js ***!
+  \******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @wordpress/dom-ready */ "@wordpress/dom-ready");
+/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _assets_svg_index__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../assets/svg/index */ "./assets/svg/index.js");
+
+
+/**
+ * Quote
+ * A stylised quotation with image upload, quote and name fields
+ */
+
+
+
+
+
+
+
+var ALLOWED_MEDIA_TYPES = ['image'];
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('mojblocks/quote', {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Quote', 'mojblocks'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('A user quote block with an optional image background, quote text and name', 'mojblocks'),
+  category: 'mojblocks',
+  icon: 'format-quote',
+  keywords: [Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('quote', 'mojblocks'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('testimonial', 'mojblocks'), Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('moj', 'mojblocks')],
+  attributes: {
+    quoteImgURL: {
+      type: 'string'
+    },
+    quoteContent: {
+      type: 'string'
+    },
+    quoteName: {
+      type: 'string'
+    },
+    quoteAlignment: {
+      type: 'string'
+    },
+    quoteImgId: {
+      type: 'number'
+    },
+    quoteClassName: {
+      type: 'string'
+    }
+  },
+  edit: function edit(props) {
+    var setAttributes = props.setAttributes,
+        _props$attributes = props.attributes,
+        quoteImgURL = _props$attributes.quoteImgURL,
+        quoteContent = _props$attributes.quoteContent,
+        quoteName = _props$attributes.quoteName,
+        quoteAlignment = _props$attributes.quoteAlignment,
+        quoteImgId = _props$attributes.quoteImgId,
+        className = props.className; // Set className attribute for PHP frontend to use
+
+    setAttributes({
+      quoteClassName: className
+    });
+
+    var onRemoveImage = function onRemoveImage() {
+      setAttributes({
+        quoteImgURL: null,
+        quoteImgId: null
+      });
+    };
+
+    return [// Show the alignment toolbar on focus
+    Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["BlockControls"], {
+      key: "controls"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["AlignmentToolbar"], {
+      value: quoteAlignment,
+      onChange: function onChange(value) {
+        return setAttributes({
+          quoteAlignment: value
+        });
+      }
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-quote",
+      "data-src": quoteImgURL
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "".concat(className, " mojblocks-quote__image ") + (quoteImgId ? 'mojblocks-quote__image-selected' : ''),
+      style: {
+        backgroundImage: "url(".concat(quoteImgURL, ")")
+      }
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["MediaUpload"], {
+      buttonProps: {
+        className: 'change-image'
+      },
+      onSelect: function onSelect(img) {
+        return setAttributes({
+          quoteImgId: img.id,
+          quoteImgURL: img.url
+        });
+      },
+      allowed: ALLOWED_MEDIA_TYPES,
+      type: "image",
+      value: quoteImgId,
+      render: function render(_ref) {
+        var open = _ref.open;
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Button"], {
+          className: 'mojblocks-quote__image__button ' + (quoteImgId ? 'mojblocks-quote__image__button-change' : 'mojblocks-quote__image__button-add'),
+          onClick: open
+        }, _assets_svg_index__WEBPACK_IMPORTED_MODULE_6__["default"].upload), quoteImgId && Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Button"], {
+          className: "mojblocks-quote__image__button mojblocks-quote__image__button-remove",
+          onClick: onRemoveImage
+        }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Dashicon"], {
+          icon: 'dismiss'
+        })));
+      }
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "govuk-width-container"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-quote__content",
+      style: {
+        textAlign: quoteAlignment
+      }
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-quote__content__icon"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_components__WEBPACK_IMPORTED_MODULE_4__["Dashicon"], {
+      icon: "format-quote"
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["RichText"], {
+      tagName: "q",
+      multiline: "span",
+      placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Add quotation text...', 'mojblocks'),
+      keepPlaceholderOnFocus: true,
+      value: quoteContent,
+      allowedFormats: ['core/bold', 'core/italic', 'core/strikethrough', 'core/link'],
+      className: "mojblocks-quote__content__quote",
+      onChange: function onChange(value) {
+        return setAttributes({
+          quoteContent: value
+        });
+      }
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["RichText"], {
+      tagName: "p",
+      placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Add name', 'mojblocks'),
+      keepPlaceholderOnFocus: true,
+      value: quoteName,
+      className: "mojblocks-quote__content__name",
+      onChange: function onChange(value) {
+        return setAttributes({
+          quoteName: value
+        });
+      }
+    }))))];
+  },
+  // return null as frontend output is done via PHP
+  save: function save() {
+    return null;
+  }
+});
+_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_5___default()(function () {
+  Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["unregisterBlockType"])('core/quote');
+});
+
+/***/ }),
+
+/***/ "./src/custom-blocks/reveal/index.js":
+/*!*******************************************!*\
+  !*** ./src/custom-blocks/reveal/index.js ***!
+  \*******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__);
+
+
+/**
+ * Reveal
+ */
+
+
+
+Object(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_2__["registerBlockType"])('mojblocks/reveal', {
+  title: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Reveal', 'mojblocks'),
+  description: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])("Arrow toggle to reveal text", "mojblocks"),
+  icon: 'controls-play',
+  category: 'mojblocks',
+  attributes: {
+    revealTitle: {
+      type: 'string'
+    },
+    revealContent: {
+      type: 'string'
+    },
+    revealClassName: {
+      type: 'string'
+    }
+  },
+  edit: function edit(props) {
+    var setAttributes = props.setAttributes,
+        _props$attributes = props.attributes,
+        revealTitle = _props$attributes.revealTitle,
+        revealContent = _props$attributes.revealContent,
+        className = props.className; // Set className attribute for PHP frontend to use
+
+    setAttributes({
+      revealClassName: className
+    }); // Grab newRevealTitle, set the value of revealTitle to newRevealTitle.
+
+    var onChangeRevealTitle = function onChangeRevealTitle(newRevealTitle) {
+      setAttributes({
+        revealTitle: newRevealTitle
+      });
+    }; // Grab newrevealContent, set the value of revealContent to newrevealContent.
+
+
+    var onChangeRevealContent = function onChangeRevealContent(newRevealContent) {
+      setAttributes({
+        revealContent: newRevealContent
+      });
+    };
+
+    return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-reveal"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-width-container'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: 'govuk-grid-row'
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "govuk-grid-column-three-quarters"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("details", {
+      className: "govuk-details",
+      "data-module": "govuk-details",
+      open: true
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("summary", {
+      className: "govuk-details__summary"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+      className: "mojblocks-reveal__title govuk-details__summary-text"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["RichText"], {
+      value: revealTitle,
+      placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Add reveal title', 'mojblocks'),
+      keepPlaceholderOnFocus: true,
+      onChange: onChangeRevealTitle
+    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-reveal__content govuk-details__text"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_3__["RichText"], {
+      multiline: "p",
+      placeholder: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_1__["__"])('Add reveal content', 'mojblocks'),
+      keepPlaceholderOnFocus: true,
+      onChange: onChangeRevealContent,
+      value: revealContent
+    })))))))];
+  },
+  // return null as frontend output is done via PHP
+  save: function save() {
+    return null;
+  }
+});
+
+/***/ }),
+
+/***/ "./src/custom-blocks/staggered-box/index.js":
+/*!**************************************************!*\
+  !*** ./src/custom-blocks/staggered-box/index.js ***!
+  \**************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+var __ = wp.i18n.__;
+var _wp$blocks = wp.blocks,
+    registerBlockType = _wp$blocks.registerBlockType,
+    registerBlockStyle = _wp$blocks.registerBlockStyle;
+var Fragment = wp.element.Fragment;
+var _wp$blockEditor = wp.blockEditor,
+    RichText = _wp$blockEditor.RichText,
+    MediaUpload = _wp$blockEditor.MediaUpload,
+    InspectorControls = _wp$blockEditor.InspectorControls,
+    URLInputButton = _wp$blockEditor.URLInputButton;
+var ALLOWED_MEDIA_TYPES = ['image'];
+registerBlockType("mojblocks/staggered-box", {
+  title: __("Staggered Box", "mojblocks"),
+  description: __('Display content on top of a staggered background image'),
+  category: "mojblocks",
+  icon: "admin-page",
+  keywords: [__('staggered box'), __('photo block')],
+  attributes: {
+    staggeredBoxTitle: {
+      type: "string"
+    },
+    staggeredBoxContent: {
+      type: "string"
+    },
+    staggeredBoxButtonText: {
+      type: "string"
+    },
+    staggeredBoxButtonLink: {
+      type: 'string'
+    },
+    staggeredBoxImageURL: {
+      type: "string"
+    },
+    staggeredBoxImageAltText: {
+      type: "string"
+    },
+    staggeredBoxClassName: {
+      type: "string"
+    }
+  },
+  edit: function edit(props) {
+    var _props$attributes = props.attributes,
+        staggeredBoxContent = _props$attributes.staggeredBoxContent,
+        staggeredBoxImageURL = _props$attributes.staggeredBoxImageURL,
+        staggeredBoxButtonText = _props$attributes.staggeredBoxButtonText,
+        staggeredBoxButtonLink = _props$attributes.staggeredBoxButtonLink,
+        staggeredBoxTitle = _props$attributes.staggeredBoxTitle,
+        staggeredBoxImageAltText = _props$attributes.staggeredBoxImageAltText,
+        className = props.className,
+        setAttributes = props.setAttributes;
+    setAttributes({
+      staggeredBoxClassName: className
+    });
+
+    var onChangeStaggeredBoxTitle = function onChangeStaggeredBoxTitle(newStaggeredBoxTitle) {
+      setAttributes({
+        staggeredBoxTitle: newStaggeredBoxTitle
+      });
+    };
+
+    var onChangeStaggeredBoxContent = function onChangeStaggeredBoxContent(newStaggeredBoxContent) {
+      setAttributes({
+        staggeredBoxContent: newStaggeredBoxContent
+      });
+    };
+
+    var onChangeStaggeredBoxButtonText = function onChangeStaggeredBoxButtonText(newStaggeredBoxButtonText) {
+      setAttributes({
+        staggeredBoxButtonText: newStaggeredBoxButtonText
+      });
+    };
+
+    var onChangeStaggeredBoxButtonLink = function onChangeStaggeredBoxButtonLink(newStaggeredBoxButtonLink) {
+      setAttributes({
+        staggeredBoxButtonLink: newStaggeredBoxButtonLink
+      });
+    };
+
+    var onStaggeredBoxImageSelect = function onStaggeredBoxImageSelect(newStaggeredBoxImageURL) {
+      setAttributes({
+        staggeredBoxImageURL: newStaggeredBoxImageURL.sizes.full.url
+      });
+      setAttributes({
+        staggeredBoxImageAltText: newStaggeredBoxImageURL.alt
+      });
+    };
+
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Fragment, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
+      onSelect: onStaggeredBoxImageSelect,
+      allowedTypes: ALLOWED_MEDIA_TYPES,
+      type: "image",
+      value: staggeredBoxImageURL,
+      render: function render(_ref) {
+        var open = _ref.open;
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
+          className: "button button-primary button-hero",
+          onClick: open
+        }, "Open Media Library");
+      }
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "".concat(className, " mojblocks-staggered-box")
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "govuk-width-container"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "govuk-grid-row"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-staggered-box__image-container govuk-grid-column-two-thirds "
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("img", {
+      className: "mojblocks-staggered-block__image",
+      src: staggeredBoxImageURL,
+      alt: staggeredBoxImageAltText
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "mojblocks-staggered-box__text-container govuk-grid-column-one-half"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      tagName: "h2",
+      value: staggeredBoxTitle,
+      onChange: onChangeStaggeredBoxTitle,
+      className: "mojblocks-staggered-box__title",
+      placeholder: __('Add staggered box title', 'mojblocks'),
+      keepPlaceholderOnFocus: true
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      tagName: "p",
+      value: staggeredBoxContent,
+      onChange: onChangeStaggeredBoxContent,
+      className: "mojblocks-staggered-box__content",
+      placeholder: __('Add staggered box content', 'mojblocks'),
+      keepPlaceholderOnFocus: true
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(URLInputButton, {
+      label: __('Button link', 'mojblocks'),
+      onChange: onChangeStaggeredBoxButtonLink,
+      url: staggeredBoxButtonLink
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      value: staggeredBoxButtonText,
+      onChange: onChangeStaggeredBoxButtonText,
+      className: "mojblocks-staggered-box__button",
+      placeholder: __('Add staggered box button', 'mojblocks')
+    }))))));
+  },
+  save: function save() {
+    return null;
+  }
+});
+registerBlockStyle('mojblocks/staggered-box', {
+  name: 'image-left',
+  label: 'Image aligned on the left',
+  isDefault: true
+});
+registerBlockStyle('mojblocks/staggered-box', {
+  name: 'staggered-box-image-right',
+  label: 'Image aligned on right'
+});
+
+/***/ }),
+
+/***/ "./src/extended-core-blocks/button/index.js":
+/*!**************************************************!*\
+  !*** ./src/extended-core-blocks/button/index.js ***!
+  \**************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/i18n */ "@wordpress/i18n");
+/* harmony import */ var _wordpress_i18n__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/dom-ready */ "@wordpress/dom-ready");
+/* harmony import */ var _wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_dom_ready__WEBPACK_IMPORTED_MODULE_2__);
+/**
+ *  Extend core WP button block
+ *  https://wordpress.org/support/article/button-block/
+ *
+ * This makes use of WP Blocks extention filters
+ * https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/
+ *
+ */
+
+
+
+wp.domReady(function () {
+  wp.blocks.unregisterBlockStyle('core/button', ['outline', 'squared', 'fill']);
+  wp.blocks.registerBlockStyle('core/button', [{
+    name: 'moj-cta-button',
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Call to action', 'mojblocks'),
+    isDefault: true
+  }]);
+  wp.blocks.registerBlockStyle('core/buttons', [{
+    name: 'moj-cta-button',
+    label: Object(_wordpress_i18n__WEBPACK_IMPORTED_MODULE_0__["__"])('Call to action', 'mojblocks'),
+    isDefault: true
+  }]);
+});
+
+/***/ }),
+
+/***/ "./src/extended-core-blocks/file/index.js":
+/*!************************************************!*\
+  !*** ./src/extended-core-blocks/file/index.js ***!
+  \************************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
+/* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
+
+
+/**
+ *  Extend core WP file block
+ *  https://wordpress.org/support/article/file-block/
+ *
+ * This makes use of WP Blocks extention filters
+ * https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/
+ *
+ */
+var addFilter = wp.hooks.addFilter;
+var createHigherOrderComponent = wp.compose.createHigherOrderComponent;
+/**
+ * Extention utility
+ * Parse file href to get a file's extention (.pdf, .doc, .xml)
+ *
+ */
+
+function getFileExtension() {
+  var file = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  return file.slice((file.lastIndexOf(".") - 1 >>> 0) + 2);
+}
+/**
+ * Append the file's extention type to the end of the file
+ *
+ * @param {Object} BlockEdit BlockEdit for the block.
+ *
+ * @return {Object} BlockEdit Modified settings.
+ */
+
+
+var addFileExtention = createHigherOrderComponent(function (BlockEdit) {
+  return function (props) {
+    // Apply to core file block only
+    if ('core/file' !== props.name) {
+      return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props);
+    }
+
+    var appendedFile = '(' + getFileExtension(props.attributes.href).toUpperCase() + ')'; // The downloadButtonText is not being used as part
+    // of our design, so we are using it to append the
+    // extention.
+
+    props.attributes.downloadButtonText = appendedFile;
+    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(BlockEdit, props);
+  };
+}, 'addFileExtention');
+addFilter('editor.BlockEdit', 'core/file', addFileExtention);
+
+/***/ }),
+
+/***/ "./src/extended-core-blocks/index.js":
+/*!*******************************************!*\
+  !*** ./src/extended-core-blocks/index.js ***!
+  \*******************************************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./button */ "./src/extended-core-blocks/button/index.js");
+/* harmony import */ var _file__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./file */ "./src/extended-core-blocks/file/index.js");
+/**
+ * Import extended block code
+ */
+
+
+
+/***/ }),
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _custom_blocks_index__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./custom-blocks/index */ "./src/custom-blocks/index.js");
+/* harmony import */ var _extended_core_blocks_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./extended-core-blocks/index */ "./src/extended-core-blocks/index.js");
+/**
+ * Import all JS from modules
+ */
+
+
+
+/***/ }),
+
+/***/ "@wordpress/block-editor":
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["blockEditor"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["blocks"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["components"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/core-data":
+/*!**********************************!*\
+  !*** external ["wp","coreData"] ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["coreData"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["data"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/date":
+/*!******************************!*\
+  !*** external ["wp","date"] ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["date"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/dom-ready":
+/*!**********************************!*\
+  !*** external ["wp","domReady"] ***!
+  \**********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["domReady"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/element":
+/*!*********************************!*\
+  !*** external ["wp","element"] ***!
+  \*********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["element"]; }());
+
+/***/ }),
+
+/***/ "@wordpress/i18n":
+/*!******************************!*\
+  !*** external ["wp","i18n"] ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+(function() { module.exports = window["wp"]["i18n"]; }());
+
+/***/ })
+
+/******/ });
+//# sourceMappingURL=index.js.map
