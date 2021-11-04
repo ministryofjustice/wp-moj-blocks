@@ -8,40 +8,6 @@ Core block: File (Gutenberg editor styles)
 // We have to target a WP core CSS class (.wp-block-file)
 // to prevent getting a rendering/broken block message.
 
-.is-style-moj-cta-button {
-	background-color: hotpink;
-}
+@import 'style.scss';
 
-.wp-block-button__link,
-a.wp-block-button__link {
-	box-sizing: border-box;
-        cursor: pointer;
-        display: block;
-        font-size: 24px;
-        font-size: govuk-px-to-rem(24);
-        font-weight: 900;
-        line-height: 36px;
-        line-height: govuk-px-to-rem(36);
-        margin-top: 15px;
-        padding: 4px 22px;
-        position: relative;
-        text-align: center;
-        text-decoration: none;
-        width: 100%;
-        border-radius: 5px;
-
-        @include govuk-media-query($from: tablet) {
-            display: inline-block;
-            width: auto;
-        }
-
-        &:visited {
-            text-decoration: none;
-        }
-
-        &:hover,
-        &:active,
-        &:focus {
-            box-shadow: none;
-        }
-}
+// same styling as frontend

@@ -9,26 +9,35 @@
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockStyle, unregisterBlockStyle } from '@wordpress/blocks';
-import { domReady } from '@wordpress/dom-ready';
+import domReady from '@wordpress/dom-ready';
 
-wp.domReady( () => {
-	wp.blocks.unregisterBlockStyle(
+/**
+ * Modify the CSS styles assosiated with
+ * two button blocks 'core/button' and 'core/buttons'
+ */
+
+domReady( () => {
+
+    // Remove the default styles
+	unregisterBlockStyle(
 		'core/button',
 		[ 'outline', 'squared', 'fill' ]
 	);
 
-    wp.blocks.registerBlockStyle( 'core/button', [
+    // Add custom CSS class
+    registerBlockStyle( 'core/button', [
 		{
-			name: 'moj-cta-button',
-			label: __('Call to action', 'mojblocks'),
+			name: 'mojblocks-cta-button',
+			label: __('Button - CTA style', 'mojblocks'),
 			isDefault: true
 		}
 	]);
 
-    wp.blocks.registerBlockStyle( 'core/buttons', [
+    // Add custom CSS class
+    registerBlockStyle( 'core/buttons', [
 		{
-			name: 'moj-cta-button',
-			label: __('Call to action', 'mojblocks'),
+			name: 'mojblocks-cta-button',
+			label: __('Button - CTA style', 'mojblocks'),
 			isDefault: true
 		}
 	]);
