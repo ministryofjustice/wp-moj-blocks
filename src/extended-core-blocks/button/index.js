@@ -1,9 +1,7 @@
 /**
- *  Extend core WP button block
+ *  Extend core WP Button, Buttons blocks
  *  https://wordpress.org/support/article/button-block/
- *
- * This makes use of WP Blocks extention filters
- * https://developer.wordpress.org/block-editor/reference-guides/filters/block-filters/
+ *  https://wordpress.org/support/article/buttons-block/
  *
  */
 
@@ -12,8 +10,9 @@ import { registerBlockStyle, unregisterBlockStyle } from '@wordpress/blocks';
 import domReady from '@wordpress/dom-ready';
 
 /**
- * Modify the CSS styles assosiated with
- * two button blocks 'core/button' and 'core/buttons'
+ * Modify the CSS styles associated with
+ * two button blocks 'core/button' and 'core/buttons'.
+ * Remove default core styles.
  */
 
 domReady( () => {

@@ -1,13 +1,9 @@
 @charset "UTF-8";
 /*********************************************************************************************
 
-Core block: File (Gutenberg editor styles)
+Core block: Button, Buttons (Gutenberg editor styles)
 
 **********************************************************************************************/
 
-// We have to target a WP core CSS class (.wp-block-file)
-// to prevent getting a rendering/broken block message.
-
+// Use the frontend styles
 @import 'style.scss';
-
-// same styling as frontend
