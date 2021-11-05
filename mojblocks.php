@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     3.3.1
+ * Version:     3.4.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Malcolm Butler, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -426,7 +426,7 @@ function mojblocks_gutenberg_editor_styles()
         'mojblocks-block-editor-styles',
         plugins_url('build/style-gutenburg.css', __FILE__),
         false,
-        '1.1',
+        '1.2',
         'all'
     );
 }
