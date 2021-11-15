@@ -17,6 +17,7 @@ Core block: file (Frontend styles)
 	&:before {
 		// shift icon in case of text wrap on mobile
 		position: absolute;
+		top:4px;
 		margin-right: 8px;
 		content: ' ';
 		// URL encode SVG for IE11
