@@ -8,6 +8,8 @@ Core block: file (Frontend styles)
 .mojblocks-file {
 	margin-bottom: 10px;
 	position: relative;
+	padding-left:30px;
+	min-height: 2rem;
 
 	&__extention {
 		display: inline-block;
@@ -17,7 +19,8 @@ Core block: file (Frontend styles)
 	&:before {
 		// shift icon in case of text wrap on mobile
 		position: absolute;
-		top:4px;
+		left:0;
+		display:inline-block;
 		margin-right: 8px;
 		content: ' ';
 		// URL encode SVG for IE11
@@ -26,9 +29,5 @@ Core block: file (Frontend styles)
 		background-repeat: no-repeat;
 		height: 28px;
 		width: 28px;
-	}
-	>* {
-		padding-left:30px;
-		display:inline-block;
 	}
 }
