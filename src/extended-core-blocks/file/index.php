@@ -71,7 +71,7 @@ function mojblocks_file_block_renderer($name, $attributes, $block_content)
 
     ?>
 
-    <div class="mojblocks-file">
+    <div class="mojblocks-file govuk-body">
         <a href="<?php echo $attributes["href"]; ?>"><?php _e($filename, 'mojblocks'); ?></a>
 
         <div class="mojblocks-file__extention">
