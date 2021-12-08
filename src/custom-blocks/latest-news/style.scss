@@ -60,6 +60,9 @@ Block: Latest News (Frontend styles)
 			padding-top: 0;
 
 		}
+		&.govuk-body{
+			font-weight: 700;
+		}
 	}
 
 	&__date {
