@@ -48,7 +48,7 @@ registerBlockType("mojblocks/hero", {
             <InspectorControls>
                 <PanelBody title={ __( 'Choose hero block banner image', 'mojblocks' ) } initialOpen={true} >
                 <label className="block-editor-block-hero"><p>For best results, uploaded images must meet a minimum
-                 size of 1366x683 pixels (or aspect ratio of 2:1).
+                 size of 1366×683 pixels (or aspect ratio of 2:1).
                  </p></label>
                 <PanelRow>
             <MediaUpload
