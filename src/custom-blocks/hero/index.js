@@ -1,3 +1,7 @@
+import {
+	SelectControl,
+} from '@wordpress/components';
+
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const {  RichText, InspectorControls, MediaUpload, InnerBlocks } = wp.blockEditor;
@@ -13,6 +17,9 @@ registerBlockType("mojblocks/hero", {
             type: 'string'
         },
         heroClassName: {
+            type: 'string'
+        },
+        heroImagePosition: {
             type: 'string'
         }
     },
@@ -34,15 +41,26 @@ registerBlockType("mojblocks/hero", {
 
         const onChangeBackgroundImage = imageObject => {
 
-           var imageSizes = imageObject.sizes;
+            var imageSizes = imageObject.sizes;
 
-           // determine the image size displayed with fallback
-           var image = (typeof imageSizes.hero !== 'undefined')
-           ? imageSizes.hero.url
-           : imageSizes.full.url;
+            // determine the image size displayed with fallback
+            var image = (typeof imageSizes.hero !== 'undefined')
+            ? imageSizes.hero.url
+            : imageSizes.full.url;
 
             setAttributes({ backgroundImage: image })
-          }
+        }
+       const optionList = [
+            { label: "Centre", value: 'center' },
+            { label: "Top", value: 'top' },
+            { label: "Bottom", value: 'bottom' },
+            { label: "Left", value: 'left' },
+            { label: "Right", value: 'right' },
+            { label: "Top left", value: 'top left' },
+            { label: "Top right", value: 'top right' },
+            { label: "Bottom left", value: 'bottom left' },
+            { label: "Bottom right", value: 'bottom right' },
+        ]
 
         return ([
             <InspectorControls>
@@ -50,26 +68,35 @@ registerBlockType("mojblocks/hero", {
                 <label className="block-editor-block-hero"><p>For best results, uploaded images must meet a minimum
                  size of 1366×683 pixels (or aspect ratio of 2:1).
                  </p></label>
-                <PanelRow>
-            <MediaUpload
-            onSelect={ onChangeBackgroundImage }
-            type="image"
-            value={ backgroundImage }
-            render={({ open }) => (
-                <button className="button button-primary button-hero" onClick={open}>
-                    Upload image
-                </button>
-                )}
-            />
-            </PanelRow>
-            </PanelBody>
+                    <PanelRow>
+                        <MediaUpload
+                        onSelect={ onChangeBackgroundImage }
+                        type="image"
+                        value={ backgroundImage }
+                        render={({ open }) => (
+                            <button className="button button-primary button-hero" onClick={open}>
+                                Upload image
+                            </button>
+                            )}
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <SelectControl
+                            label="Image position"
+                            help=""
+                            value={ position }
+                            options={ optionList }
+                            onChange={ setAttributes({ heroImagePosition: position } ) }
+                        />
+                    </PanelRow>
+                </PanelBody>
             </InspectorControls>,
 
         <section className={`${className}  mojblocks-hero`} >
             <div className="mojblocks-hero__image" style={{
             backgroundImage: `url(${ backgroundImage })`,
                 backgroundSize: 'cover',
-                backgroundPosition: 'center'
+                backgroundPosition: `${position = "center"}`
             }}>
             </div>
 
@@ -77,10 +104,9 @@ registerBlockType("mojblocks/hero", {
                 <div className={'govuk-grid-row'}>
                     <div className="mojblocks-hero__overlay">
                         <div className="govuk-grid-column-three-quarters">
-                                    <InnerBlocks
+                            <InnerBlocks
                                 allowedBlocks={ allowedBlocks }
-                                />
-
+                            />
                         </div>
                     </div>
                 </div>

@@ -16,7 +16,7 @@
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Malcolm Butler, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
- * License:     MIT License
+ * License:     MIT Licence
  * License URI: https://opensource.org/licenses/MIT
  * Copyright:   Crown Copyright (c) Ministry of Justice
  **/

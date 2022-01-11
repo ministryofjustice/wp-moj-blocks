@@ -17,6 +17,7 @@ function render_callback_hero_block($attributes, $content)
     // Parse attributes found in index.js
     $attribute_hero_image = $attributes['backgroundImage'] ?? '';
     $attribute_hero_className = $attributes['heroClassName'] ?? '';
+    $attribute_hero_image_position = $attributes['heroImagePosition'] ?? 'center';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -26,8 +27,8 @@ function render_callback_hero_block($attributes, $content)
 
     <section class="<?php _e(esc_html($attribute_hero_className)) ; ?> mojblocks-hero">
         <div class="mojblocks-hero__image"
-        style="background-image:url('<?php _e(esc_url_raw($attribute_hero_image)) ; ?>');
-        background-size: cover; background-position: center;"></div>
+        style="background-image:url('<?php _e(esc_url_raw($attribute_hero_image)); ?>');
+        background-size: cover; background-position: <?php _e($attribute_hero_image_position); ?>;"></div>
         <?php if (trim($content)) { ?>
             <div class="govuk-width-container">
                 <div class="govuk-grid-row">
