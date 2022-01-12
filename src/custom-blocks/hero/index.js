@@ -1,6 +1,7 @@
 import {
 	SelectControl,
 } from '@wordpress/components';
+import { useState } from '@wordpress/element';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
@@ -61,6 +62,7 @@ registerBlockType("mojblocks/hero", {
             { label: "Bottom left", value: 'bottom left' },
             { label: "Bottom right", value: 'bottom right' },
         ]
+        const [ position, setPosition ] = useState( 'center' );
 
         return ([
             <InspectorControls>
@@ -87,6 +89,7 @@ registerBlockType("mojblocks/hero", {
                             value={ position }
                             options={ optionList }
                             onChange={ setAttributes({ heroImagePosition: position } ) }
+                            onChange={ ( newPosition ) => setPosition( newPosition ) }
                         />
                     </PanelRow>
                 </PanelBody>
