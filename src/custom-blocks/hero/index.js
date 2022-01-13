@@ -5,7 +5,7 @@ import { useState } from '@wordpress/element';
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const {  RichText, InspectorControls, MediaUpload, InnerBlocks } = wp.blockEditor;
+const { InspectorControls, MediaUpload, InnerBlocks } = wp.blockEditor;
 const { PanelBody, PanelRow } = wp.components;
 
 registerBlockType("mojblocks/hero", {
