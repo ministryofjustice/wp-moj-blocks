@@ -97,9 +97,9 @@ registerBlockType("mojblocks/hero", {
 
         <section className={`${className}  mojblocks-hero`} >
             <div className="mojblocks-hero__image" style={{
-            backgroundImage: `url(${ backgroundImage })`,
+                backgroundImage: `url(${ backgroundImage })`,
                 backgroundSize: 'cover',
-                backgroundPosition: `${position = "center"}`
+                backgroundPosition: `${position}`
             }}>
             </div>
 
