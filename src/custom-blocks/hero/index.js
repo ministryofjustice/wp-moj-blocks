@@ -29,6 +29,7 @@ registerBlockType("mojblocks/hero", {
             setAttributes,
             attributes: {
                 backgroundImage,
+                heroImagePosition,
             },
             className
         } = props;
@@ -62,7 +63,12 @@ registerBlockType("mojblocks/hero", {
             { label: "Bottom left", value: 'bottom left' },
             { label: "Bottom right", value: 'bottom right' },
         ]
-        const [ position, setPosition ] = useState( 'center' );
+        const setPosition = useState( 'center' );
+
+        const onChangeImagePosition = newImagePosition => {
+            setAttributes({ heroImagePosition: newImagePosition });
+            setPosition( newImagePosition );
+        };
 
         return ([
             <InspectorControls>
@@ -86,10 +92,9 @@ registerBlockType("mojblocks/hero", {
                         <SelectControl
                             label="Image position"
                             help=""
-                            value={ position }
+                            value={ heroImagePosition }
                             options={ optionList }
-                            onChange={ setAttributes({ heroImagePosition: position } ) }
-                            onChange={ ( newPosition ) => setPosition( newPosition ) }
+                            onChange={ onChangeImagePosition }
                         />
                     </PanelRow>
                 </PanelBody>
@@ -99,7 +104,7 @@ registerBlockType("mojblocks/hero", {
             <div className="mojblocks-hero__image" style={{
                 backgroundImage: `url(${ backgroundImage })`,
                 backgroundSize: 'cover',
-                backgroundPosition: `${position}`
+                backgroundPosition: `${heroImagePosition}`
             }}>
             </div>
 
