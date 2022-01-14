@@ -83,9 +83,9 @@ registerBlockType("mojblocks/latest-news", {
       setAttributes,
       attributes: {
         latestNewsTitle,
-        latestNewsExpiry = useState(0),
-        latestNewsEmptyText = useState( "No news to display." ),
-        latestNewsHasDate = useState( true )
+        latestNewsExpiry,
+        latestNewsEmptyText,
+        latestNewsHasDate
       },
       className
     } = props
@@ -112,30 +112,30 @@ registerBlockType("mojblocks/latest-news", {
             <ToggleControl
               label="Show/hide article dates"
               help={
-                latestNewsHasDate
-                ? 'Dates will be displayed'
-                : 'Dates will be hidden'
+                latestNewsHasDate === false
+                ? 'Dates will be hidden'
+                : 'Dates will be displayed'
               }
-              checked={ latestNewsHasDate }
+              checked={ latestNewsHasDate !== false ? true : false }
               onChange={ setHasDate }
             />
             <TextControl
               label="Text for no news"
-              help={ !latestNewsEmptyText
+              help={ latestNewsEmptyText === ""
                 ? "If there are no news articles to display, the block will be blank."
                 : "This will be shown if there are no articles to display."
               }
-              value={ latestNewsEmptyText }
+              value={ !latestNewsEmptyText && latestNewsEmptyText !== "" ? "No news to display." : latestNewsEmptyText}
               onChange={ setEmptyText }
             />
             <NumberControl
               label="Auto-hide after how many weeks"
-              value= { latestNewsExpiry }
+              value= { !latestNewsExpiry && latestNewsExpiry !==0 ? 0 : latestNewsExpiry }
               min="0"
               onChange={ setExpiry }
             />
             <Text>
-             { latestNewsExpiry == 0
+             { !latestNewsExpiry
                 ? "Articles will not expire."
                 : "Articles will expire after " + latestNewsExpiry + " weeks."
               }
@@ -150,7 +150,7 @@ registerBlockType("mojblocks/latest-news", {
               template={ templateLatestNewsBlock }
               templateLock="all"
             />
-            <div className={`govuk-grid-row ${latestNewsHasDate ? '' : 'mojblocks-latest-news-hide-date'} ` }>
+            <div className={`govuk-grid-row ${latestNewsHasDate === false ? 'mojblocks-latest-news-hide-date' : ''} ` }>
               <div className="mojblocks-latest-news__item">
                 <div className="govuk-body mojblocks-latest-news__headline" >
                   <a href="#">{title0}</a>
