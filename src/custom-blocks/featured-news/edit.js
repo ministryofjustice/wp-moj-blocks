@@ -26,8 +26,8 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 
 	const {
 		featuredNewsLink,
-		featuredNewsID = useState( "0" ),
-		featuredNewsHasDate = useState( true ),
+		featuredNewsID,
+		featuredNewsHasDate,
 		className,
 	} = attributes;
 
@@ -93,9 +93,9 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 				<ToggleControl
 					label="Show/hide article dates"
 					help={
-						featuredNewsHasDate
-						? 'The date will be displayed'
-						: 'The date will be hidden'
+						featuredNewsHasDate === false
+						? 'The date will be hidden'
+						: 'The date will be displayed'
 					}
 					checked={ featuredNewsHasDate }
 					onChange={ setHasDate }
