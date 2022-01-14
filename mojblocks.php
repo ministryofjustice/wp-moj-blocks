@@ -231,7 +231,10 @@ function mojblocks_register_blocks()
                 ],
                 'heroClassName' => [
                     'type' => 'string'
-                ]
+                ],
+				'heroImagePosition' => [
+						'type' => 'string'
+				]
                 ]
             ]
         ]
