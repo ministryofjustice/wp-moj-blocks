@@ -26,6 +26,8 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 
 	const {
 		featuredNewsLink,
+		featuredNewsID = useState( "0" ),
+		featuredNewsHasDate = useState( true ),
 		className,
 	} = attributes;
 
@@ -68,8 +70,12 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			}
 		}
 	}
-	const [ hasDate, setHasDate ] = useState( true );
-    const [ story, setStory ] = useState( '0' );
+	const setHasDate = newDateSetting => {
+		setAttributes({ featuredNewsHasDate: newDateSetting });
+	};
+	const setStory = newStory => {
+		setAttributes({ featuredNewsID: newStory } );
+	}
 
 	const inspectorControls = (
 		<InspectorControls>
@@ -80,23 +86,19 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 				<SelectControl
 					label="Select news"
 					help="Only news articles with a summary are available for selection"
-					value={ story }
+					value={ featuredNewsID }
 					options={ optionList }
-					onChange={ setAttributes({ featuredNewsID: story } ) }
-					onChange={ ( newStory ) => setStory( newStory ) }
+					onChange={ setStory }
 				/>
 				<ToggleControl
 					label="Show/hide article dates"
 					help={
-						hasDate
+						featuredNewsHasDate
 						? 'The date will be displayed'
 						: 'The date will be hidden'
 					}
-					checked={ hasDate }
-					onChange={ setAttributes({ featuredNewsHasDate: hasDate } ) }
-					onChange={ () => {
-						setHasDate( ( state ) => ! state );
-					} }
+					checked={ featuredNewsHasDate }
+					onChange={ setHasDate }
 				/>
 			</PanelBody>
 		</InspectorControls>
@@ -112,28 +114,28 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 		return (
 			<Fragment >
 				{ inspectorControls }
-				<div className={`mojblocks-featured-news mojblocks-featured-news--${story} ${className}`}>
+				<div className={`mojblocks-featured-news mojblocks-featured-news--${featuredNewsID} ${className}`}>
 					<div className="govuk-width-container">
 						<InnerBlocks
 							template={ templateFeaturedNewsBlock }
 							templateLock="all"
 						/>
-						<div className={`govuk-grid-row ${hasDate ? '' : 'mojblocks-featured-news-hide-date'} ${(story!="0" && !newsList[story].image) ? 'mojblocks-featured-news--no-image' : ''} `}>
+						<div className={`govuk-grid-row ${featuredNewsHasDate ? '' : 'mojblocks-featured-news-hide-date'} ${(featuredNewsID!="0" && !newsList[featuredNewsID].image) ? 'mojblocks-featured-news--no-image' : ''} `}>
 							<div class="mojblocks-featured-news__item">
-								<div className="mojblocks-featured-news__image" styles={`background:url('${newsList[story].image}')`}>
-									<img src={newsList[story].image} alt="Feature image for news article" />
+								<div className="mojblocks-featured-news__image" styles={`background:url('${newsList[featuredNewsID].image}')`}>
+									<img src={newsList[featuredNewsID].image} alt="Feature image for news article" />
 								</div>
 								<div className="mojblocks-featured-news__text">
 									<div className="mojblocks-featured-news__headline" >
 										<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-news__headline-link" >
-											{newsList[story].title}
+											{newsList[featuredNewsID].title}
 										</a>
 									</div>
 									<div className="govuk-body mojblocks-featured-news__summary" >
-										{newsList[story].summary}
+										{newsList[featuredNewsID].summary}
 									</div>
 									<div className="govuk-body-s mojblocks-featured-news__date" >
-										{ datify(newsList[story].date,d) }
+										{ datify(newsList[featuredNewsID].date,d) }
 									</div>
 									<div className="mojblocks-featured-news__link">
 										<a className="govuk-link" >
