@@ -9,15 +9,19 @@ Block: Banner (Frontend styles)
 
 	padding: 20px 0;
 
-	.govuk-grid-column-two-thirds, .govuk-grid-column-one-third {
-		padding: 0;
-	}
 	&__title {
 		margin-bottom: 18px;
 
 		@include govuk-media-query($from: tablet) {
 			margin-bottom: 0;
 			line-height: 100%;
+		}
+
+		h1, h2, h3, h4, h5, h6 {
+			@include govuk-media-query($from: tablet) {
+				margin-bottom: 0;
+				line-height: 100%;
+			}
 		}
 	}
 
