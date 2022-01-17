@@ -14,10 +14,12 @@ registerBlockType("mojblocks/featured-news", {
 
   attributes: {
     featuredNewsHasDate: {
-      type: "boolean"
+      type: "boolean",
+      default: true
     },
     featuredNewsID: {
-      type: "string"
+      type: "string",
+      default: "0"
     }
   },
   edit, 

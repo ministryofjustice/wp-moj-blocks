@@ -75,7 +75,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 	};
 	const setStory = newStory => {
 		setAttributes({ featuredNewsID: newStory } );
-	}
+	};
 
 	const inspectorControls = (
 		<InspectorControls>
