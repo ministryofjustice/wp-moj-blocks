@@ -67,6 +67,7 @@ registerBlockType("mojblocks/banner", {
                                 <InnerBlocks
                                 allowedBlocks={ allowedBlocks }
                                 template={ banner_template }
+                                templateLock="all"
                                 />
                             </div>
                     </div>
