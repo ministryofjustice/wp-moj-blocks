@@ -19,6 +19,13 @@ Block: Banner (Frontend styles)
 			margin-bottom: 0;
 			line-height: 100%;
 		}
+
+		h1, h2, h3, h4, h5, h6 {
+			@include govuk-media-query($from: tablet) {
+				margin-bottom: 0;
+				line-height: 100%;
+			}
+		}
 	}
 
 	&__button.govuk-button {
