@@ -4,10 +4,8 @@ import {
 	ToggleControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
 import { __experimentalGetSettings } from '@wordpress/date';
 import {
-	RichText,
 	InnerBlocks,
 	InspectorControls,
 	__experimentalImageSizeControl as ImageSizeControl,
@@ -25,7 +23,6 @@ const templateFeaturedNewsBlock = [
 export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 
 	const {
-		featuredNewsLink,
 		featuredNewsID,
 		featuredNewsHasDate,
 		className,

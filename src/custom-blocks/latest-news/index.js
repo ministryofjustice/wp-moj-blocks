@@ -53,7 +53,6 @@ import { InnerBlocks } from "@wordpress/block-editor";
 import { TextControl } from '@wordpress/components';
 import { ToggleControl } from '@wordpress/components';
 import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
-import { useState } from '@wordpress/element';
 import { __experimentalText as Text } from '@wordpress/components';
 
 registerBlockType("mojblocks/latest-news", {
@@ -64,17 +63,17 @@ registerBlockType("mojblocks/latest-news", {
   keywords: [__('latest news'), __('recent news'), __('headlines')],
 
   attributes: {
-    latestNewsNumber: {
-      type: "string"
-    },
     latestNewsHasDate: {
-      type: "boolean"
+      type: "boolean",
+      default: true
     },
     latestNewsExpiry: {
-      type: "numeric"
+      type: "numeric",
+      default: 0
     },
     latestNewsEmptyText: {
-      type: "string"
+      type: "string",
+      default: "No news to display."
     }
   },
 
@@ -82,15 +81,12 @@ registerBlockType("mojblocks/latest-news", {
     const {
       setAttributes,
       attributes: {
-        latestNewsTitle,
         latestNewsExpiry,
         latestNewsEmptyText,
         latestNewsHasDate
       },
       className
     } = props
-
-    const [ newsNumber, setNewsNumber ] = useState( '3' );
 
     const setHasDate = newDateSetting => {
       setAttributes({ latestNewsHasDate: newDateSetting });
@@ -116,7 +112,7 @@ registerBlockType("mojblocks/latest-news", {
                 ? 'Dates will be hidden'
                 : 'Dates will be displayed'
               }
-              checked={ latestNewsHasDate !== false ? true : false }
+              checked={ latestNewsHasDate }
               onChange={ setHasDate }
             />
             <TextControl
@@ -125,12 +121,12 @@ registerBlockType("mojblocks/latest-news", {
                 ? "If there are no news articles to display, the block will be blank."
                 : "This will be shown if there are no articles to display."
               }
-              value={ !latestNewsEmptyText && latestNewsEmptyText !== "" ? "No news to display." : latestNewsEmptyText}
+              value={ latestNewsEmptyText }
               onChange={ setEmptyText }
             />
             <NumberControl
               label="Auto-hide after how many weeks"
-              value= { !latestNewsExpiry && latestNewsExpiry !==0 ? 0 : latestNewsExpiry }
+              value= { latestNewsExpiry }
               min="0"
               onChange={ setExpiry }
             />
