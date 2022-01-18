@@ -53,7 +53,6 @@ import { InnerBlocks } from "@wordpress/block-editor";
 import { TextControl } from '@wordpress/components';
 import { ToggleControl } from '@wordpress/components';
 import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
-import { useState } from '@wordpress/element';
 import { __experimentalText as Text } from '@wordpress/components';
 
 registerBlockType("mojblocks/latest-news", {
@@ -64,33 +63,40 @@ registerBlockType("mojblocks/latest-news", {
   keywords: [__('latest news'), __('recent news'), __('headlines')],
 
   attributes: {
-    latestNewsNumber: {
-      type: "string"
-    },
     latestNewsHasDate: {
-      type: "boolean"
+      type: "boolean",
+      default: true
     },
     latestNewsExpiry: {
-      type: "numeric"
+      type: "numeric",
+      default: 0
     },
     latestNewsEmptyText: {
-      type: "string"
+      type: "string",
+      default: "No news to display."
     }
   },
 
   edit: props => {
     const {
-      attributes: { latestNewsTitle },
-        className,
-        setAttributes
+      setAttributes,
+      attributes: {
+        latestNewsExpiry,
+        latestNewsEmptyText,
+        latestNewsHasDate
+      },
+      className
     } = props
 
-    const [ newsNumber, setNewsNumber ] = useState( '3' );
-    const [ expiry, setExpiry ] = useState( 0 );
-    const [ emptyText, setEmptyText ] = useState( "No news to display." );
-    const [ hasDate, setHasDate ] = useState( true );
-
-   
+    const setHasDate = newDateSetting => {
+      setAttributes({ latestNewsHasDate: newDateSetting });
+    };
+    const setEmptyText = newEmptyText => {
+      setAttributes({ latestNewsEmptyText: newEmptyText } );
+    };
+    const setExpiry = newExpiry => {
+        setAttributes({ latestNewsExpiry: newExpiry } );
+    };
   
     return (
       <Fragment >
@@ -102,50 +108,45 @@ registerBlockType("mojblocks/latest-news", {
             <ToggleControl
               label="Show/hide article dates"
               help={
-                hasDate
-                ? 'Dates will be displayed'
-                : 'Dates will be hidden'
+                latestNewsHasDate === false
+                ? 'Dates will be hidden'
+                : 'Dates will be displayed'
               }
-              checked={ hasDate }
-              onChange={ setAttributes({ latestNewsHasDate: hasDate } ) }
-              onChange={ () => {
-                setHasDate( ( state ) => ! state );
-              } }
+              checked={ latestNewsHasDate }
+              onChange={ setHasDate }
             />
             <TextControl
               label="Text for no news"
-              help={ !emptyText 
+              help={ latestNewsEmptyText === ""
                 ? "If there are no news articles to display, the block will be blank."
                 : "This will be shown if there are no articles to display."
               }
-              value={ emptyText }
-              onChange={ setAttributes({ latestNewsEmptyText: emptyText } ) }
+              value={ latestNewsEmptyText }
               onChange={ setEmptyText }
             />
             <NumberControl
               label="Auto-hide after how many weeks"
-              value= {expiry}
+              value= { latestNewsExpiry }
               min="0"
-              onChange={ setAttributes({ latestNewsExpiry: expiry } ) }
               onChange={ setExpiry }
             />
             <Text>
-             { expiry == 0 
+             { !latestNewsExpiry
                 ? "Articles will not expire."
-                : "Articles will expire after " + expiry + " weeks."
+                : "Articles will expire after " + latestNewsExpiry + " weeks."
               }
             </Text>
 
           </PanelBody>
         </InspectorControls>
 
-        <div className={`mojblocks-latest-news mojblocks-latest-news--expiry-weeks-${expiry} ${className}`}>
+        <div className={`mojblocks-latest-news mojblocks-latest-news--expiry-weeks-${latestNewsExpiry} ${className}`}>
           <div className="govuk-width-container">
             <InnerBlocks
               template={ templateLatestNewsBlock }
               templateLock="all"
             />
-            <div className={`govuk-grid-row ${hasDate ? '' : 'mojblocks-latest-news-hide-date'} ` }>
+            <div className={`govuk-grid-row ${latestNewsHasDate === false ? 'mojblocks-latest-news-hide-date' : ''} ` }>
               <div className="mojblocks-latest-news__item">
                 <div className="govuk-body mojblocks-latest-news__headline" >
                   <a href="#">{title0}</a>
