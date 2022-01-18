@@ -2,7 +2,7 @@ import {URLInputButton} from "@wordpress/block-editor";
 
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const {  RichText } = wp.blockEditor;
+const {  RichText, InnerBlocks } = wp.blockEditor;
 
 registerBlockType("mojblocks/banner", {
     title: __("Banner", "mojblocks"),
@@ -34,6 +34,13 @@ registerBlockType("mojblocks/banner", {
             className
         } = props;
 
+        // Load allowed blocks to be added to banner content
+        const allowedBlocks = [ 'core/heading' ];
+
+        const banner_template = [
+            [ 'core/heading', { placeholder: 'Banner Title' } ]
+        ];
+
         // Set className attribute for PHP frontend to use
         setAttributes({ bannerClassName: className });
 
@@ -56,14 +63,13 @@ registerBlockType("mojblocks/banner", {
             <div className={'govuk-width-container'}>
                 <div className={'govuk-grid-row'}>
                     <div className="govuk-grid-column-two-thirds">
-                            <RichText
-                            tagName="h1"
-                            className="mojblocks-banner__title"
-                            value={ bannerTitle }
-                            keepPlaceholderOnFocus
-                            onChange={ onTitleChange }
-                            placeholder="Enter your banner title"
+                            <div  className="mojblocks-banner__title">
+                                <InnerBlocks
+                                allowedBlocks={ allowedBlocks }
+                                template={ banner_template }
+                                templateLock="all"
                                 />
+                            </div>
                     </div>
                     <div className="govuk-grid-column-one-third">
                         <URLInputButton
@@ -88,5 +94,7 @@ registerBlockType("mojblocks/banner", {
 
     },
     // return null as frontend output is done via PHP
-    save: () => null
+    save: () => {
+        return <InnerBlocks.Content />;
+    }
 });
