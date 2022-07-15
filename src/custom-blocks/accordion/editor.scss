@@ -51,3 +51,10 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 .govuk-accordion__section-content {
     display: block;
 }
+
+.govuk-accordion__section-header:after {
+    content:"▽ Show / Hide";
+    color:$mojblocks-color-light-blue;
+    display:block;
+    padding-bottom: 30px;
+}
