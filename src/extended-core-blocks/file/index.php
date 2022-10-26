@@ -24,7 +24,7 @@ function mojblocks_filter_file_block($block_content, $block)
 {
 
     if (is_admin()) {
-        return;
+        return $block_content;
     }
 
     if ('core/file' !== $block['blockName']) {
