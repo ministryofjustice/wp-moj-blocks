@@ -396,6 +396,27 @@ function mojblocks_register_blocks()
             ]
         );
     }
+
+	if (post_type_exists("document")) {
+		register_block_type(
+			'mojblocks/featured-document',
+			[
+				'editor_script' => 'mojblocks-editor-script',
+				'render_callback' => 'render_callback_featured_document_block',
+				'attributes' => [
+					'featuredDocumentHasDate' => [
+						'type' => 'boolean'
+					],
+					'featuredDocumentID' => [
+						'type' => 'string'
+					],
+					'featuredDocumentClassName' => [
+						'type' => 'string'
+					]
+				]
+			]
+		);
+	}
 }
 
 /**
@@ -414,6 +435,7 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/reveal/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/staggered-box/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/latest-news/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-news/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-document/index.php';
 
 /**
  * Load PHP extended core blocks

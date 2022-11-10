@@ -14,3 +14,4 @@ import "./card";
 import "./banner";
 import "./latest-news";
 import "./featured-news";
+import "./featured-document";
