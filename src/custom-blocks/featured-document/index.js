@@ -20,7 +20,11 @@ registerBlockType("mojblocks/featured-document", {
     featuredDocumentID: {
           type: "string",
           default: "0"
-    }
+    },
+      findDocumentText: {
+          type: "string",
+          default: "0"
+      }
   },
   edit, 
   save: () => { return <InnerBlocks.Content />; }

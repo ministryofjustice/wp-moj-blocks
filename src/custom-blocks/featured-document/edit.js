@@ -25,6 +25,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 	const {
         featuredDocumentID,
         featuredDocumentHasDate,
+        findDocumentText,
 		className,
 	} = attributes;
 
@@ -41,7 +42,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
             const posts = getEntityRecords(
                 'postType',
                 'document',
-                { per_page: -1 }
+                { per_page: -1, search: findDocumentText}
             );
 
             return {
@@ -79,12 +80,23 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		setAttributes({ featuredDocumentHasDate: newDateSetting });
 	};
 
-	const inspectorControls = (
+    const setfindDocumentText = newFindDocumentText=> {
+        setAttributes({ findDocumentText: newFindDocumentText } );
+    };
+
+
+    const inspectorControls = (
 		<InspectorControls>
 			<PanelBody
 				title={__('Featured Document settings')}
 				initialOpen={true}
 			>
+                    <TextControl
+                label="Find Document"
+                help="Search for featured document"
+                value={ findDocumentText }
+                onChange={ setfindDocumentText }
+                />
                 <SelectControl
                     label="Select document"
                     value={ featuredDocumentID }
