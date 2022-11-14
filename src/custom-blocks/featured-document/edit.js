@@ -4,11 +4,9 @@ import {
     ToggleControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
-import { __experimentalGetSettings } from '@wordpress/date';
 import {
 	InnerBlocks,
 	InspectorControls,
-	__experimentalImageSizeControl as ImageSizeControl,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
