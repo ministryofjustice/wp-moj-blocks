@@ -40,7 +40,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			const posts = getEntityRecords(
 				'postType',
 				'news',
-				{ per_page: 25 }
+				{ per_page: 20 }
 			);
 
 			return {
