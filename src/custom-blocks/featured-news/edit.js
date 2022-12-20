@@ -40,7 +40,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			const posts = getEntityRecords(
 				'postType',
 				'news',
-				{ per_page: -1 }
+				{ per_page: 25 }
 			);
 
 			return {
@@ -48,6 +48,38 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			};
 		}
 	);
+
+    const {
+        featuredNewsArticle,
+    } = useSelect(
+        ( select ) => {
+
+            if(featuredNewsID.length > 0) {
+                const {  getEntityRecord } = select(
+                    coreStore
+                );
+
+                const posts = getEntityRecord(
+                    'postType',
+                    'news',
+                    featuredNewsID
+                );
+
+                return {
+                    featuredNewsArticle: posts
+                };
+
+            }
+            else {
+                return {
+                    featuredNewsArticle: false
+                };
+
+            }
+
+        }
+    );
+
 	let optionList = [
 		{ label: "None", value: '0' },
 	]
@@ -66,7 +98,22 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 				optionList.push({label: latestNews[i].title.rendered, value: latestNews[i].id});
 			}
 		}
+
+		if(featuredNewsArticle != null && featuredNewsID.length > 0 && newsList.hasOwnProperty(featuredNewsID) == false){
+
+
+          newsList[featuredNewsID] = {
+                title: featuredNewsArticle.title.rendered,
+                summary: featuredNewsArticle.summary_meta.news_story_summary,
+                date: featuredNewsArticle.date,
+                image: featuredNewsArticle.featured_image_url,
+            }
+
+           optionList.push({label: featuredNewsArticle.title.rendered, value: featuredNewsArticle.id});
+
+        }
 	}
+
 	const setHasDate = newDateSetting => {
 		setAttributes({ featuredNewsHasDate: newDateSetting });
 	};
