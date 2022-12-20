@@ -966,7 +966,7 @@ function FeaturedNewsEdit(_ref) {
         imageDimensions = _getSettings.imageDimensions;
 
     var posts = getEntityRecords('postType', 'news', {
-      per_page: 25
+      per_page: 20
     });
     return {
       latestNews: posts
