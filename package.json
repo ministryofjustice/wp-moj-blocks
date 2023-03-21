@@ -18,7 +18,7 @@
     "@wordpress/i18n": "^3.14.0",
     "@wordpress/scripts": "^12.1.1",
     "copy-webpack-plugin": "^6.0.3",
-    "govuk-frontend": "^4.2.0",
+    "govuk-frontend": "^4.5.0",
     "imagemin-mozjpeg": "^9.0.0",
     "imagemin-webpack-plugin": "^2.4.2",
     "import-glob-loader": "^1.1.0",
