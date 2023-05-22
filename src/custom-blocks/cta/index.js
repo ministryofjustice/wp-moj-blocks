@@ -6,6 +6,9 @@ import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, URLInputButton } from '@wordpress/block-editor';
 
+const { InspectorControls } = wp.blockEditor;
+const { PanelBody, PanelRow } = wp.components;
+
 registerBlockType('mojblocks/cta', {
     title: __('Call to Action', 'mojblocks'),
     icon: 'megaphone',
@@ -16,7 +19,8 @@ registerBlockType('mojblocks/cta', {
             ctaTitle: 'Add a Call to Action banner to your site',
             ctaText: 'Call To Action text',
             buttonLabel: 'Click me now',
-            buttonLink: 'https://intranet.justice.gov.uk/'
+            buttonLink: 'https://intranet.justice.gov.uk/',
+            flushBottom: false
         },
     },
     attributes: {
@@ -32,6 +36,9 @@ registerBlockType('mojblocks/cta', {
         buttonLink: {
             type: 'string'
         },
+        flushBottom: {
+            type: 'boolean'
+        },
         ctaClassName: {
             type: 'string'
         }
@@ -44,7 +51,8 @@ registerBlockType('mojblocks/cta', {
                 ctaTitle,
                 ctaText,
                 buttonLink,
-                buttonLabel
+                buttonLabel,
+                flushBottom
             },
             className
         } = props;
@@ -72,7 +80,30 @@ registerBlockType('mojblocks/cta', {
             setAttributes({ buttonLink: newButtonLink });
         };
 
-        return (
+        const onChangeFlushBottom = newFlushBottom => {
+            setAttributes({ flushBottom: newFlushBottom });
+        };
+
+        return ([
+            <InspectorControls>
+                <PanelBody title={ __( 'Choose hero block banner image', 'mojblocks' ) } initialOpen={true} >
+                <label className="block-editor-block-hero"><p>Spacing options
+                 </p></label>
+                    <PanelRow>
+                        <SelectControl
+                            label="Flush or gap"
+                            help=""
+                            value={ flushBottom }
+                            options= {[
+                                { label: "Flush", value: true },
+                                { label: "Gap", value: false }
+                            ]}
+                            onChange={ onChangeFlushBottom }
+                        />
+                    </PanelRow>
+                </PanelBody>
+            </InspectorControls>,
+
             <div className={`${className}  mojblocks-cta`}>
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
@@ -82,7 +113,7 @@ registerBlockType('mojblocks/cta', {
                                 <span role="text">
                                     <span className="mojblocks-cta__heading-text">
                                         <RichText
-                                            placeholder={__('Add a Call To Action title', 'mojblocks')}
+                                            placeholder={__('Add a Call To Action (CTA) title', 'mojblocks')}
                                             keepPlaceholderOnFocus
                                             value={ctaTitle}
                                             onChange={onChangeCtaTitle}
@@ -116,7 +147,7 @@ registerBlockType('mojblocks/cta', {
                     </div>
                 </div>
             </div>
-        );
+        ]);
     },
 
     save: () => null

@@ -204,9 +204,11 @@ function mojblocks_register_blocks()
                 'buttonLabel' => [
                     'type' => 'string'
                 ],
+                'ctaFlushBottom' => [
+                    'type' => 'boolean'
+                ],
                 'ctaClassName' => [
                     'type' => 'string'
-
                 ]
             ]
         ]
