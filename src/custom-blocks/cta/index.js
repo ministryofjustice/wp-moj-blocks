@@ -7,7 +7,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { RichText, URLInputButton } from '@wordpress/block-editor';
 
 const { InspectorControls } = wp.blockEditor;
-const { PanelBody, PanelRow } = wp.components;
+const { PanelBody, PanelRow, ToggleControl } = wp.components;
 
 registerBlockType('mojblocks/cta', {
     title: __('Call to Action', 'mojblocks'),
@@ -80,31 +80,27 @@ registerBlockType('mojblocks/cta', {
             setAttributes({ buttonLink: newButtonLink });
         };
 
-        const onChangeFlushBottom = newFlushBottom => {
-            setAttributes({ flushBottom: newFlushBottom });
-        };
-
-        return ([
-            <InspectorControls>
-                <PanelBody title={ __( 'Choose hero block banner image', 'mojblocks' ) } initialOpen={true} >
-                <label className="block-editor-block-hero"><p>Spacing options
-                 </p></label>
-                    <PanelRow>
-                        <SelectControl
-                            label="Flush or gap"
-                            help=""
-                            value={ flushBottom }
-                            options= {[
-                                { label: "Flush", value: true },
-                                { label: "Gap", value: false }
-                            ]}
-                            onChange={ onChangeFlushBottom }
-                        />
-                    </PanelRow>
-                </PanelBody>
-            </InspectorControls>,
-
+        return (
             <div className={`${className}  mojblocks-cta`}>
+                <InspectorControls>
+                    <PanelBody
+                            title="Bottom Margin"
+                            initialOpen={false}
+                    >
+                        <PanelRow>
+							<ToggleControl
+								label="Flush bottom"
+								help={
+                                    flushBottom
+                                        ? 'Gap removed from beneath this block'
+                                        : 'Normal gap beneath this block'
+                                }
+                                checked={flushBottom}
+								onChange={newFlushBottom => setAttributes({ flushBottom: newFlushBottom }) }
+							/>
+						</PanelRow>
+                    </PanelBody>
+                </InspectorControls>
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
                         <div class="govuk-grid-column-three-quarters">
@@ -113,7 +109,7 @@ registerBlockType('mojblocks/cta', {
                                 <span role="text">
                                     <span className="mojblocks-cta__heading-text">
                                         <RichText
-                                            placeholder={__('Add a Call To Action (CTA) title', 'mojblocks')}
+                                            placeholder={__('Add a Call To Action title', 'mojblocks')}
                                             keepPlaceholderOnFocus
                                             value={ctaTitle}
                                             onChange={onChangeCtaTitle}
@@ -147,7 +143,7 @@ registerBlockType('mojblocks/cta', {
                     </div>
                 </div>
             </div>
-        ]);
+        );
     },
 
     save: () => null
