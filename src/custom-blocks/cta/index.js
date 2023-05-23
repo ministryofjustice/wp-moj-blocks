@@ -88,17 +88,17 @@ registerBlockType('mojblocks/cta', {
                             initialOpen={false}
                     >
                         <PanelRow>
-							<ToggleControl
-								label="Flush bottom"
-								help={
+                            <ToggleControl
+                                label="Flush bottom"
+                                help={
                                     flushBottom
                                         ? 'Gap removed from beneath this block'
                                         : 'Normal gap beneath this block'
                                 }
                                 checked={flushBottom}
-								onChange={newFlushBottom => setAttributes({ flushBottom: newFlushBottom }) }
-							/>
-						</PanelRow>
+                                onChange={newFlushBottom => setAttributes({ flushBottom: newFlushBottom }) }
+                            />
+                        </PanelRow>
                     </PanelBody>
                 </InspectorControls>
                 <div className={'govuk-width-container'}>
