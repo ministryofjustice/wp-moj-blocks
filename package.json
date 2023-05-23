@@ -16,15 +16,15 @@
     "@wordpress/components": "^10.0.5",
     "@wordpress/element": "^2.16.0",
     "@wordpress/i18n": "^3.14.0",
-    "@wordpress/scripts": "^12.1.1",
+    "@wordpress/scripts": "*",
     "copy-webpack-plugin": "^6.0.3",
     "govuk-frontend": "^4.5.0",
-    "imagemin-mozjpeg": "^9.0.0",
-    "imagemin-webpack-plugin": "^2.4.2",
+    "imagemin-mozjpeg": "*",
+    "imagemin-webpack-plugin": "*",
     "import-glob-loader": "^1.1.0",
-    "jsdoc": "^3.6.5",
-    "laravel-mix": "^5.0.7",
-    "laravel-mix-glob": "^1.1.4",
+    "jsdoc": "*",
+    "laravel-mix": "*",
+    "laravel-mix-glob": "*",
     "laravel-mix-imagemin": "^1.0.3",
     "resolve-url-loader": "^3.1.2",
     "sass": "^1.35.2",
@@ -34,10 +34,10 @@
   },
   "scripts": {
     "start": "wp-scripts start",
-    "build": "wp-scripts build && NODE_ENV=production webpack --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "build": "wp-scripts build && NODE_ENV=production webpack --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
     "build-comp": "wp-scripts build",
     "zip": "zip -r mojblocks.zip ./ -x .git .gitignore *.git/* .DS_Store .package.json .package-lock.json *.scss webpack.config.js mojblocks.zip  postcss.config.css README.md .wordpress-org/**\\* .ds_store vendor/**\\* node_modules/**\\* src/**\\* webpack.config.js n",
     "build:docs": "rm -rf hookdocs/ && jsdoc -c hookdoc-conf.json",
-    "watch": "webpack --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+    "watch": "webpack --watch --progress --config=node_modules/laravel-mix/setup/webpack.config.js"
   }
 }
