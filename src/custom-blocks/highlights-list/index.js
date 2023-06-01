@@ -6,6 +6,9 @@ import { __ } from '@wordpress/i18n';
 import { registerBlockType, registerBlockStyle } from '@wordpress/blocks';
 import { RichText } from '@wordpress/block-editor';
 
+const { InspectorControls } = wp.blockEditor;
+const { PanelBody, PanelRow, ToggleControl } = wp.components;
+
 registerBlockType('mojblocks/highlights-list', {
     title: __('Highlights List', 'mojblocks'),
     icon: 'list-view',
@@ -14,6 +17,7 @@ registerBlockType('mojblocks/highlights-list', {
         attributes: {
             listTitle: 'This is a highlights list title',
             listItems: 'This is a list item',
+            flushBottom: false
         },
     },
     attributes: {
@@ -22,6 +26,9 @@ registerBlockType('mojblocks/highlights-list', {
         },
         listItems: {
             type: 'string', //sting due to key error issue with array
+        },
+        flushBottom: {
+            type: 'boolean'
         },
         listClassName: {
             type: 'string'
@@ -32,7 +39,8 @@ registerBlockType('mojblocks/highlights-list', {
         const {
             attributes: {
                 listTitle,
-                listItems
+                listItems,
+                flushBottom
             },
             className,
             setAttributes
@@ -52,6 +60,25 @@ registerBlockType('mojblocks/highlights-list', {
 
         return (
             <div className={`${className}  mojblocks-highlights-list`}>
+                <InspectorControls>
+                    <PanelBody
+                            title="Bottom Margin"
+                            initialOpen={false}
+                    >
+                        <PanelRow>
+                            <ToggleControl
+                                label="Flush bottom"
+                                help={
+                                    flushBottom
+                                        ? 'Gap removed from beneath this block'
+                                        : 'Normal gap beneath this block'
+                                }
+                                checked={flushBottom}
+                                onChange={newFlushBottom => setAttributes({ flushBottom: newFlushBottom }) }
+                            />
+                        </PanelRow>
+                    </PanelBody>
+                </InspectorControls>
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
                         <div className="mojblocks-highlights-list__heading-container">
