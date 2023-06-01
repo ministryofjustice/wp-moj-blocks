@@ -18,6 +18,7 @@ function render_callback_highlights_list_block($attributes, $content)
     $attribute_list_title = $attributes['listTitle'] ?? '';
     $attribute_list_items = $attributes['listItems'] ?? '';
     $attribute_list_className = $attributes['listClassName'] ?? '';
+    $attribute_list_bottom = $attributes['flushBottom'] ?? false;
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -26,16 +27,16 @@ function render_callback_highlights_list_block($attributes, $content)
 
     ?>
 
-    <div class="<?php _e(esc_html($attribute_list_className)) ; ?> mojblocks-highlights-list">
+    <div class="<?php _e(esc_html($attribute_list_className)) ; ?> mojblocks-highlights-list" <?php if ($attribute_list_bottom) echo "style='margin-bottom:0'"; ?>>
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="mojblocks-highlights-list__heading-container">
                     <h2 class="mojblocks-highlights-list__heading">
-                                 <span role="text">
-                                    <span class="mojblocks-highlights-list__heading-text">
-                                         <?php _e(esc_html($attribute_list_title)); ?>
-                                    </span>
-                                  </span>
+                        <span role="text">
+                            <span class="mojblocks-highlights-list__heading-text">
+                                    <?php _e(esc_html($attribute_list_title)); ?>
+                            </span>
+                        </span>
                     </h2>
                 </div>
                 <div class="mojblocks-highlights-list__content">

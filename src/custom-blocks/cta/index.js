@@ -6,6 +6,9 @@ import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, URLInputButton } from '@wordpress/block-editor';
 
+const { InspectorControls } = wp.blockEditor;
+const { PanelBody, PanelRow, ToggleControl } = wp.components;
+
 registerBlockType('mojblocks/cta', {
     title: __('Call to Action', 'mojblocks'),
     icon: 'megaphone',
@@ -16,7 +19,8 @@ registerBlockType('mojblocks/cta', {
             ctaTitle: 'Add a Call to Action banner to your site',
             ctaText: 'Call To Action text',
             buttonLabel: 'Click me now',
-            buttonLink: 'https://intranet.justice.gov.uk/'
+            buttonLink: 'https://intranet.justice.gov.uk/',
+            flushBottom: false
         },
     },
     attributes: {
@@ -32,6 +36,9 @@ registerBlockType('mojblocks/cta', {
         buttonLink: {
             type: 'string'
         },
+        flushBottom: {
+            type: 'boolean'
+        },
         ctaClassName: {
             type: 'string'
         }
@@ -44,7 +51,8 @@ registerBlockType('mojblocks/cta', {
                 ctaTitle,
                 ctaText,
                 buttonLink,
-                buttonLabel
+                buttonLabel,
+                flushBottom
             },
             className
         } = props;
@@ -74,6 +82,25 @@ registerBlockType('mojblocks/cta', {
 
         return (
             <div className={`${className}  mojblocks-cta`}>
+                <InspectorControls>
+                    <PanelBody
+                            title="Bottom Margin"
+                            initialOpen={false}
+                    >
+                        <PanelRow>
+                            <ToggleControl
+                                label="Flush bottom"
+                                help={
+                                    flushBottom
+                                        ? 'Gap removed from beneath this block'
+                                        : 'Normal gap beneath this block'
+                                }
+                                checked={flushBottom}
+                                onChange={newFlushBottom => setAttributes({ flushBottom: newFlushBottom }) }
+                            />
+                        </PanelRow>
+                    </PanelBody>
+                </InspectorControls>
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
                         <div class="govuk-grid-column-three-quarters">

@@ -1,5 +1,5 @@
 {
-    "/style.min.css": "/style.min.css?id=4eeaad94d35ab5ad5be6",
-    "/style-gutenburg.css": "/style-gutenburg.css?id=4698aa547e24e0af99ed",
-    "/ie.min.css": "/ie.min.css?id=1d75dee88fd262ffd879"
+    "/ie.min.css": "/ie.min.css",
+    "/style-gutenburg.css": "/style-gutenburg.css",
+    "/style.min.css": "/style.min.css"
 }

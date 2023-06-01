@@ -6,13 +6,21 @@ Block: Call to Action (Frontend styles)
 **********************************************************************************************/
 
 .wp-block-mojblocks-cta {
-    padding: 15px;
-    width: 100vw;
     position: relative;
-    left: 50%;
-    right: 50%;
-    margin-left: -50vw;
-    margin-right: -50vw;
+    margin-bottom: 2rem;
+
+    &:before {
+        content: "";
+        display: block;
+        height: calc(100% + 0.6em);
+        left: 50%;
+        overflow: visible;
+        position: absolute;
+        transform: translate(-50%,-0.3em);
+        width: 200vw;
+        z-index: -1;
+        background: inherit;
+    }
 
     .govuk-grid-row {
         // Gov UK override keeping the block within the container.
