@@ -7819,27 +7819,34 @@ Block: Highlights List (Frontend styles)
 
 **********************************************************************************************/
 .wp-block-mojblocks-highlights-list {
-  padding: 15px;
-  width: 100vw;
   position: relative;
+  margin-bottom: 2rem;
+}
+.wp-block-mojblocks-highlights-list:before {
+  content: "";
+  display: block;
+  height: calc(100% + 0.6em);
   left: 50%;
-  right: 50%;
-  margin-left: -50vw;
-  margin-right: -50vw;
-}
-@media (min-width: 40.0625em) {
-  .wp-block-mojblocks-highlights-list {
-    padding: 25px 0 25px;
-  }
-}
-@media (min-width: 48.0625em) {
-  .wp-block-mojblocks-highlights-list {
-    padding: 35px 0 25px;
-  }
+  overflow: visible;
+  position: absolute;
+  transform: translate(-50%, -0.3em);
+  width: 200vw;
+  z-index: -1;
+  background: inherit;
 }
 .wp-block-mojblocks-highlights-list .govuk-grid-row {
   margin-right: 0;
   margin-left: 0;
+}
+@media (min-width: 40.0625em) {
+  .wp-block-mojblocks-highlights-list .govuk-grid-row {
+    padding: 25px 0 25px;
+  }
+}
+@media (min-width: 48.0625em) {
+  .wp-block-mojblocks-highlights-list .govuk-grid-row {
+    padding: 35px 0 25px;
+  }
 }
 .wp-block-mojblocks-highlights-list .mojblocks-highlights-list__heading {
   margin: 12px 0 15px;
