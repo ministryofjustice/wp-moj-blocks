@@ -38,6 +38,10 @@ Core block: File (Gutenberg editor styles)
 		background-size: 28px 28px;
 		height: 28px;
 		width: 28px;
-	  }
+	}
+
+	.components-resizable-box__container {
+		display:none ! important;
+	}
 }
 

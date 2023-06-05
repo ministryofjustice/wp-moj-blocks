@@ -50,4 +50,3 @@ const addFileExtention = createHigherOrderComponent( ( BlockEdit ) => {
 addFilter( 'editor.BlockEdit',
 'core/file',
 addFileExtention );
-
