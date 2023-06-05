@@ -38,6 +38,14 @@ Core block: File (Gutenberg editor styles)
 		background-size: 28px 28px;
 		height: 28px;
 		width: 28px;
-	  }
+	}
+
+	// Here we hide the PDF preview
+	// Note that this is only visible for the editor since the frontend side is already not being shown
+	// probably owing to our changes to add the suffix of file type and size.
+	// The controls to display PDF will now be superfluous, but still visible.
+	.components-resizable-box__container {
+		display:none ! important;
+	}
 }
 
