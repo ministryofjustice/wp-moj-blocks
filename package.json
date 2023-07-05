@@ -17,7 +17,7 @@
     "@wordpress/element": "^2.16.0",
     "@wordpress/i18n": "^3.14.0",
     "@wordpress/scripts": "*",
-    "copy-webpack-plugin": "^6.0.3",
+    "copy-webpack-plugin": "^11.0.0",
     "govuk-frontend": "^4.5.0",
     "imagemin-mozjpeg": "*",
     "imagemin-webpack-plugin": "*",
