@@ -20,7 +20,8 @@ registerBlockType('mojblocks/cta', {
             ctaText: 'Call To Action text',
             buttonLabel: 'Click me now',
             buttonLink: 'https://intranet.justice.gov.uk/',
-            flushBottom: false
+            flushBottom: false,
+            clipping: true
         },
     },
     attributes: {
@@ -39,6 +40,9 @@ registerBlockType('mojblocks/cta', {
         flushBottom: {
             type: 'boolean'
         },
+        clipping: {
+            type: 'boolean'
+        },
         ctaClassName: {
             type: 'string'
         }
@@ -52,7 +56,8 @@ registerBlockType('mojblocks/cta', {
                 ctaText,
                 buttonLink,
                 buttonLabel,
-                flushBottom
+                flushBottom,
+                clipping
             },
             className
         } = props;
@@ -97,6 +102,23 @@ registerBlockType('mojblocks/cta', {
                                 }
                                 checked={flushBottom}
                                 onChange={newFlushBottom => setAttributes({ flushBottom: newFlushBottom }) }
+                            />
+                        </PanelRow>
+                    </PanelBody>
+                    <PanelBody
+                            title="Overflow clipping"
+                            initialOpen={false}
+                    >
+                        <PanelRow>
+                            <ToggleControl
+                                label="Clip slight overflow"
+                                help={
+                                    clipping
+                                        ? 'Slight overflows will be clipped (large overflows will be unsightly)'
+                                        : 'Slight overflows will be visible'
+                                }
+                                checked={clipping}
+                                onChange={newClipping => setAttributes({ clipping: newClipping }) }
                             />
                         </PanelRow>
                     </PanelBody>

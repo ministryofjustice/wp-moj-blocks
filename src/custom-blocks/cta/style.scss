@@ -8,8 +8,10 @@ Block: Call to Action (Frontend styles)
 .wp-block-mojblocks-cta {
     position: relative;
     margin-bottom: 2rem;
+    height: 100%;
 
-    &:before {
+    &:before,
+    &.highlight-clipping:after {
         content: "";
         display: block;
         height: calc(100% + 0.6em);
@@ -18,8 +20,17 @@ Block: Call to Action (Frontend styles)
         position: absolute;
         transform: translate(-50%,-0.3em);
         width: 200vw;
-        z-index: -1;
+    }
+    &:before {
         background: inherit;
+        z-index: -1;
+    }
+
+    &.highlight-clipping:after {
+        background: transparent;
+        top:0;
+        z-index: 1;
+        box-shadow:0 1rem 0px 0 white, 0 -1rem 0px 0 white; //white is page background colour - currently always white
     }
 
     .govuk-grid-row {
@@ -104,5 +115,14 @@ Block: Call to Action (Frontend styles)
         @include govuk-media-query($from: tablet) {
             @include govuk-responsive-padding(0);
         }
+    }
+}
+
+// The following bit of code sets the width to full-width if the flex-basis is anything other than 100%
+// In such cases, the flex basis is probably 66% so the text will already be reduced width
+// this relies on the current practice of style only having flex-basis
+@include govuk-media-query($from: tablet) {
+    .wp-block-column[style|="flex"]:not([style$="100%"]) .block-cancel-gds-width-if-flex-narrow {
+        width: 100%;
     }
 }
