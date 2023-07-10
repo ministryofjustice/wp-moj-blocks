@@ -14,7 +14,7 @@ Block: Call to Action (Frontend styles)
     &.highlight-clipping:after {
         content: "";
         display: block;
-        height: calc(100% + 0.6em);
+        height: calc(100% + 5px);
         left: 50%;
         overflow: visible;
         position: absolute;
@@ -122,7 +122,11 @@ Block: Call to Action (Frontend styles)
 // In such cases, the flex basis is probably 66% so the text will already be reduced width
 // this relies on the current practice of style only having flex-basis
 @include govuk-media-query($from: tablet) {
-    .wp-block-column[style|="flex"]:not([style$="100%"]) .block-cancel-gds-width-if-flex-narrow {
-        width: 100%;
+    .wp-block-column[style|="flex"]:not([style$="100%"]) {
+        align-self: stretch;
+
+        .block-cancel-gds-width-if-flex-narrow {
+            width: 100%;
+        }
     }
 }
