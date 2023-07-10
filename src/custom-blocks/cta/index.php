@@ -34,7 +34,7 @@ function render_callback_cta_block($attributes, $content)
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-three-quarters block-cancel-gds-width-if-flex-narrow">
                     <div class="mojblocks-cta__heading-container">
-                        <h2 class="mojblocks-cta__heading">
+                        <h2 class="govuk-heading-l mojblocks-cta__heading">
                             <span role="text">
                                 <span class="mojblocks-cta__heading-text">
                                     <?php _e(esc_html($attribute_cta_title)); ?>
