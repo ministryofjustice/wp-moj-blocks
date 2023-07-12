@@ -125,6 +125,10 @@ Block: Call to Action (Frontend styles)
     .wp-block-column[style|="flex"]:not([style$="100%"]) {
         align-self: stretch;
 
+        > *:last-child {
+            margin-bottom:0;
+        }
+
         .block-cancel-gds-width-if-flex-narrow {
             width: 100%;
         }
