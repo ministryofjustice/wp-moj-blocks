@@ -20,7 +20,6 @@ function render_callback_cta_block($attributes, $content)
     $attribute_cta_button_link = $attributes['buttonLink'] ?? '';
     $attribute_cta_button_label = $attributes['buttonLabel'] ?? '';
     $attribute_cta_flush_bottom = $attributes['flushBottom'] ?? false;
-    $attribute_cta_highlightClipping = $attributes['clipping'] ?? false;
     $attribute_cta_className = $attributes['ctaClassName'] ?? '';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
@@ -29,7 +28,7 @@ function render_callback_cta_block($attributes, $content)
     ob_start();
 
     ?>
-    <div class="<?php _e(esc_html($attribute_cta_className)); if($attribute_cta_highlightClipping) _e(" highlight-clipping"); ?>" <?php if ($attribute_cta_flush_bottom) echo "style='margin-bottom:0'"; ?>>
+    <div class="<?php _e(esc_html($attribute_cta_className)); ?>" <?php if ($attribute_cta_flush_bottom) echo "style='margin-bottom:0'"; ?>>
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-three-quarters block-cancel-gds-width-if-flex-narrow">

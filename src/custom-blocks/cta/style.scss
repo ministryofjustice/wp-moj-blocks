@@ -10,8 +10,7 @@ Block: Call to Action (Frontend styles)
     margin-bottom: 2rem;
     height: 100%;
 
-    &:before,
-    &.highlight-clipping:after {
+    &:before{
         content: "";
         display: block;
         height: calc(100% + 5px);
@@ -20,17 +19,8 @@ Block: Call to Action (Frontend styles)
         position: absolute;
         transform: translate(-50%,-0.3em);
         width: 200vw;
-    }
-    &:before {
         background: inherit;
         z-index: -1;
-    }
-
-    &.highlight-clipping:after {
-        background: transparent;
-        top:0;
-        z-index: 1;
-        box-shadow:0 1rem 0px 0 white; //white is page background colour - currently always white
     }
 
     .govuk-grid-row {
