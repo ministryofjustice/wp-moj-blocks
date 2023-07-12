@@ -125,7 +125,7 @@ Block: Call to Action (Frontend styles)
     .wp-block-column[style|="flex"]:not([style$="100%"]) {
         align-self: stretch;
 
-        > * {
+        > *:last-child {
             margin-bottom:0;
         }
 
