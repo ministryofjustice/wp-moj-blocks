@@ -66,7 +66,26 @@ Block: Call to Action (Frontend styles)
             }
         }
     }
+}
+/*
+Specifically only include this style if it isnt a GDS styled site
+*/
+html.hale-colours-variable {
+    .wp-block-mojblocks-cta {
+        .mojblocks-button,
+        a.mojblocks-button {
+            border-radius: 5px;
+        }
 
+        &:hover,
+        &:active,
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
+.wp-block-mojblocks-cta {
     .mojblocks-button,
     a.mojblocks-button {
         box-sizing: border-box;
@@ -83,7 +102,6 @@ Block: Call to Action (Frontend styles)
         text-align: center;
         text-decoration: none;
         width: 100%;
-        border-radius: 5px;
 
         @include govuk-media-query($from: tablet) {
             display: inline-block;
@@ -92,12 +110,6 @@ Block: Call to Action (Frontend styles)
 
         &:visited {
             text-decoration: none;
-        }
-
-        &:hover,
-        &:active,
-        &:focus {
-            box-shadow: none;
         }
     }
 
