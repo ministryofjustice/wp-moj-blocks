@@ -13,8 +13,8 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 
 .govuk-accordion {
 
-    border-top: dashed #000 1px;
-    border-bottom: dashed #000 1px;
+    border-top: dashed $mojblocks-color-black 1px;
+    border-bottom: dashed $mojblocks-color-black 1px;
     padding-top: 20px;
     padding-bottom: 20px;
 
@@ -22,6 +22,8 @@ SASS modifications to conform GovUK frontend to MoJ block styling
         content:"Accordion start";
         font-style: italic;
         display:block;
+        padding-bottom: 20px;
+        color: $mojblocks-color-dark-grey;;
     }
 
     > * {
@@ -67,7 +69,8 @@ SASS modifications to conform GovUK frontend to MoJ block styling
         &:after {
             content:"End of section";
             font-style: italic;
-            padding-top: 20px;    
+            padding-top: 20px;   
+            color: $mojblocks-color-dark-grey;
             display: block;
             margin-left: -30px;
         }
@@ -77,6 +80,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
         font-style: italic;
         padding-top: 20px;
         display: block;
+        color: $mojblocks-color-dark-grey;;
     }
 }
 
@@ -84,6 +88,63 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 .showHideAll {
     color:$mojblocks-color-light-blue;
     cursor: pointer;
+    margin-bottom: 20px;
+
+    &:hover {
+        color:$mojblocks-color-dark-blue;
+
+        .show-hide-arrow {
+            background-color: $mojblocks-color-black;
+            color: $mojblocks-color-black;
+            &:after {
+                color: $mojblocks-color-light-grey;
+            }
+        }
+    }
+
+    .show-hide-text {
+        padding-left: 6px;
+
+        &:before {
+            content:"Hide "
+        }
+    }
+    .show-hide-arrow {
+        border: 0.0625rem solid;
+        border-radius: 50%;
+        box-sizing: border-box;
+        display: inline-block;
+        height: 1.25rem;
+        position: relative;
+        vertical-align: middle;
+        width: 1.25rem;
+
+        &:after {
+            border-right: 0.125rem solid;
+            border-top: 0.125rem solid;
+            bottom: 0.3125rem;
+            box-sizing: border-box;
+            content: "";
+            display: block;
+            height: 0.375rem;
+            left: 0.375rem;
+            position: absolute;
+            transform: rotate(-45deg);
+            width: 0.375rem;
+        }
+    }
+
+    &.showThis,
+    &.showAll {
+        .show-hide-arrow {
+            transform: rotate(180deg);
+        }
+        .show-hide-text {
+            &:before {
+                content:"Show "
+            }
+        }
+    }
 }
 
 .accordion-hidden {
@@ -92,9 +153,10 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     }
 
     &:after {
-        content:"Section content hidden - open to edit";
-        padding:10px 0;
+        content:"⚠️ Section content hidden - open to edit";
+        padding: 10px;
         display: block;
-        background-color: #f3f2f1;
+        background-color: $mojblocks-color-light-grey;
+        margin: 20px 0;
     }
 }
