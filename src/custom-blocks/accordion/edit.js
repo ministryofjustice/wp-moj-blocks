@@ -42,7 +42,7 @@ showThis.appendChild(showThisText);
 showThis.classList.add("hideThis");
 showThis.classList.add("showHideThis");
 
-const showAll_text = document.createTextNode(" all sections");
+const showAll_text = document.createTextNode("");
 const showAllArrow = arrowSpan.cloneNode();
 const showAllText = textSpan.cloneNode();
 showAllText.appendChild(showAll_text);

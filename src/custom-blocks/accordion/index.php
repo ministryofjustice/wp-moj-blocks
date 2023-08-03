@@ -13,6 +13,9 @@
 
 function render_callback_accordion_block($attributes, $content)
 {
+    $welshControls = $attributes['controlLanguageWelsh'] ?? false;
+    $accordionClassName = $attributes['accordionClassName'] ?? "";
+
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
     // code below as you would in any other PHP file rather then having to use the sprintf() syntax
@@ -20,7 +23,23 @@ function render_callback_accordion_block($attributes, $content)
 
     ?>
 
-    <div class="govuk-accordion" data-module="govuk-accordion" id="accordion-default">
+    <div 
+        class="govuk-accordion <?php _e(esc_html($accordionClassName)); ?>"
+        id="accordion-default"
+        data-module="govuk-accordion"
+        <?php // Translations taken from https://covid19.public-inquiry.uk/cy/materion-pob-stori/ 
+            if ($welshControls) {
+        ?>
+        data-i18n.hide-all-sections="Cuddio pob adran"
+        data-i18n.show-all-sections="Dangos pob adran"
+        data-i18n.hide-section="Dangos"
+        data-i18n.show-section="Cuddio"
+        data-i18n.hide-section-aria-label="dangos yr adran hon"
+        data-i18n.show-section-aria-label="cuddio'r adran hon"
+        <?php
+            }
+        ?>
+    >
 
     <?php echo $content; ?>
 

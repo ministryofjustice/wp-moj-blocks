@@ -147,6 +147,32 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     }
 }
 
+.showHideAll:after {
+    content: " all sections";
+}
+
+.preview-welsh-true {
+    .showHideAll:after {
+        content: " pob adran";
+    }
+    .showHideThis,
+    .showHideAll {
+        .show-hide-text {
+            &:before {
+                content:"Dangos "
+            }
+        }
+        &.showThis,
+        &.showAll {
+            .show-hide-text {
+                &:before {
+                    content:"Cuddio "
+                }
+            }
+        }
+    }
+}
+
 .accordion-hidden {
     .govuk-accordion__section-content {
         display: none;
