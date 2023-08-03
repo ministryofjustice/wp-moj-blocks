@@ -52,10 +52,15 @@ showAll.appendChild(showAllText);
 showAll.classList.add("hideAll");
 showAll.classList.add("showHideAll");
 
-waitForElm('.govuk-accordion').then((elm) => {
-    elm.insertBefore(showAll, elm.firstChild);
+waitForElm('.govuk-accordion').then((e) => {
 
-    const sections = document.querySelectorAll(".govuk-accordion__section");
+    const elms = document.querySelectorAll(".govuk-accordion");
+
+    elms.forEach((elm) => {
+        let showHideAllControl = showAll.cloneNode(true);
+        elm.insertBefore(showHideAllControl, elm.firstChild);
+
+    const sections = elm.querySelectorAll(".govuk-accordion__section");
 
     sections.forEach((section) => {
         let showHideControl = showThis.cloneNode(true);
@@ -65,7 +70,7 @@ waitForElm('.govuk-accordion').then((elm) => {
                 section.classList.add("accordion-hidden");
                 section.querySelector(".showHideThis").classList.add("showThis");
                 section.querySelector(".showHideThis").classList.remove("hideThis");
-                if (elm.getElementsByClassName("hideThis") == 0) {
+                if (elm.getElementsByClassName("hideThis").length == 0) {
                     // if there is no hideThis left, we change the hide all to show all
                     elm.querySelector(".showHideAll").classList.add("showAll");
                     elm.querySelector(".showHideAll").classList.remove("hideAll");
@@ -106,4 +111,5 @@ waitForElm('.govuk-accordion').then((elm) => {
             elm.querySelector(".showHideAll").classList.add("hideAll");
         }
     };
+    });
 });

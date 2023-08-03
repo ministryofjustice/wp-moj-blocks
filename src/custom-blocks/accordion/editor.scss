@@ -151,7 +151,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     content: " all sections";
 }
 
-.preview-welsh-true {
+.govuk-accordion.preview-welsh-true {
     .showHideAll:after {
         content: " pob adran";
     }
@@ -170,6 +170,16 @@ SASS modifications to conform GovUK frontend to MoJ block styling
                 }
             }
         }
+    }
+    // translations of guidance text - back-end only
+    &:before {
+        content: "Dechrau'r bloc acordion";
+    }
+    &__section-content:after {
+        content: "Diwedd yr adran";
+    }
+    &:after {
+        content: "Diwedd y bloc acordion";
     }
 }
 
