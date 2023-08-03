@@ -23,22 +23,21 @@ function render_callback_accordion_block($attributes, $content)
 
     ?>
 
-    <div 
+    <div
         class="govuk-accordion <?php _e(esc_html($accordionClassName)); ?>"
         id="accordion-default"
         data-module="govuk-accordion"
-        <?php // Translations taken from https://covid19.public-inquiry.uk/cy/materion-pob-stori/ 
+        <?php
+            // Translations taken from https://covid19.public-inquiry.uk/cy/materion-pob-stori/
             if ($welshControls) {
         ?>
-        data-i18n.hide-all-sections="Cuddio pob adran"
-        data-i18n.show-all-sections="Dangos pob adran"
-        data-i18n.hide-section="Dangos"
-        data-i18n.show-section="Cuddio"
-        data-i18n.hide-section-aria-label="dangos yr adran hon"
-        data-i18n.show-section-aria-label="cuddio'r adran hon"
-        <?php
-            }
-        ?>
+            data-i18n.hide-all-sections="Cuddio pob adran"
+            data-i18n.show-all-sections="Dangos pob adran"
+            data-i18n.hide-section="Dangos"
+            data-i18n.show-section="Cuddio"
+            data-i18n.hide-section-aria-label="dangos yr adran hon"
+            data-i18n.show-section-aria-label="cuddio'r adran hon"
+        <?php } ?>
     >
 
     <?php echo $content; ?>
