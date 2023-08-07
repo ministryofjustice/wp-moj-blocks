@@ -2,9 +2,9 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { Fragment } from "@wordpress/element";
-import { RichText,  InnerBlocks, MediaUpload } from "@wordpress/block-editor";
-import { Button, Dashicon } from '@wordpress/components';
+import { Fragment, useState } from "@wordpress/element";
+import { RichText, InspectorControls, InnerBlocks, MediaUpload } from "@wordpress/block-editor";
+import { PanelBody, SelectControl, Button, Dashicon } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -27,6 +27,8 @@ export default function CardBlockEdit( props ) {
             cardExcerpt,
             cardImageURL,
             cardImageId,
+            cardImageShape,
+            cardImagePosition,
         } = props.attributes;
 
         const onRemoveImage = () => {
@@ -36,10 +38,68 @@ export default function CardBlockEdit( props ) {
             });
         };
 
+        const shapeList = [
+            { label: "1:1 (square)", value: '100' },
+            { label: "4:3 (rectangle)", value: '75' },
+            { label: "16:9 (widescreen)", value: '56' },
+            { label: "21:9 (letterbox)", value: '43' },
+        ]
+        const setShape = useState( '75' );
+        const onChangeImageShape = newImageShape => {
+            setAttributes({ cardImageShape: newImageShape });
+            setShape( newImageShape );
+        };
+
+        const positionList = [
+            { label: "Centre", value: 'center' },
+            { label: "Top", value: 'top' },
+            { label: "Bottom", value: 'bottom' },
+            { label: "Left", value: 'left' },
+            { label: "Right", value: 'right' },
+            { label: "Top left", value: 'top left' },
+            { label: "Top right", value: 'top right' },
+            { label: "Bottom left", value: 'bottom left' },
+            { label: "Bottom right", value: 'bottom right' },
+        ]
+        const setPosition = useState( 'center' );
+        const onChangeImagePosition = newImagePosition => {
+            setAttributes({ cardImagePosition: newImagePosition });
+            setPosition( newImagePosition );
+        };
+
+        const inspectorControls = (
+            <InspectorControls>
+                <PanelBody
+                    title={__('Image settings')}
+                    initialOpen={true}
+                >
+                    <SelectControl
+                        label="Image shape"
+                        help=""
+                        value={ cardImageShape }
+                        options={ shapeList }
+                        onChange={ onChangeImageShape }
+                    />
+                    <SelectControl
+                        label="Image position"
+                        help=""
+                        value={ cardImagePosition }
+                        options={ positionList }
+                        onChange={ onChangeImagePosition }
+                    />
+                </PanelBody>
+            </InspectorControls>
+        );
+
         return (
             <div className={`${className} mojblocks-card mojblocks-card-image`} data-src={cardImageURL}>
+            { inspectorControls }
             <div className={`${className} mojblocks-card__image` + ' ' + (cardImageId ? 'mojblocks-card__image-selected': '')}
-                style={{backgroundImage: `url(${cardImageURL})`}}>
+                style={{
+                    backgroundImage: `url(${cardImageURL})`,
+                    paddingBottom: `${cardImageShape}%`,
+                    backgroundPosition: cardImagePosition,
+                }}>
             <MediaUpload
                 buttonProps={{
                     className: 'change-image',

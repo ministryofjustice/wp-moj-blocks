@@ -46,6 +46,12 @@ registerBlockType('mojblocks/card', {
         cardClassName: {
             type: 'string'
         },
+        cardImagePosition: {
+            type: 'string'
+        },
+        cardImageShape: {
+            type: 'string'
+        },
     },
     edit,
     save: () => { return <InnerBlocks.Content />; }
