@@ -171,16 +171,6 @@ SASS modifications to conform GovUK frontend to MoJ block styling
             }
         }
     }
-    // translations of guidance text - back-end only
-    &:before {
-        content: "Dechrau'r bloc acordion";
-    }
-    &__section-content:after {
-        content: "Diwedd yr adran";
-    }
-    &:after {
-        content: "Diwedd y bloc acordion";
-    }
 }
 
 .accordion-hidden {
@@ -189,10 +179,18 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     }
 
     &:after {
-        content:"⚠️ Section content hidden - open to edit";
+        content:'⚠️ Section content hidden - click "Show" to edit';
         padding: 10px;
         display: block;
         background-color: $mojblocks-color-light-grey;
         margin: 20px 0;
+    }
+}
+
+.govuk-accordion.preview-welsh-true {
+    .accordion-hidden {
+        &:after {
+            content:'⚠️ Section content hidden - click "Cuddio" to reveal and edit';
+        }
     }
 }
