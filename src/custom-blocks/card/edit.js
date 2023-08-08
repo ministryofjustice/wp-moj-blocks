@@ -39,7 +39,7 @@ export default function CardBlockEdit( props ) {
         };
 
         const shapeList = [
-            { label: "1:1 (square)", value: '100'},
+            { label: "1:1 (square)", value: '100' },
             { label: "4:3 (rectangle)", value: '75' },
             { label: "16:9 (widescreen)", value: '56' },
             { label: "21:9 (letterbox)", value: '43' },
