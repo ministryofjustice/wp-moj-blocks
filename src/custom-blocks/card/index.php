@@ -19,7 +19,7 @@ function render_callback_card_block($attributes, $content)
     $attribute_card_className = $attributes['cardClassName'] ?? 'wp-block-mojblocks-card';
 	$attribute_card_excerpt = $attributes['cardExcerpt'] ?? '';
 	$attribute_card_image_shape = $attributes['cardImageShape'] ?? 'square';
-	$attribute_card_image_position = $attributes['cardImagePosition'] ?? 'center';
+	$attribute_card_image_position = $attributes['cardImagePosition'] ?? 'top';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your

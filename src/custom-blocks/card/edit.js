@@ -51,8 +51,8 @@ export default function CardBlockEdit( props ) {
         };
 
         const positionList = [
-            { label: "Centre", value: 'center' },
             { label: "Top", value: 'top' },
+            { label: "Centre", value: 'center' },
             { label: "Bottom", value: 'bottom' },
             { label: "Left", value: 'left' },
             { label: "Right", value: 'right' },
