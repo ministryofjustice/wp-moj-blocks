@@ -39,12 +39,12 @@ export default function CardBlockEdit( props ) {
         };
 
         const shapeList = [
-            { label: "1:1 (square)", value: '100' },
-            { label: "4:3 (rectangle)", value: '75' },
-            { label: "16:9 (widescreen)", value: '56' },
-            { label: "21:9 (letterbox)", value: '43' },
+            { label: "1:1 (square)", value: 'square' },
+            { label: "4:3 (rectangle)", value: 'rectangle' },
+            { label: "16:9 (widescreen)", value: 'widescreen' },
+            { label: "21:9 (letterbox)", value: 'letterbox' },
         ]
-        const setShape = useState( '100' );
+        const setShape = useState( 'square' );
         const onChangeImageShape = newImageShape => {
             setAttributes({ cardImageShape: newImageShape });
             setShape( newImageShape );
@@ -94,10 +94,9 @@ export default function CardBlockEdit( props ) {
         return (
             <div className={`${className} mojblocks-card mojblocks-card-image`} data-src={cardImageURL}>
             { inspectorControls }
-            <div className={`${className} mojblocks-card__image` + ' ' + (cardImageId ? 'mojblocks-card__image-selected': '')}
+            <div className={`${className} mojblocks-card__image mojblocks-card__image--shape-${cardImageShape}` + ' ' + (cardImageId ? 'mojblocks-card__image-selected': '')}
                 style={{
                     backgroundImage: `url(${cardImageURL})`,
-                    paddingBottom: `${cardImageShape}%`,
                     backgroundPosition: cardImagePosition,
                 }}>
             <MediaUpload

@@ -1,3 +1,18 @@
 /*********
 All styles for Accordion retrieved from the GDS Design System
 *********/
+
+.mojblocks-card__image.mojblocks-card__image--shape {
+	&-square { //1:1
+		padding-bottom: 100%;
+	}
+	&-rectangle { //4:3
+		padding-bottom: 75%;
+	}
+	&-widescreen { //16:9
+		padding-bottom: 56.25%;
+	}
+	&-letterbox { //21:9
+		padding-bottom: 42.86%;
+	}
+}

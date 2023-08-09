@@ -32,10 +32,9 @@ function render_callback_card_block($attributes, $content)
 
 		<?php if (!empty($attribute_card_image_URL)) {  ?>
 			<div
-				class="mojblocks-card__image mojblocks-card__image-selected"
+				class="mojblocks-card__image mojblocks-card__image-selected mojblocks-card__image--shape-<?php _e(esc_html($attribute_card_image_shape)); ?>"
 				style="
 					background-image: url(<?php _e(esc_url_raw($attribute_card_image_URL)); ?>);
-					padding-bottom: <?php _e(esc_html($attribute_card_image_shape)); ?>%;
 					background-position: <?php _e(esc_html($attribute_card_image_position)); ?>;
 				"
 			>
