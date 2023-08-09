@@ -20,6 +20,21 @@ Block: Card (Frontend styles)
 
     &__image {
 
+        &.mojblocks-card__image--shape {
+            &-square { //1:1
+                padding-bottom: 100%;
+            }
+            &-rectangle { //4:3
+                padding-bottom: 75%;
+            }
+            &-widescreen { //16:9
+                padding-bottom: 56.25%;
+            }
+            &-letterbox { //21:9
+                padding-bottom: 42.86%;
+            }
+        }
+
         &-selected {
             // ratio of 3 over 2 for small devices
             width: 100%;
@@ -79,4 +94,3 @@ Block: Card (Frontend styles)
         }
     }
 }
-
