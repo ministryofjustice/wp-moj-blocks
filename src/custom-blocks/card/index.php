@@ -18,7 +18,7 @@ function render_callback_card_block($attributes, $content)
     $attribute_card_image_URL = $attributes['cardImageURL'] ?? '';
     $attribute_card_className = $attributes['cardClassName'] ?? 'wp-block-mojblocks-card';
 	$attribute_card_excerpt = $attributes['cardExcerpt'] ?? '';
-	$attribute_card_image_shape = $attributes['cardImageShape'] ?? '75'; //as percentage of width
+	$attribute_card_image_shape = $attributes['cardImageShape'] ?? 'square'; //as percentage of width
 	$attribute_card_image_position = $attributes['cardImagePosition'] ?? 'center';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return

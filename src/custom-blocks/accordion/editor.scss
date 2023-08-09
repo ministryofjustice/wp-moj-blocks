@@ -13,6 +13,23 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 
 .govuk-accordion {
 
+    border-top: dashed $mojblocks-color-black 1px;
+    border-bottom: dashed $mojblocks-color-black 1px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+
+    &:before {
+        content:"Accordion start";
+        font-style: italic;
+        display:block;
+        padding-bottom: 20px;
+        color: $mojblocks-color-dark-grey;;
+    }
+
+    > * {
+        margin-left: 30px;
+    }
+
     h1,
     h2,
     h3,
@@ -36,25 +53,144 @@ SASS modifications to conform GovUK frontend to MoJ block styling
             margin-left: 0;
         }
     }
-}
+    &__section-header {
+        border-top: 1px dashed $mojblocks-color-grey;
+        color: $mojblocks-color-light-blue;
+    
+        &:before {
+            color: $mojblocks-color-grey;
+        }
+    }
+    
+    &__section-content {
+        display: block;
+        margin-left: 30px;
 
-
-.govuk-accordion__section-header {
-    border-top: 1px dashed $mojblocks-color-grey;
-    color: $mojblocks-color-light-blue;
-
-    &:before {
-        color: $mojblocks-color-grey;
+        &:after {
+            content:"End of section";
+            font-style: italic;
+            padding-top: 20px;   
+            color: $mojblocks-color-dark-grey;
+            display: block;
+            margin-left: -30px;
+        }
+    }
+    &:after {
+        content:"Accordion end";
+        font-style: italic;
+        padding-top: 20px;
+        display: block;
+        color: $mojblocks-color-dark-grey;;
     }
 }
 
-.govuk-accordion__section-content {
-    display: block;
+.showHideThis,
+.showHideAll {
+    color:$mojblocks-color-light-blue;
+    cursor: pointer;
+    margin-bottom: 20px;
+
+    &:hover {
+        color:$mojblocks-color-dark-blue;
+
+        .show-hide-arrow {
+            background-color: $mojblocks-color-black;
+            color: $mojblocks-color-black;
+            &:after {
+                color: $mojblocks-color-light-grey;
+            }
+        }
+    }
+
+    .show-hide-text {
+        padding-left: 6px;
+
+        &:before {
+            content:"Hide "
+        }
+    }
+    .show-hide-arrow {
+        border: 0.0625rem solid;
+        border-radius: 50%;
+        box-sizing: border-box;
+        display: inline-block;
+        height: 1.25rem;
+        position: relative;
+        vertical-align: middle;
+        width: 1.25rem;
+
+        &:after {
+            border-right: 0.125rem solid;
+            border-top: 0.125rem solid;
+            bottom: 0.3125rem;
+            box-sizing: border-box;
+            content: "";
+            display: block;
+            height: 0.375rem;
+            left: 0.375rem;
+            position: absolute;
+            transform: rotate(-45deg);
+            width: 0.375rem;
+        }
+    }
+
+    &.showThis,
+    &.showAll {
+        .show-hide-arrow {
+            transform: rotate(180deg);
+        }
+        .show-hide-text {
+            &:before {
+                content:"Show "
+            }
+        }
+    }
 }
 
-.govuk-accordion__section-header:after {
-    content:"▽ Show / Hide";
-    color:$mojblocks-color-light-blue;
-    display:block;
-    padding-bottom: 30px;
+.showHideAll:after {
+    content: " all sections";
+}
+
+.govuk-accordion.preview-welsh-true {
+    .showHideAll:after {
+        content: " pob adran";
+    }
+    .showHideThis,
+    .showHideAll {
+        .show-hide-text {
+            &:before {
+                content:"Dangos "
+            }
+        }
+        &.showThis,
+        &.showAll {
+            .show-hide-text {
+                &:before {
+                    content:"Cuddio "
+                }
+            }
+        }
+    }
+}
+
+.accordion-hidden {
+    .govuk-accordion__section-content {
+        display: none;
+    }
+
+    &:after {
+        content:'⚠️ Section content hidden - click "Show" to edit';
+        padding: 10px;
+        display: block;
+        background-color: $mojblocks-color-light-grey;
+        margin: 20px 0;
+    }
+}
+
+.govuk-accordion.preview-welsh-true {
+    .accordion-hidden {
+        &:after {
+            content:'⚠️ Section content hidden - click "Cuddio" to reveal and edit';
+        }
+    }
 }

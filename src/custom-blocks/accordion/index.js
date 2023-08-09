@@ -2,6 +2,8 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 const { RichText } = wp.blockEditor;
 const { InnerBlocks } = wp.blockEditor;
+const { InspectorControls } = wp.blockEditor;
+const { PanelBody, PanelRow, ToggleControl } = wp.components;
 
 /**
  * MOJBLOCKS: Accordion
@@ -14,9 +16,31 @@ registerBlockType('mojblocks/accordion', {
     icon: "list-view",
     category: 'mojblocks',
     keywords: [ __( 'accordion' ), __( 'sections' ), __( 'lists' ) ],
-    attributes: {},
+    example: {
+        attributes: {
+            controlLanguageWelsh: false
+        },
+    },
+    attributes: {
+        controlLanguageWelsh: {
+            type: 'boolean'
+        },
+        accordionClassName: {
+            type: 'string'
+        }
+    },
 
-    edit: () => {
+    edit: props => {
+        const {
+            setAttributes,
+            attributes: {
+                controlLanguageWelsh
+            },
+            className
+        } = props;
+
+        // Set className attribute for PHP frontend to use
+        setAttributes({ accordionClassName: className });
 
         // Load allowed blocks on repeater
         const allowedBlocks = [ 'mojblocks/accordion-section' ];
@@ -27,7 +51,26 @@ registerBlockType('mojblocks/accordion', {
         ];
 
         return ([
-            <div className="govuk-accordion" data-module="govuk-accordion" id="accordion-default" key="accordion-block">
+            <InspectorControls>
+                <PanelBody
+                        title="Language"
+                        initialOpen={false}
+                >
+                    <PanelRow>
+                        <ToggleControl
+                            label="Set controls to Welsh"
+                            help={
+                                controlLanguageWelsh
+                                    ? 'Controls are in Welsh'
+                                    : 'Controls are in English'
+                            }
+                            checked={controlLanguageWelsh}
+                            onChange={newControlLanguageWelsh => setAttributes({ controlLanguageWelsh: newControlLanguageWelsh }) }
+                        />
+                    </PanelRow>
+                </PanelBody>
+            </InspectorControls>,
+            <div className={'govuk-accordion preview-welsh-' + controlLanguageWelsh + ' ' + className} data-module="govuk-accordion" id="accordion-default" key="accordion-block">
                 <InnerBlocks
                     template={ templates }
                     allowedBlocks={ allowedBlocks }
@@ -124,3 +167,8 @@ registerBlockType("mojblocks/accordion-section", {
         return <InnerBlocks.Content />;
     }
 });
+
+/**
+ * Internal dependencies
+ */
+import edit from './edit';
