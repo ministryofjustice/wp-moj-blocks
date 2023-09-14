@@ -127,7 +127,10 @@ html.hale-colours-variable {
     .wp-block-column[style|="flex"]:not([style$="100%"]) {
         align-self: stretch;
 
-        > *:last-child {
+        > div:last-child,
+        > figure:last-child {
+            // This is to solve the specific problem of CCRC, so we just target figure & div.
+            // It starts to have undesirable effects elsewhere if we are more general.
             margin-bottom:0;
         }
 
