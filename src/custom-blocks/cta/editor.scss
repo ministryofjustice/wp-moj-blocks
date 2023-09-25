@@ -15,5 +15,6 @@ Block: Call to Action (Gutenberg editor styles)
 	right: 0;
 	margin-left: 0;
 	margin-right: 0;
-
+	background: linear-gradient(var(--mojblocks-cta-bg) 0%, #fff 5%, #fff 95%, var(--mojblocks-cta-bg) 100%);
+	//This background uses the designated background colour, but is just designed to hint at the background, since we don't want to get into the territory of clashing colours it is just a line at the top and bottom
 }
