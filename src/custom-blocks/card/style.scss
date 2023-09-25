@@ -11,7 +11,6 @@ Block: Card (Frontend styles)
 		margin-top: govuk-px-to-rem(12);
 	}
 
-	background-color: white;
 	max-width: 100%;
 	padding: govuk-px-to-rem(12);
 	margin-bottom: govuk-px-to-rem(12);
@@ -19,6 +18,21 @@ Block: Card (Frontend styles)
 	margin: 15px 0;
 
     &__image {
+
+        &.mojblocks-card__image--shape {
+            &-square { //1:1
+                padding-bottom: 100%;
+            }
+            &-rectangle { //4:3
+                padding-bottom: 75%;
+            }
+            &-widescreen { //16:9
+                padding-bottom: 56.25%;
+            }
+            &-letterbox { //21:9
+                padding-bottom: 42.86%;
+            }
+        }
 
         &-selected {
             // ratio of 3 over 2 for small devices
@@ -79,4 +93,3 @@ Block: Card (Frontend styles)
         }
     }
 }
-

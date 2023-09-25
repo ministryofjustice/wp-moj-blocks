@@ -13,7 +13,6 @@ Block: Card (Gutenberg editor styles)
 		margin-bottom: govuk-px-to-rem(12);
 	}
 
-	background-color: white;
 	max-width: 100%;
 	padding: govuk-px-to-rem(12);
 	margin-bottom: govuk-px-to-rem(12);
@@ -56,8 +55,8 @@ Block: Card (Gutenberg editor styles)
 				}
 
 				&:hover > svg,
-				&:focus > svg  {
-					color: $mojblocks-color-grey;
+				&:focus > svg {
+					border-color: $mojblocks-color-very-light-blue;
 				}
 			}
 
@@ -68,13 +67,14 @@ Block: Card (Gutenberg editor styles)
 				width: 36px;
 				height: 36px;
 
-				> svg {
+				> svg,
+				> .dashicons-dismiss {
 					color: white;
 				}
 
-				&:hover > svg,
-				&:focus > svg {
-					color: $mojblocks-color-grey;
+				&:hover,
+				&:focus {
+					border-color: $mojblocks-color-very-light-blue;
 				}
 			}
 		}
