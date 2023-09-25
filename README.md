@@ -36,6 +36,15 @@ This plugin follows
 * Standards set by the Wordpress organisation https://codex.wordpress.org/Writing_a_Plugin.
 * PHP Framework Interop Group's standards http://www.php-fig.org/
 
+## Things to change when adding new blocks
+- https://github.com/ministryofjustice/wp-moj-blocks/blob/main/src/custom-blocks/index.js
+- https://github.com/ministryofjustice/wp-moj-blocks/blob/main/mojblocks.php
+- https://github.com/ministryofjustice/wp-hale/blob/main/inc/restrict-blocks.php [Hale repo]
+
+Once all these have been added, run:
+- `npm start` (window won't close)
+- `npm run build`
+
 ## Developer notes
 * Run `npm install` in the plugin root directory.
 * Run `npm start` to compile and watch any changes made to the blocks.

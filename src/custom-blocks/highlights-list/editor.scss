@@ -15,6 +15,8 @@ Block: Highlights List (Gutenberg editor styles)
 	right: 0;
 	margin-left: 0;
 	margin-right: 0;
+	background: linear-gradient(var(--mojblocks-highlights-list-bg) 0%, #fff 5%, #fff 95%, var(--mojblocks-highlights-list-bg) 100%);
+	//This background uses the designated background colour, but is just designed to hint at the background, since we don't want to get into the territory of clashing colours it is just a line at the top and bottom
 
 	@include govuk-media-query($from: tablet) {
 		padding: 25px 15px 25px;

@@ -324,6 +324,19 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
+        'mojblocks/separator',
+        [
+        'editor_script' => 'mojblocks-editor-script',
+        'render_callback' => 'render_callback_separator_block',
+        'attributes' => [
+            'size' => [
+                'type' => 'string'
+            ]
+          ]
+        ]
+    );
+
+    register_block_type(
         'mojblocks/staggered-box',
         [
             'editor_script' => 'mojblocks-editor-script',
@@ -434,6 +447,7 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/highlights-list/index.php
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/intro/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/quote/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/reveal/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/separator/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/staggered-box/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/latest-news/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-news/index.php';
