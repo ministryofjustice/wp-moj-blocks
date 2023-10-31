@@ -103,11 +103,24 @@ export default function CardBlockEdit( props ) {
                 buttonProps={{
                     className: 'change-image',
                 }}
-                onSelect={(image) =>
-                    setAttributes({
-                        cardImageId: image.id,
-                        cardImageURL: image.url,
-                    })
+                onSelect={
+                    (image) => {
+                        var imageSizes = image.sizes;
+
+                        // determine the image size displayed with fallbacks
+                        if (typeof imageSizes.medium_large !== 'undefined') {
+                            var imageURL = imageSizes.medium_large.url;
+                        } else if (typeof imageSizes.medium !== 'undefined') {
+                            var imageURL = imageSizes.medium.url;
+                        } else {
+                            var imageURL = imageSizes.full.url;
+                        }
+
+                        setAttributes({
+                            cardImageId: image.id,
+                            cardImageURL: imageURL,
+                        })
+                    }
                 }
                 allowedTypes={ allowedMediaTypes }
                 type="image"

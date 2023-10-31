@@ -54,5 +54,7 @@ registerBlockType('mojblocks/card', {
         },
     },
     edit,
-    save: () => { return <InnerBlocks.Content />; }
+    save: () => {
+        return <InnerBlocks.Content />;
+    }
 });
