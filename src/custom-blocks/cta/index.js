@@ -7,7 +7,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import { RichText, URLInputButton } from '@wordpress/block-editor';
 
 const { InspectorControls } = wp.blockEditor;
-const { PanelBody, PanelRow, ToggleControl } = wp.components;
+const { PanelBody, PanelRow, ToggleControl, RadioControl } = wp.components;
 
 registerBlockType('mojblocks/cta', {
     title: __('Call to Action', 'mojblocks'),
@@ -36,6 +36,9 @@ registerBlockType('mojblocks/cta', {
         buttonLink: {
             type: 'string'
         },
+        linkStyle: {
+            type: 'string'
+        },
         flushBottom: {
             type: 'boolean'
         },
@@ -50,6 +53,7 @@ registerBlockType('mojblocks/cta', {
             attributes: {
                 ctaTitle,
                 ctaText,
+                linkStyle,
                 buttonLink,
                 buttonLabel,
                 flushBottom
@@ -80,6 +84,11 @@ registerBlockType('mojblocks/cta', {
             setAttributes({ buttonLink: newButtonLink });
         };
 
+        // Grab newLinkStyle, set the value of linkStyle to newLinkStyle.
+        const onChangeLinkStyle = newLinkStyle => {
+            setAttributes({ linkStyle: newLinkStyle });
+        };
+
         return (
             <div className={`${className}  mojblocks-cta`}>
                 <InspectorControls>
@@ -97,6 +106,27 @@ registerBlockType('mojblocks/cta', {
                                 }
                                 checked={flushBottom}
                                 onChange={newFlushBottom => setAttributes({ flushBottom: newFlushBottom }) }
+                            />
+                        </PanelRow>
+                    </PanelBody>
+                    <PanelBody
+                            title="Link Style"
+                            initialOpen={true}
+                    >
+                        <PanelRow>
+                            <RadioControl
+                                label="Link styling"
+                                help={
+                                    linkStyle == "link"
+                                        ? 'Link shall be styled like a normal link'
+                                        : 'Link shall be styled like a button'
+                                }
+                                selected={ linkStyle }
+                                options={ [
+                                    { label: 'Button', value: 'button' },
+                                    { label: 'Link', value: 'link' },
+                                ] }
+                                onChange={newLinkStyle => setAttributes({ linkStyle: newLinkStyle }) }
                             />
                         </PanelRow>
                     </PanelBody>
@@ -134,7 +164,9 @@ registerBlockType('mojblocks/cta', {
                                 url={buttonLink}
                             />
                             <RichText
-                                className="mojblocks-button govuk-button"
+                                className={
+                                    linkStyle == "link" ? "govuk-link govuk-body" : "mojblocks-button govuk-button"
+                                }
                                 value={buttonLabel}
                                 onChange={onChangeButtonLabel}
                                 placeholder="Button label"

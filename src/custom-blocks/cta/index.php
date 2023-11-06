@@ -17,10 +17,18 @@ function render_callback_cta_block($attributes, $content)
     // Parse attributes found in index.js
     $attribute_cta_title = $attributes['ctaTitle'] ?? '';
     $attribute_cta_text = $attributes['ctaText'] ?? '';
+    $attribute_cta_button_link_style = $attributes['linkStyle'] ?? 'button';
     $attribute_cta_button_link = $attributes['buttonLink'] ?? '';
     $attribute_cta_button_label = $attributes['buttonLabel'] ?? '';
     $attribute_cta_flush_bottom = $attributes['flushBottom'] ?? false;
     $attribute_cta_className = $attributes['ctaClassName'] ?? '';
+
+    // Link class
+    if ($attribute_cta_button_link_style == "link") {
+        $cta_link_class = "govuk-link govuk-body";
+    } else {
+        $cta_link_class = "mojblocks-button govuk-button";
+    }
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -44,7 +52,7 @@ function render_callback_cta_block($attributes, $content)
                     <div class="mojblocks-cta__content">
                         <?php _e(esc_html($attribute_cta_text)); ?>
                     </div>
-                    <a href="<?php _e(esc_html($attribute_cta_button_link)); ?>" class="mojblocks-button govuk-button">
+                    <a href="<?php _e(esc_html($attribute_cta_button_link)); ?>" class="<?php echo $cta_link_class; ?>">
                         <?php _e(esc_html($attribute_cta_button_label)); ?>
                     </a>
                 </div>
