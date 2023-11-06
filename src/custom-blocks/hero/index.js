@@ -52,7 +52,7 @@ registerBlockType("mojblocks/hero", {
 
             setAttributes({ backgroundImage: image })
         }
-       const optionList = [
+        const optionList = [
             { label: "Centre", value: 'center' },
             { label: "Top", value: 'top' },
             { label: "Bottom", value: 'bottom' },

@@ -61,7 +61,7 @@ registerBlockType("mojblocks/staggered-box", {
     }
 
     const onStaggeredBoxImageSelect = newStaggeredBoxImageURL => {
-      setAttributes({ staggeredBoxImageURL: newStaggeredBoxImageURL.sizes.full.url })
+      setAttributes({ staggeredBoxImageURL: newStaggeredBoxImageURL.sizes.large ? newStaggeredBoxImageURL.sizes.large.url : newStaggeredBoxImageURL.sizes.full.url })
       setAttributes({ staggeredBoxImageAltText: newStaggeredBoxImageURL.alt})
     }
 

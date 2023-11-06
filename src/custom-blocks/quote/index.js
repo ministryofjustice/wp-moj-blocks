@@ -94,7 +94,7 @@ registerBlockType('mojblocks/quote', {
                         onSelect={ (img) =>
                             setAttributes({
                                 quoteImgId: img.id,
-                                quoteImgURL: img.url,
+                                quoteImgURL: img.sizes.large ? img.sizes.large.url : img.sizes.full.url,
                             })
                         }
                         allowed={ALLOWED_MEDIA_TYPES}
