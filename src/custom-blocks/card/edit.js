@@ -108,10 +108,8 @@ export default function CardBlockEdit( props ) {
                         var imageSizes = image.sizes;
 
                         // determine the image size displayed with fallbacks
-                        if (typeof imageSizes.medium_large !== 'undefined') {
-                            var imageURL = imageSizes.medium_large.url;
-                        } else if (typeof imageSizes.medium !== 'undefined') {
-                            var imageURL = imageSizes.medium.url;
+                        if (typeof imageSizes.large !== 'undefined') {
+                            var imageURL = imageSizes.large.url;
                         } else {
                             var imageURL = imageSizes.full.url;
                         }
