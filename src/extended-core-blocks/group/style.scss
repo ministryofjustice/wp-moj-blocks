@@ -21,3 +21,8 @@
 		z-index: -1;
 	}
 }
+
+.page-template-default .is-style-bleeding-background:before {
+	width: calc(100% + 3.5em);
+    left: -1.75em;
+}
