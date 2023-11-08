@@ -1,0 +1,23 @@
+.is-style-bleeding-background {
+	padding: 0;
+	position:relative;
+
+	&:not(.flush-bottom) {
+		margin-bottom: 1.75em;
+	}
+	> * {
+		margin-bottom:0;
+	}
+
+	&:before {
+		background: inherit;
+		content: "";
+		display: block;
+		height: 100%;
+		left: -50vw;
+		overflow: visible;
+		position: absolute;
+		width: 150vw;
+		z-index: -1;
+	}
+}

@@ -1,0 +1,27 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Core block: Group (Gutenberg editor styles)
+
+**********************************************************************************************/
+
+// Use the frontend styles
+@import 'style.scss';
+
+.is-style-bleeding-background {
+	padding-top: 1.75em;
+	padding-bottom: 1.75em;
+
+	&:before {
+		background: inherit;
+		content: "";
+		display: block;
+		height: 100%;
+		left: -50vw;
+		overflow: visible;
+		position: absolute;
+		width: 150vw;
+		z-index: 0;
+		transform: translateY(-1.75em);
+	}
+}

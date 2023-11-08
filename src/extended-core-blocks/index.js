@@ -5,3 +5,4 @@
 // Extends both button and buttons core blocks
  import "./button";
  import "./file";
+ import "./group";
