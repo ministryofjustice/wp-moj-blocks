@@ -8,6 +8,8 @@ Core block: Group (Gutenberg editor styles)
 // Use the frontend styles
 @import 'style.scss';
 
+.is-style-faded-bleed,
+.is-style-text-aligned,
 .is-style-bleeding-background {
 	padding-top: 1.75em;
 	padding-bottom: 1.75em;
@@ -17,11 +19,51 @@ Core block: Group (Gutenberg editor styles)
 		content: "";
 		display: block;
 		height: 100%;
+		width: 150vw;
 		left: -50vw;
 		overflow: visible;
 		position: absolute;
-		width: 150vw;
 		z-index: 0;
 		transform: translateY(-1.75em);
+	}
+}
+
+.is-style-text-aligned:before,
+.page-template-default .is-style-bleeding-background:before {
+	// slightly less to make clearer
+	width: calc(100% + 3em);
+	left: -1.5em;
+}
+
+.is-style-bleeding-background :before {
+	width: 150vw;
+	left: -50vw;
+}
+
+.is-style-faded-bleed{
+	&:before {
+		// slightly less to make clearer
+		width: 110%;
+		left: -5%;
+	}
+	&:after {
+		background: linear-gradient(to right, #fff, transparent 7%,transparent 93%, #fff );
+		content: "";
+		top: 0;
+		position: absolute;
+		display: block;
+		height: 100%;
+		width: 110%;
+		left: -5%;
+		z-index: 1;
+	}
+	&:focus:after {
+		background: transparent;
+		content: "";
+		top: 0;
+		position: absolute;
+		display: block;
+		height: 100%;
+		width: 100%;
 	}
 }
