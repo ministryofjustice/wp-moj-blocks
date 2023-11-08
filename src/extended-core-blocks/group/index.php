@@ -7,10 +7,7 @@
  * https://developer.wordpress.org/block-editor/how-to-guides/javascript/extending-the-block-editor/
  */
 
- /*
- Plugin Name: Fancy Quote
- */
- 
+
 function group_block_enqueue() {
     wp_enqueue_script( 'bleed-background',
         plugins_url( 'index.js', __FILE__ ),
