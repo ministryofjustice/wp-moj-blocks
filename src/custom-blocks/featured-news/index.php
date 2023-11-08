@@ -34,7 +34,7 @@ function render_callback_featured_news_block($attributes, $content)
                 "summary" => get_post_meta( $attribute_box_featuredID, 'news_story_summary', TRUE ),
                 "date" => get_the_date('d F Y',$attribute_box_featuredID),
                 "link" => get_permalink($attribute_box_featuredID),
-                "image" => get_the_post_thumbnail_url($attribute_box_featuredID),
+                "image" => get_the_post_thumbnail_url($attribute_box_featuredID, "large"),
             ];
     ?>
         <div class="<?php _e(esc_html($attribute_box_className)); if (!$news_array["image"]) _e("mojblocks-featured-news--no-image"); ?> mojblocks-featured-news">

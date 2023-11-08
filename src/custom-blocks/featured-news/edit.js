@@ -102,7 +102,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 		if(featuredNewsArticle != null && featuredNewsID.length > 0 && newsList.hasOwnProperty(featuredNewsID) == false){
 
 
-          newsList[featuredNewsID] = {
+            newsList[featuredNewsID] = {
                 title: featuredNewsArticle.title.rendered,
                 summary: featuredNewsArticle.summary_meta.news_story_summary,
                 date: featuredNewsArticle.date,
