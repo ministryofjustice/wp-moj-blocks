@@ -17,27 +17,43 @@ import domReady from '@wordpress/dom-ready';
 
 domReady( () => {
 
-    // Remove the default styles
+	// Remove the default styles
 	unregisterBlockStyle(
 		'core/button',
 		[ 'outline', 'squared', 'fill' ]
 	);
 
-    // Add custom CSS class
-    registerBlockStyle( 'core/button', [
+	// Button (singular)
+	// Add custom CSS class
+	registerBlockStyle( 'core/button', [
 		{
-			name: 'mojblocks-cta-button',
-			label: __('Button - CTA style', 'mojblocks'),
+			name: 'button--default',
+			label: __('Default', 'mojblocks'),
 			isDefault: true
 		}
 	]);
-
-    // Add custom CSS class
-    registerBlockStyle( 'core/buttons', [
+	// Add custom CSS class
+	registerBlockStyle( 'core/button', [
 		{
-			name: 'mojblocks-cta-button',
-			label: __('Button - CTA style', 'mojblocks'),
+			name: 'button--bold-text',
+			label: __('Bolder', 'mojblocks'),
+		}
+	]);
+
+	// Buttons (plural)
+	// Add custom CSS class
+	registerBlockStyle( 'core/buttons', [
+		{
+			name: 'buttons--default',
+			label: __('Default', 'mojblocks'),
 			isDefault: true
+		}
+	]);
+	// Add custom CSS class
+	registerBlockStyle( 'core/buttons', [
+		{
+			name: 'buttons--bold-text',
+			label: __('All bold', 'mojblocks'),
 		}
 	]);
 } );

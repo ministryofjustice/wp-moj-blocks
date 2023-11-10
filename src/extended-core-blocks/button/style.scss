@@ -5,19 +5,8 @@ Core block: Button, Buttons (Frontend styles)
 
 **********************************************************************************************/
 
-
-/*
-Specifically only include this style if it isnt a GDS styled site
-*/
-html.hale-colours-variable {
-	.is-style-mojblocks-cta-button,
-	.wp-block-button__link {
-		border-radius: 5px;
-	}
-}
-
-.is-style-mojblocks-cta-button,
-.wp-block-button__link {
+* .is-style-buttons--bold-text .wp-block-button__link:not(.govuk-button),
+* .is-style-button--bold-text > .wp-block-button__link:not(.govuk-button) {
 	box-sizing: border-box;
 	cursor: pointer;
 	display: block;
@@ -32,6 +21,7 @@ html.hale-colours-variable {
 	text-align: center;
 	text-decoration: none;
 	width: 100%;
+	border-radius: 5px;
 
 	@include govuk-media-query($from: tablet) {
 		display: inline-block;
