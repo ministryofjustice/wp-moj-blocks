@@ -67,3 +67,16 @@ Core block: Group (Gutenberg editor styles)
 		width: 100%;
 	}
 }
+
+// If no background set and one of the other non-default styles
+// This uses the Hale colour variable with a backup of grey to illustrate the different styles
+.wp-block-group:not(.has-background) {
+	&.is-style-bleeding-background,
+	&.is-style-text-aligned,
+	&.is-style-faded-bleed {
+		background-color: var(--extended-block-group-bg,#dbdad9);
+		&:before {
+			background-color: var(--extended-block-group-bg,#dbdad9);
+		}
+	}
+}
