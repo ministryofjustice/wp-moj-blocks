@@ -1,0 +1,47 @@
+.is-style-faded-bleed,
+.is-style-text-aligned,
+.is-style-bleeding-background {
+	padding: 0;
+	position:relative;
+	margin-bottom: 1.75em;
+
+	> * {
+		margin-bottom:0;
+	}
+
+	&:before {
+		background: inherit;
+		content: "";
+		display: block;
+		height: 100%;
+		left: -50vw;
+		overflow: visible;
+		position: absolute;
+		width: 150vw;
+		z-index: -1;
+	}
+}
+
+.is-style-text-aligned:before,
+.page-template-default .is-style-bleeding-background:before {
+	width: calc(100% + 3.5em);
+    left: -1.75em;
+}
+
+.is-style-faded-bleed {
+	&:before {
+		width: 120%;
+		left: -10%;
+	}
+	&:after {
+		background: linear-gradient(to right, #fff, transparent 7%,transparent 93%, #fff );
+		content: "";
+		top:0;
+		position:absolute;
+		z-index:-1;
+		display:block;
+		height:100%;
+		width:120%;
+		left:-10%;
+	}
+}

@@ -1,0 +1,82 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Core block: Group (Gutenberg editor styles)
+
+**********************************************************************************************/
+
+// Use the frontend styles
+@import 'style.scss';
+
+.is-style-faded-bleed,
+.is-style-text-aligned,
+.is-style-bleeding-background {
+	padding-top: 1.75em;
+	padding-bottom: 1.75em;
+
+	&:before {
+		background: inherit;
+		content: "";
+		display: block;
+		height: 100%;
+		width: 150vw;
+		left: -50vw;
+		overflow: visible;
+		position: absolute;
+		z-index: 0;
+		transform: translateY(-1.75em);
+	}
+}
+
+.is-style-text-aligned:before,
+.page-template-default .is-style-bleeding-background:before {
+	// slightly less to make clearer
+	width: calc(100% + 3em);
+	left: -1.5em;
+}
+
+.is-style-bleeding-background :before {
+	width: 150vw;
+	left: -50vw;
+}
+
+.is-style-faded-bleed{
+	&:before {
+		// slightly less to make clearer
+		width: 110%;
+		left: -5%;
+	}
+	&:after {
+		background: linear-gradient(to right, #fff, transparent 7%,transparent 93%, #fff );
+		content: "";
+		top: 0;
+		position: absolute;
+		display: block;
+		height: 100%;
+		width: 110%;
+		left: -5%;
+		z-index: 1;
+	}
+	&:focus:after {
+		background: transparent;
+		content: "";
+		top: 0;
+		position: absolute;
+		display: block;
+		height: 100%;
+		width: 100%;
+	}
+}
+
+// If no background set and one of the other non-default styles
+// This uses the Hale colour variable with a backup of grey to illustrate the different styles
+.wp-block-group:not(.has-background) {
+	&.is-style-bleeding-background,
+	&.is-style-text-aligned,
+	&.is-style-faded-bleed {
+		background-color: var(--extended-block-group-bg,#dbdad9);
+		&:before {
+			background-color: inherit
+		}
+	}
+}
