@@ -76,7 +76,7 @@ Core block: Group (Gutenberg editor styles)
 	&.is-style-faded-bleed {
 		background-color: var(--extended-block-group-bg,#dbdad9);
 		&:before {
-			background-color: var(--extended-block-group-bg,#dbdad9);
+			background-color: inherit
 		}
 	}
 }
