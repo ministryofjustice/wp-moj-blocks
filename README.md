@@ -8,15 +8,21 @@ This plugin adds the following custom blocks,
 * Banner
 * Card
 * CTA
+* Featured Document
+* Featured News
 * Hero
-* Highlights-list
+* Highlights List
 * Intro
+* Latest News
 * Quote
 * Reveal
+* Seperator
 * Staggered-boxes
 
 Extends the following core blocks
 * File
+* Group
+* Button/Buttons
 
 Note: This plugin suppresses and [unregisters](https://github.com/ministryofjustice/wp-moj-blocks/blob/main/src/quote/index.js#L208-L210) the default WP quote block.
 
