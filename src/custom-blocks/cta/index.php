@@ -25,7 +25,7 @@ function render_callback_cta_block($attributes, $content)
 
     // Link class
     if ($attribute_cta_button_link_style == "link") {
-        $cta_link_class = "govuk-link govuk-body";
+        $cta_link_class = "mojblocks-cta-link govuk-link govuk-body";
     } else {
         $cta_link_class = "mojblocks-button govuk-button";
     }
