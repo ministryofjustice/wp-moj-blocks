@@ -86,6 +86,10 @@ html.hale-colours-variable {
 }
 
 .wp-block-mojblocks-cta {
+    a.mojblocks-cta-link {
+        display: inline-block;
+    }
+
     .mojblocks-button,
     a.mojblocks-button {
         box-sizing: border-box;
