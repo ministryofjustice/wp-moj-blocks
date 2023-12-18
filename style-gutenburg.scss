@@ -13,16 +13,16 @@ Text Domain: mojblocks
 .block-editor-block-styles,
 .block-editor-inserter__menu-help-panel {
 
-    @import 'node_modules/govuk-frontend/govuk/base';
-    @import 'node_modules/govuk-frontend/govuk/core/all';
-	@import 'node_modules/govuk-frontend/govuk/components/all';
-    @import 'node_modules/govuk-frontend/govuk/objects/all';
+    @import 'node_modules/govuk-frontend/dist/govuk/base';
+    @import 'node_modules/govuk-frontend/dist/govuk/core/all';
+	@import 'node_modules/govuk-frontend/dist/govuk/components/all';
+    @import 'node_modules/govuk-frontend/dist/govuk/objects/all';
 
     /// components should be loaded here
     /// suggestion to import block specific files: govuk.scss
 
-    @import 'node_modules/govuk-frontend/govuk/utilities/all';
-    @import 'node_modules/govuk-frontend/govuk/overrides/all';
+    @import 'node_modules/govuk-frontend/dist/govuk/utilities/all';
+    @import 'node_modules/govuk-frontend/dist/govuk/overrides/all';
 
 	// load variables
 	@import "assets/scss/variables.scss";
