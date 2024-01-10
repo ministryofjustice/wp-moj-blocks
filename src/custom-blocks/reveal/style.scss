@@ -12,7 +12,7 @@ Block: Reveal (Frontend styles)
 *  @imports with a URL reference
 **/
 // https://design-system.service.gov.uk/components/details/
-@import "node_modules/govuk-frontend/govuk/components/details/details";
+@import "node_modules/govuk-frontend/dist/govuk/components/details/details";
 
 .mojblocks-reveal {
 	.govuk-width-container {
