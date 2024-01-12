@@ -94,7 +94,7 @@ registerBlockType('mojblocks/separator', {
                     />
                     <PanelRow>
                         <SelectControl
-                            label={__("Gap size", "mojblocks" )}
+                            label={__("Gap", "mojblocks" )}
                             help=""
                             value={ separatorBreakSize }
                             options={ optionList }
