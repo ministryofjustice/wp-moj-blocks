@@ -1,0 +1,37 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Scheduled section (Gutenberg editor styles)
+
+**********************************************************************************************/
+
+.scheduled-block {
+
+	margin: 10px 0;
+
+	&:before,
+	&:after {
+		content:"";
+		display:block;
+		height: 20px;
+	}
+	&:before {
+		background-image: repeating-linear-gradient(-45deg,#ffdd00,#ffdd00 5%,#0b0c0c 5%,#0b0c0c 10%);
+	}
+	&:after {
+		background-image: repeating-linear-gradient(45deg,#0b0c0c,#0b0c0c 5%,#ffdd00 5%,#ffdd00 10%);
+	}
+	&--hidden {
+		background-color: #f7d7d2; // GDS red with 0.2 transparency against white
+		color: #505a5f;
+	}
+	&--shown {
+		background-color: #cde2d8; // GDS green with 0.2 transparency against white
+	}
+}
+.scheduled-block-warning-text {
+	text-align: center;
+	font-weight: bold;
+	font-size: 24px;
+	color: #0b0c0c;
+}
