@@ -30,6 +30,10 @@ registerBlockType('mojblocks/separator', {
             type: 'number',
             default: 1
         },
+        separatorWidth: {
+            type: 'string',
+            default: '0'
+        },
         separatorColour: {
             type: 'string',
             default: 'rgb(177, 180, 182)'
@@ -44,6 +48,7 @@ registerBlockType('mojblocks/separator', {
             attributes: {
                 separatorBreakSize,
                 separatorThickness,
+                separatorWidth,
                 separatorColour
             },
             className
@@ -51,18 +56,32 @@ registerBlockType('mojblocks/separator', {
 
         // Set className attribute for PHP frontend to use
         setAttributes({ separatorClassName: className });
-        const optionList = [
+        const gapOptions = [
             { label: "Extra large", value: 'xl' },
             { label: "Large", value: 'l' },
             { label: "Medium", value: 'm'},
+        ]
+        const widthOptions = [
+            { label: "Full width", value: "0" },
+            { label: "Half width", value: "50%"},
+            { label: "Third width", value: "67%"},
+            { label: "Quarter width", value: "75%"},
+            { label: "100px", value: "calc(100% - 100px)" },
         ]
         const setSize = useState( 'xl' );
         const onChangeBreakSize = newBreakSize => {
             setAttributes({ separatorBreakSize: newBreakSize });
             setSize( newBreakSize );
         };
-        const onChangeThickness = value => {
-            setAttributes( { separatorThickness: value } );
+        const setWidth = useState( '0' );
+        const onChangeWidth = newWidth => {
+            setAttributes({ separatorWidth: newWidth });
+            setWidth( newWidth );
+        };
+        const setThick = useState( 1 );
+        const onChangeThickness = newThickness => {
+            setAttributes( { separatorThickness: newThickness } );
+            setThick( newThickness );
         };
 
         const onChangeColour = colour => {
@@ -97,8 +116,17 @@ registerBlockType('mojblocks/separator', {
                             label={__("Gap", "mojblocks" )}
                             help=""
                             value={ separatorBreakSize }
-                            options={ optionList }
+                            options={ gapOptions }
                             onChange={ onChangeBreakSize }
+                        />
+                    </PanelRow>
+                    <PanelRow>
+                        <SelectControl
+                            label={__("Width", "mojblocks" )}
+                            help=""
+                            value={ separatorWidth }
+                            options={ widthOptions }
+                            onChange={ onChangeWidth }
                         />
                     </PanelRow>
 
@@ -120,7 +148,8 @@ registerBlockType('mojblocks/separator', {
                 }
                 style={{
                     borderBottomWidth: separatorThickness,
-                    borderBottomColor: separatorColour
+                    borderBottomColor: separatorColour,
+                    marginRight: separatorWidth
                 }}
             />
         ]);
