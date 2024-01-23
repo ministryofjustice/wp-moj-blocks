@@ -78,10 +78,8 @@ registerBlockType('mojblocks/separator', {
             setAttributes({ separatorWidth: newWidth });
             setWidth( newWidth );
         };
-        const setThick = useState( 1 );
         const onChangeThickness = newThickness => {
             setAttributes( { separatorThickness: newThickness } );
-            setThick( newThickness );
         };
 
         const onChangeColour = colour => {
