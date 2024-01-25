@@ -18,6 +18,7 @@ function render_callback_separator_block($attributes, $content)
     $attribute_gap_size = $attributes['separatorBreakSize'] ?? 'xl';
     $attribute_line_size = $attributes['separatorThickness'] ?? '1';
     $attribute_line_colour = $attributes['separatorColour'] ?? '#b1b4b6';
+    $attribute_width = $attributes['separatorWidth'] ?? '0';
 
     // Sets the size of the gap around the line
     $gap_size = !empty($attribute_gap_size) ? "govuk-section-break--$attribute_gap_size" : '';
@@ -28,6 +29,9 @@ function render_callback_separator_block($attributes, $content)
     // Sets the colour of the line
     $line_hue = !empty($attribute_line_colour) ? "border-bottom-color:$attribute_line_colour;" : '';
 
+    // Sets the colour of the line
+    $line_width = !empty($attribute_width) ? "margin-right:$attribute_width;" : '';
+
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
     // code below as you would in any other PHP file rather then having to use the sprintf() syntax
@@ -37,7 +41,7 @@ function render_callback_separator_block($attributes, $content)
 
     <hr
         class="govuk-section-break govuk-section-break--visible <?php echo $gap_size; ?>"
-        style="<?php echo $line_size.$line_hue;?>"
+        style="<?php echo $line_size.$line_hue.$line_width;?>"
     />
 
     <?php
