@@ -63,10 +63,14 @@ registerBlockType('mojblocks/separator', {
         ]
         const widthOptions = [
             { label: "Full width", value: "0" },
+            { label: "Two-third width", value: "33%"},
             { label: "Half width", value: "50%"},
             { label: "Third width", value: "67%"},
             { label: "Quarter width", value: "75%"},
-            { label: "100px", value: "calc(100% - 100px)" },
+            { label: "Exactly 111px", value: "calc(100% - 111px)" },
+            { label: "Exactly 222px", value: "calc(100% - 222px)" },
+            { label: "Exactly 333px", value: "calc(100% - 333px)" },
+            { label: "Exactly 666px", value: "calc(100% - 666px)" },
         ]
         const setSize = useState( 'xl' );
         const onChangeBreakSize = newBreakSize => {
@@ -121,7 +125,7 @@ registerBlockType('mojblocks/separator', {
                     <PanelRow>
                         <SelectControl
                             label={__("Width", "mojblocks" )}
-                            help=""
+                            help="Exact widths will never be more than full width"
                             value={ separatorWidth }
                             options={ widthOptions }
                             onChange={ onChangeWidth }
