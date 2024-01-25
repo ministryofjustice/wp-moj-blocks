@@ -5,3 +5,13 @@ Block: Separator (Frontend styles)
 
 **********************************************************************************************/
 
+/****
+	Custom "width" options apply a margin-right to either a proportion or an "exact" value.
+	The fixed value is "calc(100% - x)".
+	It is possible for calc(100% - x) to resolve as a negative value.
+	Therefore we need max-width: 100% to avoid overspill.
+****/
+
+.hale-page .govuk-section-break {
+	max-width: 100%;
+}

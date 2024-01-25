@@ -63,14 +63,14 @@ registerBlockType('mojblocks/separator', {
         ]
         const widthOptions = [
             { label: "Full width", value: "0" },
-            { label: "Two-third width", value: "33%"},
+            { label: "Two-thirds width", value: "33%"},
             { label: "Half width", value: "50%"},
             { label: "Third width", value: "67%"},
             { label: "Quarter width", value: "75%"},
-            { label: "Exactly 111px", value: "calc(100% - 111px)" },
-            { label: "Exactly 222px", value: "calc(100% - 222px)" },
-            { label: "Exactly 333px", value: "calc(100% - 333px)" },
-            { label: "Exactly 666px", value: "calc(100% - 666px)" },
+            { label: "Fixed width 1", value: "calc(100% - 111px)" },
+            { label: "Fixed width 2", value: "calc(100% - 222px)" },
+            { label: "Fixed width 3", value: "calc(100% - 333px)" },
+            { label: "Fixed width 4", value: "calc(100% - 666px)" },
         ]
         const setSize = useState( 'xl' );
         const onChangeBreakSize = newBreakSize => {
