@@ -135,7 +135,7 @@ registerBlockType('mojblocks/quote', {
                         </div>
                         <RichText
                             tagName="q"
-                            multiline="span"
+                            multiline="p"
                             placeholder={__(
                                 'Add quotation text...',
                                 'mojblocks'
