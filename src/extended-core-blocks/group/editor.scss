@@ -28,16 +28,20 @@ Core block: Group (Gutenberg editor styles)
 	}
 }
 
-.is-style-text-aligned:before,
-.page-template-default .is-style-bleeding-background:before {
-	// slightly less to make clearer
+.is-style-text-aligned:before {
 	width: calc(100% + 3em);
 	left: -1.5em;
 }
 
-.is-style-bleeding-background :before {
-	width: 150vw;
-	left: -50vw;
+.is-style-bleeding-background {
+	&:before {
+		width: 150vw;
+		left: -50vw;
+	}
+	&:is(.hale-template--default *):before {
+		width: calc(100% + 3em);
+		left: -1.5em;
+	}
 }
 
 .is-style-faded-bleed{
