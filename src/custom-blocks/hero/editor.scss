@@ -6,16 +6,3 @@ Block: Hero (Gutenberg editor styles)
 **********************************************************************************************/
 
 @import 'style.scss';
-
-.mojblocks-hero {
-	width: 100%;
-	position: static;
-	left: 0;
-	right: 0;
-	margin-left: 0;
-	margin-right: 0;
-
-	&__image {
-		width: 100%;
-	}
-}
