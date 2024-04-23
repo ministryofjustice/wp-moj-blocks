@@ -13,7 +13,7 @@ Block: Call to Action (Frontend styles)
     &:before{
         content: "";
         display: block;
-        height: calc(100% + 5px);
+        height: calc(100% + 15px);
         left: 50%;
         overflow: visible;
         position: absolute;
@@ -21,6 +21,10 @@ Block: Call to Action (Frontend styles)
         width: 200vw;
         background: inherit;
         z-index: -1;
+
+        @include govuk-media-query($from: tablet) {
+            height: calc(100% + 5px);
+        }
     }
 
     .govuk-grid-row {
