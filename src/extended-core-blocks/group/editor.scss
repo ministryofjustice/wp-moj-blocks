@@ -38,10 +38,6 @@ Core block: Group (Gutenberg editor styles)
 		width: 150vw;
 		left: -50vw;
 	}
-	&:is(.hale-template--default *):before {
-		width: calc(100% + 3em);
-		left: -1.5em;
-	}
 }
 
 .is-style-faded-bleed{

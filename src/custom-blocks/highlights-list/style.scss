@@ -9,7 +9,7 @@ Block: Highlights List (Frontend styles)
 	position: relative;
 	margin-bottom: 2rem;
 
-	&:before {
+	&:not(.page-template-default *):before {
 		content: "";
 		display: block;
 		height: calc(100% + 5px);
