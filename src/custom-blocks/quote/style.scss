@@ -49,11 +49,10 @@ Block: Quote (Frontend styles)
         }
 
         &__quote {
-            color: $mojblocks-color-dark-grey;
             display: block;
             font-style: italic;
-            font-size: 22px;
-            font-size: govuk-px-to-rem(22);
+            font-size: 19px;
+            font-size: govuk-px-to-rem(19);
             line-height: 28px;
             line-height: govuk-px-to-rem(28);
             margin-bottom: 15px;
