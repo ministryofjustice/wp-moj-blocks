@@ -49,6 +49,7 @@ Block: Quote (Frontend styles)
         }
 
         &__quote {
+            color: $mojblocks-color-black;
             display: block;
             font-style: italic;
             font-size: 19px;
