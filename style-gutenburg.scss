@@ -7,7 +7,6 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: mojblocks
 
 **********************************************************************************************/
-
 // Target backend (editor) styles
 .edit-post-visual-editor,
 .block-editor-block-styles,
@@ -15,7 +14,7 @@ Text Domain: mojblocks
 
     @import 'node_modules/govuk-frontend/dist/govuk/base';
     @import 'node_modules/govuk-frontend/dist/govuk/core/all';
-	@import 'node_modules/govuk-frontend/dist/govuk/components/all';
+    @import 'node_modules/govuk-frontend/dist/govuk/components/all';
     @import 'node_modules/govuk-frontend/dist/govuk/objects/all';
 
     /// components should be loaded here
@@ -23,9 +22,10 @@ Text Domain: mojblocks
 
     @import 'node_modules/govuk-frontend/dist/govuk/utilities/all';
     @import 'node_modules/govuk-frontend/dist/govuk/overrides/all';
+    $govuk-font-family: 'PT Sans', sans-serif;
 
-	// load variables
-	@import "assets/scss/variables.scss";
+    // load variables
+    @import "assets/scss/variables.scss";
 
     // load editor specific styles
     @import 'src/**/editor.scss';

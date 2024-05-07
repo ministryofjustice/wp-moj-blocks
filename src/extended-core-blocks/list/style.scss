@@ -1,0 +1,17 @@
+.govuk-main-wrapper {
+	ol {
+		font-family: $govuk-font-family;
+		@extend .govuk-list;
+		@extend .govuk-list--number;
+	}
+	ul {
+		font-family: $govuk-font-family;
+		@extend .govuk-list;
+		@extend .govuk-list--bullet;
+	}
+
+	ol.is-style-wide,
+	ul.is-style-wide {
+		max-width: 960px;
+	}
+}

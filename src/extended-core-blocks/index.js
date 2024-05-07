@@ -6,3 +6,5 @@
  import "./button";
  import "./file";
  import "./group";
+ import "./list";
+ import "./paragraph";

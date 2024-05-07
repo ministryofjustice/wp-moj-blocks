@@ -1,0 +1,10 @@
+.govuk-main-wrapper {
+	p {
+		font-family: $govuk-font-family;
+		@extend .govuk-body;
+	}
+
+	p.is-style-wide {
+		max-width: 960px;
+	}
+}
