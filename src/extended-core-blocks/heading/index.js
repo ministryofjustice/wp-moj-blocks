@@ -1,13 +1,13 @@
 /**
- *  Extend core WP list block
- *  https://wordpress.org/documentation/article/list-block/
+ *  Extend core WP heading block
+ *  https://wordpress.org/documentation/article/heading-block/
  *
  */
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockStyle, unregisterBlockStyle } from '@wordpress/blocks';
 
-registerBlockStyle( 'core/list', {
+registerBlockStyle( 'core/heading', {
     name: 'wide',
     label: __('Wide', 'mojblocks'),
 } );

@@ -1,10 +1,5 @@
-.govuk-main-wrapper {
-	p {
-		font-family: $govuk-font-family;
-		@extend .govuk-body;
-	}
+@charset "UTF-8";
 
-	p.is-style-wide {
-		max-width: 960px;
-	}
+.govuk-main-wrapper {
+	@import 'common.scss';
 }

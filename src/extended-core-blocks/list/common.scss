@@ -1,0 +1,20 @@
+ol {
+	font-family: $govuk-font-family;
+	@extend .govuk-list;
+	@extend .govuk-list--number;
+}
+ul {
+	font-family: $govuk-font-family;
+	@extend .govuk-list;
+	@extend .govuk-list--bullet;
+}
+
+@include govuk-media-query($from: "tablet") {
+	ul, ol {
+		max-width: 666px;
+
+		&.is-style-wide {
+			max-width: 960px;
+		}
+	}
+}

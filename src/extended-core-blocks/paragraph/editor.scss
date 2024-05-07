@@ -1,9 +1,5 @@
 @charset "UTF-8";
-/*********************************************************************************************
 
-Core block: Group (Gutenberg editor styles)
-
-**********************************************************************************************/
-
-// Use the frontend styles
-@import 'style.scss';
+.editor-styles-wrapper {
+	@import 'common.scss';
+}

@@ -1,0 +1,13 @@
+p {
+	font-family: $govuk-font-family;
+	@extend .govuk-body;
+}
+
+@include govuk-media-query($from: "tablet") {
+	p {
+		max-width: 666px;
+	}
+	p.is-style-wide {
+		max-width: 960px;
+	}
+}
