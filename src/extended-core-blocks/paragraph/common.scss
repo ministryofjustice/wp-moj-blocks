@@ -6,8 +6,12 @@ p {
 @include govuk-media-query($from: "tablet") {
 	p {
 		max-width: 666px;
-	}
-	p.is-style-wide {
-		max-width: 960px;
+		&:is(.hale-deprecated-paragraph-widths *), // Remove this when all sites have been updated
+		&.is-style-wide {
+			max-width: 960px;
+		}
+		&.has-text-align-center {
+			max-width: 100%;
+		}
 	}
 }
