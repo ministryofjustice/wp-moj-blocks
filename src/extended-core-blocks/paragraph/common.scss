@@ -11,7 +11,8 @@ p {
 			max-width: 960px;
 		}
 		&.has-text-align-center {
-			max-width: 100%;
+			margin-left:auto;
+			margin-right:auto;
 		}
 	}
 }
