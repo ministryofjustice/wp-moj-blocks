@@ -1,0 +1,99 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Featured Item (Frontend styles)
+
+**********************************************************************************************/
+
+.mojblocks-spinner {
+	border: 18px solid #DEE0E2;
+	border-radius: 50%;
+	border-top-color: #005EA5;
+	width: 80px;
+	height: 80px;
+	-webkit-animation: spin 2s linear infinite;
+	animation: spin 2s linear infinite;
+	margin:auto;
+	
+	&-text {
+		text-align:center;
+		margin:auto;
+	}
+}
+@-webkit-keyframes spin {
+	0% { -webkit-transform: rotate(0deg); }
+	100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+.mojblocks-featured-document {
+	margin: 48px 0;
+	margin: govuk-px-to-rem(48) 0;
+
+	& .govuk-grid-row {
+		position: relative;
+
+		// Gov UK override keeping the block within the container.
+		margin-right: 0;
+		margin-left: 0;
+	}
+	&__summary.govuk-body {
+		margin-bottom:8px;
+		margin-bottom:govuk-px-to-rem(8);
+	}
+	&__link {
+		font-weight: 700;
+		margin-top: 16px;
+		margin-top: govuk-px-to-rem(16);
+	}
+
+	&__text {
+		display:block;
+		width:100%;
+		padding: 1px 0 0 0;
+	}
+
+	&__headline {
+		margin: 16px 0;
+		margin: govuk-px-to-rem(16) 0;
+
+		&-link.govuk-link{
+			position: relative;
+			text-decoration: none;
+
+			&:before { //bar above headline
+				content: "";
+				width: 64px;
+				width: govuk-px-to-rem(64);
+				height: 8px;
+				height: govuk-px-to-rem(8);
+				background: currentColor;
+				position: absolute;
+				top: -24px; //16px + 8px (height of bar)
+				top: govuk-px-to-rem(-24);
+				pointer-events: none;
+			}
+		}
+
+	}
+
+	&__date.govuk-body-s {
+		color:$govuk-secondary-text-colour;
+	}
+
+	.mojblocks-featured-document-hide-date .mojblocks-featured-document__date {
+		display:none;
+	}
+}
+
+.wp-block-column:not([style="flex-basis:66.66%"]) {
+
+	.mojblocks-featured-document__item,
+	.mojblocks-featured-document__text {
+		display: block;
+		width:100%;
+	}
+}

@@ -453,6 +453,25 @@ function mojblocks_register_blocks()
 			]
 		);
 	}
+
+    register_block_type(
+        'mojblocks/featured-item',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_featured_item_block',
+            'attributes' => [
+                'featuredDocumentHasDate' => [
+                    'type' => 'boolean'
+                ],
+                'featuredDocumentID' => [
+                    'type' => 'string'
+                ],
+                'featuredDocumentClassName' => [
+                    'type' => 'string'
+                ]
+            ]
+        ]
+    );
 }
 
 /**
