@@ -88,10 +88,13 @@ function render_callback_accordion_block_section($attributes, $content)
             </h3>
         </div>
         <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
-            <p class="govuk-body">
-                <?php _e(esc_html($attribute_accordion_section_TextArea)) ; ?>
-                <?php _e(esc_html($content)); ?>
-            </p>
+            <?php
+            $firstParagraphContent = _(trim(esc_html($attribute_accordion_section_TextArea)));
+            if (!empty($firstParagraphContent)) {
+                echo "<p class='govuk-body'>$firstParagraphContent</p>";
+            }
+            _e(esc_html($content));
+            ?>
         </div>
     </div>
 
