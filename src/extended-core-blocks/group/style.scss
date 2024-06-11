@@ -1,47 +1,92 @@
-.is-style-faded-bleed,
-.is-style-text-aligned,
-.is-style-bleeding-background {
-	padding: 0;
-	position:relative;
-	margin-bottom: 1.75em;
-
-	> * {
-		margin-bottom:0;
+.wp-block-group {
+	&.is-style-default,
+	&.is-style-faded-bleed,
+	&.is-style-text-aligned,
+	&.is-style-bleeding-background,
+	&.is-style-rounded-corners,
+	&.is-style-jagged-edges {
+		p:last-child:not([class]),
+		p:last-child[class=""] {
+			margin-bottom:0px;
+		}
 	}
 
-	&:before {
-		background: inherit;
-		content: "";
-		display: block;
-		height: 100%;
-		left: -50vw;
-		overflow: visible;
-		position: absolute;
-		width: 150vw;
-		z-index: -1;
-	}
-}
+	&.is-style-faded-bleed,
+	&.is-style-text-aligned,
+	&.is-style-bleeding-background {
+		padding: 0;
+		position:relative;
+		margin-bottom: 1.75em;
 
-.is-style-text-aligned:before,
-.page-template-default .is-style-bleeding-background:before {
-	width: calc(100% + 3.5em);
-    left: -1.75em;
-}
+		> * {
+			margin-bottom:0;
+		}
 
-.is-style-faded-bleed {
-	&:before {
-		width: 120%;
-		left: -10%;
+		&:before {
+			background: inherit;
+			content: "";
+			display: block;
+			height: 100%;
+			left: -50vw;
+			overflow: visible;
+			position: absolute;
+			width: 150vw;
+			z-index: -1;
+		}
 	}
-	&:after {
-		background: linear-gradient(to right, #fff, transparent 7%,transparent 93%, #fff );
-		content: "";
-		top:0;
-		position:absolute;
-		z-index:-1;
-		display:block;
-		height:100%;
-		width:120%;
-		left:-10%;
+
+	&.is-style-text-aligned:before,
+	&.is-style-bleeding-background:is(.page-template-default *):before {
+		width: calc(100% + 3.5em);
+		left: -1.75em;
+	}
+
+	&.is-style-faded-bleed {
+		&:before {
+			width: 120%;
+			left: -10%;
+		}
+		&:after {
+			background: linear-gradient(to right, #fff, transparent 7%,transparent 93%, #fff );
+			content: "";
+			top:0;
+			position:absolute;
+			z-index:-1;
+			display:block;
+			height:100%;
+			width:120%;
+			left:-10%;
+		}
+	}
+
+	&.is-style-rounded-corners {
+		border-radius: 25px;
+
+		p:last-child:not([class]),
+		p:last-child[class=""] {
+			margin-bottom:0px;
+		}
+	}
+
+	&.is-style-jagged-edges {
+		// Edges protrude 2% out from main content area
+		position: relative;
+		clip-path: polygon(
+			0 0,
+			102% 0,	100% 10%, 102% 20%, 100% 30%, 102% 40%, 100% 50%, 102% 60%, 100% 70%, 102% 80%, 100% 90%, 102% 100%,
+			-2% 100%, 0% 90%, -2% 80%, 0% 70%, -2% 60%, 0% 50%, -2% 40%, 0% 30%, -2% 20%, 0% 10%, -2% 0%);
+
+		&:before {
+			background: inherit;
+			content: "";
+			display: block;
+			height: 100%;
+			overflow: visible;
+			position: absolute;
+			width: 104%;
+			z-index: -1;
+			top: 0;
+			left: -2%;
+		}
 	}
 }

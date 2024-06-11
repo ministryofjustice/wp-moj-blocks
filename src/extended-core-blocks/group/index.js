@@ -21,3 +21,13 @@ registerBlockStyle( 'core/group', {
     name: 'faded-bleed',
     label: __('Fading out', 'mojblocks'),
 } );
+
+registerBlockStyle( 'core/group', {
+    name: 'rounded-corners',
+    label: __('Rounded corners', 'mojblocks'),
+} );
+
+registerBlockStyle( 'core/group', {
+    name: 'jagged-edges',
+    label: __('Jagged edges', 'mojblocks'),
+} );
