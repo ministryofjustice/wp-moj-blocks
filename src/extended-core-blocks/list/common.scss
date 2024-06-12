@@ -1,10 +1,8 @@
 ol {
-	font-family: $govuk-font-family;
 	@extend .govuk-list;
 	@extend .govuk-list--number;
 }
 ul {
-	font-family: $govuk-font-family;
 	@extend .govuk-list;
 	@extend .govuk-list--bullet;
 }
