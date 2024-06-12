@@ -1,12 +1,3 @@
-ol {
-	@extend .govuk-list;
-	@extend .govuk-list--number;
-}
-ul {
-	@extend .govuk-list;
-	@extend .govuk-list--bullet;
-}
-
 @include govuk-media-query($from: "tablet") {
 	ul, ol {
 		max-width: 666px;
