@@ -1,0 +1,15 @@
+// Heading max widths are 5% (rounded up) bigger than paragraphs etc.
+
+@include govuk-media-query($from: "tablet") {
+	h1, h2, h3, h4, h5, h6 {
+		max-width: 700px;
+		&:is(.hale-deprecated-paragraph-widths *), // Remove this when all sites have been updated
+		&.is-style-wide {
+			max-width: 1010px;
+		}
+		&.has-text-align-center {
+			margin-left:auto;
+			margin-right:auto;
+		}
+	}
+}
