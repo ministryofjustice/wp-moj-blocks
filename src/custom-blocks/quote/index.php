@@ -46,15 +46,15 @@ function render_callback_quote_block($attributes, $content)
         </div>
         <div class="govuk-width-container">
             <div class="mojblocks-quote__content" <?php _e($quote_alignment); ?> >
-                <div class="mojblocks-quote__content__icon">
+                <div class="mojblocks-quote__content__icon use-dark-background-heading-colour">
                     <span class="dashicon dashicons dashicons-format-quote"></span>
                 </div>
 
-                <div class="mojblocks-quote__content__quote">
+                <div class="mojblocks-quote__content__quote use-dark-background-text-colour">
                     <?php _e(esc_html($attribute_quote_quoteContent)) ; ?>
                 </div>
 
-                <div class="mojblocks-quote__content__name">
+                <div class="mojblocks-quote__content__name use-dark-background-text-colour">
                     <?php _e(esc_html($attribute_quote_quoteName)) ; ?>
                 </div>
 

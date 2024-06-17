@@ -130,7 +130,7 @@ registerBlockType('mojblocks/quote', {
                          style={{
                              textAlign: quoteAlignment,
                          }}>
-                        <div className="mojblocks-quote__content__icon">
+                        <div className="mojblocks-quote__content__icon use-dark-background-heading-colour">
                             <Dashicon icon='format-quote'/>
                         </div>
                         <RichText
@@ -147,7 +147,7 @@ registerBlockType('mojblocks/quote', {
                                 'core/strikethrough',
                                 'core/link',
                             ]}
-                            className="mojblocks-quote__content__quote"
+                            className="mojblocks-quote__content__quote use-dark-background-text-colour"
                             onChange={ (value) =>
                                 setAttributes({ quoteContent: value })
                             }
@@ -157,7 +157,7 @@ registerBlockType('mojblocks/quote', {
                             placeholder={__('Add name', 'mojblocks')}
                             keepPlaceholderOnFocus
                             value={ quoteName }
-                            className="mojblocks-quote__content__name"
+                            className="mojblocks-quote__content__name use-dark-background-text-colour"
                             onChange={ (value) =>
                                 setAttributes({ quoteName: value })
                             }

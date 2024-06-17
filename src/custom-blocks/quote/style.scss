@@ -49,7 +49,6 @@ Block: Quote (Frontend styles)
         }
 
         &__quote {
-            color: $mojblocks-color-black;
             display: block;
             font-style: italic;
             font-size: 19px;
@@ -58,14 +57,21 @@ Block: Quote (Frontend styles)
             line-height: govuk-px-to-rem(28);
             margin-bottom: 15px;
             quotes: none;
+
+            &:not(.has-text-color *) {
+                color: $mojblocks-color-black;
+            }
         }
 
         &__name {
             display: inline-block;
             font-size: 16px;
             font-size: govuk-px-to-rem(16);
-            color: $mojblocks-color-dark-grey;
             margin: 0 0 24px;
+
+            &:not(.has-text-color *) {
+                color: $mojblocks-color-dark-grey;
+            }
         }
     }
 }
