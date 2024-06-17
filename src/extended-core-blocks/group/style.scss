@@ -1,12 +1,12 @@
 .wp-block-group {
 	&.is-style-default,
-	&.is-style-faded-bleed,
-	&.is-style-text-aligned,
-	&.is-style-bleeding-background,
 	&.is-style-rounded-corners,
-	&.is-style-jagged-edges {
-		p:last-child:not([class]),
-		p:last-child[class=""] {
+	&.is-style-very-rounded-corners {
+		// These group blocks need the text to be centred so we remove the first and last margins.
+		p:first-child {
+			margin-top:0px;
+		}
+		p:last-child {
 			margin-bottom:0px;
 		}
 	}
@@ -60,33 +60,10 @@
 	}
 
 	&.is-style-rounded-corners {
-		border-radius: 25px;
-
-		p:last-child:not([class]),
-		p:last-child[class=""] {
-			margin-bottom:0px;
-		}
+		border-radius: 6px;
 	}
 
-	&.is-style-jagged-edges {
-		// Edges protrude 2% out from main content area
-		position: relative;
-		clip-path: polygon(
-			0 0,
-			102% 0,	100% 10%, 102% 20%, 100% 30%, 102% 40%, 100% 50%, 102% 60%, 100% 70%, 102% 80%, 100% 90%, 102% 100%,
-			-2% 100%, 0% 90%, -2% 80%, 0% 70%, -2% 60%, 0% 50%, -2% 40%, 0% 30%, -2% 20%, 0% 10%, -2% 0%);
-
-		&:before {
-			background: inherit;
-			content: "";
-			display: block;
-			height: 100%;
-			overflow: visible;
-			position: absolute;
-			width: 104%;
-			z-index: -1;
-			top: 0;
-			left: -2%;
-		}
+	&.is-style-very-rounded-corners {
+		border-radius: 25px;
 	}
 }

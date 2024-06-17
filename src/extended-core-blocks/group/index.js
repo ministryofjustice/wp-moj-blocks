@@ -24,10 +24,10 @@ registerBlockStyle( 'core/group', {
 
 registerBlockStyle( 'core/group', {
     name: 'rounded-corners',
-    label: __('Rounded corners', 'mojblocks'),
+    label: __('Rounded', 'mojblocks'),
 } );
 
 registerBlockStyle( 'core/group', {
-    name: 'jagged-edges',
-    label: __('Jagged edges', 'mojblocks'),
+    name: 'very-rounded-corners',
+    label: __('Very rounded', 'mojblocks'),
 } );
