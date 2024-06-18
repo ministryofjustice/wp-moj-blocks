@@ -1,8 +1,5 @@
 .wp-block-group {
-	&.is-style-default,
-	&.is-style-rounded-corners,
-	&.is-style-very-rounded-corners {
-		// These group blocks need the text to be centred so we remove the first and last margins.
+	&.wp-block-group {
 		p:first-child {
 			margin-top:0px;
 		}
