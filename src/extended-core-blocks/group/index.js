@@ -64,7 +64,7 @@ const setSidebarRangeAttribute = ( settings, name ) => {
 };
 wp.hooks.addFilter(
     'blocks.registerBlockType',
-    'custom-attributes/set-sidebar-range-attribute',
+    'extended-core-blocks/group/set-sidebar-range-attribute',
     setSidebarRangeAttribute
 );
 
@@ -110,7 +110,7 @@ const withSidebarRange = createHigherOrderComponent( ( BlockEdit ) => {
 
 wp.hooks.addFilter(
     'editor.BlockEdit',
-    'custom-attributes/with-sidebar-select',
+    'extended-core-blocks/group/with-sidebar-select',
     withSidebarRange
 );
 
@@ -141,7 +141,7 @@ const withSidebarRangeProp = createHigherOrderComponent( ( BlockListBlock ) => {
 
 wp.hooks.addFilter(
     'editor.BlockListBlock',
-    'custom-attributes/with-sidebar-range-prop',
+    'extended-core-blocks/group/with-sidebar-range-prop',
     withSidebarRangeProp
 );
 
@@ -164,6 +164,6 @@ const saveSidebarSelectAttribute = ( extraProps, blockType, attributes ) => {
 };
 wp.hooks.addFilter(
     'blocks.getSaveContent.extraProps',
-    'custom-attributes/save-sidebar-range-attribute',
+    'extended-core-blocks/group/save-sidebar-range-attribute',
     saveSidebarSelectAttribute
 );
