@@ -1,9 +1,9 @@
 // From https://mariecomet.fr/en/2021/12/14/adding-options-controls-existing-gutenberg-block/
 
-/* Add custom attribute to image block, in Sidebar */
+/* Add custom attribute to block, in Sidebar */
 const { __ } = wp.i18n;
 
-// Enable custom attributes on Image block
+// Enable custom attributes on blocks
 const enableSidebarNewOptionsOnBlocks = [
     'core/group',
 	'mojblocks/card'
@@ -38,7 +38,7 @@ wp.hooks.addFilter(
 );
 
 /**
- * Add Custom Select to Image Sidebar
+ * Add Custom Select to Sidebar
  */
 const withSidebarNewOptions = createHigherOrderComponent( ( BlockEdit ) => {
     return ( props ) => {
@@ -92,7 +92,7 @@ const withSidebarNewOptions = createHigherOrderComponent( ( BlockEdit ) => {
 
 wp.hooks.addFilter(
     'editor.BlockEdit',
-    'shared-customizations/with-sidebar-new-options',
+    'wp-moj-blocks/shared-controls/with-sidebar-new-options',
     withSidebarNewOptions
 );
 
@@ -123,7 +123,7 @@ const withSidebarNewOptionsProp = createHigherOrderComponent( ( BlockListBlock )
 
 wp.hooks.addFilter(
     'editor.BlockListBlock',
-    'custom-attributes/with-sidebar-select-prop',
+    'wp-moj-blocks/shared-controls/rounded-corners/sidebar-select',
     withSidebarNewOptionsProp
 );
 
@@ -145,6 +145,6 @@ const saveSidebarSelectAttribute = ( extraProps, blockType, attributes ) => {
 };
 wp.hooks.addFilter(
     'blocks.getSaveContent.extraProps',
-    'custom-attributes/save-sidebar-select-attribute',
+    'wp-moj-blocks/shared-controls/rounded-corners/save-sidebar-select',
     saveSidebarSelectAttribute
 );
