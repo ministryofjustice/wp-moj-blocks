@@ -43,7 +43,7 @@ registerBlockType('mojblocks/card', {
         cardImageId: {
             type: 'number'
         },
-        cardClassName: {
+        className: {
             type: 'string'
         },
         cardImagePosition: {

@@ -167,10 +167,9 @@ function mojblocks_register_blocks()
         'mojblocks/card',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' =>
-            'render_callback_card_block',
+            'render_callback' => 'render_callback_card_block',
             'attributes' => [
-                'cardClassName' => [
+                'className' => [
                     'type' => 'string'
                 ],
                 'cardTitle' => [
@@ -180,6 +179,15 @@ function mojblocks_register_blocks()
                     'type' => 'string'
                 ],
                 'cardImageURL' => [
+                    'type' => 'string'
+                ],
+                'cardImageId' => [
+                    'type' => 'number'
+                ],
+                'cardImagePosition' => [
+                    'type' => 'string'
+                ],
+                'cardImageShape' => [
                     'type' => 'string'
                 ]
             ]

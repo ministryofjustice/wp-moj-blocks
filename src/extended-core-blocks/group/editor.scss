@@ -9,14 +9,10 @@ Core block: Group (Gutenberg editor styles)
 @import 'style.scss';
 
 .wp-block-group {
-	&.is-style-default,
-	&.is-style-rounded-corners,
-	&.is-style-very-rounded-corners {
-		&.is-selected {
-			p:nth-child(-n+2) {
-				// When element is selected in editor, a new element appears at the bottom, so we need to apply the last element styling to the second-last paragraph
-				margin-bottom:0px;
-			}
+	&.is-selected {
+		> *:nth-child(-n+2) {
+			// When element is selected in editor, a new element appears at the bottom, so we need to apply the last element styling to the second-last paragraph
+			margin-bottom:0px;
 		}
 	}
 }

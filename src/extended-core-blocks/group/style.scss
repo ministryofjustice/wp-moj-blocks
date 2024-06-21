@@ -1,9 +1,10 @@
 .wp-block-group {
 	&.wp-block-group {
-		p:first-child {
+		> p:first-child {
 			margin-top:0px;
 		}
-		p:last-child {
+		> *:last-child {
+			// style is slightly different in editor.scss
 			margin-bottom:0px;
 		}
 	}
@@ -13,11 +14,6 @@
 	&.is-style-bleeding-background {
 		padding: 0;
 		position:relative;
-		margin-bottom: 1.75em;
-
-		> * {
-			margin-bottom:0;
-		}
 
 		&:before {
 			background: inherit;
@@ -36,6 +32,7 @@
 	&.is-style-bleeding-background:is(.page-template-default *):before {
 		width: calc(100% + 3.5em);
 		left: -1.75em;
+		border-radius: inherit;
 	}
 
 	&.is-style-faded-bleed {

@@ -16,7 +16,7 @@ const templateCardBlock = [
     [ 'core/heading', { placeholder: 'Card heading' } ]
 ];
 
-export default function CardBlockEdit( props ) {
+export default function CardBlockEdit( props, extraProps ) {
 
         const {
             setAttributes,

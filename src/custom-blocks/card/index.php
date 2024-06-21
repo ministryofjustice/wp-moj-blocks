@@ -16,7 +16,7 @@ function render_callback_card_block($attributes, $content)
 
     // Parse attributes found in index.js
     $attribute_card_image_URL = $attributes['cardImageURL'] ?? '';
-    $attribute_card_className = $attributes['cardClassName'] ?? 'wp-block-mojblocks-card';
+    $attribute_card_className = $attributes['className'] ?? '';
 	$attribute_card_excerpt = $attributes['cardExcerpt'] ?? '';
 	$attribute_card_image_shape = $attributes['cardImageShape'] ?? 'square';
 	$attribute_card_image_position = $attributes['cardImagePosition'] ?? 'top';
@@ -28,8 +28,8 @@ function render_callback_card_block($attributes, $content)
 
     ?>
 
-    <div class="<?php _e(esc_html($attribute_card_className)) ; ?> mojblocks-card" data-src="<?php _e(esc_url_raw($attribute_card_image_URL)); ?>">
-
+    <div class="wp-block-mojblocks-card <?php _e(esc_html($attribute_card_className)) ; ?> mojblocks-card" data-src="<?php _e(esc_url_raw($attribute_card_image_URL)); ?>">
+		<?php _e(esc_html($attribute_card_className));?>
 		<?php if (!empty($attribute_card_image_URL)) {  ?>
 			<div
 				class="mojblocks-card__image mojblocks-card__image-selected mojblocks-card__image--shape-<?php _e(esc_html($attribute_card_image_shape)); ?>"
