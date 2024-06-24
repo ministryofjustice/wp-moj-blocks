@@ -7,17 +7,17 @@ Block: Card (Frontend styles)
 
 .mojblocks-card {
 
-	h2, p {
-		margin-top: govuk-px-to-rem(12);
-	}
+    h2, p {
+        margin-top: govuk-px-to-rem(12);
+    }
 
-	max-width: 100%;
-	padding: govuk-px-to-rem(12);
-	margin-bottom: govuk-px-to-rem(12);
+    max-width: 100%;
+    padding: govuk-px-to-rem(12);
+    margin-bottom: govuk-px-to-rem(12);
 
     border-radius: inherit;
 
-	margin: 15px 0;
+    margin: 15px 0;
 
     &__image {
 
@@ -35,6 +35,9 @@ Block: Card (Frontend styles)
                 padding-bottom: 42.86%;
             }
         }
+        &:is(.mojblocks-corner-rounded--6 *) {
+            border-radius: 4px;
+        }
         &:is(.mojblocks-corner-rounded--24 *) {
             border-radius: 18px;
         }
@@ -51,12 +54,12 @@ Block: Card (Frontend styles)
 
             @include govuk-media-query($from: tablet) {
                 // ratio of 2 over 1 for small devices
-				padding-bottom: 100%;
+                padding-bottom: 100%;
             }
         }
 
         @media screen and (-ms-high-contrast: active) {
-			filter: invert(100%);
+            filter: invert(100%);
         }
     }
 
