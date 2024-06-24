@@ -4,4 +4,4 @@
 
 import "./custom-blocks/index";
 import "./extended-core-blocks/index";
-import "./shared-controls/rounded-corners/controls";
+import "./shared-controls/index";
