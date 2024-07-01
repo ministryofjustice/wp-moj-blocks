@@ -8,6 +8,7 @@ Block: Staggered Box (Frontend styles)
 .mojblocks-staggered-box {
 	margin: 48px -15px;
 	margin: govuk-px-to-rem(48) govuk-px-to-rem(-15);
+	overflow: hidden;
 
 	& .govuk-grid-row {
 		position: relative;
