@@ -121,7 +121,7 @@ registerBlockType("mojblocks/accordion-section", {
         setAttributes({ accordionSectionClassName: className });
 
         // Load allowed blocks to be added to accordion section body
-        const allowedBlocks = [ 'core/heading','core/list', 'core/paragraph' ];
+        const allowedBlocks = [ 'core/heading','core/list', 'core/paragraph', 'core/file' ];
 
         const onChangeAccordionTitle = newAccordionTitle => {
             setAttributes({ accordionSectionTitle: newAccordionTitle })
