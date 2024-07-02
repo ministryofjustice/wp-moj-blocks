@@ -14,6 +14,7 @@
 function render_callback_accordion_block($attributes, $content)
 {
     $welshControls = $attributes['controlLanguageWelsh'] ?? false;
+    $isWide = $attributes['isWide'] ?? false;
     $accordionClassName = $attributes['accordionClassName'] ?? "";
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
@@ -21,10 +22,12 @@ function render_callback_accordion_block($attributes, $content)
     // code below as you would in any other PHP file rather then having to use the sprintf() syntax
     ob_start();
 
+    if ($isWide) $accordionClassName += ' is-style-wide';
+
     ?>
 
     <div
-        class="govuk-accordion <?php _e(esc_html($accordionClassName)); ?>"
+        class="govuk-accordion <?php _e(esc_html($accordionClassName)); ?> "
         id="accordion-default"
         data-module="govuk-accordion"
         <?php

@@ -1,3 +1,11 @@
 /*********
 All styles for Accordion retrieved from the GDS Design System
 *********/
+
+.wp-block-mojblocks-accordion {
+	max-width: 700px;
+	&.is-style-wide,
+	&.is-style-wide-true {
+		max-width: 1010px;
+	}
+}
