@@ -91,7 +91,7 @@ registerBlockType('mojblocks/accordion', {
                     </PanelRow>
                 </PanelBody>
             </InspectorControls>,
-            <div className={'govuk-accordion preview-welsh-' + controlLanguageWelsh + ' ' + className + (wideContent == 'true') ? ' is-style-wide' : ''} data-module="govuk-accordion" id="accordion-default" key="accordion-block">
+            <div className={'govuk-accordion preview-welsh-' + controlLanguageWelsh + ' wide-content-' + wideContent + ' ' + className} data-module="govuk-accordion" id="accordion-default" key="accordion-block">
                 <InnerBlocks
                     template={ templates }
                     allowedBlocks={ allowedBlocks }

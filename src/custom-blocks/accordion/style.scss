@@ -2,10 +2,13 @@
 All styles for Accordion retrieved from the GDS Design System
 *********/
 
-.wp-block-mojblocks-accordion {
-	max-width: 700px;
-	&.is-style-wide,
-	&.is-style-wide-true {
+.govuk-accordion {
+	&,
+	.govuk-accordion__section-heading {
+		max-width: 700px;
+	}
+	&.wide-content-true,
+	&.wide-content-true .govuk-accordion__section-heading {
 		max-width: 1010px;
 	}
 }
