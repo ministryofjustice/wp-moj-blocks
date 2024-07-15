@@ -11,6 +11,8 @@ SASS modifications to conform GovUK frontend to MoJ block styling
 
 **********************************************************************************************/
 
+@import 'style.scss';
+
 .govuk-accordion {
 
     border-top: dashed $mojblocks-color-black 1px;

@@ -1,3 +1,14 @@
 /*********
 All styles for Accordion retrieved from the GDS Design System
 *********/
+
+.govuk-accordion {
+	&,
+	.govuk-accordion__section-heading {
+		max-width: 700px;
+	}
+	&.wide-content-true,
+	&.wide-content-true .govuk-accordion__section-heading {
+		max-width: 1010px;
+	}
+}

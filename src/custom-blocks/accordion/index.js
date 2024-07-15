@@ -25,6 +25,9 @@ registerBlockType('mojblocks/accordion', {
         controlLanguageWelsh: {
             type: 'boolean'
         },
+        wideContent: {
+            type: 'boolean'
+        },
         accordionClassName: {
             type: 'string'
         }
@@ -34,7 +37,8 @@ registerBlockType('mojblocks/accordion', {
         const {
             setAttributes,
             attributes: {
-                controlLanguageWelsh
+                controlLanguageWelsh,
+                wideContent
             },
             className
         } = props;
@@ -69,8 +73,25 @@ registerBlockType('mojblocks/accordion', {
                         />
                     </PanelRow>
                 </PanelBody>
+                <PanelBody
+                        title="Breadth"
+                        initialOpen={false}
+                >
+                    <PanelRow>
+                        <ToggleControl
+                            label="Allow wide content"
+                            help={
+                                wideContent
+                                    ? 'Content will be wide (if page template allows)'
+                                    : 'Content restricted to more readable width'
+                            }
+                            checked={wideContent}
+                            onChange={newWideContent => setAttributes({ wideContent: newWideContent }) }
+                        />
+                    </PanelRow>
+                </PanelBody>
             </InspectorControls>,
-            <div className={'govuk-accordion preview-welsh-' + controlLanguageWelsh + ' ' + className} data-module="govuk-accordion" id="accordion-default" key="accordion-block">
+            <div className={'govuk-accordion preview-welsh-' + controlLanguageWelsh + ' wide-content-' + wideContent + ' ' + className} data-module="govuk-accordion" id="accordion-default" key="accordion-block">
                 <InnerBlocks
                     template={ templates }
                     allowedBlocks={ allowedBlocks }
