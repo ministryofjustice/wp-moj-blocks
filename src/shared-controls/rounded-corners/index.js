@@ -6,7 +6,7 @@ const { __ } = wp.i18n;
 // Enable custom attributes on blocks
 const enableSidebarNewOptionsOnBlocks = [
     'core/group',
-	'mojblocks/card'
+    'mojblocks/card'
 ];
 
 const { createHigherOrderComponent } = wp.compose;
@@ -44,7 +44,7 @@ const withSidebarNewOptions = createHigherOrderComponent( ( BlockEdit ) => {
     return ( props ) => {
 
         // If current block is not allowed
-    	if ( ! enableSidebarNewOptionsOnBlocks.includes( props.name ) ) {
+        if ( ! enableSidebarNewOptionsOnBlocks.includes( props.name ) ) {
             return (
                 <BlockEdit { ...props } />
             );
@@ -57,16 +57,16 @@ const withSidebarNewOptions = createHigherOrderComponent( ( BlockEdit ) => {
             <Fragment>
                 <BlockEdit { ...props } />
                 <InspectorControls>
-                	<PanelBody
-    	                title={ __( 'Corners', 'mojblocks' ) }
-    	            >
+                    <PanelBody
+                        title={ __( 'Corners', 'mojblocks' ) }
+                    >
                         <SelectControl
                             label={ __( 'Corner style', 'mojblocks' ) }
                             value={ cornerRoundyness }
                             options={ [
                                 {
                                     label: __( 'Square', 'mojblocks' ),
-									value: ''
+                                    value: ''
                                 },
                                 {
                                     label: __( 'Slightly rounded', 'mojblocks' ),
@@ -82,7 +82,7 @@ const withSidebarNewOptions = createHigherOrderComponent( ( BlockEdit ) => {
                                     cornerRoundyness: value,
                                 } );
                             } }
-                        /> 
+                        />
 	                </PanelBody>
                 </InspectorControls>
             </Fragment>
@@ -138,7 +138,7 @@ const saveSidebarSelectAttribute = ( extraProps, blockType, attributes ) => {
         if ( cornerRoundyness ) {
             extraProps.className = classnames( extraProps.className, 'mojblocks-corner-' + cornerRoundyness )
         }
-    }    
+    }
 
     return extraProps;
 

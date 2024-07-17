@@ -35,10 +35,10 @@ Block: Card (Frontend styles)
                 padding-bottom: 42.86%;
             }
         }
-        &:is(.mojblocks-corner-rounded--6 *) {
+        &:is(.mojblocks-corner-rounded--6>*) {
             border-radius: 4px;
         }
-        &:is(.mojblocks-corner-rounded--24 *) {
+        &:is(.mojblocks-corner-rounded--24>*) {
             border-radius: 18px;
         }
 
