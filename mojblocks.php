@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     3.10.5
+ * Version:     3.11.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Malcolm Butler, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -167,10 +167,9 @@ function mojblocks_register_blocks()
         'mojblocks/card',
         [
             'editor_script' => 'mojblocks-editor-script',
-            'render_callback' =>
-            'render_callback_card_block',
+            'render_callback' => 'render_callback_card_block',
             'attributes' => [
-                'cardClassName' => [
+                'className' => [
                     'type' => 'string'
                 ],
                 'cardTitle' => [
@@ -180,6 +179,15 @@ function mojblocks_register_blocks()
                     'type' => 'string'
                 ],
                 'cardImageURL' => [
+                    'type' => 'string'
+                ],
+                'cardImageId' => [
+                    'type' => 'number'
+                ],
+                'cardImagePosition' => [
+                    'type' => 'string'
+                ],
+                'cardImageShape' => [
                     'type' => 'string'
                 ]
             ]

@@ -8,6 +8,15 @@ Core block: Group (Gutenberg editor styles)
 // Use the frontend styles
 @import 'style.scss';
 
+.wp-block-group {
+	&.is-selected {
+		> *:nth-child(-n+2) {
+			// When element is selected in editor, a new element appears at the bottom, so we need to apply the last element styling to the second-last paragraph
+			margin-bottom:0px;
+		}
+	}
+}
+
 .is-style-faded-bleed,
 .is-style-text-aligned,
 .is-style-bleeding-background {
@@ -24,7 +33,6 @@ Core block: Group (Gutenberg editor styles)
 		overflow: visible;
 		position: absolute;
 		z-index: 0;
-		transform: translateY(-1.75em);
 	}
 }
 

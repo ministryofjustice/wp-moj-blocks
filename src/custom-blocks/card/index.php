@@ -14,22 +14,29 @@
 function render_callback_card_block($attributes, $content)
 {
 
-    // Parse attributes found in index.js
-    $attribute_card_image_URL = $attributes['cardImageURL'] ?? '';
-    $attribute_card_className = $attributes['cardClassName'] ?? 'wp-block-mojblocks-card';
+	// Parse attributes found in index.js
+	$attribute_card_image_URL = $attributes['cardImageURL'] ?? '';
+	$attribute_card_className = $attributes['className'] ?? '';
+	$attribute_card_corner_roundyness = $attributes['cornerRoundyness'] ?? '';
 	$attribute_card_excerpt = $attributes['cardExcerpt'] ?? '';
 	$attribute_card_image_shape = $attributes['cardImageShape'] ?? 'square';
 	$attribute_card_image_position = $attributes['cardImagePosition'] ?? 'top';
 
-    // Turn on buffering so we can collect all the html markup below and load it via the return
-    // This is an alternative method to using sprintf(). By using buffering you can write your
-    // code below as you would in any other PHP file rather then having to use the sprintf() syntax
-    ob_start();
+	if ($attribute_card_corner_roundyness) {
+		$attribute_card_className .= " mojblocks-corner-$attribute_card_corner_roundyness";
+	}
 
-    ?>
+	// Turn on buffering so we can collect all the html markup below and load it via the return
+	// This is an alternative method to using sprintf(). By using buffering you can write your
+	// code below as you would in any other PHP file rather then having to use the sprintf() syntax
+	ob_start();
 
-    <div class="<?php _e(esc_html($attribute_card_className)) ; ?> mojblocks-card" data-src="<?php _e(esc_url_raw($attribute_card_image_URL)); ?>">
+	?>
 
+	<div
+		class="wp-block-mojblocks-card <?php _e(esc_html($attribute_card_className)) ; ?> mojblocks-card"
+		data-src="<?php _e(esc_url_raw($attribute_card_image_URL)); ?>"
+	>
 		<?php if (!empty($attribute_card_image_URL)) {  ?>
 			<div
 				class="mojblocks-card__image mojblocks-card__image-selected mojblocks-card__image--shape-<?php _e(esc_html($attribute_card_image_shape)); ?>"
@@ -73,13 +80,13 @@ function render_callback_card_block($attributes, $content)
 	</div>
 
 	<?php
-    // Get all the html/content that has been captured in the buffer and output via return
-    $output = ob_get_contents();
+	// Get all the html/content that has been captured in the buffer and output via return
+	$output = ob_get_contents();
 
-    // decode escaped html so users can add markup to content
-    $output = html_entity_decode($output);
+	// decode escaped html so users can add markup to content
+	$output = html_entity_decode($output);
 
-    ob_end_clean();
+	ob_end_clean();
 
-    return $output;
+	return $output;
 }
