@@ -15,7 +15,9 @@ Block: Reveal (Frontend styles)
 @import "node_modules/govuk-frontend/dist/govuk/components/details/details";
 
 .mojblocks-reveal {
-	.govuk-width-container {
-		margin: 0;
+	max-width: 666px;
+
+	&__content p:not([class]) {
+		margin-bottom: 0;
 	}
 }

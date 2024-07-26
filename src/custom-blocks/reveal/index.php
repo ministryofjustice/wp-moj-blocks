@@ -26,23 +26,17 @@ function render_callback_reveal_block($attributes, $content)
 
     ?>
 
-    <div class="<?php _e(esc_html($attribute_reveal_className)); ?>">
-        <div class="govuk-width-container">
-            <div class="govuk-grid-row">
-                <div class="govuk-grid-column-three-quarters">
-                    <details class="govuk-details" data-module="govuk-details">
-                        <summary class="govuk-details__summary">
-                            <span class="mojblocks-reveal__title govuk-details__summary-text">
-                            <?php _e(esc_html($attribute_reveal_revealTitle)); ?>
-                            </span>
-                        </summary>
-                        <div class="mojblocks-reveal__content govuk-details__text">
-                        <?php _e(esc_html($attribute_reveal_content)); ?>
-                        </div>
-                    </details>
-                </div>
+    <div class="mojblocks-reveal <?php _e(esc_html($attribute_reveal_className)); ?>">
+        <details class="govuk-details" data-module="govuk-details">
+            <summary class="govuk-details__summary">
+                <span class="mojblocks-reveal__title govuk-details__summary-text">
+                    <?php _e(esc_html($attribute_reveal_revealTitle)); ?>
+                </span>
+            </summary>
+            <div class="mojblocks-reveal__content govuk-details__text">
+                <?php _e(esc_html($attribute_reveal_content)); ?>
             </div>
-        </div>
+        </details>
     </div>
 
     <?php
