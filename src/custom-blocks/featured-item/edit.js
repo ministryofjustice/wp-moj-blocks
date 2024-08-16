@@ -27,7 +27,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		className,
 	} = attributes;
 
-    const {
+	const {
         allDocuments,
     } = useSelect(
         ( select ) => {
@@ -39,7 +39,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
             const posts = getEntityRecords(
                 'postType',
-                'document',
+                featuredItemType ?? 'fatal_incident',
                 { per_page: -1 }
             );
 
@@ -51,6 +51,8 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 	let itemTypes = [
         { label: "Page", value: 'page' },
+        { label: "Document", value: 'document' },
+        { label: "FII", value: 'fatal_incident' },
     ]
 
     let docOptions = [
@@ -100,7 +102,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
                 />
 
                 <SelectControl
-                    label="Select document"
+                    label="Select item"
                     value={ featuredDocumentID }
                     options={ docOptions }
                     onChange={ setDocument }
@@ -127,6 +129,14 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 			</Fragment >
 		);
 	} else {
+		let itemTitle, itemDate;
+		if (docList[featuredDocumentID]) {
+			itemTitle = docList[featuredDocumentID].title;
+			itemDate = datify(docList[featuredDocumentID].date,d);
+		} else {
+			itemTitle = "No item selected";
+			itemDate = "Select a different item or item type"
+		}
 		return (
 			<Fragment >
 				{ inspectorControls }
@@ -141,11 +151,15 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 								<div className="mojblocks-featured-document__text">
 									<div className="mojblocks-featured-document__headline" >
 										<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-document__headline-link" >
-											{docList[featuredDocumentID].title}
+											{
+												itemTitle
+											}
 										</a>
 									</div>
 									<div className="govuk-body-s mojblocks-featured-document__date" >
-										{ datify(docList[featuredDocumentID].date,d) }
+										{
+											itemDate
+										}
 									</div>
 								</div>
 							</div>
