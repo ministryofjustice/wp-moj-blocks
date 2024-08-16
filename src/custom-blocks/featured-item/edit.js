@@ -1,7 +1,7 @@
 import {
-    PanelBody,
-    SelectControl, TextControl,
-    ToggleControl,
+	PanelBody,
+	SelectControl, TextControl,
+	ToggleControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import {
@@ -11,7 +11,7 @@ import {
 } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
- 
+
 const { Fragment } = wp.element;
 const d = new Date();
 const templateFeaturedDocumentBlock = [
@@ -22,67 +22,91 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 	const {
 		featuredItemType,
-        featuredDocumentID,
-        featuredDocumentHasDate,
+		featuredDocumentID,
+		featuredDocumentHasDate,
 		className,
 	} = attributes;
 
 	const {
-        allDocuments,
-    } = useSelect(
-        ( select ) => {
-            const { getEntityRecords, getMedia, getUsers } = select(
-                coreStore
-            );
-            const { getSettings } = select( blockEditorStore );
-            const { imageSizes, imageDimensions } = getSettings();
+		allPostTypes,
+	} = useSelect(
+		( select ) => {
 
-            const posts = getEntityRecords(
-                'postType',
-                featuredItemType ?? 'fatal_incident',
-                { per_page: -1 }
-            );
+			const { getPostTypes } = select(
+				coreStore
+			);
+			const allPostTypeThingies = getPostTypes(
+				{ per_page: -1 }
+			);
+			return {
+				allPostTypes: allPostTypeThingies
+			};
+		}
+	);
 
-            return {
-                allDocuments: posts
-            };
-        }
-    );
+	const {
+		allDocuments,
+	} = useSelect(
+		( select ) => {
+			const { getEntityRecords, getMedia, getUsers } = select(
+				coreStore
+			);
+			const { getSettings } = select( blockEditorStore );
+			const { imageSizes, imageDimensions } = getSettings();
 
-	let itemTypes = [
-        { label: "Page", value: 'page' },
-        { label: "Document", value: 'document' },
-        { label: "FII", value: 'fatal_incident' },
-    ]
+			const posts = getEntityRecords(
+				'postType',
+				featuredItemType ?? 'post',
+				{ per_page: -1 }
+			);
 
-    let docOptions = [
-        { label: "None", value: '0' },
-    ]
+			return {
+				allDocuments: posts
+			};
+		}
+	);
 
-    let docList = [
-        { title: "No item selected", summary: "", date: "date", image: ""}
-    ];
+	let itemTypes = []
+
+	if (allPostTypes) {
+		allPostTypes.forEach(thisPostType => {
+			if (thisPostType.viewable) {
+				itemTypes.push({
+					label: thisPostType.name,
+					value: thisPostType.slug
+				});
+			}
+		});
+	}
+
+	let docOptions = [
+		{ label: "None", value: '0' },
+	]
+
+	let docList = [
+		{ title: "No item selected", summary: "", date: "date", image: ""}
+	];
 
 
-    if (Array.isArray( allDocuments )) {
-        for (let i=0;i<allDocuments.length;i++) {
+	if (Array.isArray( allDocuments )) {
+		for (let i=0;i<allDocuments.length;i++) {
 
-            docList[allDocuments[i].id] = {
-                title: allDocuments[i].title.rendered,
-                date: allDocuments[i].date,
-            }
-            docOptions.push({label: allDocuments[i].title.rendered, value: allDocuments[i].id});
+			docList[allDocuments[i].id] = {
+				title: allDocuments[i].title.rendered,
+				date: allDocuments[i].date,
+			}
+			docOptions.push({label: allDocuments[i].title.rendered, value: allDocuments[i].id});
 
-        }
-    }
+		}
+	}
 
 	const setItemType = newItemType => {
-        setAttributes({ featuredItemType: newItemType } );
-    };
+		setAttributes({ featuredItemType: newItemType } );
+	};
 
-    const setDocument = newDocumentID => {
-        setAttributes({ featuredDocumentID: newDocumentID } );
-    };
+	const setDocument = newDocumentID => {
+		setAttributes({ featuredDocumentID: newDocumentID } );
+	};
 
 	const setHasDate = newDateSetting => {
 		setAttributes({ featuredDocumentHasDate: newDateSetting });
@@ -94,24 +118,24 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 				title={__('Featured Item settings')}
 				initialOpen={true}
 			>
-				 <SelectControl
-                    label="Select item type"
-                    value={ featuredItemType }
-                    options={ itemTypes }
-                    onChange={ setItemType }
-                />
+				<SelectControl
+					label="Select item type"
+					value={ featuredItemType }
+					options={ itemTypes }
+					onChange={ setItemType }
+				/>
 
-                <SelectControl
-                    label="Select item"
-                    value={ featuredDocumentID }
-                    options={ docOptions }
-                    onChange={ setDocument }
-                />
+				<SelectControl
+					label="Select item"
+					value={ featuredDocumentID }
+					options={ docOptions }
+					onChange={ setDocument }
+				/>
 
 				<ToggleControl
 					label="Show/hide publish date"
 					help={
-                        featuredDocumentHasDate === false
+						featuredDocumentHasDate === false
 						? 'The date will be hidden'
 						: 'The date will be displayed'
 					}
@@ -146,7 +170,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 							template={ templateFeaturedDocumentBlock }
 							templateLock="all"
 						/>
-						<div className={`govuk-grid-row ${featuredDocumentHasDate ? '' : 'mojblocks-featured-document-hide-date'} `}>
+						<div className={`govuk-grid-row ${featuredDocumentHasDate && itemDate != '' ? '' : 'mojblocks-featured-document-hide-date'} `}>
 							<div class="mojblocks-featured-document__item">
 								<div className="mojblocks-featured-document__text">
 									<div className="mojblocks-featured-document__headline" >
@@ -172,9 +196,9 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 }
 
 
-  function datify(x,d) {
+function datify(x,d) {
 	if (!x) return "Date";
-  
+
 	var month = new Array();
 	month[1] = "January";
 	month[2] = "February";
@@ -188,21 +212,21 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 	month[10] = "October";
 	month[11] = "November";
 	month[12] = "December";
-  
+
 	var x = x.split("-");
-  
+
 	if (x.length != 3) {
-	  //wrong format, return today
-	  return d.toLocaleString('en-GB', {day: '2-digit', month: 'long' });
+	//wrong format, return today
+	return d.toLocaleString('en-GB', {day: '2-digit', month: 'long' });
 	}
-  
+
 	var day = x[2].substring(0, 2);
 	var month = " " + month[parseInt(x[1])];
 	var year = " " + x[0];
-  
+
 	if (d.getFullYear() == x[0]) {
-	  return day + month;
+	return day + month;
 	} else {
-	  return day + month + year;
+	return day + month + year;
 	}
-  }
+}
