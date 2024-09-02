@@ -287,6 +287,19 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
+        'mojblocks/laa-chat-box',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_chat_box_block',
+            'attributes' => [
+                'chatBoxClassName' => [
+                    'type' => 'string'
+                ]
+            ]
+        ]
+    );
+
+    register_block_type(
         'mojblocks/quote',
         [
         'editor_script' => 'mojblocks-editor-script',
@@ -453,6 +466,7 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/cta/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/hero/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/highlights-list/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/intro/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/chat-box/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/quote/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/reveal/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/separator/index.php';
