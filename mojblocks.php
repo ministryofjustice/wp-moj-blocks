@@ -466,7 +466,6 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/cta/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/hero/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/highlights-list/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/intro/index.php';
-include plugin_dir_path(__FILE__) . 'src/custom-blocks/chat-box/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/quote/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/reveal/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/separator/index.php';

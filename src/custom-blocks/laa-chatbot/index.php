@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Intro block
+ * LAA Chatbot block
  * Frontend PHP code
  *
  * Uses WordPress' dynamic block method

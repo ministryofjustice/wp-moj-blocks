@@ -39,6 +39,7 @@ function render_callback_intro_block($attributes, $content)
             </div>
         </div>
     </div>
+    
     <?php
 
     // Get all the html/content that has been captured in the buffer and output via return
