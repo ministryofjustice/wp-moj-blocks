@@ -14,7 +14,7 @@ Block: Featured Item (Frontend styles)
 	-webkit-animation: spin 2s linear infinite;
 	animation: spin 2s linear infinite;
 	margin:auto;
-	
+
 	&-text {
 		text-align:center;
 		margin:auto;
@@ -29,7 +29,7 @@ Block: Featured Item (Frontend styles)
 	100% { transform: rotate(360deg); }
 }
 
-.mojblocks-featured-document {
+.mojblocks-featured-item {
 	margin: 48px 0;
 	margin: govuk-px-to-rem(48) 0;
 
@@ -49,13 +49,32 @@ Block: Featured Item (Frontend styles)
 		margin-top: 16px;
 		margin-top: govuk-px-to-rem(16);
 	}
+	&__image {
+		background-repeat: no-repeat;
+		display:block;
+		width:100%;
+		height:230px;
+		min-height:0.3vw;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		overflow: hidden;
+		background-size: contain;
 
+		&--cover {
+			background-size: cover;
+		}
+
+		+ .mojblocks-featured-item__text {
+			padding: govuk-px-to-rem(40) 0 0 0;
+		}
+	}
 	&__text {
 		display:block;
 		width:100%;
 		padding: 1px 0 0 0;
 	}
-
+	
 	&__headline {
 		margin: 16px 0;
 		margin: govuk-px-to-rem(16) 0;
@@ -84,16 +103,17 @@ Block: Featured Item (Frontend styles)
 		color:$govuk-secondary-text-colour;
 	}
 
-	.mojblocks-featured-document-hide-date .mojblocks-featured-document__date {
+	.mojblocks-featured-item-hide-date .mojblocks-featured-item__date {
 		display:none;
 	}
 }
 
 .wp-block-column:not([style="flex-basis:66.66%"]) {
 
-	.mojblocks-featured-document__item,
-	.mojblocks-featured-document__text {
+	.mojblocks-featured-item__item,
+	.mojblocks-featured-item__text {
 		display: block;
 		width:100%;
+		max-width: 666px;
 	}
 }

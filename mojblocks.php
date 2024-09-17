@@ -492,6 +492,7 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/staggered-box/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/latest-news/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-news/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-document/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-item/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/laa-chatbot/index.php';
 
 /**

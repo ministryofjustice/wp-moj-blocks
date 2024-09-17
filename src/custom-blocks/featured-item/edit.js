@@ -48,21 +48,28 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		allDocuments,
 	} = useSelect(
 		( select ) => {
-			const { getEntityRecords, getMedia, getUsers } = select(
-				coreStore
-			);
-			const { getSettings } = select( blockEditorStore );
-			const { imageSizes, imageDimensions } = getSettings();
+			if (featuredDocumentID.length > 0) {
 
-			const posts = getEntityRecords(
-				'postType',
-				featuredItemType ?? 'post',
-				{ per_page: -1 }
-			);
+				const { getEntityRecords } = select(
+					coreStore
+				);
+			//	const { getSettings } = select( blockEditorStore );
+			//	const { imageSizes, imageDimensions } = getSettings();
 
-			return {
-				allDocuments: posts
-			};
+				const posts = getEntityRecords(
+					'postType',
+					featuredItemType,
+					{ per_page: -1 }
+				);
+
+				return {
+					allDocuments: posts
+				};
+			} else {
+                return {
+                    allDocuments: false
+                };
+			}
 		}
 	);
 
@@ -70,6 +77,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 	if (allPostTypes) {
 		allPostTypes.forEach(thisPostType => {
+			console.log(thisPostType)
 			if (thisPostType.viewable) {
 				itemTypes.push({
 					label: thisPostType.name,
@@ -90,7 +98,6 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 	if (Array.isArray( allDocuments )) {
 		for (let i=0;i<allDocuments.length;i++) {
-
 			docList[allDocuments[i].id] = {
 				title: allDocuments[i].title.rendered,
 				date: allDocuments[i].date,
@@ -155,6 +162,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 	} else {
 		let itemTitle, itemDate;
 		if (docList[featuredDocumentID]) {
+			console.log(docList[featuredDocumentID]);
 			itemTitle = docList[featuredDocumentID].title;
 			itemDate = datify(docList[featuredDocumentID].date,d);
 		} else {
@@ -164,23 +172,26 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		return (
 			<Fragment >
 				{ inspectorControls }
-				<div className={`mojblocks-featured-document ${className}`}>
+				<div className={`mojblocks-featured-item ${className}`}>
 					<div className="govuk-width-container">
 						<InnerBlocks
 							template={ templateFeaturedDocumentBlock }
 							templateLock="all"
 						/>
-						<div className={`govuk-grid-row ${featuredDocumentHasDate && itemDate != '' ? '' : 'mojblocks-featured-document-hide-date'} `}>
-							<div class="mojblocks-featured-document__item">
-								<div className="mojblocks-featured-document__text">
-									<div className="mojblocks-featured-document__headline" >
-										<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-document__headline-link" >
+						<div className={`govuk-grid-row ${featuredDocumentHasDate && itemDate != '' ? '' : 'mojblocks-featured-item-hide-date'} `}>
+							<div class="mojblocks-featured-item__item">
+								<div className="mojblocks-featured-item__image" styles={`background:url('${docList[featuredDocumentID].image}')`}>
+									<img src={docList[featuredDocumentID].image} alt="Feature image for article" />
+								</div>
+								<div className="mojblocks-featured-item__text">
+									<div className="mojblocks-featured-item__headline" >
+										<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-item__headline-link" >
 											{
 												itemTitle
 											}
 										</a>
 									</div>
-									<div className="govuk-body-s mojblocks-featured-document__date" >
+									<div className="govuk-body-s mojblocks-featured-item__date" >
 										{
 											itemDate
 										}

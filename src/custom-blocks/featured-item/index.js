@@ -18,8 +18,12 @@ registerBlockType("mojblocks/featured-item", {
       default: true
     },
     featuredDocumentID: {
-          type: "string",
-          default: "0"
+      type: "string",
+      default: "0"
+    },
+    featuredItemType: {
+      type: "string",
+      default: "page"
     }
   },
   edit, 
