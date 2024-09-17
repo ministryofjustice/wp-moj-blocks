@@ -6,3 +6,42 @@ Block: Featured Item (Gutenberg editor styles)
 **********************************************************************************************/
 
 @import 'style.scss';
+
+.mojblocks-featured-item--empty {
+	// show in editor that it will not be rendered in the frontend
+	border: 2px dashed #b1b4b6;
+	background-color:#f3f2f1;
+	position:relative;
+	* {
+		filter:grayscale(1);
+	}
+	.mojblocks-featured-news__image {
+		background: linear-gradient(to bottom left, #595959, #000);
+		img {
+			display:none;
+		}
+	}
+
+	&:after {
+		content: "Nothing selected"!important;
+		position: absolute;
+		color: yellow;
+		font-size: 30px;
+		font-weight: 700;
+		top: 30%;
+		left: 20%;
+		background: darkred;
+		padding: 2px 20px 5px;
+		transform: rotate(-20deg);
+	}
+}
+
+.mojblocks-featured-item__image {
+	// placeholder to shew image location if image can't load in backend.
+	background-image: linear-gradient(to bottom left, aliceblue, skyblue);
+
+	&--none {
+		//if no image, hide image placeholder
+		display: none;
+	}
+}
