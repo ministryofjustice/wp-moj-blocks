@@ -17,6 +17,7 @@ function render_callback_featured_item_block($attributes, $content)
     // Parse attributes found in index.js
 	$attribute_box_featuredType = $attributes['featuredItemType'] ?? '';
 	$attribute_box_featuredID = $attributes['featuredDocumentID'] ?? '';
+    $attribute_box_imageOption = $attributes['featuredImage'] ?? 'contain';
     $attribute_box_hasDate = $attributes['featuredDocumentHasDate'] ?? 'true';
     $attribute_box_className = $attributes['featuredDocumentClassName'] ?? '';
 
@@ -35,6 +36,7 @@ function render_callback_featured_item_block($attributes, $content)
                 "date" => get_the_date('d F Y',$attribute_box_featuredID),
                 "link" => get_permalink($attribute_box_featuredID),
                 "image" => get_the_post_thumbnail_url($attribute_box_featuredID, "large"),
+                "imageID" => get_post_thumbnail_id($attribute_box_featuredID),
             ];
     ?>
         <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-featured-item">
@@ -45,8 +47,8 @@ function render_callback_featured_item_block($attributes, $content)
                 ?>
                 <div class="govuk-grid-row">
                     <div class="mojblocks-featured-item__item">
-                        <?php if ($feature_content["image"]) { ?>
-                            <div class="mojblocks-featured-item__image" style="background-image:url('<?php echo $feature_content["image"]; ?>')">
+                        <?php if ($feature_content["image"] && $attribute_box_imageOption != "none") { ?>
+                            <div class="mojblocks-featured-item__image mojblocks-featured-item__image--<?php echo $attribute_box_imageOption;?>" style="background-image:url('<?php echo $feature_content["image"]; ?>')">
                                 <span role="img" aria-label="Cover image for featured news story"></span>
                             </div>
                         <?php } ?>

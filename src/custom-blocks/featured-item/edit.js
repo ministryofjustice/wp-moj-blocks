@@ -21,6 +21,7 @@ const templateFeaturedDocumentBlock = [
 export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 	const {
+		featuredImage,
 		featuredItemType,
 		featuredDocumentID,
 		featuredDocumentHasDate,
@@ -53,8 +54,8 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 				const { getEntityRecords } = select(
 					coreStore
 				);
-			//	const { getSettings } = select( blockEditorStore );
-			//	const { imageSizes, imageDimensions } = getSettings();
+				const { getSettings } = select( blockEditorStore );
+				const { imageSizes, imageDimensions } = getSettings();
 
 				const posts = getEntityRecords(
 					'postType',
@@ -95,12 +96,23 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		{ title: "No item selected", summary: "", date: "date", image: ""}
 	];
 
+	let imageOptions = [
+		// this is the CSS value for background-size
+		{ label: "No image", value: "none" },
+		{ label: "Show whole image", value: "contain" },
+		{ label: "Image cropped and fills area", value: "cover" }
+	];
 
 	if (Array.isArray( allDocuments )) {
 		for (let i=0;i<allDocuments.length;i++) {
+			console.log("xxx")
+			console.log(allDocuments[i])
 			docList[allDocuments[i].id] = {
 				title: allDocuments[i].title.rendered,
+			//	summary: allDocuments[i].summary_meta.news_story_summary,
 				date: allDocuments[i].date,
+				imageExists: allDocuments[i].featured_media,
+				image: allDocuments[i].featured_media,
 			}
 			docOptions.push({label: allDocuments[i].title.rendered, value: allDocuments[i].id});
 
@@ -113,6 +125,10 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 	const setDocument = newDocumentID => {
 		setAttributes({ featuredDocumentID: newDocumentID } );
+	};
+
+	const setImage = newImage => {
+		setAttributes({ featuredImage: newImage } );
 	};
 
 	const setHasDate = newDateSetting => {
@@ -139,6 +155,13 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 					onChange={ setDocument }
 				/>
 
+				<SelectControl
+					label="Image style"
+					value={ featuredImage }
+					options={ imageOptions }
+					onChange={ setImage }
+				/>
+
 				<ToggleControl
 					label="Show/hide publish date"
 					help={
@@ -160,19 +183,24 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 			</Fragment >
 		);
 	} else {
-		let itemTitle, itemDate;
+		let itemTitle, itemDate, itemImage, itemImageExists, itemPreviewClass, itemSummary;
+
 		if (docList[featuredDocumentID]) {
-			console.log(docList[featuredDocumentID]);
 			itemTitle = docList[featuredDocumentID].title;
 			itemDate = datify(docList[featuredDocumentID].date,d);
+			itemImage = docList[featuredDocumentID].image;
+			itemImageExists = docList[featuredDocumentID].imageExists;
+			itemPreviewClass = "";
 		} else {
 			itemTitle = "No item selected";
 			itemDate = "Select a different item or item type"
+			itemPreviewClass = "mojblocks-featured-item--empty";
 		}
+
 		return (
 			<Fragment >
 				{ inspectorControls }
-				<div className={`mojblocks-featured-item ${className}`}>
+				<div className={`mojblocks-featured-item ${className} ${itemPreviewClass}`}>
 					<div className="govuk-width-container">
 						<InnerBlocks
 							template={ templateFeaturedDocumentBlock }
@@ -180,8 +208,8 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 						/>
 						<div className={`govuk-grid-row ${featuredDocumentHasDate && itemDate != '' ? '' : 'mojblocks-featured-item-hide-date'} `}>
 							<div class="mojblocks-featured-item__item">
-								<div className="mojblocks-featured-item__image" styles={`background:url('${docList[featuredDocumentID].image}')`}>
-									<img src={docList[featuredDocumentID].image} alt="Feature image for article" />
+								<div className={ `mojblocks-featured-item__image ${itemImageExists ? "" : "mojblocks-featured-item__image--none"}`} styles={`background:url('${itemImage}');`}>
+									<img src={ itemImage } alt="Feature image for article" />
 								</div>
 								<div className="mojblocks-featured-item__text">
 									<div className="mojblocks-featured-item__headline" >

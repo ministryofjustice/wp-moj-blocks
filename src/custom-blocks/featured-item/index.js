@@ -24,6 +24,10 @@ registerBlockType("mojblocks/featured-item", {
     featuredItemType: {
       type: "string",
       default: "page"
+    },
+    featuredImage: {
+      type: "string",
+      default: "contain"
     }
   },
   edit, 
