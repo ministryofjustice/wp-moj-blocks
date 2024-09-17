@@ -31,7 +31,7 @@ function render_callback_featured_news_block($attributes, $content)
         if (get_post_type($attribute_box_featuredID) == "news") {
             $news_array = [
                 "title" => get_the_title($attribute_box_featuredID),
-                "summary" => get_post_meta( $attribute_box_featuredID, 'news_story_summary', TRUE ),
+                "summary" => get_post_meta( $attribute_box_featuredID, 'post_summary', TRUE ),
                 "date" => get_the_date('d F Y',$attribute_box_featuredID),
                 "link" => get_permalink($attribute_box_featuredID),
                 "image" => get_the_post_thumbnail_url($attribute_box_featuredID, "large"),
@@ -56,9 +56,11 @@ function render_callback_featured_news_block($attributes, $content)
                                     <?php _e(esc_html($news_array["title"]));?>
                                 </a>
                             </div>
-                            <div class="govuk-body mojblocks-featured-news__summary" >
-                                <?php _e(esc_html($news_array["summary"]));?>
-                            </div>
+                            <?php if (!empty($news_array["summary"])) { ?>
+                                <div class="govuk-body mojblocks-featured-news__summary" >
+                                    <?php _e(esc_html($news_array["summary"]));?>
+                                </div>
+                            <?php } ?>
                             <?php
                             if ($attribute_box_hasDate) {
                                 $articleDate = strtotime($news_array["date"]);

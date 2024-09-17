@@ -86,17 +86,18 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 	let newsList = [
 		{ title: "No news article selected", summary: "", date: "date", image: ""}
 	];
+
 	if (Array.isArray( latestNews )) {
 		for (let i=0;i<latestNews.length;i++) {
-			if (latestNews[i].summary_meta.news_story_summary) {
+	
 				newsList[latestNews[i].id] = {
 					title: latestNews[i].title.rendered,
-					summary: latestNews[i].summary_meta.news_story_summary,
+					summary: 'Article summary will show here',
 					date: latestNews[i].date,
 					image: latestNews[i].featured_image_url,
 				}
 				optionList.push({label: latestNews[i].title.rendered, value: latestNews[i].id});
-			}
+			
 		}
 
 		if(featuredNewsArticle != null && featuredNewsID.length > 0 && newsList.hasOwnProperty(featuredNewsID) == false){
@@ -104,7 +105,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 
             newsList[featuredNewsID] = {
                 title: featuredNewsArticle.title.rendered,
-                summary: featuredNewsArticle.summary_meta.news_story_summary,
+                summary: 'Article summary will show here',
                 date: featuredNewsArticle.date,
                 image: featuredNewsArticle.featured_image_url,
             }
@@ -129,7 +130,6 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			>
 				<SelectControl
 					label="Select news"
-					help="Only news articles with a summary are available for selection"
 					value={ featuredNewsID }
 					options={ optionList }
 					onChange={ setStory }
