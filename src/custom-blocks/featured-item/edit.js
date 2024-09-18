@@ -109,10 +109,10 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 			console.log(allDocuments[i])
 			docList[allDocuments[i].id] = {
 				title: allDocuments[i].title.rendered,
-			//	summary: allDocuments[i].summary_meta.news_story_summary,
+				summary: allDocuments[i].summary_meta.news_story_summary,
 				date: allDocuments[i].date,
 				imageExists: allDocuments[i].featured_media,
-				image: allDocuments[i].featured_media,
+				image: allDocuments[i].featured_image_url,
 			}
 			docOptions.push({label: allDocuments[i].title.rendered, value: allDocuments[i].id});
 

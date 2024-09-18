@@ -568,6 +568,35 @@ function mojblocks_extend_wp_api($data, $post, $context) {
     }
 
     $summary = get_post_meta( get_the_ID(), 'post_summary', TRUE); // get the value from the meta field
+    $data->data['summary_meta'] = array( 'news_story_summary' => $summary );
+
+    $args = array(
+        'public'   => true,
+    );
+    $posties = get_post_types($args);
+    $data->data['all_public_post_types_here'] = $posties;
+
+    return $data;
+}
+
+$args = array(
+    'public'   => true,
+);
+$posties = get_post_types($args);
+foreach ($posties as $postie) {
+    if ($postie == "news") add_filter( "rest_prepare_$postie", 'mojblocks_extend_wp_api', 10, 3 );
+    console.log("prepared $postie")
+}
+$x = "news";
+//add_filter( "rest_prepare_$x", 'mojblocks_extend_wp_api', 10, 3 );
+add_filter( "rest_prepare_page", 'mojblocks_extend_wp_api', 10, 3 );
+add_filter( "rest_prepare_attachment", 'mojblocks_extend_wp_api', 10, 3 );
+add_filter( "rest_prepare_post", 'mojblocks_extend_wp_api', 10, 3 );
+foreach(get_post_types($args) as $post_type) {
+}
+/*
+function mojblocks_extend_wp_api_legacy_summary($data, $post, $context) {
+    $summary = get_post_meta( get_the_ID(), 'post_summary', TRUE); // get the value from the meta field
     if( $summary ) { // include it in the response if not empty
         $data->data['summary_meta'] = array( 'news_story_summary' => $summary );
     } else {
@@ -576,4 +605,5 @@ function mojblocks_extend_wp_api($data, $post, $context) {
 
     return $data;
 }
-add_filter( 'rest_prepare_news', 'mojblocks_extend_wp_api', 10, 3 );
+add_filter( "rest_prepare_news", 'mojblocks_extend_wp_api_legacy_summary', 10, 3 );
+*/
