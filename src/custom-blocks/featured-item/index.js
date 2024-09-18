@@ -28,8 +28,28 @@ registerBlockType("mojblocks/featured-item", {
     featuredImage: {
       type: "string",
       default: "contain"
+    },
+    featuredCustomImage: { //not yet used
+      type: "string",
+      default: ""
+    },
+    featuredImage: {
+      type: "string",
+      default: "contain"
+    },
+    featuredLinkText: {
+      type: "string",
+      default: "Read full article"
+    },
+    className: {
+      type: "string"
     }
   },
   edit, 
   save: () => { return <InnerBlocks.Content />; }
 });
+
+registerBlockStyle( 'mojblocks/featured-item', {
+  name: 'wide',
+  label: __('Wide', 'mojblocks'),
+} );

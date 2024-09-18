@@ -1,11 +1,13 @@
 import {
 	PanelBody,
-	SelectControl, TextControl,
+	SelectControl,
+	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import {
 	InnerBlocks,
+	MediaUpload,
 	InspectorControls,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
@@ -25,6 +27,8 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		featuredItemType,
 		featuredDocumentID,
 		featuredDocumentHasDate,
+		featuredLinkText,
+		featuredCustomImage,
 		className,
 	} = attributes;
 
@@ -60,7 +64,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 				const posts = getEntityRecords(
 					'postType',
 					featuredItemType,
-					{ per_page: -1 }
+					{ per_page: 24 } // restructs to the 25 options (including none)
 				);
 
 				return {
@@ -78,7 +82,6 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 	if (allPostTypes) {
 		allPostTypes.forEach(thisPostType => {
-			console.log(thisPostType)
 			if (thisPostType.viewable) {
 				itemTypes.push({
 					label: thisPostType.name,
@@ -92,8 +95,8 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		{ label: "None", value: '0' },
 	]
 
-	let docList = [
-		{ title: "No item selected", summary: "", date: "date", image: ""}
+	var docList = [
+		{ title: "No item selected", summary: "", date: "date", image: "", imageID: "0"}
 	];
 
 	let imageOptions = [
@@ -105,19 +108,26 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 	if (Array.isArray( allDocuments )) {
 		for (let i=0;i<allDocuments.length;i++) {
-			console.log("xxx")
-			console.log(allDocuments[i])
 			docList[allDocuments[i].id] = {
 				title: allDocuments[i].title.rendered,
-				summary: allDocuments[i].summary_meta.news_story_summary,
+				summary: allDocuments[i].summary_meta.post_summary,
 				date: allDocuments[i].date,
-				imageExists: allDocuments[i].featured_media,
+				imageID: allDocuments[i].featured_media,
 				image: allDocuments[i].featured_image_url,
 			}
 			docOptions.push({label: allDocuments[i].title.rendered, value: allDocuments[i].id});
 
 		}
 	}
+
+	/*
+	Not used yet
+	const onChangeImage = imageObject => {
+		var imageSizes = imageObject.sizes;
+		var image = imageSizes.large.url;
+		setAttributes({ featuredCustomImage: image })
+	}
+	*/
 
 	const setItemType = newItemType => {
 		setAttributes({ featuredItemType: newItemType } );
@@ -133,6 +143,10 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 	const setHasDate = newDateSetting => {
 		setAttributes({ featuredDocumentHasDate: newDateSetting });
+	};
+
+	const setLinkText = newLinkText => {
+		setAttributes({ featuredLinkText: newLinkText });
 	};
 
 	const inspectorControls = (
@@ -160,6 +174,11 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 					value={ featuredImage }
 					options={ imageOptions }
 					onChange={ setImage }
+					className = {
+						featuredDocumentID == "0"
+						? 'hidden-control'
+						: ''
+					}
 				/>
 
 				<ToggleControl
@@ -172,6 +191,13 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 					checked={ featuredDocumentHasDate }
 					onChange={ setHasDate }
 				/>
+
+				<TextControl
+					label="Link to item"
+					help="Leave blank for no link, the title will still link to the article"
+					value={ featuredLinkText }
+					onChange={ setLinkText }
+				/>
 			</PanelBody>
 		</InspectorControls>
 	);
@@ -183,18 +209,25 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 			</Fragment >
 		);
 	} else {
-		let itemTitle, itemDate, itemImage, itemImageExists, itemPreviewClass, itemSummary;
+		let itemTitle, itemDate, itemImage, itemImageID, itemPreviewClass, itemSummary, itemBackgroundImageStyle;
 
 		if (docList[featuredDocumentID]) {
 			itemTitle = docList[featuredDocumentID].title;
+			itemSummary = docList[featuredDocumentID].summary;
 			itemDate = datify(docList[featuredDocumentID].date,d);
 			itemImage = docList[featuredDocumentID].image;
-			itemImageExists = docList[featuredDocumentID].imageExists;
+			itemImageID = docList[featuredDocumentID].imageID; // if 0 = no image
 			itemPreviewClass = "";
 		} else {
 			itemTitle = "No item selected";
 			itemDate = "Select a different item or item type"
 			itemPreviewClass = "mojblocks-featured-item--empty";
+		}
+
+		if (itemImageID) {
+			itemBackgroundImageStyle = {
+				backgroundImage: 'url(' + itemImage + ')'
+			}
 		}
 
 		return (
@@ -208,22 +241,23 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 						/>
 						<div className={`govuk-grid-row ${featuredDocumentHasDate && itemDate != '' ? '' : 'mojblocks-featured-item-hide-date'} `}>
 							<div class="mojblocks-featured-item__item">
-								<div className={ `mojblocks-featured-item__image ${itemImageExists ? "" : "mojblocks-featured-item__image--none"}`} styles={`background:url('${itemImage}');`}>
-									<img src={ itemImage } alt="Feature image for article" />
+								<div className={ `mojblocks-featured-item__image ${itemImageID ? "" : "mojblocks-featured-item__image--none"} mojblocks-featured-item__image--${featuredImage}`} style={itemBackgroundImageStyle}>
 								</div>
 								<div className="mojblocks-featured-item__text">
 									<div className="mojblocks-featured-item__headline" >
 										<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-item__headline-link" >
-											{
-												itemTitle
-											}
+											{ itemTitle }
 										</a>
 									</div>
-									<div className="govuk-body-s mojblocks-featured-item__date" >
-										{
-											itemDate
-										}
-									</div>
+									<p className="govuk-body mojblocks-featured-item__summary" >
+										{ itemSummary }
+									</p>
+									<p className="govuk-body-s mojblocks-featured-item__date" >
+										{ itemDate }
+									</p>
+									<p className="govuk-link mojblocks-featured-item__link" >
+										{ featuredLinkText }
+									</p>
 								</div>
 							</div>
 						</div>

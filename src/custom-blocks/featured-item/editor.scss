@@ -37,11 +37,12 @@ Block: Featured Item (Gutenberg editor styles)
 }
 
 .mojblocks-featured-item__image {
-	// placeholder to shew image location if image can't load in backend.
-	background-image: linear-gradient(to bottom left, aliceblue, skyblue);
-
 	&--none {
 		//if no image, hide image placeholder
 		display: none;
 	}
+}
+
+.hidden-control {
+	display:none;
 }
