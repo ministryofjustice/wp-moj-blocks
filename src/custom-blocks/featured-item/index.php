@@ -15,11 +15,13 @@ function render_callback_featured_item_block($attributes, $content)
 {
 
     // Parse attributes found in index.js
-	$attribute_box_featuredType = $attributes['featuredItemType'] ?? '';
-	$attribute_box_featuredID = $attributes['featuredDocumentID'] ?? '';
-    $attribute_box_imageOption = $attributes['featuredImage'] ?? 'contain';
-    $attribute_box_hasDate = $attributes['featuredDocumentHasDate'] ?? 'true';
-    $attribute_box_className = $attributes['featuredDocumentClassName'] ?? '';
+    $attribute_box_featuredType = esc_html($attributes['featuredItemType'] ?? 'page');
+    $attribute_box_featuredID = esc_html($attributes['featuredDocumentID'] ?? '');
+    $attribute_box_imageOption = esc_html($attributes['featuredImage'] ?? 'contain');
+    $attribute_box_hasDate = esc_html($attributes['featuredDocumentHasDate'] ?? 'true');
+    $attribute_box_linkText = esc_html($attributes['featuredLinkText'] ?? 'Read full article');
+    $attribute_box_customImage = esc_url_raw($attributes['featuredCustomImage'] ?? '');
+    $attribute_box_className = esc_html($attributes['className'] ?? '');
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -38,6 +40,12 @@ function render_callback_featured_item_block($attributes, $content)
                 "image" => get_the_post_thumbnail_url($attribute_box_featuredID, "large"),
                 "imageID" => get_post_thumbnail_id($attribute_box_featuredID),
             ];
+
+            if (!empty($attribute_box_customImage)) {
+                $image = $attribute_box_customImage;
+            } else {
+                $image = $feature_content["image"];
+            }
     ?>
         <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-featured-item">
             <div class="govuk-width-container">
@@ -48,7 +56,7 @@ function render_callback_featured_item_block($attributes, $content)
                 <div class="govuk-grid-row">
                     <div class="mojblocks-featured-item__item">
                         <?php if ($feature_content["image"] && $attribute_box_imageOption != "none") { ?>
-                            <div class="mojblocks-featured-item__image mojblocks-featured-item__image--<?php echo $attribute_box_imageOption;?>" style="background-image:url('<?php echo $feature_content["image"]; ?>')">
+                            <div class="mojblocks-featured-item__image mojblocks-featured-item__image--<?php echo $attribute_box_imageOption;?>" style="background-image:url('<?php echo $image ?>')">
                                 <span role="img" aria-label="Cover image for featured news story"></span>
                             </div>
                         <?php } ?>
@@ -58,9 +66,13 @@ function render_callback_featured_item_block($attributes, $content)
                                     <?php _e(esc_html($feature_content["title"]));?>
                                 </a>
                             </div>
-                            <p class="govuk-body mojblocks-featured-item__summary" >
-                                <?php _e(esc_html($feature_content["summary"]));?>
-        </p>
+
+                            <?php if (!empty($feature_content["summary"])) { ?>
+                                <p class="govuk-body mojblocks-featured-item__summary" >
+                                    <?php _e(esc_html($feature_content["summary"]));?>
+                                </p>
+                            <?php } ?>
+
                             <?php
                             if ($attribute_box_hasDate) {
                                 $articleDate = strtotime($feature_content["date"]);
@@ -70,10 +82,17 @@ function render_callback_featured_item_block($attributes, $content)
                                     $date_string = date("j F Y",$articleDate);
                                 }
                             ?>
-                                <div class="govuk-body-s mojblocks-featured-item__date" >
+                                <p class="govuk-body-s mojblocks-featured-item__date" >
                                     <?php _e(esc_html($date_string));?>
-                                </div>
+                                </p>
                             <?php } ?>
+
+                            <?php if (!empty(trim($attribute_box_linkText))) { ?>
+                                <a class="govuk-link mojblocks-featured-item__link" href="<?php _e(esc_html($feature_content["link"])); ?>">
+                                    <?php _e(esc_html($attribute_box_linkText));?>
+                                </a>
+                            <?php } ?>
+
                         </div>
                     </div>
                 </div>

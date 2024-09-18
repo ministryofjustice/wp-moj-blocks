@@ -558,6 +558,8 @@ function mojblocks_enqueue_style()
 add_action('wp_enqueue_scripts', 'mojblocks_enqueue_style');
 
 function mojblocks_extend_wp_api($data, $post, $context) {
+
+    // Add featured image to API
     $featured_image_id = $data->data['featured_media']; // get featured image id
     $featured_image_url = wp_get_attachment_image_src( $featured_image_id, 'feature' ); // get url of the feature size
 
@@ -567,34 +569,24 @@ function mojblocks_extend_wp_api($data, $post, $context) {
         $data->data['featured_image_url'] = "";
     }
 
+    // Add summary to API
     $summary = get_post_meta( get_the_ID(), 'post_summary', TRUE); // get the value from the meta field
-    $data->data['summary_meta'] = array( 'news_story_summary' => $summary );
-
-    $args = array(
-        'public'   => true,
-    );
-    $posties = get_post_types($args);
-    $data->data['all_public_post_types_here'] = $posties;
+    $data->data['summary_meta'] = array( 'post_summary' => $summary );
 
     return $data;
 }
 
-$args = array(
-    'public'   => true,
-);
-$posties = get_post_types($args);
-foreach ($posties as $postie) {
-    if ($postie == "news") add_filter( "rest_prepare_$postie", 'mojblocks_extend_wp_api', 10, 3 );
-    console.log("prepared $postie")
+function add_all_prepare_filters() {
+    $args = array(
+        'public'   => true,
+    );
+    $post_types = get_post_types($args);
+    foreach ($post_types as $post_type) {
+        add_filter( "rest_prepare_$post_type", 'mojblocks_extend_wp_api', 10, 3 );
+    }
 }
-$x = "news";
-//add_filter( "rest_prepare_$x", 'mojblocks_extend_wp_api', 10, 3 );
-add_filter( "rest_prepare_page", 'mojblocks_extend_wp_api', 10, 3 );
-add_filter( "rest_prepare_attachment", 'mojblocks_extend_wp_api', 10, 3 );
-add_filter( "rest_prepare_post", 'mojblocks_extend_wp_api', 10, 3 );
-foreach(get_post_types($args) as $post_type) {
-}
-/*
+add_action( 'pre_get_posts', 'add_all_prepare_filters' );
+
 function mojblocks_extend_wp_api_legacy_summary($data, $post, $context) {
     $summary = get_post_meta( get_the_ID(), 'post_summary', TRUE); // get the value from the meta field
     if( $summary ) { // include it in the response if not empty
@@ -606,4 +598,3 @@ function mojblocks_extend_wp_api_legacy_summary($data, $post, $context) {
     return $data;
 }
 add_filter( "rest_prepare_news", 'mojblocks_extend_wp_api_legacy_summary', 10, 3 );
-*/
