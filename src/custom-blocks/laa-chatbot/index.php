@@ -22,20 +22,39 @@ function render_callback_laa_chatbot_block($attributes, $content)
     // code below as you would in any other PHP file rather then having to use the sprintf() syntax
     ob_start();
 
+    $uuid_code = "script_51621790560365ddc0e8ac6.80171075";
+    $id_code = "__8x8-chat-button-container-$uuid_code";
+
     ?>
 
-    <div class = "<?php echo $attribute_chatbot_className ?>" id="__8x8-chat-button-container-script_51621790560365ddc0e8ac6.80171075"></div>
+    <div class = "<?php echo $attribute_chatbot_className ?>" id="<?php echo $id_code; ?>"></div>
 
     <script type="text/javascript">
         window.__8x8Chat = {
-            uuid: "script_51621790560365ddc0e8ac6.80171075",
+            uuid: "<?php echo $uuid_code; ?>",
             tenant: "bGVnYWxhaWRhZ2VuY3lsYWEwMQ",
             channel: "LAA Web Chat",
             domain: "https://vcc-eu9b.8x8.com",
             path: "/.",
-            buttonContainerId: "__8x8-chat-button-container-script_51621790560365ddc0e8ac6.80171075",
+            buttonContainerId: "<?php echo $id_code; ?>",
             align: "right"
         };
+
+        if (typeof observer === 'undefined') {
+            const observer = new MutationObserver(() => {
+                // Add in accessibility stuff to button
+                document.getElementById("<?php echo $id_code; ?>").querySelector("a").setAttribute("role","button");
+                document.getElementById("<?php echo $id_code; ?>").querySelector("a").setAttribute("aria-label","Start chat");
+                document.getElementById("<?php echo $id_code; ?>").querySelector("img").setAttribute("alt","Start chat");
+
+            });
+
+            // call `observe()`, passing it the element to observe, and the options object
+            observer.observe(document.getElementById("<?php echo $id_code; ?>"), {
+                subtree: true,
+                childList: true,
+            });
+        }
 
         (function() {
             var se = document.createElement("script");
