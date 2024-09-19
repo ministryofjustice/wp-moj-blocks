@@ -85,7 +85,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 	if (allPostTypes) {
 		allPostTypes.forEach(thisPostType => {
-			if (thisPostType.viewable) {
+			if (thisPostType.name != "Posts" && thisPostType.name != "Pages" && thisPostType.name != "Media" && thisPostType.viewable) {
 				itemTypes.push({
 					label: thisPostType.name,
 					value: thisPostType.slug

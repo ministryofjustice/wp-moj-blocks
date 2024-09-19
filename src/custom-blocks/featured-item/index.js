@@ -57,3 +57,13 @@ registerBlockStyle( 'mojblocks/featured-item', {
   name: 'wide',
   label: __('Wide', 'mojblocks'),
 } );
+
+registerBlockStyle( 'mojblocks/featured-item', {
+  name: 'image-left',
+  label: __('Image left', 'mojblocks'),
+} );
+
+registerBlockStyle( 'mojblocks/featured-item', {
+  name: 'image-right',
+  label: __('Image right', 'mojblocks'),
+} );
