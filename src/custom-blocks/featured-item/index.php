@@ -15,7 +15,7 @@ function render_callback_featured_item_block($attributes, $content)
 {
 
     // Parse attributes found in index.js
-    $attribute_box_featuredType = esc_html($attributes['featuredItemType'] ?? 'page');
+    $attribute_box_featuredType = esc_html($attributes['featuredItemType'] ?? 'post');
     $attribute_box_featuredID = esc_html($attributes['featuredDocumentID'] ?? '');
     $attribute_box_imageOption = esc_html($attributes['featuredImage'] ?? 'contain');
     $attribute_box_hasDate = esc_html($attributes['featuredDocumentHasDate'] ?? 'true');

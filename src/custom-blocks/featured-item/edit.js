@@ -81,7 +81,10 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		}
 	);
 
-	let itemTypes = []
+	let itemTypes = [{
+		label: "-",
+		value: ""
+	}]
 
 	if (allPostTypes) {
 		allPostTypes.forEach(thisPostType => {
@@ -187,7 +190,8 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 					}
 				/>
 
-				{(docList[featuredDocumentID] && docList[featuredDocumentID].image && !featuredCustomImage) && (<SelectControl
+				{(docList[featuredDocumentID] && docList[featuredDocumentID].image && !featuredCustomImage) && (
+				<SelectControl
 					label="Image style"
 					value={ featuredImage }
 					options={ imageOptions }
@@ -197,7 +201,8 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 						? 'hidden-control'
 						: ''
 					}
-				/>)}
+				/>
+				)}
 
 				<ToggleControl
 					label="Show/hide publish date"
