@@ -287,6 +287,19 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
+        'mojblocks/laa-chatbot',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_laa_chatbot_block',
+            'attributes' => [
+                'chatbotClassName' => [
+                    'type' => 'string'
+                ]
+            ]
+        ]
+    );
+
+    register_block_type(
         'mojblocks/quote',
         [
         'editor_script' => 'mojblocks-editor-script',
@@ -460,6 +473,7 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/staggered-box/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/latest-news/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-news/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-document/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/laa-chatbot/index.php';
 
 /**
  * Load PHP extended core blocks
