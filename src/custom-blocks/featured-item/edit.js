@@ -3,6 +3,7 @@ import {
 	SelectControl,
 	TextControl,
 	ToggleControl,
+	Button,
 } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
 import {
@@ -16,6 +17,7 @@ import { store as coreStore } from '@wordpress/core-data';
 
 const { Fragment } = wp.element;
 const d = new Date();
+const allowedMediaTypes = ['image'];
 const templateFeaturedDocumentBlock = [
 	[ 'core/heading', { placeholder: 'Add featured item section title' } ]
 ];
@@ -120,25 +122,31 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		}
 	}
 
-	/*
-	Not used yet
-	const onChangeImage = imageObject => {
+	/* Not used yet
+	const changeImage = imageObject => {
 		var imageSizes = imageObject.sizes;
 		var image = imageSizes.large.url;
 		setAttributes({ featuredCustomImage: image })
 	}
 	*/
 
+	const removeImage = () => {
+		setAttributes({
+			featuredCustomImage: null,
+		});
+	};
+
 	const setItemType = newItemType => {
-		setAttributes({ featuredItemType: newItemType } );
+		setAttributes({ featuredItemType: newItemType });
 	};
 
 	const setDocument = newDocumentID => {
-		setAttributes({ featuredDocumentID: newDocumentID } );
+		setAttributes({ featuredCustomImage: null }); //removes image on doc change
+		setAttributes({ featuredDocumentID: newDocumentID });
 	};
 
 	const setImage = newImage => {
-		setAttributes({ featuredImage: newImage } );
+		setAttributes({ featuredImage: newImage });
 	};
 
 	const setHasDate = newDateSetting => {
@@ -167,9 +175,14 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 					value={ featuredDocumentID }
 					options={ docOptions }
 					onChange={ setDocument }
+					help={
+						featuredCustomImage
+						? 'The custom image will be removed on change'
+						: ''
+					}
 				/>
 
-				<SelectControl
+				{(docList[featuredDocumentID] && docList[featuredDocumentID].image && !featuredCustomImage) && (<SelectControl
 					label="Image style"
 					value={ featuredImage }
 					options={ imageOptions }
@@ -179,7 +192,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 						? 'hidden-control'
 						: ''
 					}
-				/>
+				/>)}
 
 				<ToggleControl
 					label="Show/hide publish date"
@@ -198,6 +211,61 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 					value={ featuredLinkText }
 					onChange={ setLinkText }
 				/>
+				<h2>
+					Custom image
+				</h2>
+				<p>
+					Add a specific image for this item
+				</p>
+				<MediaUpload
+					buttonProps={{
+						className: 'change-image',
+					}}
+					onSelect={
+						(image) => {
+							var imageSizes = image.sizes;
+
+							// determine the image size displayed with fallbacks
+							if (typeof imageSizes.large !== 'undefined') {
+								var imageURL = imageSizes.large.url;
+							} else {
+								var imageURL = imageSizes.full.url;
+							}
+
+							setAttributes({
+								featuredCustomImage: imageURL,
+							})
+						}
+					}
+					allowedTypes={ allowedMediaTypes }
+					type="image"
+					value={ featuredCustomImage }
+					render={({ open }) => (
+						<Fragment>
+							<Button className={'button govuk-!-margin-bottom-3'}
+								onClick={open}
+							>
+								Select {featuredCustomImage ? 'a different ' : '' }image
+							</Button>
+							{featuredCustomImage && (
+								<Button
+									className={'button govuk-!-margin-bottom-3'}
+									onClick={ removeImage }
+								>
+									Remove image
+								</Button>
+							)}
+						</Fragment>
+					)}
+				/>
+
+				{ featuredCustomImage && (<SelectControl
+					label="Image style"
+					value={ featuredImage }
+					options={ imageOptions }
+					onChange={ setImage }
+				/>)}
+
 			</PanelBody>
 		</InspectorControls>
 	);
@@ -209,7 +277,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 			</Fragment >
 		);
 	} else {
-		let itemTitle, itemDate, itemImage, itemImageID, itemPreviewClass, itemSummary, itemBackgroundImageStyle;
+		let itemTitle, itemDate, itemImage, itemImageID, itemPreviewClass, itemSummary, itemBackgroundImageStyle, itemImageExists = false;
 
 		if (docList[featuredDocumentID]) {
 			itemTitle = docList[featuredDocumentID].title;
@@ -218,13 +286,15 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 			itemImage = docList[featuredDocumentID].image;
 			itemImageID = docList[featuredDocumentID].imageID; // if 0 = no image
 			itemPreviewClass = "";
+			if (featuredCustomImage) itemImage = featuredCustomImage; // If a custom image has been selected, override the featured image
+			if (itemImageID || featuredCustomImage) itemImageExists = true;
 		} else {
 			itemTitle = "No item selected";
 			itemDate = "Select a different item or item type"
 			itemPreviewClass = "mojblocks-featured-item--empty";
 		}
 
-		if (itemImageID) {
+		if (itemImageExists) {
 			itemBackgroundImageStyle = {
 				backgroundImage: 'url(' + itemImage + ')'
 			}
@@ -241,7 +311,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 						/>
 						<div className={`govuk-grid-row ${featuredDocumentHasDate && itemDate != '' ? '' : 'mojblocks-featured-item-hide-date'} `}>
 							<div class="mojblocks-featured-item__item">
-								<div className={ `mojblocks-featured-item__image ${itemImageID ? "" : "mojblocks-featured-item__image--none"} mojblocks-featured-item__image--${featuredImage}`} style={itemBackgroundImageStyle}>
+								<div className={ `mojblocks-featured-item__image ${itemImageExists ? "" : "mojblocks-featured-item__image--none"} mojblocks-featured-item__image--${featuredImage}`} style={itemBackgroundImageStyle}>
 								</div>
 								<div className="mojblocks-featured-item__text">
 									<div className="mojblocks-featured-item__headline" >

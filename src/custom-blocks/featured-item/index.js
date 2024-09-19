@@ -29,7 +29,7 @@ registerBlockType("mojblocks/featured-item", {
       type: "string",
       default: "contain"
     },
-    featuredCustomImage: { //not yet used
+    featuredCustomImage: {
       type: "string",
       default: ""
     },

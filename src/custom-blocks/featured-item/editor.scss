@@ -12,6 +12,7 @@ Block: Featured Item (Gutenberg editor styles)
 	border: 2px dashed #b1b4b6;
 	background-color:#f3f2f1;
 	position:relative;
+	color: #0b0c0c;
 	* {
 		filter:grayscale(1);
 	}
@@ -41,8 +42,4 @@ Block: Featured Item (Gutenberg editor styles)
 		//if no image, hide image placeholder
 		display: none;
 	}
-}
-
-.hidden-control {
-	display:none;
 }
