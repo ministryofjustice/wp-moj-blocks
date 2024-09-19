@@ -88,8 +88,6 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 	];
 	if (Array.isArray( latestNews )) {
 		for (let i=0;i<latestNews.length;i++) {
-			console.log(latestNews[i]);
-	
 			if (latestNews[i].summary_meta.news_story_summary) {
 				newsList[latestNews[i].id] = {
 					title: latestNews[i].title.rendered,

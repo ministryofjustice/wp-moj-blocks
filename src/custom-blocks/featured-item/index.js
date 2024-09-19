@@ -17,6 +17,10 @@ registerBlockType("mojblocks/featured-item", {
       type: "boolean",
       default: true
     },
+    featuredDocumentHasBar: {
+      type: "boolean",
+      default: true
+    },
     featuredDocumentID: {
       type: "string",
       default: "0"
