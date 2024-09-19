@@ -19,6 +19,7 @@ function render_callback_featured_item_block($attributes, $content)
     $attribute_box_featuredID = esc_html($attributes['featuredDocumentID'] ?? '');
     $attribute_box_imageOption = esc_html($attributes['featuredImage'] ?? 'contain');
     $attribute_box_hasDate = esc_html($attributes['featuredDocumentHasDate'] ?? 'true');
+    $attribute_box_hasBar = esc_html($attributes['featuredDocumentHasBar'] ?? 'true');
     $attribute_box_linkText = esc_html($attributes['featuredLinkText'] ?? 'Read full article');
     $attribute_box_customImage = esc_url_raw($attributes['featuredCustomImage'] ?? '');
     $attribute_box_className = esc_html($attributes['className'] ?? '');
@@ -43,8 +44,10 @@ function render_callback_featured_item_block($attributes, $content)
 
             if (!empty($attribute_box_customImage)) {
                 $image = $attribute_box_customImage;
-            } else {
+            } elseif (!empty($feature_content["image"])) {
                 $image = $feature_content["image"];
+            } else {
+                $image = false;
             }
     ?>
         <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-featured-item">
@@ -55,13 +58,13 @@ function render_callback_featured_item_block($attributes, $content)
                 ?>
                 <div class="govuk-grid-row">
                     <div class="mojblocks-featured-item__item">
-                        <?php if ($feature_content["image"] && $attribute_box_imageOption != "none") { ?>
+                        <?php if ($image && $attribute_box_imageOption != "none") { ?>
                             <div class="mojblocks-featured-item__image mojblocks-featured-item__image--<?php echo $attribute_box_imageOption;?>" style="background-image:url('<?php echo $image ?>')">
                                 <span role="img" aria-label="Cover image for featured news story"></span>
                             </div>
                         <?php } ?>
                         <div class="mojblocks-featured-item__text">
-                            <div class="mojblocks-featured-item__headline">
+                            <div class="mojblocks-featured-item__headline <?php if(!$attribute_box_hasBar) echo "mojblocks-featured-item__headline--no-bar"; ?>">
                                 <a class="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-item__headline-link" href="<?php _e(esc_html($feature_content["link"]));?>" >
                                     <?php _e(esc_html($feature_content["title"]));?>
                                 </a>

@@ -94,11 +94,15 @@ Block: Featured Item (Frontend styles)
 		margin: 16px 0;
 		margin: govuk-px-to-rem(16) 0;
 
+		&--no-bar {
+			margin-top:0;
+		}
+
 		&-link.govuk-link{
 			position: relative;
 			text-decoration: none;
 
-			&:before { //bar above headline
+			&:not(.mojblocks-featured-item__headline--no-bar *):before { //bar above headline
 				content: "";
 				width: 64px;
 				width: govuk-px-to-rem(64);

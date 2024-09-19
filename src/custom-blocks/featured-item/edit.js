@@ -29,6 +29,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		featuredItemType,
 		featuredDocumentID,
 		featuredDocumentHasDate,
+		featuredDocumentHasBar,
 		featuredLinkText,
 		featuredCustomImage,
 		className,
@@ -153,6 +154,10 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		setAttributes({ featuredDocumentHasDate: newDateSetting });
 	};
 
+	const setLittleBar = newBarSetting => {
+		setAttributes({ featuredDocumentHasBar: newBarSetting });
+	};
+
 	const setLinkText = newLinkText => {
 		setAttributes({ featuredLinkText: newLinkText });
 	};
@@ -203,6 +208,17 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 					}
 					checked={ featuredDocumentHasDate }
 					onChange={ setHasDate }
+				/>
+
+				<ToggleControl
+					label="Show/hide little bar"
+					help={
+						featuredDocumentHasBar === false
+						? 'The little bar will be hidden'
+						: 'The little bar will be displayed'
+					}
+					checked={ featuredDocumentHasBar }
+					onChange={ setLittleBar }
 				/>
 
 				<TextControl
@@ -314,7 +330,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 								<div className={ `mojblocks-featured-item__image ${itemImageExists ? "" : "mojblocks-featured-item__image--none"} mojblocks-featured-item__image--${featuredImage}`} style={itemBackgroundImageStyle}>
 								</div>
 								<div className="mojblocks-featured-item__text">
-									<div className="mojblocks-featured-item__headline" >
+									<div className={ `mojblocks-featured-item__headline ${featuredDocumentHasBar ? "" : "mojblocks-featured-item__headline--no-bar"}` } >
 										<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-item__headline-link" >
 											{ itemTitle }
 										</a>
