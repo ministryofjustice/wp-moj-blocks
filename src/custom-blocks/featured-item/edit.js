@@ -74,9 +74,9 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 					allDocuments: posts
 				};
 			} else {
-                return {
-                    allDocuments: false
-                };
+				return {
+					allDocuments: false
+				};
 			}
 		}
 	);
