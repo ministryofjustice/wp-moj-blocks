@@ -227,7 +227,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 				/>
 
 				<TextControl
-					label="Link to item"
+					label="Link text"
 					help="Leave blank for no link, the title will still link to the article"
 					value={ featuredLinkText }
 					onChange={ setLinkText }
