@@ -18,18 +18,18 @@ import { store as coreStore } from '@wordpress/core-data';
 const { Fragment } = wp.element;
 const d = new Date();
 const allowedMediaTypes = ['image'];
-const templateFeaturedDocumentBlock = [
+const templatefeaturedItemBlock = [
 	[ 'core/heading', { placeholder: 'Add featured item section title' } ]
 ];
 
-export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
+export default function featuredItemEdit({ attributes, setAttributes} ) {
 
 	const {
 		featuredImage,
 		featuredItemType,
-		featuredDocumentID,
-		featuredDocumentHasDate,
-		featuredDocumentHasBar,
+		featuredItemID,
+		featuredItemHasDate,
+		featuredItemHasBar,
 		featuredLinkText,
 		featuredCustomImage,
 		className,
@@ -56,7 +56,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 		allDocuments,
 	} = useSelect(
 		( select ) => {
-			if (featuredDocumentID.length > 0) {
+			if (featuredItemID.length > 0) {
 
 				const { getEntityRecords } = select(
 					coreStore
@@ -146,7 +146,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 	const setDocument = newDocumentID => {
 		setAttributes({ featuredCustomImage: null }); //removes image on doc change
-		setAttributes({ featuredDocumentID: newDocumentID });
+		setAttributes({ featuredItemID: newDocumentID });
 	};
 
 	const setImage = newImage => {
@@ -154,11 +154,11 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 	};
 
 	const setHasDate = newDateSetting => {
-		setAttributes({ featuredDocumentHasDate: newDateSetting });
+		setAttributes({ featuredItemHasDate: newDateSetting });
 	};
 
 	const setLittleBar = newBarSetting => {
-		setAttributes({ featuredDocumentHasBar: newBarSetting });
+		setAttributes({ featuredItemHasBar: newBarSetting });
 	};
 
 	const setLinkText = newLinkText => {
@@ -180,7 +180,7 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 
 				<SelectControl
 					label="Select item"
-					value={ featuredDocumentID }
+					value={ featuredItemID }
 					options={ docOptions }
 					onChange={ setDocument }
 					help={
@@ -190,14 +190,14 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 					}
 				/>
 
-				{(docList[featuredDocumentID] && docList[featuredDocumentID].image && !featuredCustomImage) && (
+				{(docList[featuredItemID] && docList[featuredItemID].image && !featuredCustomImage) && (
 				<SelectControl
 					label="Image style"
 					value={ featuredImage }
 					options={ imageOptions }
 					onChange={ setImage }
 					className = {
-						featuredDocumentID == "0"
+						featuredItemID == "0"
 						? 'hidden-control'
 						: ''
 					}
@@ -207,22 +207,22 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 				<ToggleControl
 					label="Show/hide publish date"
 					help={
-						featuredDocumentHasDate === false
+						featuredItemHasDate === false
 						? 'The date will be hidden'
 						: 'The date will be displayed'
 					}
-					checked={ featuredDocumentHasDate }
+					checked={ featuredItemHasDate }
 					onChange={ setHasDate }
 				/>
 
 				<ToggleControl
 					label="Show/hide little bar"
 					help={
-						featuredDocumentHasBar === false
+						featuredItemHasBar === false
 						? 'The little bar will be hidden'
 						: 'The little bar will be displayed'
 					}
-					checked={ featuredDocumentHasBar }
+					checked={ featuredItemHasBar }
 					onChange={ setLittleBar }
 				/>
 
@@ -300,12 +300,12 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 	} else {
 		let itemTitle, itemDate, itemImage, itemImageID, itemPreviewClass, itemSummary, itemBackgroundImageStyle, itemImageExists = false;
 
-		if (docList[featuredDocumentID]) {
-			itemTitle = docList[featuredDocumentID].title;
-			itemSummary = docList[featuredDocumentID].summary;
-			itemDate = datify(docList[featuredDocumentID].date,d);
-			itemImage = docList[featuredDocumentID].image;
-			itemImageID = docList[featuredDocumentID].imageID; // if 0 = no image
+		if (docList[featuredItemID]) {
+			itemTitle = docList[featuredItemID].title;
+			itemSummary = docList[featuredItemID].summary;
+			itemDate = datify(docList[featuredItemID].date,d);
+			itemImage = docList[featuredItemID].image;
+			itemImageID = docList[featuredItemID].imageID; // if 0 = no image
 			itemPreviewClass = "";
 			if (featuredCustomImage) itemImage = featuredCustomImage; // If a custom image has been selected, override the featured image
 			if (itemImageID || featuredCustomImage) itemImageExists = true;
@@ -327,15 +327,15 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 				<div className={`mojblocks-featured-item ${className} ${itemPreviewClass}`}>
 					<div className="govuk-width-container">
 						<InnerBlocks
-							template={ templateFeaturedDocumentBlock }
+							template={ templatefeaturedItemBlock }
 							templateLock="all"
 						/>
-						<div className={`govuk-grid-row ${featuredDocumentHasDate && itemDate != '' ? '' : 'mojblocks-featured-item-hide-date'} `}>
+						<div className={`govuk-grid-row ${featuredItemHasDate && itemDate != '' ? '' : 'mojblocks-featured-item-hide-date'} `}>
 							<div class="mojblocks-featured-item__item">
 								<div className={ `mojblocks-featured-item__image ${itemImageExists ? "" : "mojblocks-featured-item__image--none"} mojblocks-featured-item__image--${featuredImage}`} style={itemBackgroundImageStyle}>
 								</div>
 								<div className="mojblocks-featured-item__text">
-									<div className={ `mojblocks-featured-item__headline ${featuredDocumentHasBar ? "" : "mojblocks-featured-item__headline--no-bar"}` } >
+									<div className={ `mojblocks-featured-item__headline ${featuredItemHasBar ? "" : "mojblocks-featured-item__headline--no-bar"}` } >
 										<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-item__headline-link" >
 											{ itemTitle }
 										</a>

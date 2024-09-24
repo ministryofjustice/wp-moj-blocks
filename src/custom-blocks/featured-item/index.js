@@ -13,15 +13,15 @@ registerBlockType("mojblocks/featured-item", {
   keywords: [__('featured item')],
 
   attributes: {
-    featuredDocumentHasDate: {
+    featuredItemHasDate: {
       type: "boolean",
       default: true
     },
-    featuredDocumentHasBar: {
+    featuredItemHasBar: {
       type: "boolean",
       default: true
     },
-    featuredDocumentID: {
+    featuredItemID: {
       type: "string",
       default: "0"
     },
