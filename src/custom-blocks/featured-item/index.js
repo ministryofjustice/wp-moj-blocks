@@ -37,10 +37,6 @@ registerBlockType("mojblocks/featured-item", {
       type: "string",
       default: ""
     },
-    featuredImage: {
-      type: "string",
-      default: "contain"
-    },
     featuredLinkText: {
       type: "string",
       default: "Read full article"
