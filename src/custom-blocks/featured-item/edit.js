@@ -105,12 +105,15 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		{ title: "No item selected", summary: "", date: "date", image: "", imageID: "0"}
 	];
 
-	let imageOptions = [
-		// this is the CSS value for background-size
-		{ label: "No image", value: "none" },
-		{ label: "Show whole image", value: "contain" },
-		{ label: "Image cropped and fills area", value: "cover" }
+	// this is the CSS value for background-size
+	let imageOptionsCustom = [
+		{ label: "Image cropped and fills area", value: "cover" }, //default
+		{ label: "Show whole image", value: "contain" }
 	];
+	// this is as above, except if no custom image selected, the option to not shew image also exists
+	let imageOptionsAuto = imageOptionsCustom.concat([
+		{ label: "No image", value: "none" },
+	]);
 
 	if (Array.isArray( allDocuments )) {
 		for (let i=0;i<allDocuments.length;i++) {
@@ -194,7 +197,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 				<SelectControl
 					label="Image style"
 					value={ featuredImage }
-					options={ imageOptions }
+					options={ imageOptionsAuto }
 					onChange={ setImage }
 					className = {
 						featuredItemID == "0"
@@ -283,7 +286,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 				{ featuredCustomImage && (<SelectControl
 					label="Image style"
 					value={ featuredImage }
-					options={ imageOptions }
+					options={ imageOptionsCustom }
 					onChange={ setImage }
 				/>)}
 
@@ -325,14 +328,14 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 			<Fragment >
 				{ inspectorControls }
 				<div className={`mojblocks-featured-item ${className} ${itemPreviewClass}`}>
-					<div className="govuk-width-container">
+					<div className="govuk-width-container govuk-!-margin-0">
 						<InnerBlocks
 							template={ templatefeaturedItemBlock }
 							templateLock="all"
 						/>
 						<div className={`govuk-grid-row ${featuredItemHasDate && itemDate != '' ? '' : 'mojblocks-featured-item-hide-date'} `}>
 							<div class="mojblocks-featured-item__item">
-								<div className={ `mojblocks-featured-item__image ${itemImageExists ? "" : "mojblocks-featured-item__image--none"} mojblocks-featured-item__image--${featuredImage}`} style={itemBackgroundImageStyle}>
+								<div className={ `mojblocks-featured-item__image ${itemImageExists && itemImage ? "" : "mojblocks-featured-item__image--none"} mojblocks-featured-item__image--${featuredImage}`} style={itemBackgroundImageStyle}>
 								</div>
 								<div className="mojblocks-featured-item__text">
 									<div className={ `mojblocks-featured-item__headline ${featuredItemHasBar ? "" : "mojblocks-featured-item__headline--no-bar"}` } >
@@ -346,9 +349,9 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 									<p className="govuk-body-s mojblocks-featured-item__date" >
 										{ itemDate }
 									</p>
-									<p className="govuk-link mojblocks-featured-item__link" >
+									<a href="#" className="govuk-link mojblocks-featured-item__link" >
 										{ featuredLinkText }
-									</p>
+									</a>
 								</div>
 							</div>
 						</div>
