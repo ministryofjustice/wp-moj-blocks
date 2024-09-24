@@ -16,10 +16,10 @@ function render_callback_featured_item_block($attributes, $content)
 
     // Parse attributes found in index.js
     $attribute_box_featuredType = esc_html($attributes['featuredItemType'] ?? 'post');
-    $attribute_box_featuredID = esc_html($attributes['featuredDocumentID'] ?? '');
+    $attribute_box_featuredID = esc_html($attributes['featuredItemID'] ?? '');
     $attribute_box_imageOption = esc_html($attributes['featuredImage'] ?? 'contain');
-    $attribute_box_hasDate = esc_html($attributes['featuredDocumentHasDate'] ?? 'true');
-    $attribute_box_hasBar = esc_html($attributes['featuredDocumentHasBar'] ?? 'true');
+    $attribute_box_hasDate = esc_html($attributes['featuredItemHasDate'] ?? 'true');
+    $attribute_box_hasBar = esc_html($attributes['featuredItemHasBar'] ?? 'true');
     $attribute_box_linkText = esc_html($attributes['featuredLinkText'] ?? 'Read full article');
     $attribute_box_customImage = esc_url_raw($attributes['featuredCustomImage'] ?? '');
     $attribute_box_className = esc_html($attributes['className'] ?? '');
