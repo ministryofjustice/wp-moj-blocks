@@ -30,8 +30,8 @@ registerBlockType("mojblocks/featured-item", {
       default: ""
     },
     featuredImage: {
-      type: "string",
-      default: "cover"
+      type: "boolean",
+      default: true
     },
     featuredCustomImage: {
       type: "string",

@@ -17,7 +17,7 @@ function render_callback_featured_item_block($attributes, $content)
     // Parse attributes found in index.js
     $attribute_box_featuredType = esc_html($attributes['featuredItemType'] ?? '');
     $attribute_box_featuredID = esc_html($attributes['featuredItemID'] ?? '');
-    $attribute_box_imageOption = esc_html($attributes['featuredImage'] ?? 'cover');
+    $attribute_box_hasImage = esc_html($attributes['featuredImage'] ?? true);
     $attribute_box_hasDate = esc_html($attributes['featuredItemHasDate'] ?? 'true');
     $attribute_box_hasBar = esc_html($attributes['featuredItemHasBar'] ?? 'true');
     $attribute_box_linkText = esc_html($attributes['featuredLinkText'] ?? 'Read full article');
@@ -58,8 +58,8 @@ function render_callback_featured_item_block($attributes, $content)
                 ?>
                 <div class="govuk-grid-row">
                     <div class="mojblocks-featured-item__item">
-                        <?php if ($image && $attribute_box_imageOption != "none") { ?>
-                            <div class="mojblocks-featured-item__image mojblocks-featured-item__image--<?php echo $attribute_box_imageOption;?>" style="background-image:url('<?php echo $image ?>')">
+                        <?php if ($image && $attribute_box_hasImage) { ?>
+                            <div class="mojblocks-featured-item__image mojblocks-featured-item__image--cover" style="background-image:url('<?php echo $image ?>')">
                                 <span role="img" aria-label="Cover image for featured news story"></span>
                             </div>
                         <?php } ?>
