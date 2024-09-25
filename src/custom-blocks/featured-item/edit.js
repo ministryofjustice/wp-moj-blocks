@@ -374,9 +374,5 @@ function datify(x,d) {
 	var month = " " + month[parseInt(x[1])];
 	var year = " " + x[0];
 
-	if (d.getFullYear() == x[0]) {
-	return day + month;
-	} else {
 	return day + month + year;
-	}
 }
