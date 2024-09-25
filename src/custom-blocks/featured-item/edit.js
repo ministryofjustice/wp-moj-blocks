@@ -56,7 +56,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		allDocuments,
 	} = useSelect(
 		( select ) => {
-			if (featuredItemID.length > 0) {
+			if (featuredItemType != "" && featuredItemID.length > 0) {
 
 				const { getEntityRecords } = select(
 					coreStore
@@ -67,7 +67,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 				const posts = getEntityRecords(
 					'postType',
 					featuredItemType,
-					{ per_page: 24 } // restructs to the 25 options (including none)
+					{ per_page: 24 } // restricts to the 25 options (including none)
 				);
 
 				return {
@@ -293,7 +293,8 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 			</PanelBody>
 		</InspectorControls>
 	);
-	if (!Array.isArray( allDocuments ) || !Array.isArray(docList)) {
+	if (!Array.isArray( allDocuments ) && allDocuments !== false) {
+		// allDocuments is null (items from getEntityRecords not loaded yet)
 		return (
 			<Fragment >
 				<div class="mojblocks-spinner"></div>
@@ -301,6 +302,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 			</Fragment >
 		);
 	} else {
+		// allDocuments is array or is false (false = no post type selected)
 		let itemTitle, itemDate, itemImage, itemImageID, itemPreviewClass, itemSummary, itemBackgroundImageStyle, itemImageExists = false;
 
 		if (docList[featuredItemID]) {
