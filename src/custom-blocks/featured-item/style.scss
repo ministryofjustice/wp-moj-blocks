@@ -69,40 +69,48 @@ Block: Featured Item (Frontend styles)
 		background-size: contain;
 		background-position-y: center;
 
-		&--cover {
-			background-position: center;
-			background-size: cover;
-
-			img {
-				width: fit-content;
-				min-width: 100%;
-				min-height: 100%;
+		&:not(.is-style-image-left *):not(.is-style-image-right *) {
+			+ .mojblocks-featured-item__text {
+				padding-top: govuk-px-to-rem(40);
 			}
 		}
 
-		+ .mojblocks-featured-item__text {
-			padding: govuk-px-to-rem(40) 0 0 0;
+		&:is(.is-style-image-left *),
+		&:is(.is-style-image-right *) {
+			background-size: cover;
+			background-position: center;
+
+			+ .mojblocks-featured-item__text {
+				padding-top: 8px;
+
+				&--no-bar {
+					padding-top: 0;
+				}
+			}
 		}
+
 	}
 	&__text {
 		display:block;
 		width:100%;
 		padding: 1px 0 0 0;
+
+		&--no-bar {
+			.mojblocks-featured-item__headline {
+				margin-top:0;
+			}
+		}
 	}
-	
+
 	&__headline {
 		margin: 16px 0;
 		margin: govuk-px-to-rem(16) 0;
-
-		&--no-bar {
-			margin-top:0;
-		}
 
 		&-link.govuk-link{
 			position: relative;
 			text-decoration: none;
 
-			&:not(.mojblocks-featured-item__headline--no-bar *):before { //bar above headline
+			&:not(.mojblocks-featured-item__text--no-bar *):before { //bar above headline
 				content: "";
 				width: 64px;
 				width: govuk-px-to-rem(64);
@@ -136,7 +144,7 @@ Block: Featured Item (Frontend styles)
 		}
 		&.is-style-image-left {
 			.mojblocks-featured-item__text {
-				padding: govuk-px-to-rem(32) 0 0 govuk-px-to-rem(32);
+				padding-left: govuk-px-to-rem(32);
 			}
 		}
 		&.is-style-image-right {
@@ -144,7 +152,7 @@ Block: Featured Item (Frontend styles)
 				flex-direction:row-reverse;
 			}
 			.mojblocks-featured-item__text {
-				padding: govuk-px-to-rem(32) govuk-px-to-rem(32) 0 0;
+				padding-right: govuk-px-to-rem(32);
 			}
 		}
 	}

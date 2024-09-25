@@ -105,16 +105,6 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		{ title: "No item selected", summary: "", date: "date", image: "", imageID: "0"}
 	];
 
-	// this is the CSS value for background-size
-	let imageOptionsCustom = [
-		{ label: "Image cropped and fills area", value: "cover" }, //default
-		{ label: "Show whole image", value: "contain" }
-	];
-	// this is as above, except if no custom image selected, the option to not shew image also exists
-	let imageOptionsAuto = imageOptionsCustom.concat([
-		{ label: "No image", value: "none" },
-	]);
-
 	if (Array.isArray( allDocuments )) {
 		for (let i=0;i<allDocuments.length;i++) {
 			docList[allDocuments[i].id] = {
@@ -194,17 +184,16 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 				/>
 
 				{(docList[featuredItemID] && docList[featuredItemID].image && !featuredCustomImage) && (
-				<SelectControl
-					label="Image style"
-					value={ featuredImage }
-					options={ imageOptionsAuto }
-					onChange={ setImage }
-					className = {
-						featuredItemID == "0"
-						? 'hidden-control'
-						: ''
-					}
-				/>
+					<ToggleControl
+						label="Show/hide image"
+						help={
+							featuredImage === true
+							? 'The image will be displayed, you can choose a different image below'
+							: 'The image will be hidden'
+						}
+						checked={ featuredImage }
+						onChange={ setImage }
+					/>
 				)}
 
 				<ToggleControl
@@ -282,14 +271,6 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 						</Fragment>
 					)}
 				/>
-
-				{ featuredCustomImage && (<SelectControl
-					label="Image style"
-					value={ featuredImage }
-					options={ imageOptionsCustom }
-					onChange={ setImage }
-				/>)}
-
 			</PanelBody>
 		</InspectorControls>
 	);
@@ -313,7 +294,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 			itemImageID = docList[featuredItemID].imageID; // if 0 = no image
 			itemPreviewClass = "";
 			if (featuredCustomImage) itemImage = featuredCustomImage; // If a custom image has been selected, override the featured image
-			if (itemImageID || featuredCustomImage) itemImageExists = true;
+			if ((featuredImage && itemImageID) || featuredCustomImage) itemImageExists = true;
 		} else {
 			itemTitle = "No item selected";
 			itemDate = "Select a different item or item type"
@@ -337,10 +318,10 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 						/>
 						<div className={`govuk-grid-row ${featuredItemHasDate && itemDate != '' ? '' : 'mojblocks-featured-item-hide-date'} `}>
 							<div class="mojblocks-featured-item__item">
-								<div className={ `mojblocks-featured-item__image ${itemImageExists && itemImage ? "" : "mojblocks-featured-item__image--none"} mojblocks-featured-item__image--${featuredImage}`} style={itemBackgroundImageStyle}>
+								<div className={ `mojblocks-featured-item__image ${itemImageExists && itemImage ? "" : "mojblocks-featured-item__image--none"}`} style={itemBackgroundImageStyle}>
 								</div>
-								<div className="mojblocks-featured-item__text">
-									<div className={ `mojblocks-featured-item__headline ${featuredItemHasBar ? "" : "mojblocks-featured-item__headline--no-bar"}` } >
+								<div className={ `mojblocks-featured-item__text ${featuredItemHasBar ? "" : "mojblocks-featured-item__text--no-bar"}`}>
+									<div className="mojblocks-featured-item__headline" >
 										<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-item__headline-link" >
 											{ itemTitle }
 										</a>
