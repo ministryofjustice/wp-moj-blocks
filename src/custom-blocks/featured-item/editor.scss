@@ -43,13 +43,3 @@ Block: Featured Item (Gutenberg editor styles)
 		display: none;
 	}
 }
-
-// This removes the bottom margin when in a group block for editor screens
-.block-editor-block-styles .wp-block-group.wp-block-group>:last-child .mojblocks-featured-item,
-.block-editor-inserter__menu-help-panel .wp-block-group.wp-block-group>:last-child .mojblocks-featured-item,
-.edit-post-visual-editor .wp-block-group.wp-block-group>:last-child .mojblocks-featured-item,
-.block-editor-block-styles .wp-block-group.is-selected>:nth-child(-n+2) .mojblocks-featured-item,
-.block-editor-inserter__menu-help-panel .wp-block-group.is-selected>:nth-child(-n+2) .mojblocks-featured-item,
-.edit-post-visual-editor .wp-block-group.is-selected>:nth-child(-n+2) .mojblocks-featured-item{
-    margin-bottom: 0;
-}
