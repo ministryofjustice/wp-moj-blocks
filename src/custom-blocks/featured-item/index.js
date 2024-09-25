@@ -27,7 +27,7 @@ registerBlockType("mojblocks/featured-item", {
     },
     featuredItemType: {
       type: "string",
-      default: "post"
+      default: ""
     },
     featuredImage: {
       type: "string",

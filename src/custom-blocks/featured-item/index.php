@@ -15,7 +15,7 @@ function render_callback_featured_item_block($attributes, $content)
 {
 
     // Parse attributes found in index.js
-    $attribute_box_featuredType = esc_html($attributes['featuredItemType'] ?? 'post');
+    $attribute_box_featuredType = esc_html($attributes['featuredItemType'] ?? '');
     $attribute_box_featuredID = esc_html($attributes['featuredItemID'] ?? '');
     $attribute_box_imageOption = esc_html($attributes['featuredImage'] ?? 'cover');
     $attribute_box_hasDate = esc_html($attributes['featuredItemHasDate'] ?? 'true');
@@ -79,14 +79,10 @@ function render_callback_featured_item_block($attributes, $content)
                             <?php
                             if ($attribute_box_hasDate) {
                                 $articleDate = strtotime($feature_content["date"]);
-                                if (date("Y") == date("Y",$articleDate)) {
-                                    $date_string = date("j F",$articleDate);
-                                } else {
-                                    $date_string = date("j F Y",$articleDate);
-                                }
+                                $date_string = date("F j, Y",$articleDate);
                             ?>
                                 <p class="govuk-body-s mojblocks-featured-item__date" >
-                                    <?php _e(esc_html($date_string));?>
+                                    <span class="govuk-visually-hidden"><?php _e("Published on ","hale"); ?></span><?php _e(esc_html($date_string));?>
                                 </p>
                             <?php } ?>
 
