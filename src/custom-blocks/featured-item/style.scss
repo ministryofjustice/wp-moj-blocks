@@ -47,9 +47,11 @@ Block: Featured Item (Frontend styles)
 		margin-left: 0;
 	}
 	&__summary.govuk-body {
-		margin-bottom:8px;
 		margin-bottom:govuk-px-to-rem(8);
 
+		&:is(.has-text-color p) {
+			color:inherit;
+		}
 		&:is(.is-style-wide p) {
 			max-width: 960px;
 		}
@@ -159,6 +161,10 @@ Block: Featured Item (Frontend styles)
 
 	&__date.govuk-body-s {
 		color:$govuk-secondary-text-colour;
+
+		&:is(.has-text-color p) {
+			color: inherit;
+		}
 	}
 
 	.mojblocks-featured-item-hide-date .mojblocks-featured-item__date {
