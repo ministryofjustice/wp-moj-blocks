@@ -60,7 +60,7 @@ function render_callback_featured_item_block($attributes, $content)
                     <div class="mojblocks-featured-item__item">
                         <?php if ($image && $attribute_box_hasImage) { ?>
                             <div class="mojblocks-featured-item__image mojblocks-featured-item__image--cover" style="background-image:url('<?php echo $image ?>')">
-                                <span role="img" aria-label="Cover image for featured news story"></span>
+                                <span role="img" aria-label="Cover image for featured item (<?php _e(esc_html($feature_content["title"]));?>)"></span>
                             </div>
                         <?php } ?>
                         <div class="mojblocks-featured-item__text">
