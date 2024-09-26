@@ -48,6 +48,8 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			};
 		}
 	);
+	console.log("ccc");
+	console.log(latestNews);
 
     const {
         featuredNewsArticle,
@@ -88,10 +90,10 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 	];
 	if (Array.isArray( latestNews )) {
 		for (let i=0;i<latestNews.length;i++) {
-			if (latestNews[i].summary_meta.news_story_summary) {
+			if (latestNews[i].post_meta.summary) {
 				newsList[latestNews[i].id] = {
 					title: latestNews[i].title.rendered,
-					summary: latestNews[i].summary_meta.news_story_summary,
+					summary: latestNews[i].post_meta.summary,
 					date: latestNews[i].date,
 					image: latestNews[i].featured_image_url,
 				}
@@ -104,7 +106,7 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 
             newsList[featuredNewsID] = {
                 title: featuredNewsArticle.title.rendered,
-                summary: featuredNewsArticle.summary_meta.news_story_summary,
+                summary: featuredNewsArticle.post_meta.summary,
                 date: featuredNewsArticle.date,
                 image: featuredNewsArticle.featured_image_url,
             }
