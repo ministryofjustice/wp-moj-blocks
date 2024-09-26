@@ -109,7 +109,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		for (let i=0;i<allDocuments.length;i++) {
 			docList[allDocuments[i].id] = {
 				title: allDocuments[i].title.rendered,
-				summary: allDocuments[i].summary_meta.post_summary,
+				summary: allDocuments[i].post_meta.summary,
 				date: allDocuments[i].date,
 				imageID: allDocuments[i].featured_media,
 				image: allDocuments[i].featured_image_url,

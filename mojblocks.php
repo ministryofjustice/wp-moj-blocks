@@ -571,7 +571,7 @@ function mojblocks_extend_wp_api($data, $post, $context) {
 
     // Add summary to API
     $summary = get_post_meta( get_the_ID(), 'post_summary', TRUE); // get the value from the meta field
-    $data->data['summary_meta'] = array( 'post_summary' => $summary );
+    $data->data['post_meta'] = array( 'summary' => $summary );
 
     return $data;
 }
@@ -586,15 +586,3 @@ function add_all_prepare_filters() {
     }
 }
 add_action( 'pre_get_posts', 'add_all_prepare_filters' );
-
-function mojblocks_extend_wp_api_legacy_summary($data, $post, $context) {
-    $summary = get_post_meta( get_the_ID(), 'post_summary', TRUE); // get the value from the meta field
-    if( $summary ) { // include it in the response if not empty
-        $data->data['summary_meta'] = array( 'news_story_summary' => $summary );
-    } else {
-        $data->data['summary_meta'] = array( 'news_story_summary' => '' );
-    }
-
-    return $data;
-}
-add_filter( "rest_prepare_news", 'mojblocks_extend_wp_api_legacy_summary', 10, 3 );
