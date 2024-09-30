@@ -19,6 +19,7 @@ function render_callback_separator_block($attributes, $content)
     $attribute_line_size = $attributes['separatorThickness'] ?? '1';
     $attribute_line_colour = $attributes['separatorColour'] ?? '#b1b4b6';
     $attribute_width = $attributes['separatorWidth'] ?? '0';
+    $attribute_class_name = $attributes['className'] ?? '';
 
     // Sets the size of the gap around the line
     $gap_size = !empty($attribute_gap_size) ? "govuk-section-break--$attribute_gap_size" : '';
@@ -40,7 +41,7 @@ function render_callback_separator_block($attributes, $content)
     ?>
 
     <hr
-        class="alignfull govuk-section-break govuk-section-break--visible <?php echo $gap_size; ?>"
+        class="alignfull govuk-section-break govuk-section-break--visible <?php echo $gap_size; ?> <?php echo esc_html($attribute_class_name); ?>"
         <?php // alignfull is to prevent group block overriding the width ?>
         style="<?php echo $line_size.$line_hue.$line_width;?>"
     />
