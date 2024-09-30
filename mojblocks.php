@@ -460,13 +460,13 @@ function mojblocks_register_blocks()
             'editor_script' => 'mojblocks-editor-script',
             'render_callback' => 'render_callback_featured_item_block',
             'attributes' => [
-                'featuredDocumentHasDate' => [
+                'featuredItemHasDate' => [
                     'type' => 'boolean'
                 ],
-                'featuredDocumentID' => [
+                'featuredItemID' => [
                     'type' => 'string'
                 ],
-                'featuredDocumentClassName' => [
+                'featuredItemClassName' => [
                     'type' => 'string'
                 ]
             ]
