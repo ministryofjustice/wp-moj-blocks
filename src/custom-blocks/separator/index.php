@@ -40,7 +40,8 @@ function render_callback_separator_block($attributes, $content)
     ?>
 
     <hr
-        class="govuk-section-break govuk-section-break--visible <?php echo $gap_size; ?>"
+        class="alignfull govuk-section-break govuk-section-break--visible <?php echo $gap_size; ?>"
+        <?php // alignfull is to prevent group block overriding the width ?>
         style="<?php echo $line_size.$line_hue.$line_width;?>"
     />
 
