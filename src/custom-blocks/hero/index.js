@@ -245,37 +245,37 @@ registerBlockType("mojblocks/hero", {
                     
                 </PanelBody>
             </InspectorControls>,
-        <section className={`${className} mojblocks-hero ${heroImageWide ? '' : 'mojblocks-hero--narrow'}`} >
-            <div className="mojblocks-hero__image" style={{
-                backgroundImage: `url(${ backgroundImage })`,
-                backgroundSize: 'cover',
-                backgroundPosition: `${heroImagePosition}`
-            }}>
-            </div>
 
-            <div className="govuk-width-container">
-                <div className={`govuk-grid-row mojblocks-hero__overlay-container mojblocks-hero__overlay-container--${overlayPosition}`}>
-                    <div
-                        className="mojblocks-hero__overlay"
-                        style={{
-                            borderRadius: `${overlayCorners}px`,
-                            rotate: `${overlayPosition == "middle" ? overlayTilt : '0'}deg`
-                        }}
-                    >
-                        <div className="mojblocks-hero__overlay__background" style={{
-                            backgroundColor: `${overlayBackgroundColour}`,
-                            opacity: `${overlayBackgroundOpacity}`,
-                        }}></div>
-                        <InnerBlocks
-                            allowedBlocks={ allowedBlocks }
-                        />
+            <section className={`${className} mojblocks-hero ${heroImageWide ? '' : 'mojblocks-hero--narrow'}`} >
+                <div className="mojblocks-hero__image" style={{
+                    backgroundImage: `url(${ backgroundImage })`,
+                    backgroundSize: 'cover',
+                    backgroundPosition: `${heroImagePosition}`
+                }}>
+                </div>
+
+                <div className="govuk-width-container">
+                    <div className={`govuk-grid-row mojblocks-hero__overlay-container mojblocks-hero__overlay-container--${overlayPosition}`}>
+                        <div
+                            className="mojblocks-hero__overlay"
+                            style={{
+                                borderRadius: `${overlayCorners}px`,
+                                rotate: `${overlayPosition == "middle" ? overlayTilt : '0'}deg`
+                            }}
+                        >
+                            <div className="mojblocks-hero__overlay__background" style={{
+                                backgroundColor: `${overlayBackgroundColour}`,
+                                opacity: `${overlayBackgroundOpacity}`,
+                            }}></div>
+                            <InnerBlocks
+                                allowedBlocks={ allowedBlocks }
+                            />
+                        </div>
                     </div>
                 </div>
-            </div>
 
-        </section>
-    ])
-
+            </section>
+        ])
     },
     // return null as frontend output is done via PHP
     save: () => {
