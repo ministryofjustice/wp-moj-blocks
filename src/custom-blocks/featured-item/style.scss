@@ -119,7 +119,7 @@ Block: Featured Item (Frontend styles)
 				width: govuk-px-to-rem(64);
 				height: 8px;
 				height: govuk-px-to-rem(8);
-				background: currentColor;
+				background: currentColor; //Overridden by a custom colour from Hale
 				position: absolute;
 				top: -24px; //16px + 8px (height of bar)
 				top: govuk-px-to-rem(-24);

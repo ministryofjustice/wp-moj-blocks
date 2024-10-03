@@ -32,7 +32,7 @@ function render_callback_featured_item_block($attributes, $content)
     ?>
 
     <?php
-        if ($attribute_box_featuredID != "" && get_post_type($attribute_box_featuredID) == $attribute_box_featuredType) {
+        if ($attribute_box_featuredID != "" && get_post_type($attribute_box_featuredID) == $attribute_box_featuredType && get_post_status($attribute_box_featuredID) == "publish") {
             $feature_content = [
                 "title" => get_the_title($attribute_box_featuredID),
                 "summary" => get_post_meta( $attribute_box_featuredID, 'post_summary', TRUE ),
