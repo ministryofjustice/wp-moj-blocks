@@ -21,6 +21,7 @@ const allowedMediaTypes = ['image'];
 const templatefeaturedItemBlock = [
 	[ 'core/heading', { placeholder: 'Add featured item section title' } ]
 ];
+const noItemSelectedText = "No item selected"; // Text in editor to shew that no item will be displayed
 
 export default function featuredItemEdit({ attributes, setAttributes} ) {
 
@@ -102,7 +103,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 	]
 
 	var docList = [
-		{ title: "No item selected", summary: "", date: "date", image: "", imageID: "0"}
+		{ title: noItemSelectedText, summary: "", date: "date", image: "", imageID: "0"}
 	];
 
 	if (Array.isArray( allDocuments )) {
@@ -286,19 +287,22 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		// allDocuments is array or is false (false = no post type selected)
 		let itemTitle, itemDate, itemImage, itemImageID, itemPreviewClass, itemSummary, itemBackgroundImageStyle, itemImageExists = false;
 
+		itemPreviewClass = "";
 		if (docList[featuredItemID]) {
 			itemTitle = docList[featuredItemID].title;
 			itemSummary = docList[featuredItemID].summary;
 			itemDate = datify(docList[featuredItemID].date,d);
 			itemImage = docList[featuredItemID].image;
 			itemImageID = docList[featuredItemID].imageID; // if 0 = no image
-			itemPreviewClass = "";
 			if (featuredCustomImage) itemImage = featuredCustomImage; // If a custom image has been selected, override the featured image
 			if ((featuredImage && itemImageID) || featuredCustomImage) itemImageExists = true;
 		} else {
-			itemTitle = "No item selected";
-			itemDate = "Select a different item or item type"
-			itemPreviewClass = "mojblocks-featured-item--empty";
+			itemTitle = noItemSelectedText;
+		}
+
+		if (itemTitle == noItemSelectedText) {
+			itemDate = "Select a different item or item type";
+			itemPreviewClass += "mojblocks-featured-item--empty";
 		}
 
 		if (itemImageExists) {
