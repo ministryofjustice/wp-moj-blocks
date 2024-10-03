@@ -28,7 +28,6 @@ Block: Featured Item (Frontend styles)
 	0% { transform: rotate(0deg); }
 	100% { transform: rotate(360deg); }
 }
-
 .mojblocks-featured-item {
 	max-width: 700px;
 	margin: 0 0 govuk-px-to-rem(48);
@@ -47,7 +46,7 @@ Block: Featured Item (Frontend styles)
 		margin-left: 0;
 	}
 	&__summary.govuk-body {
-		margin-bottom:govuk-px-to-rem(8);
+		margin-bottom:govuk-px-to-rem(12);
 
 		&:is(.has-text-color p) {
 			color:inherit;
@@ -59,7 +58,7 @@ Block: Featured Item (Frontend styles)
 	&__link {
 		font-weight: 700;
 		margin-top: 16px;
-		margin-top: govuk-px-to-rem(16);
+		margin-top: govuk-px-to-rem(12);
 	}
 	&__image {
 		background-repeat: no-repeat;
@@ -84,8 +83,10 @@ Block: Featured Item (Frontend styles)
 
 			+ .mojblocks-featured-item__text {
 				padding-top: 8px;
+				margin-top: 1.5rem;
 
 				&--no-bar {
+					margin-top: 0;
 					padding-top: 0;
 				}
 			}
@@ -142,6 +143,9 @@ Block: Featured Item (Frontend styles)
 				height:initial;
 				min-height:230px;
 				flex: 1;
+			}
+			.mojblocks-featured-item__text {
+				margin-top: 0px;
 			}
 		}
 		&.is-style-image-left {
