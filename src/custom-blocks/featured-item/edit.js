@@ -316,26 +316,24 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 							template={ templatefeaturedItemBlock }
 							templateLock="all"
 						/>
-						<div className={`govuk-grid-row ${featuredItemHasDate && itemDate != '' ? '' : 'mojblocks-featured-item-hide-date'} `}>
-							<div class="mojblocks-featured-item__item">
-								<div className={ `mojblocks-featured-item__image ${itemImageExists && itemImage ? "" : "mojblocks-featured-item__image--none"}`} style={itemBackgroundImageStyle}>
-								</div>
-								<div className={ `mojblocks-featured-item__text ${featuredItemHasBar ? "" : "mojblocks-featured-item__text--no-bar"}`}>
-									<div className="mojblocks-featured-item__headline" >
-										<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-item__headline-link" >
-											{ itemTitle }
-										</a>
-									</div>
-									<p className="govuk-body mojblocks-featured-item__summary" >
-										{ itemSummary }
-									</p>
-									<p className="govuk-body-s mojblocks-featured-item__date" >
-										{ itemDate }
-									</p>
-									<a href="#" className="govuk-link mojblocks-featured-item__link" >
-										{ featuredLinkText }
+						<div class="mojblocks-featured-item__item">
+							<div className={ `mojblocks-featured-item__image ${itemImageExists && itemImage ? "" : "mojblocks-featured-item__image--none"}`} style={itemBackgroundImageStyle}>
+							</div>
+							<div className={ `mojblocks-featured-item__text govuk-!-padding-top-2 ${featuredItemHasBar ? "" : "mojblocks-featured-item__text--no-bar"}`}>
+								<div className="mojblocks-featured-item__headline" >
+									<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-item__headline-link" >
+										{ itemTitle }
 									</a>
 								</div>
+								<p className="govuk-body mojblocks-featured-item__summary" >
+									{ itemSummary }
+								</p>
+								<p className="govuk-body-s mojblocks-featured-item__date" >
+									{ itemDate }
+								</p>
+								<a href="#" className="govuk-link mojblocks-featured-item__link" >
+									{ featuredLinkText }
+								</a>
 							</div>
 						</div>
 					</div>
