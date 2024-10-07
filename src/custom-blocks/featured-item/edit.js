@@ -323,7 +323,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 						<div class="mojblocks-featured-item__item">
 							<div className={ `mojblocks-featured-item__image ${itemImageExists && itemImage ? "" : "mojblocks-featured-item__image--none"}`} style={itemBackgroundImageStyle}>
 							</div>
-							<div className={ `mojblocks-featured-item__text govuk-!-padding-top-2 ${featuredItemHasBar ? "" : "mojblocks-featured-item__text--no-bar"}`}>
+							<div className={ `mojblocks-featured-item__text ${featuredItemHasBar ? "" : "mojblocks-featured-item__text--no-bar"}`}>
 								<div className="mojblocks-featured-item__headline" >
 									<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-item__headline-link" >
 										{ itemTitle }
