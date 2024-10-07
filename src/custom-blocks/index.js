@@ -17,3 +17,4 @@ import "./latest-news";
 import "./featured-news";
 import "./featured-document";
 import "./laa-chatbot";
+import "./featured-item";
