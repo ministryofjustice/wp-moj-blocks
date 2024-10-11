@@ -44,11 +44,11 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 			const { getPostTypes } = select(
 				coreStore
 			);
-			const allPostTypeThingies = getPostTypes(
+			const allPostTypeList = getPostTypes(
 				{ per_page: -1 }
 			);
 			return {
-				allPostTypes: allPostTypeThingies
+				allPostTypes: allPostTypeList
 			};
 		}
 	);
@@ -58,6 +58,8 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 	} = useSelect(
 		( select ) => {
 			if (featuredItemType != "" && featuredItemID.length > 0) {
+				console.log("XXX");
+				console.log(featuredItemID);
 
 				const { getEntityRecords } = select(
 					coreStore
@@ -138,9 +140,9 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		setAttributes({ featuredItemType: newItemType });
 	};
 
-	const setDocument = newDocumentID => {
+	const setFeaturedItem = newItemID => {
 		setAttributes({ featuredCustomImage: null }); //removes image on doc change
-		setAttributes({ featuredItemID: newDocumentID });
+		setAttributes({ featuredItemID: newItemID });
 	};
 
 	const setImage = newImage => {
@@ -176,7 +178,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 					label="Select item"
 					value={ featuredItemID }
 					options={ docOptions }
-					onChange={ setDocument }
+					onChange={ setFeaturedItem }
 					help={
 						featuredCustomImage
 						? 'The custom image will be removed on change'
