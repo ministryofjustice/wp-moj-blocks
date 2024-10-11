@@ -57,9 +57,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		allDocuments,
 	} = useSelect(
 		( select ) => {
-			if (featuredItemType != "" && featuredItemID.length > 0) {
-				console.log("XXX");
-				console.log(featuredItemID);
+			if (featuredItemType != "") {
 
 				const { getEntityRecords } = select(
 					coreStore
