@@ -54,7 +54,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 	);
 
 	const {
-		allDocuments,
+		allItems,
 	} = useSelect(
 		( select ) => {
 			if (featuredItemType != "") {
@@ -72,11 +72,11 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 				);
 
 				return {
-					allDocuments: posts
+					allItems: posts
 				};
 			} else {
 				return {
-					allDocuments: false
+					allItems: false
 				};
 			}
 		}
@@ -106,27 +106,19 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		{ title: noItemSelectedText, summary: "", date: "date", image: "", imageID: "0"}
 	];
 
-	if (Array.isArray( allDocuments )) {
-		for (let i=0;i<allDocuments.length;i++) {
-			docList[allDocuments[i].id] = {
-				title: allDocuments[i].title.rendered,
-				summary: allDocuments[i].post_meta.summary,
-				date: allDocuments[i].date,
-				imageID: allDocuments[i].featured_media,
-				image: allDocuments[i].featured_image_url,
+	if (Array.isArray( allItems )) {
+		for (let i=0;i<allItems.length;i++) {
+			docList[allItems[i].id] = {
+				title: allItems[i].title.rendered,
+				summary: allItems[i].post_meta.summary,
+				date: allItems[i].date,
+				imageID: allItems[i].featured_media,
+				image: allItems[i].featured_image_url,
 			}
-			docOptions.push({label: allDocuments[i].title.rendered, value: allDocuments[i].id});
+			docOptions.push({label: allItems[i].title.rendered, value: allItems[i].id});
 
 		}
 	}
-
-	/* Not used yet
-	const changeImage = imageObject => {
-		var imageSizes = imageObject.sizes;
-		var image = imageSizes.large.url;
-		setAttributes({ featuredCustomImage: image })
-	}
-	*/
 
 	const removeImage = () => {
 		setAttributes({
@@ -275,8 +267,8 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 			</PanelBody>
 		</InspectorControls>
 	);
-	if (!Array.isArray( allDocuments ) && allDocuments !== false) {
-		// allDocuments is null (items from getEntityRecords not loaded yet)
+	if (!Array.isArray( allItems ) && allItems !== false) {
+		// allItems is null (items from getEntityRecords not loaded yet)
 		return (
 			<Fragment >
 				<div class="mojblocks-spinner"></div>
@@ -284,7 +276,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 			</Fragment >
 		);
 	} else {
-		// allDocuments is array or is false (false = no post type selected)
+		// allItems is array or is false (false = no post type selected)
 		let itemTitle, itemDate, itemImage, itemImageID, itemPreviewClass, itemSummary, itemBackgroundImageStyle, itemImageExists = false;
 
 		itemPreviewClass = "";
