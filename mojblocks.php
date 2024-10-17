@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     3.12.2
+ * Version:     3.13.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Malcolm Butler, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -453,6 +453,25 @@ function mojblocks_register_blocks()
 			]
 		);
 	}
+
+    register_block_type(
+        'mojblocks/featured-item',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_featured_item_block',
+            'attributes' => [
+                'featuredItemHasDate' => [
+                    'type' => 'boolean'
+                ],
+                'featuredItemID' => [
+                    'type' => 'string'
+                ],
+                'featuredItemClassName' => [
+                    'type' => 'string'
+                ]
+            ]
+        ]
+    );
 }
 
 /**
@@ -473,6 +492,7 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/staggered-box/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/latest-news/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-news/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-document/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-item/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/laa-chatbot/index.php';
 
 /**
@@ -536,24 +556,3 @@ function mojblocks_enqueue_style()
 }
 
 add_action('wp_enqueue_scripts', 'mojblocks_enqueue_style');
-
-function mojblocks_extend_wp_api($data, $post, $context) {
-    $featured_image_id = $data->data['featured_media']; // get featured image id
-    $featured_image_url = wp_get_attachment_image_src( $featured_image_id, 'feature' ); // get url of the feature size
-
-    if( $featured_image_url ) {
-        $data->data['featured_image_url'] = $featured_image_url[0];
-    } else {
-        $data->data['featured_image_url'] = "";
-    }
-
-    $summary = get_post_meta( get_the_ID(), 'post_summary', TRUE); // get the value from the meta field
-    if( $summary ) { // include it in the response if not empty
-        $data->data['summary_meta'] = array( 'news_story_summary' => $summary );
-    } else {
-        $data->data['summary_meta'] = array( 'news_story_summary' => '' );
-    }
-
-    return $data;
-}
-add_filter( 'rest_prepare_news', 'mojblocks_extend_wp_api', 10, 3 );
