@@ -1,0 +1,82 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Latest News (Frontend styles)
+
+**********************************************************************************************/
+
+.mojblocks-auto-item-list {
+	margin: 0 0 govuk-px-to-rem(48) 0;
+
+	& .govuk-grid-row {
+		position: relative;
+
+		// Gov UK override keeping the block within the container.
+		margin-right: 0;
+		margin-left: 0;
+	}
+
+	@include govuk-media-query($from: tablet) {
+		@include govuk-clearfix;
+
+		&__item {
+			display: inline-block;
+			vertical-align: top;
+			padding: 10px 3% 10px 0;
+			margin-bottom: 1.5rem;
+			width: 32%;
+			min-width: min(100%, 180px); // This is to ensure the items don't get too scrunched up when put into columns etc.
+
+			&--1 {
+				padding: 10px 3% 10px 0;
+				width: 66%;
+			}
+			&--2, &--4 {
+				padding: 10px 3% 10px 0;
+				width: 49%;
+			}
+		}
+	}
+
+	&__headline {
+		margin-top: govuk-px-to-rem(16);
+		margin-bottom: govuk-px-to-rem(16);
+
+		&:first-child {
+			padding-top: govuk-px-to-rem(16); //no image only
+		}
+
+		@include govuk-media-query($from: tablet) {
+
+			padding-top: 0;
+
+		}
+		&.govuk-body{
+			font-weight: 700;
+		}
+	}
+
+	&__image {
+		height: 120px;
+		width: 180px;
+		background-repeat: no-repeat;
+		background-size: cover;
+		background-position: center;
+		margin-bottom: 1rem;
+
+		&--logo {
+			border: 2px solid;
+			background-size: contain;
+		}
+	}
+
+	&__date {
+		&:not(.has-background p):not(.has-text-color p) {
+			color:#505a5f;
+		}
+	}
+
+	.mojblocks-auto-item-list-hide-date .mojblocks-auto-item-list__date {
+		display:none;
+	}
+}
