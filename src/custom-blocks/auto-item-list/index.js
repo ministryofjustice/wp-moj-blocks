@@ -43,6 +43,14 @@ registerBlockType("mojblocks/auto-item-list", {
       type: "string",
       default: "post"
     },
+    listTaxonomy: {
+      type: "string",
+      default: ""
+    },
+    listTaxonomyValue: {
+      type: "string",
+      default: ""
+    },
     listImage: {
       type: "boolean",
       default: false
@@ -68,6 +76,8 @@ registerBlockType("mojblocks/auto-item-list", {
         listHasDate,
         listHasTime,
         listItemType,
+        listTaxonomy,
+        listTaxonomyValue,
         listImage,
         listDefaultImage,
         pastFuture
@@ -110,6 +120,71 @@ registerBlockType("mojblocks/auto-item-list", {
     }
 
     const {
+      allTaxonomies,
+      taxonomyOptions,
+      taxonomyValues,
+      selectedOptionName
+    } = useSelect(
+      ( select ) => {
+        if (allPostTypes) {
+          const { getEntityRecords } = select(
+            coreStore
+          );
+
+          let allTaxes = [];
+          let taxOptionList = [{
+            label: "Show all",
+            value: ""
+          }]
+          let taxValueList = []
+
+          allPostTypes.forEach(thisPostType => {
+            if (thisPostType.slug == listItemType && thisPostType.taxonomies.length) {
+              thisPostType.taxonomies.forEach(tax => {
+                let taxValues = getEntityRecords( 'taxonomy', tax, { per_page: -1 });
+                if (taxValues && taxValues.length > 1) {
+                  taxOptionList.push({
+                    label: tax.charAt(0).toUpperCase() + tax.slice(1).replaceAll('_', ' '),
+                    value: tax
+                  })
+                  allTaxes[tax] = [];
+                  taxValues.forEach(taxValue => {
+                    if (listTaxonomy == tax) {
+                      taxValueList.push({
+                        label: taxValue.name,
+                        value: taxValue.id
+                      })
+                    }
+                    allTaxes[tax].push(taxValue);
+                  });
+                }
+              });
+            }
+          });
+          return {
+            allTaxonomies: allTaxes,
+            selectedOptionName: listTaxonomy.replaceAll('_', ' '),
+            taxonomyOptions: taxOptionList,
+            taxonomyValues: taxValueList
+          }
+        } else {
+          return {
+            allTaxonomies: false,
+            selectedOptionName: "",
+            taxonomyOptions: [{
+              label: "-",
+              value: ""
+            }],
+            taxonomyValues: [{
+              label: "-",
+              value: ""
+            }]
+          };
+        }
+      }
+    );
+
+    const {
       allDocuments,
     } = useSelect(
       ( select ) => {
@@ -138,6 +213,12 @@ registerBlockType("mojblocks/auto-item-list", {
 
     const setItemType = newItemType => {
       setAttributes({ listItemType: newItemType });
+    };
+    const setTaxonomy = newTaxonomy => {
+      setAttributes({ listTaxonomy: newTaxonomy });
+    };
+    const setTaxonomyValue = newTaxonomyValue => {
+      setAttributes({ listTaxonomyValue: newTaxonomyValue });
     };
     const setLength = newLength => {
       setAttributes({ listLength: newLength });
@@ -217,6 +298,26 @@ registerBlockType("mojblocks/auto-item-list", {
               options={ itemTypes }
               onChange={ setItemType }
             />
+            {
+              (taxonomyOptions.length > 1) && (
+                <SelectControl
+                  label="Restrict by taxonomy"
+                  value={ listTaxonomy }
+                  options={ taxonomyOptions }
+                  onChange={ setTaxonomy }
+                />
+              )
+            }
+            {
+              (listTaxonomy != "") && (
+                <SelectControl
+                  label={`Select ${selectedOptionName}`}
+                  value={ listTaxonomyValue }
+                  options={ taxonomyValues }
+                  onChange={ setTaxonomyValue }
+                />
+              )
+            }
             <ToggleControl
               label="Show/hide item publish date"
               help={

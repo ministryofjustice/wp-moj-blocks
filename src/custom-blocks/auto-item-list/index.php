@@ -23,6 +23,8 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_className = $attributes['listClassName'] ?? '';
     $attribute_box_listPostType = $attributes['listItemType'] ?? '';
     $attribute_box_listSort = 'date'; //date=published date, currently always published date
+    $attribute_box_listTaxonomy = $attributes['listTaxonomy'] ?? '';
+    $attribute_box_listTaxonomyValue = $attributes['listTaxonomyValue'] ?? '';
     $attribute_box_listImage = $attributes['listImage'] ?? false;
     $attribute_box_listDefaultImage = $attributes['listDefaultImage'] ?? '';
 
@@ -44,6 +46,7 @@ function render_callback_auto_item_list_block($attributes)
         // The Query
         $args = array(
             'post_type' => $attribute_box_listPostType,
+            'posts_per_page' => -1
         );
         $query = new WP_Query( $args );
 
@@ -80,6 +83,13 @@ function render_callback_auto_item_list_block($attributes)
                     $use_default = false;
                 }
 
+                $relevant_taxonomy_value = false;
+                if ($attribute_box_listTaxonomy != "" && taxonomy_exists($attribute_box_listTaxonomy)) {
+                    //If taxonomy to scrutinize is specified
+                    $relevant_taxonomy_array = get_the_terms(get_the_ID(),$attribute_box_listTaxonomy);
+                    if(is_array($relevant_taxonomy_array)) $relevant_taxonomy_value = $relevant_taxonomy_array[0]->term_id;
+                }
+
                 $item_array[] = [
                     "id" => get_the_ID(),
                     "title" => get_the_title(),
@@ -88,6 +98,7 @@ function render_callback_auto_item_list_block($attributes)
                     "link" => get_permalink(get_the_ID()),
                     "image" => $image,
                     "useLogo" => $use_logo_as_default && $use_default,
+                    "relevantTaxonomyValue" => $relevant_taxonomy_value
                 ];
             }
         }
@@ -131,6 +142,16 @@ function render_callback_auto_item_list_block($attributes)
                     continue;
                 }
             }
+            if ($attribute_box_listTaxonomyValue && $item_array[$k]["relevantTaxonomyValue"] && $item_array[$k]["relevantTaxonomyValue"] != $attribute_box_listTaxonomyValue) {
+                //Remove items which don't have the correct taxonomy value
+                unset($item_array[$k]);
+                continue;
+            } elseif ($attribute_box_listTaxonomyValue && !$item_array[$k]["relevantTaxonomyValue"]) {
+                //Remove items without this taxonomy value set
+                unset($item_array[$k]);
+                continue;
+            }
+
         }
         $item_array = array_values($item_array); //re-index
     ?>
