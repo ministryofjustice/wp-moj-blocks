@@ -48,8 +48,6 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 			};
 		}
 	);
-	console.log("ccc");
-	console.log(latestNews);
 
     const {
         featuredNewsArticle,
