@@ -22,10 +22,9 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_emptyText = $attributes['listEmptyText'] ?? 'No items to display.';
     $attribute_box_className = $attributes['listClassName'] ?? '';
     $attribute_box_listPostType = $attributes['listItemType'] ?? '';
-    $attribute_box_listSort = $attributes['listSort'] ?? 'date';
+    $attribute_box_listSort = 'date'; //date=published date, currently always published date
     $attribute_box_listImage = $attributes['listImage'] ?? false;
     $attribute_box_listDefaultImage = $attributes['listDefaultImage'] ?? '';
-    $attribute_box_listDatePrefix = $attributes['listDatePrefix'] ?? 'Updated';
 
     $use_logo_as_default = false;
     if (empty($attribute_box_listDefaultImage)) {
@@ -53,12 +52,9 @@ function render_callback_auto_item_list_block($attributes)
         if ( $query->have_posts() ) {
             while ( $query->have_posts() ) {
                 $query->the_post();
-                if ($attribute_box_listDatePrefix) $date_prefix = __("$attribute_box_listDatePrefix: ","hale");
-                if ($attribute_box_hasTime) $date_prefix .= "<br />"; //Break to give more space for the long date and time string
                 if ($attribute_box_listSort == "date") {
                     $date_to_use = get_the_date("Ymd");
                     $time_to_use = get_the_time("YmdHis");
-                    $date_prefix = "";
                 } elseif ($attribute_box_listSort == "modified") {
                     $date_to_use = get_the_modified_date("Ymd");
                     $time_to_use = get_the_modified_time("YmdHis");
@@ -68,7 +64,6 @@ function render_callback_auto_item_list_block($attributes)
                         // not a date/time, use publish date
                         $date_to_use = get_the_date("Ymd");
                         $time_to_use = get_the_time("YmdHis");
-                        $date_prefix = "";
                     } else {
                         $date_to_use = $time_to_use = $date_meta["datetime"];
                         if (!$date_meta["has_time"]) $time_to_use = ""; //there is no time data so we set it to ""
@@ -175,7 +170,7 @@ function render_callback_auto_item_list_block($attributes)
                                             $timeString .= __(date("a",$itemTime), "hale");
                                         }
                                     }
-                                    $item_array[$i]["date"] = $date_prefix.$dateString.$timeString;
+                                    $item_array[$i]["date"] = $dateString.$timeString;
                                 ?>
                                     <p class="govuk-body-s mojblocks-auto-item-list__date" >
                                         <?php _e(esc_html($item_array[$i]["date"]));?>

@@ -43,14 +43,6 @@ registerBlockType("mojblocks/auto-item-list", {
       type: "string",
       default: "post"
     },
-    listSort: {
-      type: "string",
-      default: "date"
-    },
-    listDatePrefix: {
-      type: "string",
-      default: "Updated"
-    },
     listImage: {
       type: "boolean",
       default: false
@@ -76,8 +68,6 @@ registerBlockType("mojblocks/auto-item-list", {
         listHasDate,
         listHasTime,
         listItemType,
-        listSort,
-        listDatePrefix,
         listImage,
         listDefaultImage,
         pastFuture
@@ -106,11 +96,6 @@ registerBlockType("mojblocks/auto-item-list", {
       value: ""
     }]
     let itemTypesFinishedParsing = false;
-
-    let fieldOptions = [
-      {label: "Publish date", value: "date"},
-      {label: "Modified date", value: "modified"},
-    ]
 
     if (allPostTypes) {
       allPostTypes.forEach(thisPostType => {
@@ -151,22 +136,6 @@ registerBlockType("mojblocks/auto-item-list", {
       }
     );
 
-    if (Array.isArray( allDocuments ) && allDocuments.length >= 1) {
-      // This section loops through the properties of this custom post type (first one, they'll all be the same)
-      // We are looking for any other fields which are dates
-      if (allDocuments[0].acf) {
-        for (var prop in allDocuments[0].acf) {
-          fieldOptions.push({label: (prop.charAt(0).toUpperCase()+prop.slice(1)).replaceAll("_"," "), value: prop});
-        }
-      }
-    }
-
-    const setSortField = newSortField => {
-      setAttributes({ listSort: newSortField });
-    };
-    const setDatePrefix = newDatePrefix => {
-      setAttributes({ listDatePrefix: newDatePrefix });
-    };
     const setItemType = newItemType => {
       setAttributes({ listItemType: newItemType });
     };
@@ -262,20 +231,6 @@ registerBlockType("mojblocks/auto-item-list", {
                 : `The most recent ${listLength} items will be shown${!listExpiry ? '' : ', unless they are more than ' + listExpiry + ' weeks old.'}`
               }
             />
-            <SelectControl
-              label="Select field to sort by"
-              value={ listSort }
-              options={ fieldOptions }
-              onChange={ setSortField }
-            />
-            {
-              (listSort != "date") && (<TextControl
-                label="Date prefix"
-                value={ listDatePrefix }
-                onChange={ setDatePrefix }
-              />)
-            }
-
             <ToggleControl
               label="Show/hide item publish date"
               help={
@@ -406,8 +361,7 @@ registerBlockType("mojblocks/auto-item-list", {
                 {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
-                  {listSort != 'date' && listDatePrefix ? listDatePrefix + ': ' : ''}
-                  {listHasTime && listDatePrefix ? <br /> : ''} <i>{ date } {listHasTime ? ' & time' : '' }</i>
+                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
                   <br />
                   {pastFuture == "future" ? "(next scheduled item)" : "(most recent item)" }
                 </p>
@@ -417,8 +371,7 @@ registerBlockType("mojblocks/auto-item-list", {
                 {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
-                  {listSort != 'date' && listDatePrefix ? listDatePrefix + ': ' : ''}
-                  {listHasTime && listDatePrefix ? <br /> : ''} <i>{ date } {listHasTime ? ' & time' : '' }</i>
+                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
                 </p>
               </div>
               <div className={`mojblocks-auto-item-list__item mojblocks-auto-item-list__item--${listLength}`}>
@@ -426,8 +379,7 @@ registerBlockType("mojblocks/auto-item-list", {
                 {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
-                  {listSort != 'date' && listDatePrefix ? listDatePrefix + ': ' : ''}
-                  {listHasTime && listDatePrefix ? <br /> : ''} <i>{ date } {listHasTime ? ' & time' : '' }</i>
+                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
                 </p>
               </div>
               <div className={`mojblocks-auto-item-list__item mojblocks-auto-item-list__item--${listLength}`}>
@@ -435,8 +387,7 @@ registerBlockType("mojblocks/auto-item-list", {
                 {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
-                  {listSort != 'date' && listDatePrefix ? listDatePrefix + ': ' : ''}
-                  {listHasTime && listDatePrefix ? <br /> : ''} <i>{ date } {listHasTime ? ' & time' : '' }</i>
+                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
                 </p>
               </div>
               <div className={`mojblocks-auto-item-list__item mojblocks-auto-item-list__item--${listLength}`}>
@@ -444,8 +395,7 @@ registerBlockType("mojblocks/auto-item-list", {
                 {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
-                  {listSort != 'date' && listDatePrefix ? listDatePrefix + ': ' : ''}
-                  {listHasTime && listDatePrefix ? <br /> : ''} <i>{ date } {listHasTime ? ' & time' : '' }</i>
+                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
                 </p>
               </div>
               <div className={`mojblocks-auto-item-list__item mojblocks-auto-item-list__item--${listLength}`}>
@@ -453,8 +403,7 @@ registerBlockType("mojblocks/auto-item-list", {
                 {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
-                  {listSort != 'date' && listDatePrefix ? listDatePrefix + ': ' : ''}
-                  {listHasTime && listDatePrefix ? <br /> : ''} <i>{ date } {listHasTime ? ' & time' : '' }</i>
+                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
                 </p>
               </div>
             </div>
