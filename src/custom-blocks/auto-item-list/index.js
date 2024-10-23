@@ -217,20 +217,6 @@ registerBlockType("mojblocks/auto-item-list", {
               options={ itemTypes }
               onChange={ setItemType }
             />
-            <RadioControl
-              label="Past or future"
-              selected={ pastFuture }
-              options={ [
-                  { label: 'Past (e.g. latest news)', value: 'past' },
-                  { label: 'Future (e.g. next event)', value: 'future' },
-              ] }
-              onChange={ setPastFuture }
-              help={
-                pastFuture == "future"
-                ? `The next ${listLength} items will be shown${!listExpiry ? '' : ', unless they are more than ' + listExpiry + ' days in the future.'}`
-                : `The most recent ${listLength} items will be shown${!listExpiry ? '' : ', unless they are more than ' + listExpiry + ' days old.'}`
-              }
-            />
             <ToggleControl
               label="Show/hide item publish date"
               help={
