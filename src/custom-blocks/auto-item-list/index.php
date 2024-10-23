@@ -24,7 +24,7 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_listPostType = $attributes['listItemType'] ?? '';
     $attribute_box_listSort = 'date'; //date=published date, currently always published date
     $attribute_box_listTaxonomy = $attributes['listTaxonomy'] ?? '';
-    $attribute_box_listTaxonomyValue = $attributes['listTaxonomyValue'] ?? '';
+    $attribute_box_listTaxonomyValueArray = $attributes['listTaxonomyValueArray'] ?? [];
     $attribute_box_listImage = $attributes['listImage'] ?? false;
     $attribute_box_listDefaultImage = $attributes['listDefaultImage'] ?? '';
 
@@ -142,11 +142,11 @@ function render_callback_auto_item_list_block($attributes)
                     continue;
                 }
             }
-            if ($attribute_box_listTaxonomyValue && $item_array[$k]["relevantTaxonomyValue"] && $item_array[$k]["relevantTaxonomyValue"] != $attribute_box_listTaxonomyValue) {
-                //Remove items which don't have the correct taxonomy value
+            if (!empty($attribute_box_listTaxonomyValueArray) && $item_array[$k]["relevantTaxonomyValue"] && !in_array($item_array[$k]["relevantTaxonomyValue"],$attribute_box_listTaxonomyValueArray)) {
+                //Remove items which don't have a correct taxonomy value
                 unset($item_array[$k]);
                 continue;
-            } elseif ($attribute_box_listTaxonomyValue && !$item_array[$k]["relevantTaxonomyValue"]) {
+            } elseif (!empty($attribute_box_listTaxonomyValueArray) && !$item_array[$k]["relevantTaxonomyValue"]) {
                 //Remove items without this taxonomy value set
                 unset($item_array[$k]);
                 continue;

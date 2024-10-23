@@ -47,9 +47,9 @@ registerBlockType("mojblocks/auto-item-list", {
       type: "string",
       default: ""
     },
-    listTaxonomyValue: {
-      type: "string",
-      default: ""
+    listTaxonomyValueArray: {
+      type: "array",
+      default: []
     },
     listImage: {
       type: "boolean",
@@ -77,7 +77,7 @@ registerBlockType("mojblocks/auto-item-list", {
         listHasTime,
         listItemType,
         listTaxonomy,
-        listTaxonomyValue,
+        listTaxonomyValueArray,
         listImage,
         listDefaultImage,
         pastFuture
@@ -218,7 +218,7 @@ registerBlockType("mojblocks/auto-item-list", {
       setAttributes({ listTaxonomy: newTaxonomy });
     };
     const setTaxonomyValue = newTaxonomyValue => {
-      setAttributes({ listTaxonomyValue: newTaxonomyValue });
+      setAttributes({ listTaxonomyValueArray: newTaxonomyValue });
     };
     const setLength = newLength => {
       setAttributes({ listLength: newLength });
@@ -311,8 +311,9 @@ registerBlockType("mojblocks/auto-item-list", {
             {
               (listTaxonomy != "") && (
                 <SelectControl
+                  multiple
                   label={`Select ${selectedOptionName}`}
-                  value={ listTaxonomyValue }
+                  value={ listTaxonomyValueArray }
                   options={ taxonomyValues }
                   onChange={ setTaxonomyValue }
                 />
