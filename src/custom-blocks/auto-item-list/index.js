@@ -227,8 +227,8 @@ registerBlockType("mojblocks/auto-item-list", {
               onChange={ setPastFuture }
               help={
                 pastFuture == "future"
-                ? `The next ${listLength} items will be shown${!listExpiry ? '' : ', unless they are more than ' + listExpiry + ' weeks in the future.'}`
-                : `The most recent ${listLength} items will be shown${!listExpiry ? '' : ', unless they are more than ' + listExpiry + ' weeks old.'}`
+                ? `The next ${listLength} items will be shown${!listExpiry ? '' : ', unless they are more than ' + listExpiry + ' days in the future.'}`
+                : `The most recent ${listLength} items will be shown${!listExpiry ? '' : ', unless they are more than ' + listExpiry + ' days old.'}`
               }
             />
             <ToggleControl
@@ -270,7 +270,7 @@ registerBlockType("mojblocks/auto-item-list", {
               onChange={ setLength }
             />
             <NumberControl
-              label="Auto-remove after how many weeks"
+              label="Auto-remove after how many days"
               help="Set to 0 for no limit"
               value= { listExpiry }
               onChange={ setExpiry }
@@ -281,7 +281,7 @@ registerBlockType("mojblocks/auto-item-list", {
                 <Text>
                   { !listExpiry || listExpiry == 0
                     ? "Items will not expire."
-                    : "Items will be removed after " + listExpiry + " weeks."
+                    : "Items will be removed after " + listExpiry + " days."
                   }
                 </Text>
               )
@@ -291,7 +291,7 @@ registerBlockType("mojblocks/auto-item-list", {
                 <Text>
                   { !listExpiry || listExpiry == 0
                     ? `The next ${listLength} items will be displayed, regardless of how distant in the future they are.`
-                    : `Items will only appear when they are less than ${listExpiry} weeks in the future.`
+                    : `Items will only appear when they are less than ${listExpiry} days in the future.`
                   }
                 </Text>
               )
@@ -353,7 +353,7 @@ registerBlockType("mojblocks/auto-item-list", {
           </PanelBody>
         </InspectorControls>
 
-        <div className={`mojblocks-auto-item-list mojblocks-auto-item-list--expiry-weeks-${listExpiry} ${className}`}>
+        <div className={`mojblocks-auto-item-list mojblocks-auto-item-list--expiry-days-${listExpiry} ${className}`}>
           <div className="govuk-width-container">
             <div className={`govuk-grid-row ${listHasDate === false ? 'mojblocks-auto-item-list-hide-date' : ''} ` }>
               <div className={`mojblocks-auto-item-list__item mojblocks-auto-item-list__item--${listLength}`}>

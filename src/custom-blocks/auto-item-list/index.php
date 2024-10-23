@@ -18,7 +18,7 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_hasDate = $attributes['listHasDate'] ?? true;
     $attribute_box_hasTime = $attributes['listHasTime'] ?? false;
     $attribute_box_pastFuture = $attributes['pastFuture'] ?? 'past';
-    $attribute_box_expiryWeeks = $attributes['listExpiry'] ?? 0;
+    $attribute_box_expiryDays = $attributes['listExpiry'] ?? 0;
     $attribute_box_emptyText = $attributes['listEmptyText'] ?? 'No items to display.';
     $attribute_box_className = $attributes['listClassName'] ?? '';
     $attribute_box_listPostType = $attributes['listItemType'] ?? '';
@@ -100,8 +100,8 @@ function render_callback_auto_item_list_block($attributes)
         if ($attribute_box_pastFuture == 'future') $future = true;
 
         $expiryDate = strtotime("01 Jan 1970");
-        if ($attribute_box_expiryWeeks && is_numeric($attribute_box_expiryWeeks)) {
-            $expiryDateDays = -7*$attribute_box_expiryWeeks;
+        if ($attribute_box_expiryDays && is_numeric($attribute_box_expiryDays)) {
+            $expiryDateDays = -1*$attribute_box_expiryDays;
             $expiryDate = strtotime($expiryDateDays." day", strtotime("now"));
         }
 
@@ -122,10 +122,10 @@ function render_callback_auto_item_list_block($attributes)
                 unset($item_array[$k]);
                 continue;
             }
-            if (abs($attribute_box_expiryWeeks) > 0) {
+            if (abs($attribute_box_expiryDays) > 0) {
                 //0 = include all
-                $difference_in_weeks = abs(intval((strtotime($item["date"]) - strtotime($now))/604800)); //604800 = seconds in 1 week
-                if ($difference_in_weeks > abs($attribute_box_expiryWeeks)) {
+                $difference_in_days = abs(intval((strtotime($item["date"]) - strtotime($now))/86400)); //86400 = seconds in 1 day
+                if ($difference_in_days > abs($attribute_box_expiryDays)) {
                     // items outside range are removed
                     unset($item_array[$k]);
                     continue;
