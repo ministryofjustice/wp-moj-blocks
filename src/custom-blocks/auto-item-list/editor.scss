@@ -1,0 +1,43 @@
+@charset "UTF-8";
+/*********************************************************************************************
+
+Block: Auto-populated Item List (Gutenberg editor styles)
+
+**********************************************************************************************/
+
+@import 'style.scss';
+
+.mojblocks-auto-item-list {
+	&__text-container.govuk-grid-column-one-half {
+
+		@include govuk-media-query($from: tablet) {
+			margin-top: -5%;
+		}
+	}
+
+	&__item {
+		&--1:nth-child(n+2),
+		&--2:nth-child(n+3),
+		&--3:nth-child(n+4),
+		&--4:nth-child(n+5),
+		&--5:nth-child(n+6) {
+			display: none;
+		}
+	}
+
+	&__no-image{
+		height: 120px;
+		width: min(240px,100%);
+		background: #b2b4b6;
+		background-image: linear-gradient(to bottom right, #b1b4b6, #505a5f);
+		color:#fff;
+		font-weight: 700;
+		display: flex;
+		align-items: center;
+		padding: 0.8em;
+		span {
+			text-align: center;
+			width: 100%;
+		}
+	}
+}
