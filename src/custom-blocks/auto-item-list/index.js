@@ -47,6 +47,10 @@ registerBlockType("mojblocks/auto-item-list", {
       type: "string",
       default: ""
     },
+    listTaxonomyOptions: {
+      type: "array",
+      default: []
+    },
     listTaxonomyValueArray: {
       type: "array",
       default: []
@@ -77,6 +81,7 @@ registerBlockType("mojblocks/auto-item-list", {
         listHasTime,
         listItemType,
         listTaxonomy,
+        listTaxonomyOptions,
         listTaxonomyValueArray,
         listImage,
         listDefaultImage,
@@ -216,6 +221,13 @@ registerBlockType("mojblocks/auto-item-list", {
     };
     const setTaxonomy = newTaxonomy => {
       setAttributes({ listTaxonomy: newTaxonomy });
+
+      // pass through the valid options for the newly selected taxonomy
+      let newTaxonomyOptions = [];
+      allTaxonomies[newTaxonomy].forEach(taxOption => {
+        newTaxonomyOptions.push(taxOption.id);
+      });
+      setAttributes({ listTaxonomyOptions: newTaxonomyOptions });
     };
     const setTaxonomyValue = newTaxonomyValue => {
       setAttributes({ listTaxonomyValueArray: newTaxonomyValue });

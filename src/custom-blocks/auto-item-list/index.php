@@ -24,6 +24,7 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_listPostType = $attributes['listItemType'] ?? '';
     $attribute_box_listSort = 'date'; //date=published date, currently always published date
     $attribute_box_listTaxonomy = $attributes['listTaxonomy'] ?? '';
+    $attribute_box_listTaxonomyOptions = $attributes['listTaxonomyOptions'] ?? [];
     $attribute_box_listTaxonomyValueArray = $attributes['listTaxonomyValueArray'] ?? [];
     $attribute_box_listImage = $attributes['listImage'] ?? false;
     $attribute_box_listDefaultImage = $attributes['listDefaultImage'] ?? '';
@@ -123,37 +124,46 @@ function render_callback_auto_item_list_block($attributes)
         } else {
             array_multisort($key_values, SORT_DESC, $item_array);
         }
-        foreach($item_array as $k => $item) {
-            if ($future && $item["date"]<$now) {
-                // items in past are removed
-                unset($item_array[$k]);
-                continue;
-            } elseif (!$future && $item["date"]>$now) {
-                // items in future are removed
-                unset($item_array[$k]);
-                continue;
-            }
-            if (abs($attribute_box_expiryDays) > 0) {
-                //0 = include all
-                $difference_in_days = abs(intval((strtotime($item["date"]) - strtotime($now))/86400)); //86400 = seconds in 1 day
-                if ($difference_in_days > abs($attribute_box_expiryDays)) {
-                    // items outside range are removed
+        //if taxonomy set, we make sure the items which don't match are removed from the array
+        if (
+            !empty($attribute_box_listTaxonomyValueArray) // at least one value in array of tax values
+            &&
+            in_array($attribute_box_listTaxonomyValueArray[0], $attribute_box_listTaxonomyOptions) //the first selected value is in the array for this taxonomy (if it isn't, the previously selected taxonomy's values might still be being used, so we treat as show all)
+            &&
+            $attribute_box_listTaxonomy !="" // taxonomy not set to "show all"
+        ) {
+
+            foreach($item_array as $k => $item) {
+                if ($future && $item["date"]<$now) {
+                    // items in past are removed
+                    unset($item_array[$k]);
+                    continue;
+                } elseif (!$future && $item["date"]>$now) {
+                    // items in future are removed
+                    unset($item_array[$k]);
+                    continue;
+                }
+                if (abs($attribute_box_expiryDays) > 0) {
+                    //0 = include all
+                    $difference_in_days = abs(intval((strtotime($item["date"]) - strtotime($now))/86400)); //86400 = seconds in 1 day
+                    if ($difference_in_days > abs($attribute_box_expiryDays)) {
+                        // items outside range are removed
+                        unset($item_array[$k]);
+                        continue;
+                    }
+                }
+                if ($item_array[$k]["relevantTaxonomyValue"] && !in_array($item_array[$k]["relevantTaxonomyValue"],$attribute_box_listTaxonomyValueArray)) {
+                    //Remove items which don't have a correct taxonomy value
+                    unset($item_array[$k]);
+                    continue;
+                } elseif (!$item_array[$k]["relevantTaxonomyValue"]) {
+                    //Remove items without this taxonomy value set
                     unset($item_array[$k]);
                     continue;
                 }
             }
-            if (!empty($attribute_box_listTaxonomyValueArray) && $item_array[$k]["relevantTaxonomyValue"] && !in_array($item_array[$k]["relevantTaxonomyValue"],$attribute_box_listTaxonomyValueArray)) {
-                //Remove items which don't have a correct taxonomy value
-                unset($item_array[$k]);
-                continue;
-            } elseif (!empty($attribute_box_listTaxonomyValueArray) && !$item_array[$k]["relevantTaxonomyValue"]) {
-                //Remove items without this taxonomy value set
-                unset($item_array[$k]);
-                continue;
-            }
-
+            $item_array = array_values($item_array); //re-index
         }
-        $item_array = array_values($item_array); //re-index
     ?>
 
     <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-auto-item-list">
