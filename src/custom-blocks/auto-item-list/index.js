@@ -192,7 +192,7 @@ registerBlockType("mojblocks/auto-item-list", {
         </InspectorControls>
 
         <div className={`mojblocks-auto-item-list ${className}`}>
-          <div className="govuk-width-container">
+          <div className="govuk-width-container govuk-!-margin-0">
             <div className={`govuk-grid-row ${listHasDate === false ? 'mojblocks-auto-item-list-hide-date' : ''} ` }>
               <div className={`mojblocks-auto-item-list__item`}>
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>

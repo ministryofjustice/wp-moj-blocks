@@ -69,7 +69,7 @@ function render_callback_auto_item_list_block($attributes)
     ?>
 
     <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-auto-item-list">
-        <div class="govuk-width-container">
+        <div class="govuk-width-container govuk-!-margin-0">
             <div class="govuk-grid-row">
                 <?php
                     $i = 0;
