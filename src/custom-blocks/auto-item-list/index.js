@@ -23,18 +23,6 @@ registerBlockType("mojblocks/auto-item-list", {
       type: "boolean",
       default: true
     },
-    listHasTime: {
-      type: "boolean",
-      default: false
-    },
-    listLength: {
-      type: "numeric",
-      default: 3
-    },
-    listExpiry: {
-      type: "numeric",
-      default: 0
-    },
     listEmptyText: {
       type: "string",
       default: "No items to display."
@@ -43,17 +31,8 @@ registerBlockType("mojblocks/auto-item-list", {
       type: "string",
       default: "post"
     },
-    listImage: {
-      type: "boolean",
-      default: false
-    },
-    listDefaultImage: {
-      type: "string",
-      default: ""
-    },
-    pastFuture: {
-      type: "string",
-      default: "past"
+    listClassName: {
+      type: 'string'
     }
 
   },
@@ -62,15 +41,9 @@ registerBlockType("mojblocks/auto-item-list", {
     const {
       setAttributes,
       attributes: {
-        listLength,
-        listExpiry,
         listEmptyText,
         listHasDate,
-        listHasTime,
-        listItemType,
-        listImage,
-        listDefaultImage,
-        pastFuture
+        listItemType
       },
       className
     } = props
@@ -95,11 +68,14 @@ registerBlockType("mojblocks/auto-item-list", {
       label: "-",
       value: ""
     }]
+    let restrctedPostTypes = ["Media", "Posts", "Pages"];
     let itemTypesFinishedParsing = false;
 
     if (allPostTypes) {
       allPostTypes.forEach(thisPostType => {
-        if (thisPostType.name != "Media" && thisPostType.name != "Posts" && thisPostType.name != "Pages" && thisPostType.viewable) {
+
+        //Prevents core post types to be shown but still allows CPTs which do not have single views
+        if (!restrctedPostTypes.includes(thisPostType.name) && thisPostType.visibility.show_ui && thisPostType.visibility.show_in_nav_menus) {
           itemTypes.push({
             label: thisPostType.name,
             value: thisPostType.slug
@@ -136,45 +112,21 @@ registerBlockType("mojblocks/auto-item-list", {
       }
     );
 
+    // Set className attribute for PHP frontend to use
+    setAttributes({ listClassName: className });
+
     const setItemType = newItemType => {
       setAttributes({ listItemType: newItemType });
-    };
-    const setLength = newLength => {
-      setAttributes({ listLength: newLength });
     };
     const setHasDate = newDateSetting => {
       setAttributes({ listHasDate: newDateSetting });
     };
-    const setHasTime = newTimeSetting => {
-      setAttributes({ listHasTime: newTimeSetting });
-    };
     const setEmptyText = newEmptyText => {
       setAttributes({ listEmptyText: newEmptyText } );
-    };
-    const setExpiry = newExpiry => {
-        setAttributes({ listExpiry: newExpiry } );
-    };
-    const setHasImage = newHasImage => {
-        setAttributes({ listImage: newHasImage } );
-    };
-    const removeImage = () => {
-      setAttributes({
-        listDefaultImage: null,
-      });
-    };
-    const setImage = newImage => {
-      setAttributes({ listDefaultImage: newImage });
-    };
-    const setPastFuture = newTemporalRelationship => {
-      setAttributes({ pastFuture: newTemporalRelationship });
     };
 
     let title = 'Title automatically updated on preview page';
     let date = 'Date';
-    let placeholderImageText = 'Logo will be used if no image on item';
-    let listImageStyle = {
-      backgroundImage: 'url(' + listDefaultImage + ')'
-    }
 
     if (itemTypes.length <= 1 && itemTypesFinishedParsing) return (
       <Fragment >
@@ -227,18 +179,6 @@ registerBlockType("mojblocks/auto-item-list", {
               checked={ listHasDate }
               onChange={ setHasDate }
             />
-            {
-              (listHasDate) && (<ToggleControl
-                label="Show/hide item publish time"
-                help={
-                  listHasTime === false
-                  ? 'Times will be hidden'
-                  : 'Times will also be displayed'
-                }
-                checked={ listHasTime }
-                onChange={ setHasTime }
-              />)
-            }
             <TextControl
               label="Text for no items"
               help={ listEmptyText === ""
@@ -248,148 +188,30 @@ registerBlockType("mojblocks/auto-item-list", {
               value={ listEmptyText }
               onChange={ setEmptyText }
             />
-            <NumberControl
-              label="How many items to include"
-              value= { listLength }
-              min="1"
-              max="6"
-              onChange={ setLength }
-            />
-            <NumberControl
-              label="Auto-remove after how many days"
-              help="Set to 0 for no limit"
-              value= { listExpiry }
-              onChange={ setExpiry }
-              min="0"
-            />
-            {
-              (pastFuture != "future") && (
-                <Text>
-                  { !listExpiry || listExpiry == 0
-                    ? "Items will not expire."
-                    : "Items will be removed after " + listExpiry + " days."
-                  }
-                </Text>
-              )
-            }
-            {
-              (pastFuture == "future") && (
-                <Text>
-                  { !listExpiry || listExpiry == 0
-                    ? `The next ${listLength} items will be displayed, regardless of how distant in the future they are.`
-                    : `Items will only appear when they are less than ${listExpiry} days in the future.`
-                  }
-                </Text>
-              )
-            }
-            <ToggleControl
-              className='govuk-!-margin-top-3'
-              label="Show item image"
-              help={
-                listImage === true
-                ? 'Items without an image will use the site logo or a designated alternative'
-                : ''
-              }
-              checked={ listImage }
-              onChange={ setHasImage }
-            />
-            {
-              (listImage) && (<MediaUpload
-                buttonProps={{
-                  className: 'change-image',
-                }}
-                onSelect={
-                  (image) => {
-                    var imageSizes = image.sizes;
-
-                    // determine the image size displayed with fallbacks
-                    if (typeof imageSizes.medium !== 'undefined') {
-                      var imageURL = imageSizes.medium.url;
-                    } else {
-                      var imageURL = imageSizes.full.url;
-                    }
-
-                    setAttributes({
-                      listDefaultImage: imageURL,
-                    })
-                  }
-                }
-                allowedTypes={ allowedMediaTypes }
-                type="image"
-                value={ listDefaultImage }
-                render={({ open }) => (
-                  <Fragment>
-                    <Button className={'button govuk-!-margin-bottom-3'}
-                      onClick={open}
-                    >
-                      Select alternative default image
-                    </Button>
-                    {listDefaultImage && (
-                      <Button
-                        className={'button govuk-!-margin-bottom-3'}
-                        onClick={ removeImage }
-                      >
-                        Use site logo
-                      </Button>
-                    )}
-                  </Fragment>
-                )}
-              />)
-            }
           </PanelBody>
         </InspectorControls>
 
-        <div className={`mojblocks-auto-item-list mojblocks-auto-item-list--expiry-days-${listExpiry} ${className}`}>
+        <div className={`mojblocks-auto-item-list ${className}`}>
           <div className="govuk-width-container">
             <div className={`govuk-grid-row ${listHasDate === false ? 'mojblocks-auto-item-list-hide-date' : ''} ` }>
-              <div className={`mojblocks-auto-item-list__item mojblocks-auto-item-list__item--${listLength}`}>
-                {(listImage && listDefaultImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
-                {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
+              <div className={`mojblocks-auto-item-list__item`}>
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
-                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
+                  <i>{ date }</i>
                   <br />
-                  {pastFuture == "future" ? "(next scheduled item)" : "(most recent item)" }
+                  (most recent item)
                 </p>
               </div>
-              <div className={`mojblocks-auto-item-list__item mojblocks-auto-item-list__item--${listLength}`}>
-                {(listImage && listDefaultImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
-                {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
+              <div className={`mojblocks-auto-item-list__item`}>
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
-                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
+                  <i>{ date }</i>
                 </p>
               </div>
-              <div className={`mojblocks-auto-item-list__item mojblocks-auto-item-list__item--${listLength}`}>
-                {(listImage && listDefaultImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
-                {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
+              <div className={`mojblocks-auto-item-list__item`}>
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
-                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
-                </p>
-              </div>
-              <div className={`mojblocks-auto-item-list__item mojblocks-auto-item-list__item--${listLength}`}>
-                {(listImage && listDefaultImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
-                {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
-                <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
-                <p className="mojblocks-auto-item-list__date">
-                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
-                </p>
-              </div>
-              <div className={`mojblocks-auto-item-list__item mojblocks-auto-item-list__item--${listLength}`}>
-                {(listImage && listDefaultImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
-                {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
-                <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
-                <p className="mojblocks-auto-item-list__date">
-                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
-                </p>
-              </div>
-              <div className={`mojblocks-auto-item-list__item mojblocks-auto-item-list__item--${listLength}`}>
-                {(listImage && listDefaultImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
-                {(listImage && !listDefaultImage) && (<div class="mojblocks-auto-item-list__no-image"><span>{placeholderImageText}</span></div>)}
-                <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
-                <p className="mojblocks-auto-item-list__date">
-                  <i>{ date } {listHasTime ? ' & time' : '' }</i>
+                  <i>{ date }</i>
                 </p>
               </div>
             </div>

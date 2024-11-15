@@ -14,24 +14,10 @@ function render_callback_auto_item_list_block($attributes)
 {
 
     // Parse attributes found in index.js
-    $attribute_box_numberItems = $attributes['listLength'] ?? 3;
     $attribute_box_hasDate = $attributes['listHasDate'] ?? true;
-    $attribute_box_hasTime = $attributes['listHasTime'] ?? false;
-    $attribute_box_pastFuture = $attributes['pastFuture'] ?? 'past';
-    $attribute_box_expiryDays = $attributes['listExpiry'] ?? 0;
     $attribute_box_emptyText = $attributes['listEmptyText'] ?? 'No items to display.';
     $attribute_box_className = $attributes['listClassName'] ?? '';
     $attribute_box_listPostType = $attributes['listItemType'] ?? '';
-    $attribute_box_listSort = 'date'; //date=published date, currently always published date
-    $attribute_box_listImage = $attributes['listImage'] ?? false;
-    $attribute_box_listDefaultImage = $attributes['listDefaultImage'] ?? '';
-
-    $use_logo_as_default = false;
-    if (empty($attribute_box_listDefaultImage)) {
-        // If no default image is selected, use the site logo
-        $use_logo_as_default = true;
-        $attribute_box_listDefaultImage = wp_get_attachment_image_src(get_theme_mod( 'custom_logo' ), "medium")[0];
-    }
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -41,98 +27,45 @@ function render_callback_auto_item_list_block($attributes)
     ?>
 
     <?php
-        // The Query
-        $args = array(
-            'post_type' => $attribute_box_listPostType,
-        );
-        $query = new WP_Query( $args );
 
-        // The Loop
-        $item_array = array();
-        if ( $query->have_posts() ) {
-            while ( $query->have_posts() ) {
-                $query->the_post();
-                if ($attribute_box_listSort == "date") {
+        $post_type_obj = get_post_type_object( $attribute_box_listPostType );
+
+        if(!empty($post_type_obj)){
+            // The Query
+            $args = array(
+                'post_type' => $attribute_box_listPostType,
+            );
+            $query = new WP_Query( $args );
+
+            // The Loop
+            $item_array = array();
+            if ( $query->have_posts() ) {
+                while ( $query->have_posts() ) {
+                    $query->the_post();
+                    
                     $date_to_use = get_the_date("Ymd");
-                    $time_to_use = get_the_time("YmdHis");
-                } elseif ($attribute_box_listSort == "modified") {
-                    $date_to_use = get_the_modified_date("Ymd");
-                    $time_to_use = get_the_modified_time("YmdHis");
-                } else {
-                    $date_meta = get_date_format(get_post_meta(get_the_ID(), $attribute_box_listSort, true));
-                    if (!$date_meta) {
-                        // not a date/time, use publish date
-                        $date_to_use = get_the_date("Ymd");
-                        $time_to_use = get_the_time("YmdHis");
-                    } else {
-                        $date_to_use = $time_to_use = $date_meta["datetime"];
-                        if (!$date_meta["has_time"]) $time_to_use = ""; //there is no time data so we set it to ""
+                    $link = '';
+            
+                    if (!get_the_title() || !$date_to_use) continue; //in case any of the required items is missing, we skip this entry
+                    
+                    if($post_type_obj->publicly_queryable){
+                        $link = get_permalink(get_the_ID());
                     }
-                }
 
-                if (!get_the_title() || !$date_to_use || !get_permalink(get_the_ID())) continue; //in case any of the required items is missing, we skip this entry
+                    $link = apply_filters( 'mojblocks_item_list_link', $link, get_the_ID());
 
-                if (!get_the_post_thumbnail_url(get_the_ID(),"medium")) {
-                    $image = $attribute_box_listDefaultImage;
-                    $use_default = true;
-                } else {
-                    $image = get_the_post_thumbnail_url(get_the_ID(),"medium");
-                    $use_default = false;
-                }
-
-                $item_array[] = [
-                    "id" => get_the_ID(),
-                    "title" => get_the_title(),
-                    "date" => $date_to_use,
-                    "time" => $time_to_use,
-                    "link" => get_permalink(get_the_ID()),
-                    "image" => $image,
-                    "useLogo" => $use_logo_as_default && $use_default,
-                ];
-            }
-        }
-        // Restore original Post Data
-        wp_reset_postdata();
-
-        $now = date("YmdHis");
-
-        $future = false;
-        if ($attribute_box_pastFuture == 'future') $future = true;
-
-        $expiryDate = strtotime("01 Jan 1970");
-        if ($attribute_box_expiryDays && is_numeric($attribute_box_expiryDays)) {
-            $expiryDateDays = -1*$attribute_box_expiryDays;
-            $expiryDate = strtotime($expiryDateDays." day", strtotime("now"));
-        }
-
-        // Sort the array according to the date
-        $key_values = array_column($item_array, 'date');
-        if ($future) {
-            array_multisort($key_values, SORT_ASC, $item_array);
-        } else {
-            array_multisort($key_values, SORT_DESC, $item_array);
-        }
-        foreach($item_array as $k => $item) {
-            if ($future && $item["date"]<$now) {
-                // items in past are removed
-                unset($item_array[$k]);
-                continue;
-            } elseif (!$future && $item["date"]>$now) {
-                // items in future are removed
-                unset($item_array[$k]);
-                continue;
-            }
-            if (abs($attribute_box_expiryDays) > 0) {
-                //0 = include all
-                $difference_in_days = abs(intval((strtotime($item["date"]) - strtotime($now))/86400)); //86400 = seconds in 1 day
-                if ($difference_in_days > abs($attribute_box_expiryDays)) {
-                    // items outside range are removed
-                    unset($item_array[$k]);
-                    continue;
+                    $item_array[] = [
+                        "id" => get_the_ID(),
+                        "title" => get_the_title(),
+                        "date" => $date_to_use,
+                        "link" => $link
+                    ];
+                    
                 }
             }
-        }
-        $item_array = array_values($item_array); //re-index
+            // Restore original Post Data
+            wp_reset_postdata();  
+
     ?>
 
     <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-auto-item-list">
@@ -142,34 +75,25 @@ function render_callback_auto_item_list_block($attributes)
                     $i = 0;
                     $number_of_items = count($item_array);
                     if ($number_of_items) {
-                        while ($i < $number_of_items && $i < $attribute_box_numberItems) {
+                        while ($i < $number_of_items && $i < 3) {
                 ?>
-                            <div class="mojblocks-auto-item-list__item mojblocks-auto-item-list__item--<?php echo $number_of_items; ?>">
-                                <?php if ($attribute_box_listImage) { ?>
-                                    <div class="mojblocks-auto-item-list__image <?php if ($item_array[$i]["useLogo"]) echo "mojblocks-auto-item-list__image--logo";?>" style="background-image:url('<?php echo $item_array[$i]["image"] ?>')">
-                                        <span role="img" aria-label="Cover image for this item"></span>
-                                    </div>
-                                <?php } ?>
+                            <div class="mojblocks-auto-item-list__item">
                                 <p class="govuk-body mojblocks-auto-item-list__headline" >
-                                    <a href="<?php _e(esc_html($item_array[$i]["link"]));?>"><?php _e(esc_html($item_array[$i]["title"]));?></a>
+                                    <?php 
+                                    //Some post types dont have a single view
+                                    if(empty($link)){
+                                        _e(esc_html($item_array[$i]["title"]));
+                                    }
+                                    else { ?>
+                                        <a href="<?php _e(esc_html($item_array[$i]["link"]));?>"><?php _e(esc_html($item_array[$i]["title"]));?></a>
+                                    <?php } ?>
                                 </p>
                                 <?php
                                 if ($attribute_box_hasDate) {
                                     $itemDate = strtotime($item_array[$i]["date"]);
                                     $itemTime = strtotime($item_array[$i]["time"]);
                                     $dateString = date("j F Y",$itemDate);
-                                    $timeString = "";
-                                    if ($attribute_box_hasTime && !empty($itemTime)) {
-                                        $timeString .= ", ";
-                                        if (date("Hi",$itemTime) == "1200") {
-                                            $timeString .= "12 ".__("noon", "hale");
-                                        } elseif (date("Hi",$itemTime) == "0000") {
-                                            $timeString .= __("midnight", "hale");
-                                        } else {
-                                            $timeString .= date("g:i",$itemTime);
-                                            $timeString .= __(date("a",$itemTime), "hale");
-                                        }
-                                    }
+
                                     $item_array[$i]["date"] = $dateString.$timeString;
                                 ?>
                                     <p class="govuk-body-s mojblocks-auto-item-list__date" >
@@ -189,7 +113,7 @@ function render_callback_auto_item_list_block($attributes)
     </div>
 
     <?php
-
+        }
     // Get all the html/content that has been captured in the buffer and output via return
     $output = ob_get_contents();
 

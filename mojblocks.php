@@ -394,14 +394,11 @@ function mojblocks_register_blocks()
             'editor_script' => 'mojblocks-editor-script',
             'render_callback' => 'render_callback_auto_item_list_block',
             'attributes' => [
-                'listLength' => [
-                    'type' => 'integer'
+                'listItemType' => [
+                    'type' => 'string'
                 ],
                 'listHasDate' => [
                     'type' => 'boolean'
-                ],
-                'listExpiry' => [
-                    'type' => 'integer'
                 ],
                 'listEmptyText' => [
                     'type' => 'string'
