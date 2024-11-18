@@ -124,30 +124,3 @@ function render_callback_auto_item_list_block($attributes)
 
     return $output;
 }
-
-function get_date_format($suspected_date) {
-
-    if (empty($suspected_date)) return false;
-
-    switch(!false) {
-        // We cycle through formats checking the format
-        // Dates are stored as Ymd (e.g. 29th Feb 1980 = 19800229)
-        // Datetimess are stored as Y-m-d H:i:s (e.g. 12:34:56 on 29th Feb 1980 = 19800229123456)
-        case DateTime::createFromFormat('Y-m-d H:i:s', $suspected_date):
-            $format = 'Y-m-d H:i:s';
-            $time = true;
-            $datetime = DateTime::createFromFormat($format, $suspected_date)->format('YmdHis');
-            break;
-        case DateTime::createFromFormat('Ymd', $suspected_date):
-            $format = 'Ymd';
-            $time = false;
-            $datetime = DateTime::createFromFormat($format, $suspected_date)->format('Ymd')."000000";
-            break;
-    }
-
-    $return_array = [];
-    $return_array["has_time"] = $time;
-    $return_array["datetime"] = $datetime;
-
-    return $return_array;
-}
