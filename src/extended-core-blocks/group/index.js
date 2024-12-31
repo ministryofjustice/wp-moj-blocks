@@ -21,3 +21,10 @@ registerBlockStyle( 'core/group', {
     name: 'faded-bleed',
     label: __('Fading out', 'mojblocks'),
 } );
+
+/*
+registerBlockStyle( 'core/group', {
+    name: 'banner',
+    label: __('Top banner', 'mojblocks'),
+} );
+/* */

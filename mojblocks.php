@@ -521,6 +521,7 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/laa-chatbot/index.php';
  * Load PHP extended core blocks
  */
 include plugin_dir_path(__FILE__) . 'src/extended-core-blocks/file/index.php';
+include plugin_dir_path(__FILE__) . 'src/extended-core-blocks/group/index.php';
 
 /**
  * Queues up the gutenberg editor style
