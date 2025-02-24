@@ -1,4 +1,4 @@
-@include govuk-media-query($from: "tablet") {
+@include govuk-media-query($from: "tablet", $media-type: screen) {
 	ul, ol {
 		max-width: 666px;
 

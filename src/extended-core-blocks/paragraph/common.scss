@@ -1,4 +1,4 @@
-@include govuk-media-query($from: "tablet") {
+@include govuk-media-query($from: "tablet", $media-type: screen) {
 	p {
 		max-width: 666px;
 		&:is(.hale-deprecated-paragraph-widths *), // Remove this when all sites have been updated
