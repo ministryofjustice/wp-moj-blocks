@@ -53,3 +53,9 @@
 		}
 	}
 }
+
+@include govuk-media-query($media-type: print) {
+	.wp-block-group {
+		margin-bottom: 5px;
+	}
+}
