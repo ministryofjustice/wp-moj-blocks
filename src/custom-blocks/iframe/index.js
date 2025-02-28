@@ -17,8 +17,8 @@ import { ToggleControl } from '@wordpress/components';
 import { Button } from '@wordpress/components'
 
 registerBlockType('mojblocks/iframe', {
-    title: __('iFrame', 'mojblocks'),
-    icon: 'editor-paragraph',
+    title: __('Inline Frame (iframe)', 'mojblocks'),
+    icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" focusable="false"><path d="M18.5 5.5h-13c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h13c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2zm.5 11c0 .3-.2.5-.5.5h-13c-.3 0-.5-.2-.5-.5v-9c0-.3.2-.5.5-.5h13c.3 0 .5.2.5.5v9zM6.5 12H8v-2h2V8.5H6.5V12zm9.5 2h-2v1.5h3.5V12H16v2z"></path></svg>,
     category: 'mojblocks',
     attributes: {
         iFrameURL: {
@@ -39,6 +39,10 @@ registerBlockType('mojblocks/iframe', {
             type: "boolean",
             default: false
         },
+        iFrameCentre: {
+            type: "boolean",
+            default: false
+        },
         iFrameCode: {
             type: "string",
         },
@@ -56,6 +60,7 @@ registerBlockType('mojblocks/iframe', {
                 iFrameWidth,
                 iFrameHeight,
                 iFrameBorder,
+                iFrameCentre,
                 iFrameCode,
                 iFrameButton,
                 iFrameClassName
@@ -78,6 +83,9 @@ registerBlockType('mojblocks/iframe', {
         };
         const setIFrameBorder = newIFrameBorder => {
             setAttributes({ iFrameBorder: newIFrameBorder } );
+        };
+        const setIFrameCentre = newIFrameCentre => {
+            setAttributes({ iFrameCentre: newIFrameCentre } );
         };
         const setIFrameCode = newIFrameCode => {
             setAttributes({ iFrameCode: newIFrameCode } );
@@ -136,11 +144,11 @@ registerBlockType('mojblocks/iframe', {
             <Fragment>
                 <InspectorControls>
                 <PanelBody
-                        title={__('iFrame code parse')}
+                        title={__('iframe code parse')}
                         initialOpen={true}
                     >
                         <Text>
-                            Use this section to automatically create the iFrame from code.
+                            Use this section to automatically create the iframe from code.
                         </Text>
                         <TextareaControl
                             label="Code"
@@ -157,15 +165,25 @@ registerBlockType('mojblocks/iframe', {
                         </Button>
                     </PanelBody>
                     <PanelBody
-                        title={__('iFrame settings')}
+                        title={__('Settings')}
+                        initialOpen={true}
+                    >
+                        <ToggleControl
+                            label="Centre iframe"
+                            checked={ iFrameCentre }
+                            onChange={ setIFrameCentre }
+                        />
+                    </PanelBody>
+                    <PanelBody
+                        title={__('Advanced settings')}
                         initialOpen={false}
                     >
                         <Text>
-                            Use this section to tweak all the settings of the iFrame.
+                            Use this section to tweak all the settings of the iframe.
                         </Text>
                         <TextControl
-                            label="URL for iFrame"
-                            help="This will be the URL that goes in the iFrame's src property"
+                            label="URL for iframe"
+                            help="This will be the URL that goes in the iframe's src property"
                             value={ iFrameURL }
                             onChange={ setIFrameURL }
                         />
@@ -204,6 +222,7 @@ registerBlockType('mojblocks/iframe', {
                     className={ classnames(
                         'moj-block-iframe',
                         (iFrameBorder) ? "moj-block-iframe--border" : "",
+                        (iFrameCentre) ? "moj-block-iframe--centre" : "",
                         iFrameClassName
                     )}
                     src={(iFrameURL && iFrameURL.substring(0, 8) == "https://") ? iFrameURL : ""}

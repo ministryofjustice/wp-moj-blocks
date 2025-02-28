@@ -7,9 +7,12 @@ Block: iFrame (Frontend styles)
 
 .moj-block-iframe {
   display:block;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 0.5rem;
+
+  &--centre {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   &--border {
     border: 1px solid;
