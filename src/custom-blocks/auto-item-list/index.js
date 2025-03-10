@@ -43,10 +43,17 @@ registerBlockType("mojblocks/auto-item-list", {
       type: "array",
       default: []
     },
+    listImage: {
+      type: "boolean",
+      default: false
+    },
+    listBackupImage: {
+      type: "string",
+      default: ""
+    },
     listClassName: {
       type: 'string'
     }
-
   },
 
   edit: props => {
@@ -59,6 +66,8 @@ registerBlockType("mojblocks/auto-item-list", {
         listTaxonomy,
         listTaxonomyOptions,
         listTaxonomyValueArray,
+        listImage,
+        listBackupImage,
       },
       className
     } = props
@@ -218,10 +227,20 @@ registerBlockType("mojblocks/auto-item-list", {
     const setEmptyText = newEmptyText => {
       setAttributes({ listEmptyText: newEmptyText } );
     };
+    const setShowImage = newShowImage => {
+      setAttributes({ listImage: newShowImage } );
+    };
+    const removeBackupImage = () => {
+      setAttributes({
+        listBackupImage: null,
+      });
+    };
 
     let title = 'Title automatically updated on preview page';
     let date = 'Date';
-
+    let listImageStyle = {
+      backgroundImage: 'url(' + listBackupImage + ')'
+    }
     if (itemTypes.length <= 1 && itemTypesFinishedParsing) return (
       <Fragment >
         <InspectorControls>
@@ -294,6 +313,58 @@ registerBlockType("mojblocks/auto-item-list", {
               checked={ listHasDate }
               onChange={ setHasDate }
             />
+            <ToggleControl
+              className='govuk-!-margin-top-3'
+              label="Show item image"
+              help={
+                listImage === true
+                ? 'Items without an image will use a backup image - add this below'
+                : ''
+              }
+              checked={ listImage }
+              onChange={ setShowImage }
+            />
+            {
+              (listImage) && (<MediaUpload
+                buttonProps={{
+                  className: 'change-image',
+                }}
+                onSelect={
+                  (image) => {
+                    var imageSizes = image.sizes;
+                    // determine the image size displayed with fallbacks
+                    if (typeof imageSizes.medium !== 'undefined') {
+                      var imageURL = imageSizes.medium.url;
+                    } else {
+                      var imageURL = imageSizes.full.url;
+                    }
+                    setAttributes({
+                      listBackupImage: imageURL,
+                    })
+                  }
+                }
+                allowedTypes={ allowedMediaTypes }
+                type="image"
+                value={ listBackupImage }
+                render={({ open }) => (
+                  <Fragment>
+                    <Button className={'button govuk-!-margin-bottom-3'}
+                      onClick={open}
+                    >
+                      Select alternative backup image
+                    </Button>
+                    {listBackupImage && (
+                      <Button
+                        className={'button govuk-!-margin-bottom-3'}
+                        onClick={ removeBackupImage }
+                      >
+                        Remove image
+                      </Button>
+                    )}
+                  </Fragment>
+                )}
+              />)
+            }
             <TextControl
               label="Text for no items"
               help={ listEmptyText === ""
@@ -310,6 +381,7 @@ registerBlockType("mojblocks/auto-item-list", {
           <div className="govuk-width-container govuk-!-margin-0">
             <div className={`govuk-grid-row ${listHasDate === false ? 'mojblocks-auto-item-list-hide-date' : ''} ` }>
               <div className={`mojblocks-auto-item-list__item`}>
+                {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
                   <i>{ date }</i>
@@ -318,12 +390,14 @@ registerBlockType("mojblocks/auto-item-list", {
                 </p>
               </div>
               <div className={`mojblocks-auto-item-list__item`}>
+                {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
                   <i>{ date }</i>
                 </p>
               </div>
               <div className={`mojblocks-auto-item-list__item`}>
+                {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className="mojblocks-auto-item-list__date">
                   <i>{ date }</i>

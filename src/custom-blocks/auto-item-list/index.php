@@ -21,6 +21,8 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_listTaxonomy = $attributes['listTaxonomy'] ?? '';
     $attribute_box_listTaxonomyOptions = $attributes['listTaxonomyOptions'] ?? [];
     $attribute_box_listTaxonomyValueArray = $attributes['listTaxonomyValueArray'] ?? [];
+    $attribute_box_listImage = $attributes['listImage'] ?? false;
+    $attribute_box_listBackupImage = $attributes['listBackupImage'] ?? '';
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -100,50 +102,73 @@ function render_callback_auto_item_list_block($attributes)
                 }
                 $item_array = array_values($item_array); //re-index
             }
+
+            $number_of_items = count($item_array);
+            $max_number_of_items = 3;
+            $few_items_class = "";
+            if ($number_of_items < $max_number_of_items) {
+                $few_items_class = " mojblocks-auto-item-list__item--$number_of_items";
+            }
     ?>
 
     <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-auto-item-list">
-        <div class="govuk-width-container govuk-!-margin-0">
-            <div class="govuk-grid-row">
-                <?php
-                    $i = 0;
-                    $number_of_items = count($item_array);
-                    if ($number_of_items) {
-                        while ($i < $number_of_items && $i < 3) {
-                ?>
-                            <div class="mojblocks-auto-item-list__item">
-                                <p class="govuk-body mojblocks-auto-item-list__headline" >
-                                    <?php 
-                                    //Some post types dont have a single view
-                                    if(empty($link)){
-                                        _e(esc_html($item_array[$i]["title"]));
-                                    }
-                                    else { ?>
-                                        <a href="<?php _e(esc_html($item_array[$i]["link"]));?>"><?php _e(esc_html($item_array[$i]["title"]));?></a>
-                                    <?php } ?>
-                                </p>
-                                <?php
-                                if ($attribute_box_hasDate) {
-                                    $itemDate = strtotime($item_array[$i]["date"]);
-                                    $itemTime = strtotime($item_array[$i]["time"]);
-                                    $dateString = date("j F Y",$itemDate);
-
-                                    $item_array[$i]["date"] = $dateString.$timeString;
-                                ?>
-                                    <p class="govuk-body-s mojblocks-auto-item-list__date" >
-                                        <?php _e(esc_html($item_array[$i]["date"]));?>
-                                    </p>
-                                <?php } ?>
-                            </div>
-                        <?php
-                            $i++;
+        <?php
+            $i = 0;
+            if ($number_of_items) {
+                if ($attribute_box_listImage) {
+                    //If images are enabled, we need to check whether all/any items have images
+                    $all_items_have_images = true; // assume all have images
+                    $one_items_has_image = false; // assume none have an image
+                    for ($j=0; $j < $number_of_items && $j < $max_number_of_items; $j++) {
+                        // check that all items have an image
+                        $id = $item_array[$j]['id'];
+                        if (!has_post_thumbnail($id)) {
+                            $all_items_have_images = false;
+                        } else {
+                            $one_items_has_image = true;
                         }
-                    } else {
-                        _e("<p class='govuk-body'>".esc_html($attribute_box_emptyText)."</p>");
                     }
-                ?>
-            </div>
-        </div>
+                }
+                while ($i < $number_of_items && $i < $max_number_of_items) {
+                    $id           = $item_array[$i]["id"];
+                    $backup_image = !empty($attribute_box_listBackupImage) ? $attribute_box_listBackupImage : "";
+                    $image        = has_post_thumbnail($id) ? wp_get_attachment_image_src(get_post_thumbnail_id($id))[0] : $backup_image;
+                    $title        = __(esc_html($item_array[$i]["title"]),"hale");
+                    $date         = $attribute_box_hasDate ? date(get_option("date_format"), strtotime($item_array[$i]["date"])) : "";
+                    $url          = esc_html($item_array[$i]["link"]);
+
+        ?>
+                    <div id="item-<?php echo $id;?>" class="mojblocks-auto-item-list__item <?php echo $few_items_class;?>">
+                        <?php if ($attribute_box_listImage && $one_items_has_image) { ?>
+                            <div class="mojblocks-auto-item-list__image" style="background-image:url('<?php echo $image; ?>')">
+                                <span role="img" aria-label="Cover image for <?php echo $title;?>"></span>
+                            </div>
+                        <?php } ?>
+                        <div class="mojblocks-auto-item-list__content">
+                            <p class="govuk-body mojblocks-auto-item-list__headline" >
+                                <?php 
+                                //Some post types dont have a single view
+                                if(empty($link)) {
+                                    echo $title;
+                                } else {
+                                    echo "<a href='$url'>$title</a>";
+                                }
+                                ?>
+                            </p>
+                            <?php if ($attribute_box_hasDate) { ?>
+                                <p class="govuk-body-s mojblocks-auto-item-list__date" >
+                                    <?php echo $date;?>
+                                </p>
+                            <?php } ?>
+                        </div>
+                    </div>
+                <?php
+                    $i++;
+                }
+            } else {
+                echo "<p class='govuk-body'>".__(esc_html($attribute_box_emptyText),"hale")."</p>";
+            }
+        ?>
     </div>
 
     <?php
