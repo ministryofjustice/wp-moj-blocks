@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     3.14.1
+ * Version:     3.15.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Malcolm Butler, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -271,6 +271,31 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
+        'mojblocks/iframe',
+        [
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_iframe_block',
+            'attributes' => [
+                'iFrameURL'=> [
+                    'type'=> 'string',
+                ],
+                'iFrameClassName'=> [
+                    'type'=> 'string',
+                ],
+                'iFrameWidth'=> [
+                    'type'=> 'number',
+                ],
+                'iFrameHeight'=> [
+                    'type'=> 'number',
+                ],
+                'iFrameBorder'=> [
+                    'type'=> 'boolean',
+                ],
+            ]
+        ]
+    );
+
+    register_block_type(
         'mojblocks/intro',
         [
             'editor_script' => 'mojblocks-editor-script',
@@ -506,6 +531,7 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/cta/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/hero/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/highlights-list/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/intro/index.php';
+include plugin_dir_path(__FILE__) . 'src/custom-blocks/iframe/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/quote/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/reveal/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/separator/index.php';

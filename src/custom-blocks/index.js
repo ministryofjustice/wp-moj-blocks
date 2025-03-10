@@ -9,6 +9,7 @@ import "./accordion";
 import "./staggered-box";
 import "./separator";
 import "./quote";
+import "./iframe";
 import "./intro";
 import "./reveal";
 import "./card";
