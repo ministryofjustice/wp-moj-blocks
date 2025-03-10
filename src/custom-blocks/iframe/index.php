@@ -24,10 +24,10 @@ function render_callback_iFrame_block($attributes, $content)
     if ($attribute_iFrame_url == "" || substr($attribute_iFrame_url,0,8) != "https://") {
         return "";
     }
-    
+
     $attribute_iFrame_url = esc_url($attribute_iFrame_url);
-    $attribute_iFrame_width = esc_html($attribute_iFrame_width);
-    $attribute_iFrame_height = esc_html($attribute_iFrame_height);
+    $attribute_iFrame_width = $attribute_iFrame_width;
+    $attribute_iFrame_height = $attribute_iFrame_height;
     $attribute_iFrame_className = esc_html($attribute_iFrame_className);
 
     if ($attribute_iFrame_centre) $attribute_iFrame_className = "moj-block-iframe--centre ".$attribute_iFrame_className;
