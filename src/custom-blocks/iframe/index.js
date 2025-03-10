@@ -97,45 +97,35 @@ registerBlockType('mojblocks/iframe', {
             }
         };
         const readIFrameCode = x => {
-            // This code sets the URL, Width and Height for the iFrame from the code bopied in.
-            let spacedOutIFrameCode = iFrameCode.replaceAll(">"," > ");
+            // This code sets the URL, Width and Height for the iFrame from the code copied in.
             let i = 0;
-            while (spacedOutIFrameCode.indexOf(" =") >= 0 || spacedOutIFrameCode.indexOf("= ") >= 0) {
+            while (iFrameCode.indexOf(" =") >= 0 || iFrameCode.indexOf("= ") >= 0) {
                 // Remove any spaces around equals signs
-                spacedOutIFrameCode = spacedOutIFrameCode.replaceAll(" =","=")
-                spacedOutIFrameCode = spacedOutIFrameCode.replaceAll("= ","=")
+                iFrameCode = iFrameCode.replaceAll(" =","=")
+                iFrameCode = iFrameCode.replaceAll("= ","=")
                 i++;
-                if (i > 10) break;
+                if (i > 100) break;
             }
-            let codeArray = spacedOutIFrameCode.split(" ");
-            let iframeTag = false;
-            setAttributes({ iFrameBorder: false } ); // set the frame to off, will be turned on if frameborder is present
-            for (i=0;i<codeArray.length;i++) {
-                let item=codeArray[i];
-                let lowercase=item.toLowerCase();
-                if (lowercase.indexOf("<iframe") >= 0) iframeTag = true;
-                if (!iframeTag) continue;
-                if (lowercase.substring(0,4) == "src=") {
-                    //This is case sensitive so do not use lowercase.substring...
-                    setAttributes({iFrameURL: item.substring(4).replaceAll("\"","").replaceAll("\'","")})
-                }
-                if (lowercase.substring(0,6) == "width=") {
-                    setAttributes({iFrameWidth: Number(item.substring(6).replaceAll("\"","").replaceAll("\'",""))})
-                }
-                if (lowercase.substring(0,7) == "height=") {
-                    setAttributes({iFrameHeight: Number(item.substring(7).replaceAll("\"","").replaceAll("\'",""))})
-                }
-                if (lowercase.substring(0,12) == "frameborder=") {
-                    let borderValue = Number(item.substring(12).replaceAll("\"","").replaceAll("\'",""));
-                    if (borderValue > 0) {
-                        // if the value is not zero, we set border to true
-                        console.log(borderValue);
-                        setAttributes({ iFrameBorder: true } );
-                    }
-                }
-                if (lowercase == "</iframe" || lowercase.indexOf("</iframe") >= 0) {
-                    // the iFrame has come to an end, so we finish the loop
-                    break;
+            let src = iFrameCode.match(/src=..*?(?=[*"' ])/,"i");
+            let width = iFrameCode.match(/width=..*?(?=[*"' ])/,"i");
+            let height = iFrameCode.match(/height=..*?(?=[*"' ])/,"i");
+            let frameborder = iFrameCode.match(/frameborder=..*?(?=[*"' ])/,"i");
+
+            if (src && height && width) {
+                // These three are required
+                let srcValue = src[0].replaceAll("\"","").replaceAll("\'","").substring(4); // src= (4)
+                let widthValue = Number(width[0].substring(7)); // width=" (7)
+                let heightValue = Number(height[0].substring(8)); // height=" (8)
+                let borderValue;
+                // Set the attributes
+                setAttributes({iFrameURL: srcValue});
+                setAttributes({iFrameWidth: widthValue});
+                setAttributes({iFrameHeight: heightValue});
+
+                if (!frameborder || borderValue == 'frameborder="0' || borderValue == "frameborder='0") {
+                    borderValue = false;
+                } else {
+                    borderValue = true;
                 }
             }
         };
