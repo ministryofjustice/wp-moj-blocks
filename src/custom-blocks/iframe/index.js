@@ -113,20 +113,23 @@ registerBlockType('mojblocks/iframe', {
 
             if (src) {
                 // src is required
-                let srcValue = src[0].replaceAll("\"","").replaceAll("\'","").substring(4); // src= (4)
-                let widthValue = Number(width[0].substring(7)); // width=" (7)
-                let heightValue = Number(height[0].substring(8)); // height=" (8)
-                let borderValue;
-                // Set the attributes
+                let srcValue = src[0].replaceAll("\"","").replaceAll("\'","").substring(4); // src= (4), we don't know if quotes have been used
                 setAttributes({iFrameURL: srcValue});
-                setAttributes({iFrameWidth: widthValue});
-                setAttributes({iFrameHeight: heightValue});
-
-                if (!frameborder || borderValue == 'frameborder="0' || borderValue == "frameborder='0") {
+                if (width) {
+                    let widthValue = Number(width[0].substring(7)); // width=" (7)
+                    setAttributes({iFrameWidth: widthValue});
+                }
+                if (height) {
+                    let heightValue = Number(height[0].substring(8)); // height=" (8)
+                    setAttributes({iFrameHeight: heightValue});
+                }
+                let borderValue;
+                if (!frameborder || frameborder[0] == 'frameborder="0' || frameborder[0] == "frameborder='0") {
                     borderValue = false;
                 } else {
                     borderValue = true;
                 }
+                setAttributes({ iFrameBorder: borderValue } );
             }
         };
 
