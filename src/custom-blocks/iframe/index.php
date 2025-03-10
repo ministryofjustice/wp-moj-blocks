@@ -17,13 +17,15 @@ function render_callback_iFrame_block($attributes, $content)
     $attribute_iFrame_url = $attributes['iFrameURL'] ?? '';
     $attribute_iFrame_width = $attributes['iFrameWidth'] ?? '';
     $attribute_iFrame_height = $attributes['iFrameHeight'] ?? '';
-    $attribute_iFrame_border = $attributes['iFrameBorder'] ? '1' : '0';
+    $attribute_iFrame_border = $attributes['iFrameBorder'] ?? false;
     $attribute_iFrame_centre = $attributes['iFrameCentre'] ?? false;
     $attribute_iFrame_className = $attributes['iFrameClassName'] ?? '';
 
     if ($attribute_iFrame_url == "" || substr($attribute_iFrame_url,0,8) != "https://") {
         return "";
     }
+
+    $attribute_iFrame_border = $attribute_iFrame_border ? "1" : "0";
 
     $attribute_iFrame_url = esc_url($attribute_iFrame_url);
     $attribute_iFrame_width = $attribute_iFrame_width;
