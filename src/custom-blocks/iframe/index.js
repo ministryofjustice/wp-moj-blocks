@@ -111,8 +111,8 @@ registerBlockType('mojblocks/iframe', {
             let height = iFrameCode.match(/height=..*?(?=[*"' ])/,"i");
             let frameborder = iFrameCode.match(/frameborder=..*?(?=[*"' ])/,"i");
 
-            if (src && height && width) {
-                // These three are required
+            if (src) {
+                // src is required
                 let srcValue = src[0].replaceAll("\"","").replaceAll("\'","").substring(4); // src= (4)
                 let widthValue = Number(width[0].substring(7)); // width=" (7)
                 let heightValue = Number(height[0].substring(8)); // height=" (8)
