@@ -17,7 +17,7 @@ function render_callback_iFrame_block($attributes, $content)
     $attribute_iFrame_url = $attributes['iFrameURL'] ?? '';
     $attribute_iFrame_width = $attributes['iFrameWidth'] ?? '';
     $attribute_iFrame_height = $attributes['iFrameHeight'] ?? '';
-    $attribute_iFrame_border = $attributes['iFrameBorder'] ?? false;
+    $attribute_iFrame_border = $attributes['iFrameBorder'] ? '1' : '0';
     $attribute_iFrame_centre = $attributes['iFrameCentre'] ?? false;
     $attribute_iFrame_className = $attributes['iFrameClassName'] ?? '';
 
@@ -31,7 +31,6 @@ function render_callback_iFrame_block($attributes, $content)
     $attribute_iFrame_className = esc_html($attribute_iFrame_className);
 
     if ($attribute_iFrame_centre) $attribute_iFrame_className = "moj-block-iframe--centre ".$attribute_iFrame_className;
-    if ($attribute_iFrame_border) $attribute_iFrame_className = "moj-block-iframe--border ".$attribute_iFrame_className;
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -44,6 +43,7 @@ function render_callback_iFrame_block($attributes, $content)
         src="<?php echo $attribute_iFrame_url; ?>"
         width="<?php echo $attribute_iFrame_width; ?>"
         height="<?php echo $attribute_iFrame_height; ?>"
+        frameborder="<?php echo $attribute_iFrame_border; ?>"
     ></iframe>
 
     <?php
