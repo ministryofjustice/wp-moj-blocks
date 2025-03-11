@@ -3,7 +3,6 @@
 @include govuk-media-query($from: "tablet", $media-type: screen) {
 	h1, h2, h3, h4, h5, h6 {
 		max-width: 700px;
-		&:is(.hale-deprecated-paragraph-widths *), // Remove this when all sites have been updated
 		&.is-style-wide {
 			max-width: 1010px;
 		}
