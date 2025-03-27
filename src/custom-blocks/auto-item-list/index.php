@@ -70,6 +70,7 @@ function render_callback_auto_item_list_block($attributes)
                     $item_array[] = [
                         "id" => get_the_ID(),
                         "title" => get_the_title(),
+                        "summary" => get_post_meta( get_the_ID(), 'post_summary', TRUE ),
                         "date" => $date_to_use,
                         "link" => $link,
                         "relevantTaxonomyValue" => $relevant_taxonomy_value
@@ -134,29 +135,50 @@ function render_callback_auto_item_list_block($attributes)
                     $backup_image = !empty($attribute_box_listBackupImage) ? $attribute_box_listBackupImage : "";
                     $image        = has_post_thumbnail($id) ? wp_get_attachment_image_src(get_post_thumbnail_id($id))[0] : $backup_image;
                     $title        = __(esc_html($item_array[$i]["title"]),"hale");
+                    $summary        = __(esc_html($item_array[$i]["summary"]),"hale");
                     $date         = $attribute_box_hasDate ? date(get_option("date_format"), strtotime($item_array[$i]["date"])) : "";
                     $url          = esc_html($item_array[$i]["link"]);
+
+                    $image_class = "mojblocks-auto-item-list__image";
+                    $immage_innards = $image_style = "";
+                    if ($image == "") {
+                        $image_class .= " mojblocks-auto-item-list__image--no-image";
+                        $immage_innards = '
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path>
+                        </svg>';
+                    } else {
+                        $image_style = "background-image:url('$image')";
+                        $immage_innards = "<span role='img' aria-label='Cover image for $title'></span>";
+                    }
 
         ?>
                     <div id="item-<?php echo $id;?>" class="mojblocks-auto-item-list__item <?php echo $few_items_class;?>">
                         <?php if ($attribute_box_listImage && $one_items_has_image) { ?>
-                            <div class="mojblocks-auto-item-list__image" style="background-image:url('<?php echo $image; ?>')">
-                                <span role="img" aria-label="Cover image for <?php echo $title;?>"></span>
+                            <div class="<?php echo $image_class;?>" style="<?php echo $image_style; ?>">
+                                <?php echo $immage_innards;?>
                             </div>
                         <?php } ?>
                         <div class="mojblocks-auto-item-list__content">
-                            <p class="govuk-body mojblocks-auto-item-list__headline" >
-                                <?php 
-                                //Some post types dont have a single view
-                                if(empty($link)) {
-                                    echo $title;
-                                } else {
-                                    echo "<a href='$url'>$title</a>";
-                                }
-                                ?>
-                            </p>
+                            <div>
+                                <p class="govuk-body mojblocks-auto-item-list__headline" >
+                                    <?php 
+                                    //Some post types dont have a single view
+                                    if(empty($link)) {
+                                        echo $title;
+                                    } else {
+                                        echo "<a href='$url'>$title</a>";
+                                    }
+                                    ?>
+                                </p>
+                                <p class="govuk-body mojblocks-auto-item-list__summary" >
+                                    <?php 
+                                        echo $summary;
+                                    ?>
+                                </p>
+                            </div>
                             <?php if ($attribute_box_hasDate) { ?>
-                                <p class="govuk-body-s mojblocks-auto-item-list__date" >
+                                <p class="govuk-body-s mojblocks-auto-item-list__date govuk-!-margin-bottom-0" >
                                     <?php echo $date;?>
                                 </p>
                             <?php } ?>

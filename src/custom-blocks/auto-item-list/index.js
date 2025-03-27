@@ -412,3 +412,16 @@ registerBlockType("mojblocks/auto-item-list", {
 
     save: () => { return <InnerBlocks.Content />; }
 });
+
+registerBlockStyle( 'mojblocks/auto-item-list', {
+  name: 'shaded',
+  label: __('Shaded', 'mojblocks'),
+} );
+registerBlockStyle( 'mojblocks/auto-item-list', {
+  name: 'bordered',
+  label: __('Bordered', 'mojblocks'),
+} );
+registerBlockStyle( 'mojblocks/auto-item-list', {
+  name: 'shaded-bordered',
+  label: __('Shaded & bordered', 'mojblocks'),
+} );
