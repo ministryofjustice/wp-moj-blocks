@@ -15,6 +15,7 @@ function render_callback_auto_item_list_block($attributes)
 
     // Parse attributes found in index.js
     $attribute_box_hasDate = $attributes['listHasDate'] ?? true;
+    $attribute_box_hasSummary = $attributes['listHasSummary'] ?? false;
     $attribute_box_emptyText = $attributes['listEmptyText'] ?? 'No items to display.';
     $attribute_box_className = $attributes['listClassName'] ?? '';
     $attribute_box_listPostType = $attributes['listItemType'] ?? '';
@@ -23,6 +24,31 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_listTaxonomyValueArray = $attributes['listTaxonomyValueArray'] ?? [];
     $attribute_box_listImage = $attributes['listImage'] ?? false;
     $attribute_box_listBackupImage = $attributes['listBackupImage'] ?? '';
+    $attribute_box_listBackgroundColourClass = $attributes['backgroundColourClass'] ?? '';
+    $attribute_box_listTextColourClass = $attributes['textColourClass'] ?? '';
+    $attribute_box_listBorderColour = $attributes['borderColour'] ?? '';
+
+    $text_colour_class = $background_colour_class = $border_style = $border_class = "";
+
+    if (
+        !$attribute_box_hasDate && !$attribute_box_hasSummary && !$attribute_box_listImage //only headline in items
+        &&
+        !$attribute_box_listBorderColour && !$attribute_box_listBackgroundColourClass //no border or shading selected
+    ) {
+        $border_class = "is-bordered"; //add a grey border to the items
+    }
+
+    if ($attribute_box_listBackgroundColourClass) {
+        $background_colour_class = $attribute_box_listBackgroundColourClass . " has-background";
+    }
+    if ($attribute_box_listTextColourClass) {
+        $text_colour_class = $attribute_box_listTextColourClass . " has-text-color";
+    }
+    if ($attribute_box_listBorderColour) {
+        $border_style = "border-color: $attribute_box_listBorderColour";
+        $border_class = "is-bordered";
+    }
+
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -70,7 +96,7 @@ function render_callback_auto_item_list_block($attributes)
                     $item_array[] = [
                         "id" => get_the_ID(),
                         "title" => get_the_title(),
-                        "summary" => get_post_meta( get_the_ID(), 'post_summary', TRUE ),
+                        "summary" => $attribute_box_hasSummary ? get_post_meta( get_the_ID(), 'post_summary', TRUE ) : "",
                         "date" => $date_to_use,
                         "link" => $link,
                         "relevantTaxonomyValue" => $relevant_taxonomy_value
@@ -135,7 +161,7 @@ function render_callback_auto_item_list_block($attributes)
                     $backup_image = !empty($attribute_box_listBackupImage) ? $attribute_box_listBackupImage : "";
                     $image        = has_post_thumbnail($id) ? wp_get_attachment_image_src(get_post_thumbnail_id($id))[0] : $backup_image;
                     $title        = __(esc_html($item_array[$i]["title"]),"hale");
-                    $summary        = __(esc_html($item_array[$i]["summary"]),"hale");
+                    $summary      = __(esc_html($item_array[$i]["summary"]),"hale");
                     $date         = $attribute_box_hasDate ? date(get_option("date_format"), strtotime($item_array[$i]["date"])) : "";
                     $url          = esc_html($item_array[$i]["link"]);
 
@@ -153,16 +179,25 @@ function render_callback_auto_item_list_block($attributes)
                     }
 
         ?>
-                    <div id="item-<?php echo $id;?>" class="mojblocks-auto-item-list__item <?php echo $few_items_class;?>">
-                        <?php if ($attribute_box_listImage && $one_items_has_image) { ?>
-                            <div class="<?php echo $image_class;?>" style="<?php echo $image_style; ?>">
-                                <?php echo $immage_innards;?>
-                            </div>
-                        <?php } ?>
+                    <div
+                        id="item-<?php echo $id;?>"
+                        style="<?php echo $border_style;?>"
+                        class="mojblocks-auto-item-list__item <?php echo $few_items_class." ".$background_colour_class." ".$text_colour_class." ".$border_class;?>"
+                    >
+                        <?php if ($attribute_box_listImage && $one_items_has_image) {
+                            if(!empty($link)) echo "<a href='$url' tabindex='-1'>";
+                                echo "
+                                    <div class='$image_class' style=\"$image_style\">
+                                        $immage_innards
+                                    </div>
+                                ";
+                            if(!empty($link)) echo "</a>";
+                        }
+                        ?>
                         <div class="mojblocks-auto-item-list__content">
-                            <div>
+                            <div class="mojblocks-auto-item-list__title-and-summary">
                                 <p class="govuk-body mojblocks-auto-item-list__headline" >
-                                    <?php 
+                                    <?php
                                     //Some post types dont have a single view
                                     if(empty($link)) {
                                         echo $title;
@@ -171,14 +206,14 @@ function render_callback_auto_item_list_block($attributes)
                                     }
                                     ?>
                                 </p>
-                                <p class="govuk-body mojblocks-auto-item-list__summary" >
-                                    <?php 
-                                        echo $summary;
-                                    ?>
-                                </p>
+                                <?php if ($attribute_box_hasSummary) {?>
+                                    <p class="mojblocks-auto-item-list__summary" >
+                                        <?php echo $summary; ?>
+                                    </p>
+                                <?php } ?>
                             </div>
                             <?php if ($attribute_box_hasDate) { ?>
-                                <p class="govuk-body-s mojblocks-auto-item-list__date govuk-!-margin-bottom-0" >
+                                <p class="mojblocks-auto-item-list__date" >
                                     <?php echo $date;?>
                                 </p>
                             <?php } ?>

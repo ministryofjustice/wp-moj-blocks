@@ -3,12 +3,11 @@ import { store as coreStore } from '@wordpress/core-data';
 const { __ } = wp.i18n;
 const { registerBlockType, registerBlockStyle } = wp.blocks;
 const { Fragment } = wp.element;
-const { useSelect } = wp.data;
-const { InspectorControls, MediaUpload, InnerBlocks } = wp.blockEditor;
-const { PanelBody, SelectControl, Button, TextControl, ToggleControl, RadioControl} = wp.components;
+const { useSelect, select } = wp.data;
+const { InspectorControls, MediaUpload, InnerBlocks, PanelColorSettings, getColorClassName, getColorObjectByColorValue } = wp.blockEditor;
+const { PanelBody, SelectControl, Button, TextControl, ToggleControl} = wp.components;
 const allowedMediaTypes = ['image'];
 
-import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
 import { __experimentalText as Text } from '@wordpress/components';
 
 registerBlockType("mojblocks/auto-item-list", {
@@ -22,6 +21,10 @@ registerBlockType("mojblocks/auto-item-list", {
     listHasDate: {
       type: "boolean",
       default: true
+    },
+    listHasSummary: {
+      type: "boolean",
+      default: false
     },
     listEmptyText: {
       type: "string",
@@ -53,7 +56,27 @@ registerBlockType("mojblocks/auto-item-list", {
     },
     listClassName: {
       type: 'string'
-    }
+    },
+    backgroundColour: {
+      type: 'string',
+      default: ''
+    },
+    backgroundColourClass: {
+      type: 'string',
+      default: ''
+    },
+    borderColour: {
+      type: 'string',
+      default: ''
+    },
+    textColour: {
+      type: 'string',
+      default: ''
+    },
+    textColourClass: {
+      type: 'string',
+      default: ''
+    },
   },
 
   edit: props => {
@@ -62,12 +85,18 @@ registerBlockType("mojblocks/auto-item-list", {
       attributes: {
         listEmptyText,
         listHasDate,
+        listHasSummary,
         listItemType,
         listTaxonomy,
         listTaxonomyOptions,
         listTaxonomyValueArray,
         listImage,
         listBackupImage,
+        backgroundColour,
+        backgroundColourClass,
+        borderColour,
+        textColour,
+        textColourClass
       },
       className
     } = props
@@ -224,6 +253,9 @@ registerBlockType("mojblocks/auto-item-list", {
     const setHasDate = newDateSetting => {
       setAttributes({ listHasDate: newDateSetting });
     };
+    const setHasSummary = newSummarySetting => {
+      setAttributes({ listHasSummary: newSummarySetting });
+    };
     const setEmptyText = newEmptyText => {
       setAttributes({ listEmptyText: newEmptyText } );
     };
@@ -235,11 +267,51 @@ registerBlockType("mojblocks/auto-item-list", {
         listBackupImage: null,
       });
     };
+    const onChangeBackgroundColour = colour => {
+      setAttributes( { backgroundColour: colour } );
+      if (typeof(colour) === "undefined" || colour == "") {
+        setAttributes( { backgroundColourClass: ""} );
+      } else {
+        const settings = select( 'core/editor' ).getEditorSettings();
+        const colourObject = (getColorObjectByColorValue(settings.colors, colour));
+        setAttributes( { backgroundColour: colour } );
+        setAttributes( { backgroundColourClass: getColorClassName( 'background-color', colourObject.slug ) } );
+      }
+    };
+    const onChangeTextColour = colour => {
+      setAttributes( { textColour: colour } );
+      if (typeof(colour) === "undefined" || colour == "") {
+        setAttributes( { textColourClass: ""} );
+      } else {
+        const settings = select( 'core/editor' ).getEditorSettings();
+        const colourObject = (getColorObjectByColorValue(settings.colors, colour));
+        setAttributes( { textColourClass: getColorClassName( 'color', colourObject.slug ) } );
+      }
+    };
+    const onChangeBorderColour = colour => {
+      if (typeof(colour) === "undefined") {
+        setAttributes( { borderColour: "" } );
+      } else {
+        setAttributes( { borderColour: colour } );
+      }
+    };
 
     let title = 'Title automatically updated on preview page';
-    let date = 'Date';
+    let summary = listHasSummary ? 'The summary text shall be displayed here.': '';
+    let date = listHasDate ? 'Date' : "";
     let listImageStyle = {
       backgroundImage: 'url(' + listBackupImage + ')'
+    };
+    let borderStyle = {borderColor: borderColour};
+    let itemClass = "";
+    if (backgroundColourClass) {
+      itemClass += backgroundColourClass + " has-background ";
+    }
+    if (textColourClass) {
+      itemClass += textColourClass + " has-text-color ";
+    }
+    if (borderColour) {
+      itemClass += " is-bordered";
     }
     if (itemTypes.length <= 1 && itemTypesFinishedParsing) return (
       <Fragment >
@@ -272,6 +344,27 @@ registerBlockType("mojblocks/auto-item-list", {
     if (itemTypes.length > 1) return (
       <Fragment >
         <InspectorControls>
+        <PanelColorSettings
+              title={__("Colour Settings", "mojblocks" )}
+              initialOpen={false}
+              colorSettings={[
+                  {
+                      value: backgroundColour,
+                      onChange: onChangeBackgroundColour,
+                      label: __('Background colour', 'mojblocks')
+                  },
+                  {
+                      value: textColour,
+                      onChange: onChangeTextColour,
+                      label: __('Text colour', 'mojblocks')
+                  },
+                  {
+                      value: borderColour,
+                      onChange: onChangeBorderColour,
+                      label: __('Border colour', 'mojblocks')
+                  }
+              ]}
+          />
           <PanelBody
             title={__('Settings')}
             initialOpen={true}
@@ -304,7 +397,7 @@ registerBlockType("mojblocks/auto-item-list", {
               )
             }
             <ToggleControl
-              label="Show/hide item publish date"
+              label="Show item publish date"
               help={
                 listHasDate === false
                 ? 'Dates will be hidden'
@@ -312,6 +405,16 @@ registerBlockType("mojblocks/auto-item-list", {
               }
               checked={ listHasDate }
               onChange={ setHasDate }
+            />
+            <ToggleControl
+              label="Show item summary"
+              help={
+                listHasSummary === false
+                ? 'The summary shall be hidden'
+                : 'The summary shall be displayed'
+              }
+              checked={ listHasSummary }
+              onChange={ setHasSummary }
             />
             <ToggleControl
               className='govuk-!-margin-top-3'
@@ -374,35 +477,53 @@ registerBlockType("mojblocks/auto-item-list", {
               value={ listEmptyText }
               onChange={ setEmptyText }
             />
+            <Text>
+              { !listImage && !listHasSummary && !listHasDate && !borderColour && !backgroundColour
+                ? "Items with only a title will be given a border around them to distinguish them from regular text."
+                : ""
+              }
+            </Text>
           </PanelBody>
         </InspectorControls>
 
         <div className={`mojblocks-auto-item-list ${className}`}>
-          <div className="govuk-width-container govuk-!-margin-0">
-            <div className={`govuk-grid-row ${listHasDate === false ? 'mojblocks-auto-item-list-hide-date' : ''} ` }>
-              <div className={`mojblocks-auto-item-list__item`}>
-                {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
-                <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
-                <p className="mojblocks-auto-item-list__date">
-                  <i>{ date }</i>
-                  <br />
-                  (most recent item)
-                </p>
+            <div className={`mojblocks-auto-item-list__item ${itemClass}`} style={borderStyle}>
+            {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
+            {(listImage && !listBackupImage) && (<div class="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
+            <div className="mojblocks-auto-item-list__content">
+              <div className={`mojblocks-auto-item-list__title-and-summary`}>
+                <p className="govuk-body mojblocks-auto-item-list__headline"><a href="#">{title}</a></p>
+                <p className={`govuk-body mojblocks-auto-item-list__summary  ${textColourClass}`}>{summary}</p>
               </div>
-              <div className={`mojblocks-auto-item-list__item`}>
-                {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
-                <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
-                <p className="mojblocks-auto-item-list__date">
-                  <i>{ date }</i>
-                </p>
+              <p className="mojblocks-auto-item-list__date">
+                <i>{ date }</i> (most recent item)
+              </p>
+            </div>
+          </div>
+          <div className={`mojblocks-auto-item-list__item ${itemClass}`} style={borderStyle}>
+            {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
+            {(listImage && !listBackupImage) && (<div class="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
+            <div className={"mojblocks-auto-item-list__content"}>
+              <div className="mojblocks-auto-item-list__title-and-summary">
+                <p className="govuk-body mojblocks-auto-item-list__headline"><a href="#">{title}</a></p>
+                <p className={`govuk-body mojblocks-auto-item-list__summary  ${textColourClass}`}>{summary}</p>
               </div>
-              <div className={`mojblocks-auto-item-list__item`}>
-                {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
+              <p className="mojblocks-auto-item-list__date">
+                <i>{ date }</i>
+              </p>
+            </div>
+          </div>
+          <div className={`mojblocks-auto-item-list__item ${itemClass}`} style={borderStyle}>
+            {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
+            {(listImage && !listBackupImage) && (<div class="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
+            <div className="mojblocks-auto-item-list__content">
+              <div className={`mojblocks-auto-item-list__title-and-summary`}>
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
-                <p className="mojblocks-auto-item-list__date">
-                  <i>{ date }</i>
-                </p>
-              </div>
+                <p className={`govuk-body mojblocks-auto-item-list__summary  ${textColourClass}`}>{summary}</p>
+                </div>
+              <p className="mojblocks-auto-item-list__date">
+                <i>{ date }</i>
+              </p>
             </div>
           </div>
         </div>
@@ -412,16 +533,3 @@ registerBlockType("mojblocks/auto-item-list", {
 
     save: () => { return <InnerBlocks.Content />; }
 });
-
-registerBlockStyle( 'mojblocks/auto-item-list', {
-  name: 'shaded',
-  label: __('Shaded', 'mojblocks'),
-} );
-registerBlockStyle( 'mojblocks/auto-item-list', {
-  name: 'bordered',
-  label: __('Bordered', 'mojblocks'),
-} );
-registerBlockStyle( 'mojblocks/auto-item-list', {
-  name: 'shaded-bordered',
-  label: __('Shaded & bordered', 'mojblocks'),
-} );
