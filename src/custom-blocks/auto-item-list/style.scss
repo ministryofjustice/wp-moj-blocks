@@ -41,9 +41,21 @@ Block: Auto item list (Frontend styles)
 		}
 	}
 
+	&__summary {
+		display: -webkit-box;
+		-webkit-line-clamp: 10;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
+	}
+
 	&__headline {
 		margin-top: govuk-px-to-rem(16);
 		margin-bottom: govuk-px-to-rem(16);
+
+		display: -webkit-box;
+		-webkit-line-clamp: 5;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 
 		&:first-child {
 			padding-top: govuk-px-to-rem(16); //no image only
