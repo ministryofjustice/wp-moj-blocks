@@ -41,6 +41,14 @@ Block: Auto item list (Frontend styles)
 		}
 	}
 
+	&__content {
+		padding-top: govuk-px-to-rem(16); //gap betwixt headline and image
+		&:first-child {
+			//removes gap meant to separate headline from image
+			padding-top: 0;
+		}
+	}
+
 	&__summary {
 		display: -webkit-box;
 		-webkit-line-clamp: 10;
@@ -49,7 +57,8 @@ Block: Auto item list (Frontend styles)
 	}
 
 	&__headline {
-		margin-top: govuk-px-to-rem(16);
+		font-weight: 700;
+		margin-top: 0;
 		margin-bottom: govuk-px-to-rem(16);
 
 		display: -webkit-box;
@@ -57,17 +66,8 @@ Block: Auto item list (Frontend styles)
 		-webkit-box-orient: vertical;
 		overflow: hidden;
 
-		&:first-child {
-			padding-top: govuk-px-to-rem(16); //no image only
-		}
-
 		@include govuk-media-query($from: tablet) {
-
 			padding-top: 0;
-
-		}
-		&.govuk-body{
-			font-weight: 700;
 		}
 	}
 
@@ -137,10 +137,6 @@ Block: Auto item list (Frontend styles)
 			}
 			flex:1;
 			align-content: space-between;
-		}
-		.mojblocks-auto-item-list__headline:first-child {
-			//removes gap meant to separate headline from image
-			padding-top: 0;
 		}
 	}
 	&.is-bordered {

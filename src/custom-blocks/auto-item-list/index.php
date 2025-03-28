@@ -196,7 +196,7 @@ function render_callback_auto_item_list_block($attributes)
                         ?>
                         <div class="mojblocks-auto-item-list__content">
                             <div class="mojblocks-auto-item-list__title-and-summary">
-                                <p class="govuk-body mojblocks-auto-item-list__headline" >
+                                <p class="mojblocks-auto-item-list__headline" >
                                     <?php
                                     //Some post types dont have a single view
                                     if(empty($link)) {
