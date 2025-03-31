@@ -6,10 +6,10 @@ Block: Auto item list (Frontend styles)
 **********************************************************************************************/
 
 .mojblocks-auto-item-list {
-	margin: 0 0 govuk-px-to-rem(48) 0;
+	margin-bottom: govuk-px-to-rem(24);
 
 	&__item {
-		margin-bottom: govuk-px-to-rem(24)
+		margin-bottom: govuk-px-to-rem(18);
 	}
 
 	@include govuk-media-query($from: tablet) {
@@ -21,16 +21,25 @@ Block: Auto item list (Frontend styles)
 		&__item {
 			display: flex;
 			flex-direction: column;
-			margin-bottom: 1.5rem;
+			margin-bottom: 0;
 			width: 32%;
 			min-width: min(100%, 150px); // This is to ensure the items don't get too scrunched up when put into columns etc.
 
 			&--1 {
-				padding: 10px 3% 10px 0;
-				width: 66%;
+				width: 100%;
+				flex-direction: row;
+
+				.mojblocks-auto-item-list__image-link{
+					margin-right: 3%;
+					width: 49%;
+				}
+				.mojblocks-auto-item-list__content {
+					width: 45%;
+					padding-top: 0;
+					display: block;
+				}
 			}
 			&--2, &--4 {
-				padding: 10px 3% 10px 0;
 				width: 49%;
 			}
 		}
@@ -137,6 +146,11 @@ Block: Auto item list (Frontend styles)
 			}
 			flex:1;
 			align-content: space-between;
+		}
+		&.mojblocks-auto-item-list__item--1 .mojblocks-auto-item-list__content:not(:first-child) {
+			@include govuk-media-query($from: tablet) {
+				padding-left: 0;
+			}
 		}
 	}
 	&.is-bordered {

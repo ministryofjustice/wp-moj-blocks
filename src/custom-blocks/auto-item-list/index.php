@@ -67,6 +67,15 @@ function render_callback_auto_item_list_block($attributes)
                 'post_type' => $attribute_box_listPostType,
                 'post_per_page' => -1
             );
+            if ($attribute_box_listTaxonomy != "" && taxonomy_exists($attribute_box_listTaxonomy)) {
+                $args['tax_query'] = array(
+                    array(
+                        'taxonomy' => $attribute_box_listTaxonomy,
+                        'field' => 'term_id',
+                        'terms' => $attribute_box_listTaxonomyValueArray,
+                    ),
+                );
+            }
             $query = new WP_Query( $args );
 
             // The Loop
@@ -185,7 +194,7 @@ function render_callback_auto_item_list_block($attributes)
                         class="mojblocks-auto-item-list__item <?php echo $few_items_class." ".$background_colour_class." ".$text_colour_class." ".$border_class;?>"
                     >
                         <?php if ($attribute_box_listImage && $one_items_has_image) {
-                            if(!empty($link)) echo "<a href='$url' tabindex='-1'>";
+                            if(!empty($link)) echo "<a class='mojblocks-auto-item-list__image-link' href='$url' tabindex='-1'>";
                                 echo "
                                     <div class='$image_class' style=\"$image_style\">
                                         $immage_innards

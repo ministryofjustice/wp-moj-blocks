@@ -313,6 +313,9 @@ registerBlockType("mojblocks/auto-item-list", {
     if (borderColour) {
       itemClass += " is-bordered";
     }
+    if (!borderColour && !backgroundColour && !listHasDate && !listHasSummary && !listImage) {
+      itemClass += " is-bordered"; //apply a border to items with only a headline/title, when no border/shading styling set
+    }
     if (itemTypes.length <= 1 && itemTypesFinishedParsing) return (
       <Fragment >
         <InspectorControls>
