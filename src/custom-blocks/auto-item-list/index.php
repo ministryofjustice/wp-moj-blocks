@@ -25,7 +25,7 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_listTextColourClass = $attributes['textColourClass'] ?? '';
     $attribute_box_listBorderColour = $attributes['borderColour'] ?? '';
 
-    $text_colour_class = $background_colour_class = $border_style = $border_class = "";
+    $has_image_class = $text_colour_class = $background_colour_class = $border_style = $border_class = "";
 
     if (
         !$attribute_box_hasDate && !$attribute_box_hasSummary && !$attribute_box_listImage //only headline in items
@@ -118,6 +118,7 @@ function render_callback_auto_item_list_block($attributes)
                             $all_items_have_images = false;
                         } else {
                             $one_items_has_image = true;
+                            $has_image_class = "has-image";
                         }
                     }
                 }
@@ -147,7 +148,7 @@ function render_callback_auto_item_list_block($attributes)
                     <div
                         id="item-<?php echo $id;?>"
                         style="<?php echo $border_style;?>"
-                        class="mojblocks-auto-item-list__item <?php echo $few_items_class." ".$background_colour_class." ".$text_colour_class." ".$border_class;?>"
+                        class="mojblocks-auto-item-list__item <?php echo $few_items_class." ".$has_image_class." ".$background_colour_class." ".$text_colour_class." ".$border_class;?>"
                     >
                         <?php if ($attribute_box_listImage && $one_items_has_image) {
                             if(!empty($link)) echo "<a class='mojblocks-auto-item-list__image-link' href='$url' tabindex='-1'>";
