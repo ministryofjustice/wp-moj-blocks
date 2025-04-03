@@ -28,22 +28,6 @@ Block: Auto item list (Frontend styles)
 			&--1, &--2, &--4 {
 				width: 49%;
 			}
-
-			&--1.has-image {
-				width: 100%;
-				flex-direction: row;
-
-				.mojblocks-auto-item-list__image-link{
-					margin-right: 3%;
-					width: 49%;
-					align-self: start;
-				}
-				.mojblocks-auto-item-list__content {
-					width: 45%;
-					padding-top: 0;
-					display: block;
-				}
-			}
 		}
 
 		&__content {
@@ -148,11 +132,6 @@ Block: Auto item list (Frontend styles)
 			}
 			flex:1;
 			align-content: space-between;
-		}
-		&.mojblocks-auto-item-list__item--1 .mojblocks-auto-item-list__content:not(:first-child) {
-			@include govuk-media-query($from: tablet) {
-				padding-left: 0;
-			}
 		}
 	}
 	&.is-bordered {
