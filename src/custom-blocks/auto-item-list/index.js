@@ -3,12 +3,11 @@ import { store as coreStore } from '@wordpress/core-data';
 const { __ } = wp.i18n;
 const { registerBlockType, registerBlockStyle } = wp.blocks;
 const { Fragment } = wp.element;
-const { useSelect } = wp.data;
-const { InspectorControls, MediaUpload, InnerBlocks } = wp.blockEditor;
-const { PanelBody, SelectControl, Button, TextControl, ToggleControl, RadioControl} = wp.components;
+const { useSelect, select } = wp.data;
+const { InspectorControls, MediaUpload, InnerBlocks, PanelColorSettings, getColorClassName, getColorObjectByColorValue } = wp.blockEditor;
+const { PanelBody, SelectControl, Button, TextControl, ToggleControl} = wp.components;
 const allowedMediaTypes = ['image'];
 
-import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
 import { __experimentalText as Text } from '@wordpress/components';
 
 registerBlockType("mojblocks/auto-item-list", {
@@ -23,6 +22,10 @@ registerBlockType("mojblocks/auto-item-list", {
       type: "boolean",
       default: true
     },
+    listHasSummary: {
+      type: "boolean",
+      default: false
+    },
     listEmptyText: {
       type: "string",
       default: "No items to display."
@@ -31,10 +34,49 @@ registerBlockType("mojblocks/auto-item-list", {
       type: "string",
       default: "post"
     },
+    listTaxonomy: {
+      type: "string",
+      default: ""
+    },
+    listTaxonomyOptions: {
+      type: "array",
+      default: []
+    },
+    listTaxonomyValueArray: {
+      type: "array",
+      default: []
+    },
+    listImage: {
+      type: "boolean",
+      default: false
+    },
+    listBackupImage: {
+      type: "string",
+      default: ""
+    },
     listClassName: {
       type: 'string'
-    }
-
+    },
+    backgroundColour: {
+      type: 'string',
+      default: ''
+    },
+    backgroundColourClass: {
+      type: 'string',
+      default: ''
+    },
+    borderColour: {
+      type: 'string',
+      default: ''
+    },
+    textColour: {
+      type: 'string',
+      default: ''
+    },
+    textColourClass: {
+      type: 'string',
+      default: ''
+    },
   },
 
   edit: props => {
@@ -43,7 +85,18 @@ registerBlockType("mojblocks/auto-item-list", {
       attributes: {
         listEmptyText,
         listHasDate,
-        listItemType
+        listHasSummary,
+        listItemType,
+        listTaxonomy,
+        listTaxonomyOptions,
+        listTaxonomyValueArray,
+        listImage,
+        listBackupImage,
+        backgroundColour,
+        backgroundColourClass,
+        borderColour,
+        textColour,
+        textColourClass
       },
       className
     } = props
@@ -86,6 +139,71 @@ registerBlockType("mojblocks/auto-item-list", {
     }
 
     const {
+      allTaxonomies,
+      taxonomyOptions,
+      taxonomyValues,
+      selectedOptionName
+    } = useSelect(
+      ( select ) => {
+        if (allPostTypes) {
+          const { getEntityRecords } = select(
+            coreStore
+          );
+
+          let allTaxes = [];
+          let taxOptionList = [{
+            label: "Show all",
+            value: ""
+          }]
+          let taxValueList = []
+
+          allPostTypes.forEach(thisPostType => {
+            if (thisPostType.slug == listItemType && thisPostType.taxonomies.length) {
+              thisPostType.taxonomies.forEach(tax => {
+                let taxValues = getEntityRecords( 'taxonomy', tax, { per_page: -1 });
+                if (taxValues && taxValues.length > 1) {
+                  taxOptionList.push({
+                    label: tax.charAt(0).toUpperCase() + tax.slice(1).replaceAll('_', ' '),
+                    value: tax
+                  })
+                  allTaxes[tax] = [];
+                  taxValues.forEach(taxValue => {
+                    if (listTaxonomy == tax) {
+                      taxValueList.push({
+                        label: taxValue.name,
+                        value: taxValue.id
+                      })
+                    }
+                    allTaxes[tax].push(taxValue);
+                  });
+                }
+              });
+            }
+          });
+          return {
+            allTaxonomies: allTaxes,
+            selectedOptionName: listTaxonomy.replaceAll('_', ' '),
+            taxonomyOptions: taxOptionList,
+            taxonomyValues: taxValueList
+          }
+        } else {
+          return {
+            allTaxonomies: false,
+            selectedOptionName: "",
+            taxonomyOptions: [{
+              label: "-",
+              value: ""
+            }],
+            taxonomyValues: [{
+              label: "-",
+              value: ""
+            }]
+          };
+        }
+      }
+    );
+
+    const {
       allDocuments,
     } = useSelect(
       ( select ) => {
@@ -112,6 +230,20 @@ registerBlockType("mojblocks/auto-item-list", {
       }
     );
 
+    const setTaxonomy = newTaxonomy => {
+      setAttributes({ listTaxonomy: newTaxonomy });
+
+      // pass through the valid options for the newly selected taxonomy
+      let newTaxonomyOptions = [];
+      allTaxonomies[newTaxonomy].forEach(taxOption => {
+        newTaxonomyOptions.push(taxOption.id);
+      });
+      setAttributes({ listTaxonomyOptions: newTaxonomyOptions });
+    };
+    const setTaxonomyValue = newTaxonomyValue => {
+      setAttributes({ listTaxonomyValueArray: newTaxonomyValue });
+    };
+
     // Set className attribute for PHP frontend to use
     setAttributes({ listClassName: className });
 
@@ -121,13 +253,69 @@ registerBlockType("mojblocks/auto-item-list", {
     const setHasDate = newDateSetting => {
       setAttributes({ listHasDate: newDateSetting });
     };
+    const setHasSummary = newSummarySetting => {
+      setAttributes({ listHasSummary: newSummarySetting });
+    };
     const setEmptyText = newEmptyText => {
       setAttributes({ listEmptyText: newEmptyText } );
     };
+    const setShowImage = newShowImage => {
+      setAttributes({ listImage: newShowImage } );
+    };
+    const removeBackupImage = () => {
+      setAttributes({
+        listBackupImage: null,
+      });
+    };
+    const onChangeBackgroundColour = colour => {
+      setAttributes( { backgroundColour: colour } );
+      if (typeof(colour) === "undefined" || colour == "") {
+        setAttributes( { backgroundColourClass: ""} );
+      } else {
+        const settings = select( 'core/editor' ).getEditorSettings();
+        const colourObject = (getColorObjectByColorValue(settings.colors, colour));
+        setAttributes( { backgroundColour: colour } );
+        setAttributes( { backgroundColourClass: getColorClassName( 'background-color', colourObject.slug ) } );
+      }
+    };
+    const onChangeTextColour = colour => {
+      setAttributes( { textColour: colour } );
+      if (typeof(colour) === "undefined" || colour == "") {
+        setAttributes( { textColourClass: ""} );
+      } else {
+        const settings = select( 'core/editor' ).getEditorSettings();
+        const colourObject = (getColorObjectByColorValue(settings.colors, colour));
+        setAttributes( { textColourClass: getColorClassName( 'color', colourObject.slug ) } );
+      }
+    };
+    const onChangeBorderColour = colour => {
+      if (typeof(colour) === "undefined") {
+        setAttributes( { borderColour: "" } );
+      } else {
+        setAttributes( { borderColour: colour } );
+      }
+    };
 
     let title = 'Title automatically updated on preview page';
-    let date = 'Date';
-
+    let summary = listHasSummary ? 'The summary text shall be displayed here.': '';
+    let date = listHasDate ? 'Date' : "";
+    let listImageStyle = {
+      backgroundImage: 'url(' + listBackupImage + ')'
+    };
+    let borderStyle = {borderColor: borderColour};
+    let itemClass = "";
+    if (backgroundColourClass) {
+      itemClass += backgroundColourClass + " has-background ";
+    }
+    if (textColourClass) {
+      itemClass += textColourClass + " has-text-color ";
+    }
+    if (borderColour) {
+      itemClass += " is-bordered";
+    }
+    if (!borderColour && !backgroundColour && !listHasDate && !listHasSummary && !listImage) {
+      itemClass += " is-bordered"; //apply a border to items with only a headline/title, when no border/shading styling set
+    }
     if (itemTypes.length <= 1 && itemTypesFinishedParsing) return (
       <Fragment >
         <InspectorControls>
@@ -159,6 +347,27 @@ registerBlockType("mojblocks/auto-item-list", {
     if (itemTypes.length > 1) return (
       <Fragment >
         <InspectorControls>
+        <PanelColorSettings
+              title={__("Colour Settings", "mojblocks" )}
+              initialOpen={false}
+              colorSettings={[
+                  {
+                      value: backgroundColour,
+                      onChange: onChangeBackgroundColour,
+                      label: __('Background colour', 'mojblocks')
+                  },
+                  {
+                      value: textColour,
+                      onChange: onChangeTextColour,
+                      label: __('Text colour', 'mojblocks')
+                  },
+                  {
+                      value: borderColour,
+                      onChange: onChangeBorderColour,
+                      label: __('Border colour', 'mojblocks')
+                  }
+              ]}
+          />
           <PanelBody
             title={__('Settings')}
             initialOpen={true}
@@ -169,8 +378,29 @@ registerBlockType("mojblocks/auto-item-list", {
               options={ itemTypes }
               onChange={ setItemType }
             />
+            {
+              (taxonomyOptions.length > 1) && (
+                <SelectControl
+                  label="Restrict by taxonomy"
+                  value={ listTaxonomy }
+                  options={ taxonomyOptions }
+                  onChange={ setTaxonomy }
+                />
+              )
+            }
+            {
+              (listTaxonomy != "") && (
+                <SelectControl
+                  multiple
+                  label={`Select ${selectedOptionName}`}
+                  value={ listTaxonomyValueArray }
+                  options={ taxonomyValues }
+                  onChange={ setTaxonomyValue }
+                />
+              )
+            }
             <ToggleControl
-              label="Show/hide item publish date"
+              label="Show item publish date"
               help={
                 listHasDate === false
                 ? 'Dates will be hidden'
@@ -179,6 +409,68 @@ registerBlockType("mojblocks/auto-item-list", {
               checked={ listHasDate }
               onChange={ setHasDate }
             />
+            <ToggleControl
+              label="Show item summary"
+              help={
+                listHasSummary === false
+                ? 'The summary shall be hidden'
+                : 'The summary shall be displayed'
+              }
+              checked={ listHasSummary }
+              onChange={ setHasSummary }
+            />
+            <ToggleControl
+              className='govuk-!-margin-top-3'
+              label="Show item image"
+              help={
+                listImage === true
+                ? 'Items without an image will use a backup image - add this below'
+                : ''
+              }
+              checked={ listImage }
+              onChange={ setShowImage }
+            />
+            {
+              (listImage) && (<MediaUpload
+                buttonProps={{
+                  className: 'change-image',
+                }}
+                onSelect={
+                  (image) => {
+                    var imageSizes = image.sizes;
+                    // determine the image size displayed with fallbacks
+                    if (typeof imageSizes.medium !== 'undefined') {
+                      var imageURL = imageSizes.medium.url;
+                    } else {
+                      var imageURL = imageSizes.full.url;
+                    }
+                    setAttributes({
+                      listBackupImage: imageURL,
+                    })
+                  }
+                }
+                allowedTypes={ allowedMediaTypes }
+                type="image"
+                value={ listBackupImage }
+                render={({ open }) => (
+                  <Fragment>
+                    <Button className={'button govuk-!-margin-bottom-3'}
+                      onClick={open}
+                    >
+                      Select alternative backup image
+                    </Button>
+                    {listBackupImage && (
+                      <Button
+                        className={'button govuk-!-margin-bottom-3'}
+                        onClick={ removeBackupImage }
+                      >
+                        Remove image
+                      </Button>
+                    )}
+                  </Fragment>
+                )}
+              />)
+            }
             <TextControl
               label="Text for no items"
               help={ listEmptyText === ""
@@ -188,32 +480,53 @@ registerBlockType("mojblocks/auto-item-list", {
               value={ listEmptyText }
               onChange={ setEmptyText }
             />
+            <Text>
+              { !listImage && !listHasSummary && !listHasDate && !borderColour && !backgroundColour
+                ? "Items with only a title will be given a border around them to distinguish them from regular text."
+                : ""
+              }
+            </Text>
           </PanelBody>
         </InspectorControls>
 
         <div className={`mojblocks-auto-item-list ${className}`}>
-          <div className="govuk-width-container govuk-!-margin-0">
-            <div className={`govuk-grid-row ${listHasDate === false ? 'mojblocks-auto-item-list-hide-date' : ''} ` }>
-              <div className={`mojblocks-auto-item-list__item`}>
-                <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
-                <p className="mojblocks-auto-item-list__date">
-                  <i>{ date }</i>
-                  <br />
-                  (most recent item)
-                </p>
+            <div className={`mojblocks-auto-item-list__item ${itemClass}`} style={borderStyle}>
+            {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
+            {(listImage && !listBackupImage) && (<div class="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
+            <div className="mojblocks-auto-item-list__content">
+              <div className={`mojblocks-auto-item-list__title-and-summary`}>
+                <p className="mojblocks-auto-item-list__headline"><a href="#">{title}</a></p>
+                <p className={`mojblocks-auto-item-list__summary`}>{summary}</p>
               </div>
-              <div className={`mojblocks-auto-item-list__item`}>
-                <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
-                <p className="mojblocks-auto-item-list__date">
-                  <i>{ date }</i>
-                </p>
+              <p className="mojblocks-auto-item-list__date">
+                <i>{ date }</i> (most recent item)
+              </p>
+            </div>
+          </div>
+          <div className={`mojblocks-auto-item-list__item ${itemClass}`} style={borderStyle}>
+            {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
+            {(listImage && !listBackupImage) && (<div class="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
+            <div className={"mojblocks-auto-item-list__content"}>
+              <div className="mojblocks-auto-item-list__title-and-summary">
+                <p className="govuk-body mojblocks-auto-item-list__headline"><a href="#">{title}</a></p>
+                <p className={`govuk-body mojblocks-auto-item-list__summary  ${textColourClass}`}>{summary}</p>
               </div>
-              <div className={`mojblocks-auto-item-list__item`}>
+              <p className="mojblocks-auto-item-list__date">
+                <i>{ date }</i>
+              </p>
+            </div>
+          </div>
+          <div className={`mojblocks-auto-item-list__item ${itemClass}`} style={borderStyle}>
+            {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
+            {(listImage && !listBackupImage) && (<div class="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
+            <div className="mojblocks-auto-item-list__content">
+              <div className={`mojblocks-auto-item-list__title-and-summary`}>
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
-                <p className="mojblocks-auto-item-list__date">
-                  <i>{ date }</i>
-                </p>
-              </div>
+                <p className={`govuk-body mojblocks-auto-item-list__summary  ${textColourClass}`}>{summary}</p>
+                </div>
+              <p className="mojblocks-auto-item-list__date">
+                <i>{ date }</i>
+              </p>
             </div>
           </div>
         </div>
