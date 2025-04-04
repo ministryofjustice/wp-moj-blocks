@@ -101,7 +101,6 @@ function render_callback_auto_item_list_block($attributes)
             $image_size = "medium";
             if ($number_of_items < $max_number_of_items) {
                 $few_items_class = " mojblocks-auto-item-list__item--$number_of_items";
-                $image_size = "medium_large";
             }
     ?>
 
