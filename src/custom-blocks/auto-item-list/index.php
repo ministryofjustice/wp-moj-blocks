@@ -98,8 +98,10 @@ function render_callback_auto_item_list_block($attributes)
             $number_of_items = count($item_array);
             $max_number_of_items = 3;
             $few_items_class = "";
+            $image_size = "medium";
             if ($number_of_items < $max_number_of_items) {
                 $few_items_class = " mojblocks-auto-item-list__item--$number_of_items";
+                $image_size = "medium_large";
             }
     ?>
 
@@ -125,7 +127,7 @@ function render_callback_auto_item_list_block($attributes)
                 while ($i < $number_of_items && $i < $max_number_of_items) {
                     $id           = $item_array[$i]["id"];
                     $backup_image = !empty($attribute_box_listBackupImage) ? $attribute_box_listBackupImage : "";
-                    $image        = has_post_thumbnail($id) ? wp_get_attachment_image_src(get_post_thumbnail_id($id))[0] : $backup_image;
+                    $image        = has_post_thumbnail($id) ? wp_get_attachment_image_src(get_post_thumbnail_id($id),$image_size)[0] : $backup_image;
                     $title        = __(esc_html($item_array[$i]["title"]),"hale");
                     $summary      = __(esc_html($item_array[$i]["summary"]),"hale");
                     $date         = $attribute_box_hasDate ? date(get_option("date_format"), strtotime($item_array[$i]["date"])) : "";
