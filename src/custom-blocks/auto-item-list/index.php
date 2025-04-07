@@ -15,9 +15,37 @@ function render_callback_auto_item_list_block($attributes)
 
     // Parse attributes found in index.js
     $attribute_box_hasDate = $attributes['listHasDate'] ?? true;
+    $attribute_box_hasSummary = $attributes['listHasSummary'] ?? false;
     $attribute_box_emptyText = $attributes['listEmptyText'] ?? 'No items to display.';
     $attribute_box_className = $attributes['listClassName'] ?? '';
     $attribute_box_listPostType = $attributes['listItemType'] ?? '';
+    $attribute_box_listImage = $attributes['listImage'] ?? false;
+    $attribute_box_listBackupImage = $attributes['listBackupImage'] ?? '';
+    $attribute_box_listBackgroundColourClass = $attributes['backgroundColourClass'] ?? '';
+    $attribute_box_listTextColourClass = $attributes['textColourClass'] ?? '';
+    $attribute_box_listBorderColour = $attributes['borderColour'] ?? '';
+
+    $has_image_class = $text_colour_class = $background_colour_class = $border_style = $border_class = "";
+
+    if (
+        !$attribute_box_hasDate && !$attribute_box_hasSummary && !$attribute_box_listImage //only headline in items
+        &&
+        !$attribute_box_listBorderColour && !$attribute_box_listBackgroundColourClass //no border or shading selected
+    ) {
+        $border_class = "is-bordered"; //add a grey border to the items
+    }
+
+    if ($attribute_box_listBackgroundColourClass) {
+        $background_colour_class = $attribute_box_listBackgroundColourClass . " has-background";
+    }
+    if ($attribute_box_listTextColourClass) {
+        $text_colour_class = $attribute_box_listTextColourClass . " has-text-color";
+    }
+    if ($attribute_box_listBorderColour) {
+        $border_style = "border-color: $attribute_box_listBorderColour";
+        $border_class = "is-bordered";
+    }
+
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -57,6 +85,7 @@ function render_callback_auto_item_list_block($attributes)
                     $item_array[] = [
                         "id" => get_the_ID(),
                         "title" => get_the_title(),
+                        "summary" => $attribute_box_hasSummary ? get_post_meta( get_the_ID(), 'post_summary', TRUE ) : "",
                         "date" => $date_to_use,
                         "link" => $link
                     ];
@@ -66,50 +95,104 @@ function render_callback_auto_item_list_block($attributes)
             // Restore original Post Data
             wp_reset_postdata();  
 
+            $number_of_items = count($item_array);
+            $max_number_of_items = 3;
+            $few_items_class = "";
+            $image_size = "medium";
+            if ($number_of_items < $max_number_of_items) {
+                $few_items_class = " mojblocks-auto-item-list__item--$number_of_items";
+            }
     ?>
 
     <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-auto-item-list">
-        <div class="govuk-width-container govuk-!-margin-0">
-            <div class="govuk-grid-row">
-                <?php
-                    $i = 0;
-                    $number_of_items = count($item_array);
-                    if ($number_of_items) {
-                        while ($i < $number_of_items && $i < 3) {
-                ?>
-                            <div class="mojblocks-auto-item-list__item">
-                                <p class="govuk-body mojblocks-auto-item-list__headline" >
-                                    <?php 
-                                    //Some post types dont have a single view
-                                    if(empty($link)){
-                                        _e(esc_html($item_array[$i]["title"]));
-                                    }
-                                    else { ?>
-                                        <a href="<?php _e(esc_html($item_array[$i]["link"]));?>"><?php _e(esc_html($item_array[$i]["title"]));?></a>
-                                    <?php } ?>
-                                </p>
-                                <?php
-                                if ($attribute_box_hasDate) {
-                                    $itemDate = strtotime($item_array[$i]["date"]);
-                                    $itemTime = strtotime($item_array[$i]["time"]);
-                                    $dateString = date("j F Y",$itemDate);
+        <?php
+            $i = 0;
+            if ($number_of_items) {
+                if ($attribute_box_listImage) {
+                    //If images are enabled, we need to check whether all/any items have images
+                    $all_items_have_images = true; // assume all have images
+                    $one_items_has_image = false; // assume none have an image
+                    for ($j=0; $j < $number_of_items && $j < $max_number_of_items; $j++) {
+                        // check that all items have an image
+                        $id = $item_array[$j]['id'];
+                        if (!has_post_thumbnail($id)) {
+                            $all_items_have_images = false;
+                        } else {
+                            $one_items_has_image = true;
+                            $has_image_class = "has-image";
+                        }
+                    }
+                }
+                while ($i < $number_of_items && $i < $max_number_of_items) {
+                    $id           = $item_array[$i]["id"];
+                    $backup_image = !empty($attribute_box_listBackupImage) ? $attribute_box_listBackupImage : "";
+                    $image        = has_post_thumbnail($id) ? wp_get_attachment_image_src(get_post_thumbnail_id($id),$image_size)[0] : $backup_image;
+                    $title        = __(esc_html($item_array[$i]["title"]),"hale");
+                    $summary      = __(esc_html($item_array[$i]["summary"]),"hale");
+                    $date         = $attribute_box_hasDate ? date(get_option("date_format"), strtotime($item_array[$i]["date"])) : "";
+                    $url          = esc_url($item_array[$i]["link"]);
 
-                                    $item_array[$i]["date"] = $dateString.$timeString;
-                                ?>
-                                    <p class="govuk-body-s mojblocks-auto-item-list__date" >
-                                        <?php _e(esc_html($item_array[$i]["date"]));?>
+                    $image_class = "mojblocks-auto-item-list__image";
+                    $image_innards = $image_style = "";
+                    if ($image == "") {
+                        $image_class .= " mojblocks-auto-item-list__image--no-image";
+                        $image_innards = '
+                        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path>
+                        </svg>';
+                    } else {
+                        $image_style = "background-image:url('$image')";
+                        $image_innards = "<span role='img' aria-label='Cover image for $title'></span>";
+                    }
+
+        ?>
+                    <div
+                        id="<?php echo esc_attr("item-$id"); ?>"
+                        style="<?php echo $border_style;?>"
+                        class="mojblocks-auto-item-list__item <?php echo $few_items_class." ".$has_image_class." ".$background_colour_class." ".$text_colour_class." ".$border_class;?>"
+                    >
+                        <?php if ($attribute_box_listImage && $one_items_has_image) {
+                            if(!empty($link)) echo "<a class='mojblocks-auto-item-list__image-link' href='$url' tabindex='-1'>";
+                                echo "
+                                    <div class='$image_class' style=\"$image_style\">
+                                        $image_innards
+                                    </div>
+                                ";
+                            if(!empty($link)) echo "</a>";
+                        }
+                        ?>
+                        <div class="mojblocks-auto-item-list__content">
+                            <div class="mojblocks-auto-item-list__title-and-summary">
+                                <p class="mojblocks-auto-item-list__headline" >
+                                    <?php
+                                    //Some post types dont have a single view
+                                    if(empty($link)) {
+                                        echo $title;
+                                    } else {
+                                        echo "<a href='$url'>$title</a>";
+                                    }
+                                    ?>
+                                </p>
+                                <?php if ($attribute_box_hasSummary) {?>
+                                    <p class="mojblocks-auto-item-list__summary" >
+                                        <?php echo $summary; ?>
                                     </p>
                                 <?php } ?>
                             </div>
-                        <?php
-                            $i++;
-                        }
-                    } else {
-                        _e("<p class='govuk-body'>".esc_html($attribute_box_emptyText)."</p>");
-                    }
-                ?>
-            </div>
-        </div>
+                            <?php if ($attribute_box_hasDate) { ?>
+                                <p class="mojblocks-auto-item-list__date" >
+                                    <?php echo $date;?>
+                                </p>
+                            <?php } ?>
+                        </div>
+                    </div>
+                <?php
+                    $i++;
+                }
+            } else {
+                echo "<p class='govuk-body'>".__(esc_html($attribute_box_emptyText),"hale")."</p>";
+            }
+        ?>
     </div>
 
     <?php
