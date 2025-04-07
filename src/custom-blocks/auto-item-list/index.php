@@ -130,7 +130,7 @@ function render_callback_auto_item_list_block($attributes)
                     $title        = __(esc_html($item_array[$i]["title"]),"hale");
                     $summary      = __(esc_html($item_array[$i]["summary"]),"hale");
                     $date         = $attribute_box_hasDate ? date(get_option("date_format"), strtotime($item_array[$i]["date"])) : "";
-                    $url          = esc_html($item_array[$i]["link"]);
+                    $url          = esc_url($item_array[$i]["link"]);
 
                     $image_class = "mojblocks-auto-item-list__image";
                     $image_innards = $image_style = "";
@@ -147,7 +147,7 @@ function render_callback_auto_item_list_block($attributes)
 
         ?>
                     <div
-                        id="item-<?php echo $id;?>"
+                        id="<?php echo esc_attr("item-$id"); ?>"
                         style="<?php echo $border_style;?>"
                         class="mojblocks-auto-item-list__item <?php echo $few_items_class." ".$has_image_class." ".$background_colour_class." ".$text_colour_class." ".$border_class;?>"
                     >
