@@ -6,63 +6,97 @@ Block: Auto item list (Frontend styles)
 **********************************************************************************************/
 
 .mojblocks-auto-item-list {
-	margin: 0 0 govuk-px-to-rem(48) 0;
+	margin-bottom: govuk-px-to-rem(24);
 
-	& .govuk-grid-row {
-		position: relative;
-
-		// Gov UK override keeping the block within the container.
-		margin-right: 0;
-		margin-left: 0;
+	&__item {
+		margin-bottom: govuk-px-to-rem(18);
 	}
 
-	@include govuk-media-query($from: tablet) {
-		@include govuk-clearfix;
+	@include govuk-media-query($from: desktop) {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: stretch;
 
 		&__item {
-			display: inline-block;
-			vertical-align: top;
-			padding: 10px 3% 10px 0;
-			margin-bottom: 1.5rem;
+			display: flex;
+			flex-direction: column;
+			margin-bottom: 0;
 			width: 32%;
-			min-width: min(100%, 180px); // This is to ensure the items don't get too scrunched up when put into columns etc.
-
-			&--1 {
-				padding: 10px 3% 10px 0;
-				width: 66%;
-			}
-			&--2, &--4 {
-				padding: 10px 3% 10px 0;
-				width: 49%;
+			margin-right: 1.5%;
+			min-width: min(100%, 150px); // This is to ensure the items don't get too scrunched up when put into columns etc.
+			&:last-child {
+				margin-right: 0;
 			}
 		}
+
+		&__content {
+			display: flex;
+			flex-wrap: wrap;
+		}
+	}
+
+	&__content {
+		padding-top: govuk-px-to-rem(16); //gap betwixt headline and image
+		&:first-child {
+			//removes gap meant to separate headline from image
+			padding-top: 0;
+		}
+	}
+
+	&__summary {
+		display: -webkit-box;
+		-webkit-line-clamp: 10;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 	}
 
 	&__headline {
-		margin-top: govuk-px-to-rem(16);
+		font-weight: 700;
+		margin-top: 0;
 		margin-bottom: govuk-px-to-rem(16);
 
-		&:first-child {
-			padding-top: govuk-px-to-rem(16); //no image only
-		}
+		display: -webkit-box;
+		-webkit-line-clamp: 5;
+		-webkit-box-orient: vertical;
+		overflow: hidden;
 
 		@include govuk-media-query($from: tablet) {
-
 			padding-top: 0;
-
 		}
-		&.govuk-body{
-			font-weight: 700;
+	}
+
+	&__title-and-summary {
+		width: 100%;
+		margin-bottom: 15px;
+		@include govuk-media-query($from: tablet) {
+			margin-bottom: 20px;
+		}
+
+		&:last-child,
+		p:last-child {
+			margin-bottom: 0px;
 		}
 	}
 
 	&__image {
-		height: 120px;
-		width: 180px;
+		width: 100%;
+		aspect-ratio: 16/9;
+		background-color: govuk-colour("light-grey");
 		background-repeat: no-repeat;
 		background-size: cover;
 		background-position: center;
-		margin-bottom: 1rem;
+
+		&--no-image {
+			background-color: govuk-colour("light-grey");
+			display: flex;
+			align-items: center;
+
+			svg {
+				width: 100%;
+				height: 75px;
+				fill: govuk-colour("dark-grey");
+			}
+		}
 
 		&--logo {
 			border: 2px solid;
@@ -71,12 +105,32 @@ Block: Auto item list (Frontend styles)
 	}
 
 	&__date {
+		font-size: govuk-px-to-rem(16);
+		margin: 0;
+		line-height: 1.25;
+
+		&:not(.has-text-color p) {
+			color: $govuk-text-colour;
+		}
 		&:not(.has-background p):not(.has-text-color p) {
-			color:#505a5f;
+			color: $govuk-secondary-text-colour;
 		}
 	}
+}
 
-	.mojblocks-auto-item-list-hide-date .mojblocks-auto-item-list__date {
-		display:none;
+.mojblocks-auto-item-list__item {
+	&.has-background,
+	&.is-bordered {
+		.mojblocks-auto-item-list__content {
+			padding: govuk-px-to-rem(16);
+			@include govuk-media-query($from: tablet) {
+				padding: govuk-px-to-rem(24);
+			}
+			flex:1;
+			align-content: space-between;
+		}
+	}
+	&.is-bordered {
+		border: 1px solid govuk-colour("mid-grey");
 	}
 }
