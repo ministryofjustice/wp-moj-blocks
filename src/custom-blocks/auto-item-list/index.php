@@ -19,6 +19,9 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_emptyText = $attributes['listEmptyText'] ?? 'No items to display.';
     $attribute_box_className = $attributes['listClassName'] ?? '';
     $attribute_box_listPostType = $attributes['listItemType'] ?? '';
+    $attribute_box_listTaxonomy = $attributes['listTaxonomy'] ?? '';
+    $attribute_box_listTaxonomyOptions = $attributes['listTaxonomyOptions'] ?? [];
+    $attribute_box_listTaxonomyValueArray = $attributes['listTaxonomyValueArray'] ?? [];
     $attribute_box_listImage = $attributes['listImage'] ?? false;
     $attribute_box_listBackupImage = $attributes['listBackupImage'] ?? '';
     $attribute_box_listBackgroundColourClass = $attributes['backgroundColourClass'] ?? '';
@@ -62,7 +65,17 @@ function render_callback_auto_item_list_block($attributes)
             // The Query
             $args = array(
                 'post_type' => $attribute_box_listPostType,
+                'post_per_page' => -1
             );
+            if ($attribute_box_listTaxonomy != "" && taxonomy_exists($attribute_box_listTaxonomy)) {
+                $args['tax_query'] = array(
+                    array(
+                        'taxonomy' => $attribute_box_listTaxonomy,
+                        'field' => 'term_id',
+                        'terms' => $attribute_box_listTaxonomyValueArray,
+                    ),
+                );
+            }
             $query = new WP_Query( $args );
 
             // The Loop
@@ -82,18 +95,49 @@ function render_callback_auto_item_list_block($attributes)
 
                     $link = apply_filters( 'mojblocks_item_list_link', $link, get_the_ID());
 
+                    $relevant_taxonomy_value = false;
+                    if ($attribute_box_listTaxonomy != "" && taxonomy_exists($attribute_box_listTaxonomy)) {
+                        //If taxonomy to scrutinize is specified
+                        $relevant_taxonomy_array = get_the_terms(get_the_ID(),$attribute_box_listTaxonomy);
+                        if(is_array($relevant_taxonomy_array)) $relevant_taxonomy_value = $relevant_taxonomy_array[0]->term_id;
+                    }
+
                     $item_array[] = [
                         "id" => get_the_ID(),
                         "title" => get_the_title(),
                         "summary" => $attribute_box_hasSummary ? get_post_meta( get_the_ID(), 'post_summary', TRUE ) : "",
                         "date" => $date_to_use,
-                        "link" => $link
+                        "link" => $link,
+                        "relevantTaxonomyValue" => $relevant_taxonomy_value
                     ];
                     
                 }
             }
             // Restore original Post Data
             wp_reset_postdata();  
+
+            //if taxonomy set, we make sure the items which don't match are removed from the array
+            if (
+                !empty($attribute_box_listTaxonomyValueArray) // at least one value in array of tax values
+                &&
+                in_array($attribute_box_listTaxonomyValueArray[0], $attribute_box_listTaxonomyOptions) //the first selected value is in the array for this taxonomy (if it isn't, the previously selected taxonomy's values might still be being used, so we treat as show all)
+                &&
+                $attribute_box_listTaxonomy !="" // taxonomy not set to "show all"
+            ) {
+
+                foreach($item_array as $k => $item) {
+                    if ($item_array[$k]["relevantTaxonomyValue"] && !in_array($item_array[$k]["relevantTaxonomyValue"],$attribute_box_listTaxonomyValueArray)) {
+                        //Remove items which don't have a correct taxonomy value
+                        unset($item_array[$k]);
+                        continue;
+                    } elseif (!$item_array[$k]["relevantTaxonomyValue"]) {
+                        //Remove items without this taxonomy value set
+                        unset($item_array[$k]);
+                        continue;
+                    }
+                }
+                $item_array = array_values($item_array); //re-index
+            }
 
             $number_of_items = count($item_array);
             $max_number_of_items = 3;

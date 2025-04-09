@@ -24,6 +24,7 @@ Block: Auto item list (Frontend styles)
 			width: 32%;
 			margin-right: 1.5%;
 			min-width: min(100%, 150px); // This is to ensure the items don't get too scrunched up when put into columns etc.
+
 			&:last-child {
 				margin-right: 0;
 			}
