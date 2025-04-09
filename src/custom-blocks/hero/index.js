@@ -89,19 +89,19 @@ registerBlockType("mojblocks/hero", {
         const onChangeColour = colour => {
             setAttributes( { overlayBackgroundColour: colour } );
         };
-        
+
         const onChangeOpacity = opacity => {
             setAttributes( { overlayBackgroundOpacity: opacity } );
         };
-        
+
         const onChangeOverlayPosition = position => {
             setAttributes( { overlayPosition: position } );
         };
-        
+
         const onChangeCorners = cornerRadius => {
             setAttributes( { overlayCorners: cornerRadius } );
         };
-        
+
         const onChangeTilt = tilt => {
             setAttributes( { overlayTilt: tilt } );
         };
@@ -242,7 +242,6 @@ registerBlockType("mojblocks/hero", {
                         max={ 25 }
                         step={1}
                     />)}
-                    
                 </PanelBody>
             </InspectorControls>,
 

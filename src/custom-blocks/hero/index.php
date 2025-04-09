@@ -47,7 +47,7 @@ function render_callback_hero_block($attributes, $content)
                 <div class="govuk-grid-row mojblocks-hero__overlay-container mojblocks-hero__overlay-container--<?php echo esc_html($attribute_overlay_position);?>">
                     <div class="mojblocks-hero__overlay" style="border-radius:<?php echo $attribute_corners;?>px;rotate:<?php echo $attribute_overlay_tilt;?>deg;">
                         <div
-                            class="mojblocks-hero__overlay__background" 
+                            class="mojblocks-hero__overlay__background"
                             style="<?php echo "background-color:$attribute_overlay_background_colour; opacity:$attribute_overlay_opacity";?>"
                         ></div>
                         <?php _e(esc_html($content)); ?>
