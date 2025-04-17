@@ -166,7 +166,7 @@ registerBlockType("mojblocks/accordion-section", {
                     </span>
                 </h3>
                 </div>
-                <div id="accordion-default-content-1" className="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
+                <div id="accordion-default-content-1" className="govuk-accordion__section-content">
                     <div className="govuk-body">
                         <RichText
                             placeholder={__('Add accordion section content', 'mojblocks')}

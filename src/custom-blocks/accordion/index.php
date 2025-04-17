@@ -90,7 +90,7 @@ function render_callback_accordion_block_section($attributes, $content)
                 </span>
             </h3>
         </div>
-        <div id="accordion-default-content-1" class="govuk-accordion__section-content" aria-labelledby="accordion-default-heading-1">
+        <div id="accordion-default-content-1" class="govuk-accordion__section-content">
             <?php
             $firstParagraphContent = _(trim(esc_html($attribute_accordion_section_TextArea)));
             if (!empty($firstParagraphContent)) {
