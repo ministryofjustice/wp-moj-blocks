@@ -523,7 +523,7 @@ registerBlockType("mojblocks/auto-item-list", {
               <div className={`mojblocks-auto-item-list__title-and-summary`}>
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
                 <p className={`govuk-body mojblocks-auto-item-list__summary  ${textColourClass}`}>{summary}</p>
-                </div>
+              </div>
               <p className="mojblocks-auto-item-list__date">
                 <i>{ date }</i>
               </p>
