@@ -347,7 +347,7 @@ registerBlockType("mojblocks/auto-item-list", {
     if (itemTypes.length > 1) return (
       <Fragment >
         <InspectorControls>
-        <PanelColorSettings
+          <PanelColorSettings
               title={__("Colour Settings", "mojblocks" )}
               initialOpen={false}
               colorSettings={[
@@ -371,7 +371,7 @@ registerBlockType("mojblocks/auto-item-list", {
           <PanelBody
             title={__('Settings')}
             initialOpen={true}
-        >
+          >
             <SelectControl
               label="Select item type"
               value={ listItemType }
