@@ -19,6 +19,9 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_emptyText = $attributes['listEmptyText'] ?? 'No items to display.';
     $attribute_box_className = $attributes['listClassName'] ?? '';
     $attribute_box_listPostType = $attributes['listItemType'] ?? '';
+    $attribute_box_listTaxonomy = $attributes['listTaxonomy'] ?? '';
+    $attribute_box_listTaxonomyOptions = $attributes['listTaxonomyOptions'] ?? [];
+    $attribute_box_listTaxonomyValue = $attributes['listTaxonomyValueArray'] ?? [];
     $attribute_box_listImage = $attributes['listImage'] ?? false;
     $attribute_box_listBackupImage = $attributes['listBackupImage'] ?? '';
     $attribute_box_listBackgroundColourClass = $attributes['backgroundColourClass'] ?? '';
@@ -26,6 +29,13 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_listBorderColour = $attributes['borderColour'] ?? '';
 
     $has_image_class = $text_colour_class = $background_colour_class = $border_style = $border_class = "";
+
+    // Ensure that we are dealing with an array even if the JS file returns a string.
+    if (is_array($attribute_box_listTaxonomyValue)) {
+        $attribute_box_listTaxonomyValueArray = $attribute_box_listTaxonomyValue;
+    } else {
+        $attribute_box_listTaxonomyValueArray = [$attribute_box_listTaxonomyValue];
+    }
 
     if (
         !$attribute_box_hasDate && !$attribute_box_hasSummary && !$attribute_box_listImage //only headline in items
