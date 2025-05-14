@@ -37,6 +37,11 @@ function render_callback_auto_item_list_block($attributes)
         $attribute_box_listTaxonomyValueArray = [$attribute_box_listTaxonomyValue];
     }
 
+    // Catch for tax selected but no tax values selected - treat all viable options as selected.
+    if (empty($attribute_box_listTaxonomyValueArray)) {
+        $attribute_box_listTaxonomyValueArray = $attribute_box_listTaxonomyOptions;
+    }
+
     if (
         !$attribute_box_hasDate && !$attribute_box_hasSummary && !$attribute_box_listImage //only headline in items
         &&
@@ -72,7 +77,17 @@ function render_callback_auto_item_list_block($attributes)
             // The Query
             $args = array(
                 'post_type' => $attribute_box_listPostType,
+                'posts_per_page' => -1
             );
+            if ($attribute_box_listTaxonomy != "" && taxonomy_exists($attribute_box_listTaxonomy)) {
+                $args['tax_query'] = array(
+                    array(
+                        'taxonomy' => $attribute_box_listTaxonomy,
+                        'field' => 'term_id',
+                        'terms' => $attribute_box_listTaxonomyValueArray,
+                    ),
+                );
+            }
             $query = new WP_Query( $args );
 
             // The Loop
@@ -92,18 +107,48 @@ function render_callback_auto_item_list_block($attributes)
 
                     $link = apply_filters( 'mojblocks_item_list_link', $link, get_the_ID());
 
+                    $relevant_taxonomy_value = false;
+                    if ($attribute_box_listTaxonomy != "" && taxonomy_exists($attribute_box_listTaxonomy)) {
+                        //If taxonomy to scrutinize is specified
+                        $relevant_taxonomy_array = get_the_terms(get_the_ID(),$attribute_box_listTaxonomy);
+                        if(is_array($relevant_taxonomy_array)) $relevant_taxonomy_value = $relevant_taxonomy_array[0]->term_id;
+                    }
+
                     $item_array[] = [
                         "id" => get_the_ID(),
                         "title" => get_the_title(),
                         "summary" => $attribute_box_hasSummary ? get_post_meta( get_the_ID(), 'post_summary', TRUE ) : "",
                         "date" => $date_to_use,
-                        "link" => $link
+                        "link" => $link,
+                        "relevantTaxonomyValue" => $relevant_taxonomy_value
                     ];
                     
                 }
             }
             // Restore original Post Data
             wp_reset_postdata();  
+            //if taxonomy set, we make sure the items which don't match are removed from the array
+            if (
+                !empty($attribute_box_listTaxonomyValueArray) // at least one value in array of tax values
+                &&
+                in_array($attribute_box_listTaxonomyValueArray[0], $attribute_box_listTaxonomyOptions) //the first selected value is in the array for this taxonomy (if it isn't, the previously selected taxonomy's values might still be being used, so we treat as show all)
+                &&
+                $attribute_box_listTaxonomy !="" // taxonomy not set to "show all"
+            ) {
+
+                foreach($item_array as $k => $item) {
+                    if ($item_array[$k]["relevantTaxonomyValue"] && !in_array($item_array[$k]["relevantTaxonomyValue"],$attribute_box_listTaxonomyValueArray)) {
+                        //Remove items which don't have a correct taxonomy value
+                        unset($item_array[$k]);
+                        continue;
+                    } elseif (!$item_array[$k]["relevantTaxonomyValue"]) {
+                        //Remove items without this taxonomy value set
+                        unset($item_array[$k]);
+                        continue;
+                    }
+                }
+                $item_array = array_values($item_array); //re-index
+            }
 
             $number_of_items = count($item_array);
             $max_number_of_items = 3;
