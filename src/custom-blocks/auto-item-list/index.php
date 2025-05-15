@@ -37,8 +37,18 @@ function render_callback_auto_item_list_block($attributes)
         $attribute_box_listTaxonomyValueArray = [$attribute_box_listTaxonomyValue];
     }
 
-    // Catch for tax selected but no tax values selected - treat all viable options as selected.
-    if (empty($attribute_box_listTaxonomyValueArray)) {
+    /**
+     * Catch for:
+     * - No tax options selected
+     *   This can happen if the block is added, taxonomy selected, but no tax option is chosen.
+     * - Tax option (we only check the first) isn't in the list of options
+     *   This can happen if the taxonomy is changed but no tax option is chosen for the new taxonomy.
+     * In both situations, we treat all viable options for the selected taxonomy as chosen.
+     */
+    if (
+        empty($attribute_box_listTaxonomyValueArray) ||
+        !in_array($attribute_box_listTaxonomyValueArray[0],$attribute_box_listTaxonomyOptions)
+    ) {
         $attribute_box_listTaxonomyValueArray = $attribute_box_listTaxonomyOptions;
     }
 
@@ -129,13 +139,10 @@ function render_callback_auto_item_list_block($attributes)
             wp_reset_postdata();  
             //if taxonomy set, we make sure the items which don't match are removed from the array
             if (
-                !empty($attribute_box_listTaxonomyValueArray) // at least one value in array of tax values
+                $attribute_box_listTaxonomyValueArray != $attribute_box_listTaxonomyOptions // check that all options are not chosen
                 &&
-                in_array($attribute_box_listTaxonomyValueArray[0], $attribute_box_listTaxonomyOptions) //the first selected value is in the array for this taxonomy (if it isn't, the previously selected taxonomy's values might still be being used, so we treat as show all)
-                &&
-                $attribute_box_listTaxonomy !="" // taxonomy not set to "show all"
+                $attribute_box_listTaxonomy != "" // taxonomy not set to "show all"
             ) {
-
                 foreach($item_array as $k => $item) {
                     if ($item_array[$k]["relevantTaxonomyValue"] && !in_array($item_array[$k]["relevantTaxonomyValue"],$attribute_box_listTaxonomyValueArray)) {
                         //Remove items which don't have a correct taxonomy value
