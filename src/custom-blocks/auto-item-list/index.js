@@ -249,6 +249,8 @@ registerBlockType("mojblocks/auto-item-list", {
 
     const setItemType = newItemType => {
       setAttributes({ listItemType: newItemType });
+      setAttributes({ listTaxonomy: "" });
+      setAttributes({ listTaxonomyOptions: [] });
     };
     const setHasDate = newDateSetting => {
       setAttributes({ listHasDate: newDateSetting });
