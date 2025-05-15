@@ -32,7 +32,7 @@ registerBlockType("mojblocks/auto-item-list", {
     },
     listItemType: {
       type: "string",
-      default: "post"
+      default: ""
     },
     listTaxonomy: {
       type: "string",
