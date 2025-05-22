@@ -196,3 +196,27 @@ SASS modifications to conform GovUK frontend to MoJ block styling
         }
     }
 }
+
+/********
+ * Bad practice alerts
+ **/
+
+.govuk-accordion .block-editor-block-list__block:not(.is-selected):only-child {
+    outline: 4px solid #b32d2e;
+    outline-offset: 2px;
+    position: relative;
+
+    &:after {
+        content: 'WARNING: Single-item accordion';
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        background: rgba( 0,0,0,.65 );
+        color: #fff;
+        padding: 3px 5px;
+        border-radius: 5px;
+        border: 1px solid #b32d2e;
+        font-size: .875rem;
+        font-weight: 700;
+    }
+}
