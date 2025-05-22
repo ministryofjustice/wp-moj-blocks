@@ -9,7 +9,6 @@
 p b:only-child, p strong:only-child {
 	outline: 4px solid #b32d2e;
 	outline-offset: 2px;
-	position: relative;
 	display: block;
 
 	&:after {
