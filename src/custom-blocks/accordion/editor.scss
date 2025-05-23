@@ -201,7 +201,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
  * Bad practice alerts
  **/
 
-.govuk-accordion .block-editor-block-list__block:not(.is-selected):only-child {
+.govuk-accordion .mojblocks-accordion-section-container:not(.is-selected):only-child {
     outline: 4px solid #b32d2e;
     outline-offset: 2px;
     position: relative;
