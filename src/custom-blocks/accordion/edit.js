@@ -63,6 +63,7 @@ waitForElm('.govuk-accordion').then((e) => {
         const sections = elm.querySelectorAll(".govuk-accordion__section");
 
         sections.forEach((section) => {
+            section.parentElement.classList.add("mojblocks-accordion-section-container");
             let showHideControl = showThis.cloneNode(true);
             section.insertBefore(showHideControl, section.lastChild);
             section.querySelector(".showHideThis").onclick = function() {
