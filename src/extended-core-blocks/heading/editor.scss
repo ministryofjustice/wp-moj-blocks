@@ -18,7 +18,7 @@ h4 + h6.wp-block-heading {
 	outline-offset: 2px;
 
 	&:after {
-		content: 'WARNING: This heading has skipped a level.';
+		content: 'WARNING: Has this heading skipped a level?';
 		background: rgba( 0,0,0,.65 );
 		color: #fff;
 		display: block;
