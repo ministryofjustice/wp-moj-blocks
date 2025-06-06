@@ -6,13 +6,9 @@ Block: Reveal (Frontend styles)
 **********************************************************************************************/
 
 /**
-* This file contains imported styling to support GOV UK Frontend usage in the plugin
-*
-* To import styles from govuk-frontend, simply include the Gov UK module using
-*  @imports with a URL reference
+*  The reveal block is based on the GOV UK Design system details block.
+*  https://design-system.service.gov.uk/components/details/
 **/
-// https://design-system.service.gov.uk/components/details/
-@import "node_modules/govuk-frontend/dist/govuk/components/details/details";
 
 .mojblocks-reveal {
 	max-width: 666px;
