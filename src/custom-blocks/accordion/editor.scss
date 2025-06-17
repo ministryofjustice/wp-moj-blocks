@@ -207,7 +207,7 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     position: relative;
 
     &:after {
-        content: 'WARNING: Single-item accordion';
+        content: '⚠️ Accordions should not be used for single items, consider using a reveal block';
         position: absolute;
         right: 10px;
         top: 10px;
