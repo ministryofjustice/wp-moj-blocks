@@ -15,7 +15,7 @@ img[alt*="This image has an empty alt"],
 .wp-block-image:has(img[alt*="This image has an empty alt"]):after,
 .wp-block-image:has(img[alt=""]):after,
 .wpa-image-missing-alt:after {
-	content: 'WARNING: alt text missing';
+	content: '⚠️ Does this image need alt text?';
 	position: absolute;
 	right: 10px;
 	top: 10px;

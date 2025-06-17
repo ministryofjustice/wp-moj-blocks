@@ -12,7 +12,7 @@ p b:only-child, p strong:only-child {
 	display: block;
 
 	&:after {
-		content: 'WARNING: Should this bold text be a heading?';
+		content: '⚠️ Have you used bold text instead of a heading?';
 		background: rgba( 0,0,0,.65 );
 		color: #fff;
 		display: block;
