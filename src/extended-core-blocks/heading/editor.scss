@@ -9,11 +9,13 @@
 /*
 	:not(h2 ~ *)   = there is no H2 tag above it
 	:not(h2 ~ * *) = there is no H2 tag above its container
+	:not(*:has(h2) ~ *) = there is no H2 tag in a container above it
+	:not(*:has(h2) ~ * *) = there is no H2 tag in a container above its container
 */
-.wp-block-heading:is(h3, h4, h5, h6):not(h2 ~ *, h2 ~ * *),
-.wp-block-heading:is(h4, h5, h6    ):not(h3 ~ *, h3 ~ * *),
-.wp-block-heading:is(h5, h6        ):not(h4 ~ *, h4 ~ * *),
-.wp-block-heading:is(h6            ):not(h5 ~ *, h5 ~ * *),
+.wp-block-heading:is(h3, h4, h5, h6):not(h2 ~ *, h2 ~ * *, *:has(h2) ~ *, *:has(h2) ~ * *),
+.wp-block-heading:is(h4, h5, h6    ):not(h3 ~ *, h3 ~ * *, *:has(h3) ~ *, *:has(h3) ~ * *),
+.wp-block-heading:is(h5, h6        ):not(h4 ~ *, h4 ~ * *, *:has(h4) ~ *, *:has(h4) ~ * *),
+.wp-block-heading:is(h6            ):not(h5 ~ *, h5 ~ * *, *:has(h5) ~ *, *:has(h5) ~ * *),
 h1 + .wp-block-heading:is(h3, h4, h5, h6),
 h2 + .wp-block-heading:is(h4, h5, h6),
 h3 + .wp-block-heading:is(h5, h6),
