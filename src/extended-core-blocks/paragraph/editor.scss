@@ -3,23 +3,3 @@
 .editor-styles-wrapper {
 	@import 'common.scss';
 }
-
-
-/* Implicit headings */
-p b:only-child, p strong:only-child {
-	outline: 4px solid #b32d2e;
-	outline-offset: 2px;
-	display: block;
-
-	&:after {
-		content: '⚠️ Have you used bold text instead of a heading?';
-		background: rgba( 0,0,0,.65 );
-		color: #fff;
-		display: block;
-		padding: 3px 5px;
-		border-radius: 5px;
-		border: 1px solid #b32d2e;
-		font-size: .875rem;
-		font-weight: 700;
-	}
-}
