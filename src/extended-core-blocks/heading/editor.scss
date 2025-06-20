@@ -6,13 +6,13 @@
 
 /* Skipping heading level */
 
-h1 ~ *:not(h2) ~ h3.wp-block-heading,
-h2 ~ *:not(h3) ~ h4.wp-block-heading,
-h3 ~ *:not(h4) ~ h5.wp-block-heading,
-h4 ~ *:not(h5) ~ h6.wp-block-heading,
-h1 + h3.wp-block-heading, h1 + h4.wp-block-heading, h1 + h5.wp-block-heading, h1 + h6.wp-block-heading, 
-h2 + h4.wp-block-heading, h2 + h5.wp-block-heading, h2 + h6.wp-block-heading, 
-h3 + h5.wp-block-heading, h3 + h6.wp-block-heading,
+.wp-block-heading:is(h3, h4, h5, h6):not(h2 ~ *),
+.wp-block-heading:is(h4, h5, h6    ):not(h3 ~ *),
+.wp-block-heading:is(h5, h6        ):not(h4 ~ *),
+.wp-block-heading:is(h6            ):not(h5 ~ *),
+h1 + .wp-block-heading:is(h3, h4, h5, h6),
+h2 + .wp-block-heading:is(h4, h5, h6),
+h3 + .wp-block-heading:is(h5, h6),
 h4 + h6.wp-block-heading {
 	outline: 4px solid #b32d2e;
 	outline-offset: 2px;
