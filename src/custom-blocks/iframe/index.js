@@ -24,6 +24,9 @@ registerBlockType('mojblocks/iframe', {
         iFrameURL: {
             type: "string",
         },
+        iFrameTitle: {
+            type: "string",
+        },
         iFrameClassName: {
             type: "string",
         },
@@ -57,6 +60,7 @@ registerBlockType('mojblocks/iframe', {
         const {
             attributes: {
                 iFrameURL,
+                iFrameTitle,
                 iFrameWidth,
                 iFrameHeight,
                 iFrameBorder,
@@ -74,6 +78,9 @@ registerBlockType('mojblocks/iframe', {
 
         const setIFrameURL = newIFrameURL => {
             setAttributes({ iFrameURL: newIFrameURL } );
+        };
+        const setIFrameTitle = newIFrameTitle => {
+            setAttributes({ iFrameTitle: newIFrameTitle } );
         };
         const setIFrameWidth = newIFrameWidth => {
             setAttributes({ iFrameWidth: newIFrameWidth } );
@@ -140,6 +147,13 @@ registerBlockType('mojblocks/iframe', {
                         title={__('iframe code parse')}
                         initialOpen={true}
                     >
+                        <TextControl
+                            label="Title for iframe"
+                            help="Give the iframe a title to help users of assistive technology"
+                            value={ iFrameTitle }
+                            onChange={ setIFrameTitle }
+                            __next40pxDefaultSize = "true"
+                        />
                         <Text>
                             Use this section to automatically create the iframe from code.
                         </Text>

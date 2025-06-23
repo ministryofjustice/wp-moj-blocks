@@ -15,6 +15,7 @@ function render_callback_iFrame_block($attributes, $content)
 {
     // Parse attributes found in index.js
     $attribute_iFrame_url = $attributes['iFrameURL'] ?? '';
+    $attribute_iFrame_title = $attributes['iFrameTitle'] ?? '';
     $attribute_iFrame_width = $attributes['iFrameWidth'] ?? '';
     $attribute_iFrame_height = $attributes['iFrameHeight'] ?? '';
     $attribute_iFrame_border = $attributes['iFrameBorder'] ?? false;
@@ -28,8 +29,9 @@ function render_callback_iFrame_block($attributes, $content)
     $attribute_iFrame_border = $attribute_iFrame_border ? "1" : "0";
 
     $attribute_iFrame_url = esc_url($attribute_iFrame_url);
-    $attribute_iFrame_width = $attribute_iFrame_width;
-    $attribute_iFrame_height = $attribute_iFrame_height;
+    $attribute_iFrame_title = esc_html($attribute_iFrame_title);
+    $attribute_iFrame_width = intval($attribute_iFrame_width);
+    $attribute_iFrame_height = intval($attribute_iFrame_height);
     $attribute_iFrame_className = esc_html($attribute_iFrame_className);
 
     if ($attribute_iFrame_centre) $attribute_iFrame_className = "moj-block-iframe--centre ".$attribute_iFrame_className;
@@ -47,6 +49,7 @@ function render_callback_iFrame_block($attributes, $content)
         width="<?php echo $attribute_iFrame_width; ?>"
         height="<?php echo $attribute_iFrame_height; ?>"
         frameborder="<?php echo $attribute_iFrame_border; ?>"
+        title="<?php echo $attribute_iFrame_title; ?>"
     ></iframe>
 
     <?php
