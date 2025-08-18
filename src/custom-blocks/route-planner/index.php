@@ -32,6 +32,9 @@ function render_callback_route_planner_block($attributes, $content)
         <div id="postcodeInput-hint" class="govuk-hint">
         <?php _e("For example, SW1A 1AA","hale"); ?>
         </div>
+        <p id="postcodeInput-error" class="govuk-error-message" style="display:none;" aria-live="polite">
+            <span class="govuk-visually-hidden">Error:</span> Enter a postcode or address.
+        </p>
         <input class="govuk-input govuk-input--width-10 govuk-!-margin-bottom-4" type="text" id="postcodeInput" aria-describedby="postcodeInput-hint"/><br />
         <button class="govuk-button" onclick="redirectToMap()"><?php _e("Submit","hale"); ?></button>
 
@@ -39,9 +42,13 @@ function render_callback_route_planner_block($attributes, $content)
             function redirectToMap() {
                 const postcode = document.getElementById("postcodeInput").value.trim();
                 if (!postcode) {
-                alert("Please enter a valid UK postcode.");
-                return;
+                    document.getElementById("postcodeInput-error").style.display = "block";
+                    document.getElementById("postcodeInput").classList.add("govuk-input--error");
+                    return;
                 }
+
+                document.getElementById("postcodeInput-error").style.display = "none";
+                document.getElementById("postcodeInput").classList.remove("govuk-input--error");
 
                 const origin = encodeURIComponent(postcode);
                 const destination = encodeURIComponent("<?php echo esc_html($attribute_route_destination); ?>"); // your fixed location
