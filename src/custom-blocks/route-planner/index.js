@@ -26,7 +26,7 @@ registerBlockType('mojblocks/route-planner', {
         },
         routeMethod: {
             type: 'string',
-            default: ""
+            default: "driving"
         }
     },
     edit: props => {
@@ -53,7 +53,7 @@ registerBlockType('mojblocks/route-planner', {
                 <TextareaControl
                     __nextHasNoMarginBottom
                     label="Destination"
-                    help="Enter a postcode or an address, lat-long also accepted."
+                    help="Enter a postcode or an address, lat-long also accepted if Google doesn't provide the correct location."
                     value={ routeDestination }
                     onChange={ onChangeDestination }
                 />,
@@ -63,6 +63,7 @@ registerBlockType('mojblocks/route-planner', {
                     options={ [
                         { label: 'Car', value: 'driving' },
                         { label: 'Public transport', value: 'transit' },
+                        { label: 'No preference', value: '' }
                     ] }
                     onChange={ onChangeMethod }
                 />
