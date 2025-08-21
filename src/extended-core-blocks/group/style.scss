@@ -29,7 +29,8 @@
 	}
 
 	&.is-style-text-aligned:before,
-	&.is-style-bleeding-background:is(.page-template-default *):before {
+	&.is-style-bleeding-background:is(.page-template-default *):before,
+	&.is-style-bleeding-background:is(.page-template-page-toc *):before {
 		width: calc(100% + 3.5em);
 		left: -1.75em;
 		border-radius: inherit;

@@ -10,7 +10,7 @@ Block: Call to Action (Frontend styles)
     margin-bottom: 2rem;
     height: 100%;
 
-    &:not(.page-template-default *):before {
+    &:not(.page-template-default *):not(.page-template-page-toc *):before {
         content: "";
         display: block;
         height: calc(100% + 15px);
