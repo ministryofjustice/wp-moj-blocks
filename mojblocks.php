@@ -377,6 +377,9 @@ function mojblocks_register_blocks()
         'attributes' => [
             'routeDestination' => [
                 'type' => 'string'
+            ],
+            'routeMethod' => [
+                'type' => 'string'
             ]
           ]
         ]
