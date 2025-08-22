@@ -27,7 +27,7 @@ registerBlockType('mojblocks/route-planner', {
         },
         routeMethod: {
             type: 'string',
-            default: "driving"
+            default: ""
         }
     },
     edit: props => {
@@ -61,14 +61,14 @@ registerBlockType('mojblocks/route-planner', {
                         help="Enter a postcode or an address, lat-long also accepted if Google doesn't provide the correct location."
                         value={ routeDestination }
                         onChange={ onChangeDestination }
-                    />,
+                    />
                     <RadioControl
                         label="Default travel method"
                         selected={ routeMethod }
                         options={ [
-                            { label: 'Car', value: 'driving' },
-                            { label: 'Public transport', value: 'transit' },
-                            { label: 'No preference', value: '' }
+                            { label: 'No preference', value: '' },
+                            { label: 'Motor vehicle', value: 'driving' },
+                            { label: 'Public transport', value: 'transit' }
                         ] }
                         onChange={ onChangeMethod }
                     />
@@ -80,10 +80,10 @@ registerBlockType('mojblocks/route-planner', {
                 (routeDestination.trim()) ? "" : "mojblocks-route-planner--empty",
                 className
             )}>
-                <label class="govuk-label" for="postcodeInput">Enter a postcode or location</label>,
-                <div id="postcodeInput-hint" class="govuk-hint">For example, SW1A 1AA</div>,
-                <input disabled class="govuk-input govuk-input--width-10 govuk-!-margin-bottom-4" type="text" id="postcodeInput" aria-describedby="postcodeInput-hint"/>,
-                <br />,
+                <label class="govuk-label" for="postcodeInput">Enter a postcode or location</label>
+                <div id="postcodeInput-hint" class="govuk-hint">For example, SW1A 1AA</div>
+                <input class="govuk-input govuk-input--width-10 govuk-!-margin-bottom-4" type="text" id="postcodeInput" aria-describedby="postcodeInput-hint"/>
+                <br />
                 <button class="govuk-button">Submit</button>
             </form>
         ]);
