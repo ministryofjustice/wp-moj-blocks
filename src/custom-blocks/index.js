@@ -7,6 +7,7 @@ import "./cta";
 import "./hero";
 import "./accordion";
 import "./staggered-box";
+import "./route-planner";
 import "./separator";
 import "./quote";
 import "./iframe";
