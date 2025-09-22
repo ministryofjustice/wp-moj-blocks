@@ -133,7 +133,6 @@ html.hale-colours-variable {
 // this relies on the current practice of style only having flex-basis
 @include govuk-media-query($from: tablet) {
     .wp-block-column[style|="flex"]:not([style$="100%"]) {
-        align-self: stretch;
 
         > div:last-child,
         > figure:last-child {
