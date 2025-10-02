@@ -10,10 +10,12 @@ Block: Reveal (Frontend styles)
 *  https://design-system.service.gov.uk/components/details/
 **/
 
-.mojblocks-reveal {
+.govuk-main-wrapper .mojblocks-reveal {
 	max-width: 666px;
 
-	&__content p:not([class]) {
-		margin-bottom: 0;
+	&__content {
+		*:last-child {
+			margin-bottom: 0;
+		}
 	}
 }
