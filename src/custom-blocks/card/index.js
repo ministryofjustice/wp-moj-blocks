@@ -40,6 +40,9 @@ registerBlockType('mojblocks/card', {
         cardImageURL: {
             type: 'string'
         },
+        cardImageAlt: {
+            type: 'string'
+        },
         cardImageId: {
             type: 'number'
         },

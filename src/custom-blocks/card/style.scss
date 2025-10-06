@@ -19,17 +19,22 @@ Block: Card (Frontend styles)
     &__image {
 
         &.mojblocks-card__image--shape {
+            // the max-height will be 428px - the aspect ratio need to be preserved, hence the max-width calc usage.
             &-square { //1:1
-                padding-bottom: 100%;
+                max-width: min(100%,428px);
+                padding-bottom: min(100%,428px);
             }
             &-rectangle { //4:3
-                padding-bottom: 75%;
+                max-width: min(100%,calc(428px * 4 / 3));
+                padding-bottom: min(75%,428px);
             }
             &-widescreen { //16:9
-                padding-bottom: 56.25%;
+                max-width: min(100%,calc(428px * 16 / 9));
+                padding-bottom: min(56.25%,428px);
             }
             &-letterbox { //21:9
-                padding-bottom: 42.86%;
+                max-width: min(100%,calc(428px * 21 / 9));
+                padding-bottom: min(42.86%,428px);
             }
         }
         &:is(.mojblocks-corner-rounded--6>*) {

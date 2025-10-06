@@ -26,6 +26,7 @@ export default function CardBlockEdit( props ) {
         const {
             cardExcerpt,
             cardImageURL,
+            cardImageAlt,
             cardImageId,
             cardImageShape,
             cardImagePosition,
@@ -34,6 +35,7 @@ export default function CardBlockEdit( props ) {
         const onRemoveImage = () => {
             setAttributes({
                 cardImageURL: null,
+                cardImageAlt: null,
                 cardImageId: null,
             });
         };
@@ -116,6 +118,7 @@ export default function CardBlockEdit( props ) {
 
                         setAttributes({
                             cardImageId: image.id,
+                            cardImageAlt: image.alt,
                             cardImageURL: imageURL,
                         })
                     }
