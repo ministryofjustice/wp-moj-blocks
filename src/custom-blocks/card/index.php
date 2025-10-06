@@ -16,6 +16,7 @@ function render_callback_card_block($attributes, $content)
 
 	// Parse attributes found in index.js
 	$attribute_card_image_URL = $attributes['cardImageURL'] ?? '';
+	$attribute_card_image_alt = $attributes['cardImageAlt'] ?? '';
 	$attribute_card_className = $attributes['className'] ?? '';
 	$attribute_card_corner_roundyness = $attributes['cornerRoundyness'] ?? '';
 	$attribute_card_excerpt = $attributes['cardExcerpt'] ?? '';
@@ -44,6 +45,8 @@ function render_callback_card_block($attributes, $content)
 					background-image: url(<?php _e(esc_url_raw($attribute_card_image_URL)); ?>);
 					background-position: <?php _e(esc_html($attribute_card_image_position)); ?>;
 				"
+				role="img"
+				aria-label="<?php echo $attribute_card_image_alt;?>"
 			>
 			</div>
 
