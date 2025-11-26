@@ -34,7 +34,8 @@ function render_callback_reveal_block($attributes, $content)
                 </span>
             </summary>
             <div class="mojblocks-reveal__content govuk-details__text">
-                <?php _e(esc_html($attribute_reveal_content)); ?>
+                <?php if (!esc_html($content)) _e(esc_html($attribute_reveal_content)); ?>
+                <?php _e(esc_html($content)); ?>
             </div>
         </details>
     </div>

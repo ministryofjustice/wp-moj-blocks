@@ -10,7 +10,7 @@ Block: Call to Action (Frontend styles)
     margin-bottom: 2rem;
     height: 100%;
 
-    &:not(.page-template-default *):before {
+    &:not(.page-template-default *):not(.page-template-page-toc *):before {
         content: "";
         display: block;
         height: calc(100% + 15px);
@@ -133,7 +133,6 @@ html.hale-colours-variable {
 // this relies on the current practice of style only having flex-basis
 @include govuk-media-query($from: tablet) {
     .wp-block-column[style|="flex"]:not([style$="100%"]) {
-        align-self: stretch;
 
         > div:last-child,
         > figure:last-child {

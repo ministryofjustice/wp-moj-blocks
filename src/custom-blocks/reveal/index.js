@@ -4,6 +4,7 @@
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText } from '@wordpress/block-editor';
+const { InnerBlocks } = wp.blockEditor;
 
 registerBlockType('mojblocks/reveal', {
     title: __('Reveal', 'mojblocks'),
@@ -32,6 +33,18 @@ registerBlockType('mojblocks/reveal', {
             className
         } = props;
 
+        // Load allowed blocks to be added to content
+        const allowedBlocks = [ 'core/heading', 'core/paragraph' , 'core/list' ];
+
+        var template = [];
+        if (revealContent && revealContent != "") {
+            //This is to support existing reveal blocks which used RichText prior to changes in October 2025
+            let revealContentArray = revealContent.replaceAll("<p>","").split("</p>");
+            revealContentArray.forEach(element => {
+                if (element.trim().length) template.push([ 'core/paragraph', { content: `${element}` } ],)
+            });
+        }
+
         // Set className attribute for PHP frontend to use
         setAttributes({ revealClassName: className });
 
@@ -59,12 +72,10 @@ registerBlockType('mojblocks/reveal', {
                         </span>
                     </summary>
                     <div className="mojblocks-reveal__content govuk-details__text">
-                        <RichText
-                        multiline="p"
-                        placeholder={ __('Add reveal content', 'mojblocks') }
-                        keepPlaceholderOnFocus
-                        onChange={ onChangeRevealContent }
-                        value={ revealContent }
+                        <InnerBlocks
+                            allowedBlocks={allowedBlocks}
+                            template={ template }
+				            templateLock={ false } // or 'all'/'insert' to lock the structure
                         />
                     </div>
                 </details>
@@ -72,6 +83,8 @@ registerBlockType('mojblocks/reveal', {
         ]);
     },
     // return null as frontend output is done via PHP
-    save: () => null
+    save: () => {
+        return <InnerBlocks.Content />;
+    }
 });
 
