@@ -602,14 +602,6 @@ function mojblocks_enqueue_style()
     // Load MoJ block styles
     wp_enqueue_style('mojblocks');
 
-    // IE specific stylesheet
-    wp_enqueue_style(
-        'mojblocks-ie',
-        plugins_url('build/ie.min.js', __FILE__),
-        ['mojblocks']
-    );
-    wp_style_add_data('mojblocks-ie', 'conditional', 'IE');
-
     // This script is dequeue when using this plugin in the Hale theme, blocking it from loading.
     wp_enqueue_script(
         'mojblocks-govuk-js',
