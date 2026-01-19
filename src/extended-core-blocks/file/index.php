@@ -64,6 +64,8 @@ function mojblocks_file_block_renderer($name, $attributes, $block_content)
     // Return a file name with the extention removed and no trailing whitespace
     $filename = trim(preg_replace($pattern, '', $parsedHTML, 1));
 
+    $metadata = '<span>&#40;</span>'.esc_attr($extention).esc_attr($filesize).'<span>&#41;</span>';
+
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
     // code below as you would in any other PHP file rather then having to use the sprintf() syntax
@@ -72,10 +74,10 @@ function mojblocks_file_block_renderer($name, $attributes, $block_content)
     ?>
 
     <div class="mojblocks-file govuk-body">
-        <a href="<?php echo $attributes["href"]; ?>"><?php _e($filename, 'mojblocks'); ?></a>
+        <a href="<?php echo $attributes["href"]; ?>"><?php _e($filename, 'mojblocks'); ?><span class="govuk-visually-hidden"> <?php _e($metadata);?></span></a>
 
-        <div class="mojblocks-file__extention">
-            <span>&#40;</span><?php echo esc_attr($extention); ?><?php echo esc_attr($filesize); ?><span>&#41;</span>
+        <div class="mojblocks-file__extention" aria-hidden="true">
+            <?php _e($metadata);?>
         </div>
     </div>
 
