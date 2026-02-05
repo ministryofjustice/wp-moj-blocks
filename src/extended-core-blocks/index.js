@@ -9,3 +9,4 @@
  import "./heading";
  import "./list";
  import "./paragraph";
+ import "./post-date";

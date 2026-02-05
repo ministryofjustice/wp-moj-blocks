@@ -611,6 +611,29 @@ function mojblocks_enqueue_style()
         '1.0',
         'all'
     );
+
+
 }
 
 add_action('wp_enqueue_scripts', 'mojblocks_enqueue_style');
+
+add_action('enqueue_block_editor_assets', function () {
+    wp_enqueue_script(
+        'mojblocks-govuk-js-2',
+        plugins_url('src/extended-core-blocks/post-date/index.js', __FILE__),
+        array(
+			'wp-blocks',
+			'wp-dom-ready',
+			'wp-edit-post',
+			'wp-i18n',
+			'wp-element',
+			'wp-components',
+			'wp-hooks',
+			'wp-data',
+			'wp-compose',
+			'wp-block-editor',
+		),
+        '1.0',
+        'all'
+    );
+});
