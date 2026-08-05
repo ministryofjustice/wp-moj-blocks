@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
-.editor-styles-wrapper {
+// .editor-styles-wrapper is a descendant of the outer wrapper in the classic
+// (non-iframed) editor, but IS the outer-matched body element itself when the
+// editor is iframed (WP 7.0+), hence the &. variant.
+.editor-styles-wrapper,
+&.editor-styles-wrapper {
 	@import 'common.scss';
 }

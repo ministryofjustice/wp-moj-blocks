@@ -567,9 +567,20 @@ include plugin_dir_path(__FILE__) . 'src/extended-core-blocks/file/index.php';
 
 /**
  * Queues up the gutenberg editor style
+ *
+ * Hooked on enqueue_block_assets (not enqueue_block_editor_assets) so that
+ * _wp_get_iframed_editor_assets() collects the stylesheet into the editor
+ * canvas iframe. WordPress 7.0 iframes the post editor whenever every block
+ * on the page uses Block API v3+, and styles enqueued on
+ * enqueue_block_editor_assets only reach the parent document, never the
+ * canvas. The hook also fires on the front end, hence the is_admin() guard.
  */
 function mojblocks_gutenberg_editor_styles()
 {
+    if (!is_admin()) {
+        return;
+    }
+
     wp_enqueue_style(
         'mojblocks-block-editor-styles',
         plugins_url('build/style-gutenburg.css', __FILE__),
@@ -579,8 +590,7 @@ function mojblocks_gutenberg_editor_styles()
     );
 }
 
-// Pulls the enqueued file in to standard wp process.
-add_action('enqueue_block_editor_assets', 'mojblocks_gutenberg_editor_styles');
+add_action('enqueue_block_assets', 'mojblocks_gutenberg_editor_styles');
 
 /**
  * Queues up the blocks styling for frontend
