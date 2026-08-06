@@ -10,6 +10,11 @@ Text Domain: mojblocks
 
 // Target backend (editor) styles - .block-editor-iframe__body is the canvas body
 // when the editor is iframed. Use :is() to keep the compiled css short.
+// TODO: once this plugin drops support for WordPress < 7.1 the parent-document
+// selectors can go, because 7.1+ always iframes the editor. Not before then:
+// on 7.0 a v1/v2 block from ANY plugin on the page forces the classic editor,
+// which needs them. Verify the block-styles preview panel still renders styled
+// before removing.
 :is(
     .edit-post-visual-editor,
     .block-editor-block-styles,
