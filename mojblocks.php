@@ -583,7 +583,7 @@ function mojblocks_gutenberg_editor_styles()
         'mojblocks-block-editor-styles',
         plugins_url('build/style-gutenburg.css', __FILE__),
         false,
-        '1.2',
+        '1.3',
         'all'
     );
 }
