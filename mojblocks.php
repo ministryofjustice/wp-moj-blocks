@@ -570,8 +570,9 @@ include plugin_dir_path(__FILE__) . 'src/extended-core-blocks/file/index.php';
  *
  * TODO: migrate the blocks to apiVersion 3 (block.json + editorStyle) before
  * any site running this plugin upgrades to WordPress 7.1, which always
- * iframes the post editor with no fallback for apiVersion 1/2 blocks. See
- * https://make.wordpress.org/core/2026/08/03/iframed-editor-changes-in-wordpress-7-1/
+ * iframes the post editor with no fallback for apiVersion 1/2 blocks.
+ *
+ * @see https://make.wordpress.org/core/2026/08/03/iframed-editor-changes-in-wordpress-7-1/
  */
 function mojblocks_gutenberg_editor_styles()
 {
