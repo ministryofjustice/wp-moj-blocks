@@ -7,12 +7,9 @@ License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Text Domain: mojblocks
 
 **********************************************************************************************/
-// Target backend (editor) styles.
-// .block-editor-iframe__body is the canvas body when the editor is iframed
-// (always the case in WP 7.0+ when every block on the page is Block API v3);
-// the other selectors only exist in the parent document. :is() keeps the
-// compiled output to one compact prefix per rule instead of a combinatorial
-// selector list.
+
+// Target backend (editor) styles - .block-editor-iframe__body is the canvas body
+// when the editor is iframed. Use :is() to keep the compiled css short.
 :is(
     .edit-post-visual-editor,
     .block-editor-block-styles,
