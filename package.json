@@ -39,5 +39,8 @@
     "zip": "zip -r mojblocks.zip ./ -x .git .gitignore *.git/* .DS_Store .package.json .package-lock.json *.scss webpack.config.js mojblocks.zip  postcss.config.css README.md .wordpress-org/**\\* .ds_store vendor/**\\* node_modules/**\\* src/**\\* webpack.config.js n",
     "build:docs": "rm -rf hookdocs/ && jsdoc -c hookdoc-conf.json",
     "watch": "webpack --watch --progress --config=node_modules/laravel-mix/setup/webpack.config.js"
+  },
+  "overrides": {
+    "webpack": "~5.99.9"
   }
 }

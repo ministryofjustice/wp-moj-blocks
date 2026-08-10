@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     3.19.5
+ * Version:     3.19.6
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Malcolm Butler, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -567,20 +567,29 @@ include plugin_dir_path(__FILE__) . 'src/extended-core-blocks/file/index.php';
 
 /**
  * Queues up the gutenberg editor style
+ *
+ * TODO: migrate the blocks to apiVersion 3 before any site running this
+ * plugin upgrades to WordPress 7.1, which always iframes the post editor
+ * with no fallback for apiVersion 1/2 blocks.
+ *
+ * @see https://make.wordpress.org/core/2026/08/03/iframed-editor-changes-in-wordpress-7-1/
  */
 function mojblocks_gutenberg_editor_styles()
 {
+    if (!is_admin()) {
+        return;
+    }
+
     wp_enqueue_style(
         'mojblocks-block-editor-styles',
         plugins_url('build/style-gutenburg.css', __FILE__),
         false,
-        '1.2',
+        filemtime(plugin_dir_path(__FILE__) . 'build/style-gutenburg.css'),
         'all'
     );
 }
 
-// Pulls the enqueued file in to standard wp process.
-add_action('enqueue_block_editor_assets', 'mojblocks_gutenberg_editor_styles');
+add_action('enqueue_block_assets', 'mojblocks_gutenberg_editor_styles');
 
 /**
  * Queues up the blocks styling for frontend
