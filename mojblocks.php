@@ -166,6 +166,7 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/card',
         [
+            'api_version' => 3,
             'editor_script' => 'mojblocks-editor-script',
             'render_callback' => 'render_callback_card_block',
             'attributes' => [
