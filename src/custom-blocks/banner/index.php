@@ -18,7 +18,26 @@ function render_callback_banner_block($attributes, $content)
     $attribute_banner_title = $attributes['bannerTitle'] ?? '';
     $attribute_button_link = $attributes['buttonLink'] ?? '';
     $attribute_button_label = $attributes['buttonLabel'] ?? '';
-    $attribute_banner_className = $attributes['bannerClassName'] ?? '';
+
+    // Wrapper classes.
+    //
+    // apiVersion 3 blocks no longer receive className in edit(), so the editor
+    // can't stash the generated class in bannerClassName any more. Build the
+    // wrapper class here instead: the block's own classes, plus whatever custom
+    // classes the user set (WordPress persists those in `className`).
+    //
+    // bannerClassName is the fallback for banners saved before the apiVersion 3
+    // upgrade — those already contain the generated class, hence the dedupe.
+    $attribute_banner_className = $attributes['className'] ?? $attributes['bannerClassName'] ?? '';
+    $banner_wrapper_classes = array_unique(
+        array_filter(
+            array_merge(
+                ['wp-block-mojblocks-banner', 'mojblocks-banner'],
+                preg_split('/\s+/', trim($attribute_banner_className))
+            )
+        )
+    );
+    $attribute_banner_className = implode(' ', $banner_wrapper_classes);
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -27,7 +46,7 @@ function render_callback_banner_block($attributes, $content)
 
     ?>
 
-    <div class="<?php _e(esc_html($attribute_banner_className)) ; ?> mojblocks-banner">
+    <div class="<?php echo esc_attr($attribute_banner_className); ?>">
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-two-thirds">

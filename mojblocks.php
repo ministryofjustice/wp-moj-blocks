@@ -143,6 +143,7 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/banner',
         [
+            'api_version' => 3,
             'editor_script' => 'mojblocks-editor-script',
             'render_callback' => 'render_callback_banner_block',
             'attributes' => [
