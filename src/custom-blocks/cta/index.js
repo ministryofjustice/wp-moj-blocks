@@ -4,12 +4,11 @@
  */
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, URLInputButton } from '@wordpress/block-editor';
-
-const { InspectorControls } = wp.blockEditor;
-const { PanelBody, PanelRow, ToggleControl, RadioControl } = wp.components;
+import { RichText, URLInputButton, InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { PanelBody, PanelRow, ToggleControl, RadioControl } from '@wordpress/components';
 
 registerBlockType('mojblocks/cta', {
+    apiVersion: 3,
     title: __('Call to Action', 'mojblocks'),
     icon: 'megaphone',
     category: 'mojblocks',
@@ -42,6 +41,13 @@ registerBlockType('mojblocks/cta', {
         flushBottom: {
             type: 'boolean'
         },
+        /**
+         * Legacy. Older CTAs persisted the editor's generated className here so
+         * the PHP could read it back. apiVersion 3 no longer passes className to
+         * edit(), so nothing writes to this any more — it stays registered only
+         * so the render callback can still fall back to it for content saved
+         * before this change.
+         */
         ctaClassName: {
             type: 'string'
         }
@@ -57,12 +63,10 @@ registerBlockType('mojblocks/cta', {
                 buttonLink,
                 buttonLabel,
                 flushBottom
-            },
-            className
+            }
         } = props;
 
-        // Set className attribute for PHP frontend to use
-        setAttributes({ ctaClassName: className });
+        const blockProps = useBlockProps({ className: 'mojblocks-cta' });
 
         // Grab newCtaTitle, set the value of ctaTitle to newCtaTitle.
         const onChangeCtaTitle = newCtaTitle => {
@@ -90,7 +94,7 @@ registerBlockType('mojblocks/cta', {
         };
 
         return (
-            <div className={`${className}  mojblocks-cta`}>
+            <div { ...blockProps }>
                 <InspectorControls>
                     <PanelBody
                             title="Bottom Margin"
@@ -133,7 +137,7 @@ registerBlockType('mojblocks/cta', {
                 </InspectorControls>
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
-                        <div class="govuk-grid-column-three-quarters">
+                        <div className="govuk-grid-column-three-quarters">
                             <div className="mojblocks-cta__heading-container">
                                 <h2 className="mojblocks-cta__heading">
                                 <span role="text">

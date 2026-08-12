@@ -198,6 +198,7 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/cta',
         [
+            'api_version' => 3,
             'editor_script' => 'mojblocks-editor-script',
             'render_callback' => 'render_callback_cta_block',
             'attributes' => [
@@ -213,7 +214,10 @@ function mojblocks_register_blocks()
                 'buttonLabel' => [
                     'type' => 'string'
                 ],
-                'ctaFlushBottom' => [
+                'linkStyle' => [
+                    'type' => 'string'
+                ],
+                'flushBottom' => [
                     'type' => 'boolean'
                 ],
                 'ctaClassName' => [

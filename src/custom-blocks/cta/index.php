@@ -21,7 +21,26 @@ function render_callback_cta_block($attributes, $content)
     $attribute_cta_button_link = $attributes['buttonLink'] ?? '';
     $attribute_cta_button_label = $attributes['buttonLabel'] ?? '';
     $attribute_cta_flush_bottom = $attributes['flushBottom'] ?? false;
-    $attribute_cta_className = $attributes['ctaClassName'] ?? '';
+
+    // Wrapper classes.
+    //
+    // apiVersion 3 blocks no longer receive className in edit(), so the editor
+    // can't stash the generated class in ctaClassName any more. Build the
+    // wrapper class here instead: the block's own class, plus whatever custom
+    // classes the user set (WordPress persists those in `className`).
+    //
+    // ctaClassName is the fallback for CTAs saved before the apiVersion 3
+    // upgrade — those already contain the generated class, hence the dedupe.
+    $attribute_cta_className = $attributes['className'] ?? $attributes['ctaClassName'] ?? '';
+    $cta_wrapper_classes = array_unique(
+        array_filter(
+            array_merge(
+                ['wp-block-mojblocks-cta'],
+                preg_split('/\s+/', trim($attribute_cta_className))
+            )
+        )
+    );
+    $attribute_cta_className = implode(' ', $cta_wrapper_classes);
 
     // Link class
     if ($attribute_cta_button_link_style == "link") {
@@ -36,7 +55,7 @@ function render_callback_cta_block($attributes, $content)
     ob_start();
 
     ?>
-    <div class="<?php _e(esc_html($attribute_cta_className)); ?>" <?php if ($attribute_cta_flush_bottom) echo "style='margin-bottom:0'"; ?>>
+    <div class="<?php echo esc_attr($attribute_cta_className); ?>" <?php if ($attribute_cta_flush_bottom) echo "style='margin-bottom:0'"; ?>>
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-three-quarters block-cancel-gds-width-if-flex-narrow">
