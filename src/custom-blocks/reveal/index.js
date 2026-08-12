@@ -3,10 +3,10 @@
  */
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText } from '@wordpress/block-editor';
-const { InnerBlocks } = wp.blockEditor;
+import { RichText, InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
 registerBlockType('mojblocks/reveal', {
+    apiVersion: 3,
     title: __('Reveal', 'mojblocks'),
     description: __("Arrow toggle to reveal text", "mojblocks"),
     icon: 'controls-play',
@@ -18,6 +18,13 @@ registerBlockType('mojblocks/reveal', {
         revealContent: {
             type: 'string'
         },
+        /**
+         * Legacy. Older reveals persisted the editor's generated className here
+         * so the PHP could read it back. apiVersion 3 no longer passes
+         * className to edit(), so nothing writes to this any more — it stays
+         * registered only so the render callback can still fall back to it for
+         * content saved before this change.
+         */
         revealClassName: {
             type: 'string'
         }
@@ -29,9 +36,12 @@ registerBlockType('mojblocks/reveal', {
             attributes: {
                 revealTitle,
                 revealContent
-            },
-            className
+            }
         } = props;
+
+        // apiVersion 3: the wrapper element must carry the props returned by
+        // useBlockProps. className is no longer passed to edit() as a prop.
+        const blockProps = useBlockProps({ className: 'mojblocks-reveal' });
 
         // Load allowed blocks to be added to content
         const allowedBlocks = [ 'core/heading', 'core/paragraph' , 'core/list' ];
@@ -45,21 +55,13 @@ registerBlockType('mojblocks/reveal', {
             });
         }
 
-        // Set className attribute for PHP frontend to use
-        setAttributes({ revealClassName: className });
-
         // Grab newRevealTitle, set the value of revealTitle to newRevealTitle.
         const onChangeRevealTitle = newRevealTitle => {
             setAttributes({ revealTitle: newRevealTitle });
         };
 
-        // Grab newrevealContent, set the value of revealContent to newrevealContent.
-        const onChangeRevealContent = newRevealContent => {
-            setAttributes({ revealContent: newRevealContent });
-        };
-
-        return ([
-            <div className={`mojblocks-reveal`}>
+        return (
+            <div { ...blockProps }>
                 <details className="govuk-details" data-module="govuk-details" open>
                     <summary className="govuk-details__summary">
                         <span className="mojblocks-reveal__title govuk-details__summary-text">
@@ -80,9 +82,16 @@ registerBlockType('mojblocks/reveal', {
                     </div>
                 </details>
             </div>
-        ]);
+        );
     },
-    // return null as frontend output is done via PHP
+    /**
+     * Deliberately does not call useBlockProps.save().
+     *
+     * This is a dynamic block: what save() returns is passed to
+     * render_callback_reveal_block() as $content, and the PHP builds the outer
+     * wrapper itself. Adding a wrapper here would double-wrap the frontend
+     * markup and invalidate every reveal already saved in the database.
+     */
     save: () => {
         return <InnerBlocks.Content />;
     }

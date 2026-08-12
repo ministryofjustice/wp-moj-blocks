@@ -15,9 +15,28 @@ function render_callback_reveal_block($attributes, $content)
 {
 
     // Parse attributes found in index.js
-    $attribute_reveal_className = $attributes['revealClassName'] ?? '';
     $attribute_reveal_content = $attributes['revealContent'] ?? '';
     $attribute_reveal_revealTitle = $attributes['revealTitle'] ?? '';
+
+    // Wrapper classes.
+    //
+    // apiVersion 3 blocks no longer receive className in edit(), so the editor
+    // can't stash the generated class in revealClassName any more. Build the
+    // wrapper class here instead: the block's own class, plus whatever custom
+    // classes the user set (WordPress persists those in `className`).
+    //
+    // revealClassName is the fallback for reveals saved before the apiVersion 3
+    // upgrade — those already contain the generated class, hence the dedupe.
+    $attribute_reveal_className = $attributes['className'] ?? $attributes['revealClassName'] ?? '';
+    $reveal_wrapper_classes = array_unique(
+        array_filter(
+            array_merge(
+                ['mojblocks-reveal', 'wp-block-mojblocks-reveal'],
+                preg_split('/\s+/', trim($attribute_reveal_className))
+            )
+        )
+    );
+    $attribute_reveal_className = implode(' ', $reveal_wrapper_classes);
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -26,7 +45,7 @@ function render_callback_reveal_block($attributes, $content)
 
     ?>
 
-    <div class="mojblocks-reveal <?php _e(esc_html($attribute_reveal_className)); ?>">
+    <div class="<?php echo esc_attr($attribute_reveal_className); ?>">
         <details class="govuk-details" data-module="govuk-details">
             <summary class="govuk-details__summary">
                 <span class="mojblocks-reveal__title govuk-details__summary-text">
