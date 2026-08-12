@@ -231,6 +231,7 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/hero',
         [
+            'api_version' => 3,
             'editor_script' => 'mojblocks-editor-script',
             'render_callback' => 'render_callback_hero_block',
             'attributes' => [
@@ -240,16 +241,14 @@ function mojblocks_register_blocks()
                 'heroTitle' => [
                     'type' => 'string'
                 ],
-                [
                 'heroText' => [
                     'type' => 'string'
                 ],
                 'heroClassName' => [
                     'type' => 'string'
                 ],
-				'heroImagePosition' => [
-						'type' => 'string'
-				]
+                'heroImagePosition' => [
+                    'type' => 'string'
                 ]
             ]
         ]
