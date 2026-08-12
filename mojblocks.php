@@ -393,13 +393,28 @@ function mojblocks_register_blocks()
     register_block_type(
         'mojblocks/separator',
         [
-        'editor_script' => 'mojblocks-editor-script',
-        'render_callback' => 'render_callback_separator_block',
-        'attributes' => [
-            'size' => [
-                'type' => 'string'
+            'api_version' => 3,
+            'editor_script' => 'mojblocks-editor-script',
+            'render_callback' => 'render_callback_separator_block',
+            'attributes' => [
+                // Defaults are deliberately left out here — render_callback_separator_block()
+                // owns them via ?? so that existing content keeps rendering unchanged.
+                'separatorBreakSize' => [
+                    'type' => 'string'
+                ],
+                'separatorThickness' => [
+                    'type' => 'number'
+                ],
+                'separatorWidth' => [
+                    'type' => 'string'
+                ],
+                'separatorColour' => [
+                    'type' => 'string'
+                ],
+                'className' => [
+                    'type' => 'string'
+                ]
             ]
-          ]
         ]
     );
 
