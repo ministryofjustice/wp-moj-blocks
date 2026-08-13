@@ -5,30 +5,9 @@ import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, InnerBlocks, useBlockProps } from '@wordpress/block-editor';
 
-registerBlockType('mojblocks/reveal', {
-    apiVersion: 3,
-    title: __('Reveal', 'mojblocks'),
-    description: __("Arrow toggle to reveal text", "mojblocks"),
-    icon: 'controls-play',
-    category: 'mojblocks',
-    attributes: {
-        revealTitle: {
-            type: 'string'
-        },
-        revealContent: {
-            type: 'string'
-        },
-        /**
-         * Legacy. Older reveals persisted the editor's generated className here
-         * so the PHP could read it back. apiVersion 3 no longer passes
-         * className to edit(), so nothing writes to this any more — it stays
-         * registered only so the render callback can still fall back to it for
-         * content saved before this change.
-         */
-        revealClassName: {
-            type: 'string'
-        }
-    },
+import metadata from './block.json';
+
+registerBlockType(metadata.name, {
     edit: props => {
 
         const {

@@ -8,7 +8,6 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { InnerBlocks } from "@wordpress/block-editor";
 
@@ -16,46 +15,9 @@ import { InnerBlocks } from "@wordpress/block-editor";
  * Internal dependencies
  */
 import edit from './edit';
+import metadata from './block.json';
 
-registerBlockType('mojblocks/card', {
-    apiVersion: 3,
-    title: __('Card', 'mojblocks'),
-    description: __('Add a card pattern to a default page', 'mojblocks'),
-    category: 'mojblocks',
-    icon: 'table-row-after',
-    keywords: [
-        __('card', 'navigation', 'mojblocks')
-    ],
-    supports: {
-        align: ['wide','full'],
-        html: false
-    },
-    attributes: {
-        cardTitle: {
-            type: 'string'
-        },
-        cardExcerpt: {
-            type: 'string'
-        },
-        cardImageURL: {
-            type: 'string'
-        },
-        cardImageAlt: {
-            type: 'string'
-        },
-        cardImageId: {
-            type: 'number'
-        },
-        className: {
-            type: 'string'
-        },
-        cardImagePosition: {
-            type: 'string'
-        },
-        cardImageShape: {
-            type: 'string'
-        },
-    },
+registerBlockType(metadata.name, {
     edit,
     /**
      * Deliberately does not call useBlockProps.save().

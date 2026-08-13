@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/banner",
+	"title": "Banner",
+	"description": "Banner with title and button",
+	"category": "mojblocks",
+	"icon": "schedule",
+	"textdomain": "mojblocks",
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"bannerTitle": {
+			"type": "string"
+		},
+		"buttonLink": {
+			"type": "string"
+		},
+		"buttonLabel": {
+			"type": "string"
+		},
+		"bannerClassName": {
+			"type": "string"
+		}
+	}
+}

@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/reveal",
+	"title": "Reveal",
+	"description": "Arrow toggle to reveal text",
+	"category": "mojblocks",
+	"icon": "controls-play",
+	"textdomain": "mojblocks",
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"revealTitle": {
+			"type": "string"
+		},
+		"revealContent": {
+			"type": "string"
+		},
+		"revealClassName": {
+			"type": "string"
+		}
+	}
+}

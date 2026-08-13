@@ -16,6 +16,8 @@ import {
     useBlockProps,
 } from '@wordpress/block-editor';
 
+import metadata from './block.json';
+
 // Blocks an editor is allowed to place inside the banner title.
 const allowedBlocks = [ 'core/heading' ];
 
@@ -23,33 +25,7 @@ const banner_template = [
     [ 'core/heading', { placeholder: 'Banner Title' } ]
 ];
 
-registerBlockType("mojblocks/banner", {
-    apiVersion: 3,
-    title: __("Banner", "mojblocks"),
-    description: __("Banner with title and button", "mojblocks"),
-    category: "mojblocks",
-    icon: "schedule",
-    attributes: {
-        bannerTitle: {
-            type: 'string'
-        },
-        buttonLink: {
-            type: 'string'
-        },
-        buttonLabel: {
-            type: 'string'
-        },
-        /**
-         * Legacy. Older banners persisted the editor's generated className here
-         * so the PHP could read it back. apiVersion 3 no longer passes
-         * className to edit(), so nothing writes to this any more — it stays
-         * registered only so the render callback can still fall back to it for
-         * content saved before this change.
-         */
-        bannerClassName: {
-            type: 'string'
-        }
-    },
+registerBlockType(metadata.name, {
     edit: props => {
         const {
             setAttributes,

@@ -1,57 +1,25 @@
 /**
  * CTA
  * A stylised call to action displaying a title, text and cta button
+ *
+ * Block metadata — name, title, icon, category, keywords, attributes, example —
+ * lives in block.json and is registered server-side from mojblocks.php. This
+ * file only supplies the editor behaviour.
+ *
+ * Note the ctaClassName attribute in block.json is legacy: older CTAs persisted
+ * the editor's generated className there so the PHP could read it back.
+ * apiVersion 3 no longer passes className to edit(), and the render callback now
+ * uses get_block_wrapper_attributes(), so nothing reads or writes it. It stays
+ * registered only so it isn't stripped from content saved before that change.
  */
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, URLInputButton, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, PanelRow, ToggleControl, RadioControl } from '@wordpress/components';
 
-registerBlockType('mojblocks/cta', {
-    apiVersion: 3,
-    title: __('Call to Action', 'mojblocks'),
-    icon: 'megaphone',
-    category: 'mojblocks',
-    keywords: [ __( 'cta' ), __( 'Call to Action' ), __( 'banner' ) ],
-    example: {
-        attributes: {
-            ctaTitle: 'Add a Call to Action banner to your site',
-            ctaText: 'Call To Action text',
-            buttonLabel: 'Click me now',
-            buttonLink: 'https://intranet.justice.gov.uk/',
-            flushBottom: false
-        },
-    },
-    attributes: {
-        ctaTitle: {
-            type: 'string'
-        },
-        ctaText: {
-            type: 'string'
-        },
-        buttonLabel: {
-            type: 'string'
-        },
-        buttonLink: {
-            type: 'string'
-        },
-        linkStyle: {
-            type: 'string'
-        },
-        flushBottom: {
-            type: 'boolean'
-        },
-        /**
-         * Legacy. Older CTAs persisted the editor's generated className here so
-         * the PHP could read it back. apiVersion 3 no longer passes className to
-         * edit(), so nothing writes to this any more — it stays registered only
-         * so the render callback can still fall back to it for content saved
-         * before this change.
-         */
-        ctaClassName: {
-            type: 'string'
-        }
-    },
+import metadata from './block.json';
+
+registerBlockType(metadata.name, {
 
     edit: props => {
         const {

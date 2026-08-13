@@ -14,6 +14,8 @@ import { Fragment } from '@wordpress/element';
 import { PanelBody, PanelRow, SelectControl, RangeControl } from '@wordpress/components';
 import domReady from '@wordpress/dom-ready';
 
+import metadata from './block.json';
+
 const gapOptions = [
     { label: "Extra large", value: 'xl' },
     { label: "Large", value: 'l' },
@@ -43,41 +45,7 @@ const marks = [
     },
 ];
 
-registerBlockType('mojblocks/separator', {
-    apiVersion: 3,
-    title: __('Separator', 'mojblocks'),
-    description: __('A section break', 'mojblocks'),
-    category: 'mojblocks',
-    icon: 'minus',
-    keywords: [
-        __('separator', 'mojblocks'),
-        __('section', 'mojblocks'),
-        __('break', 'mojblocks'),
-        __('moj', 'mojblocks'),
-    ],
-    attributes: {
-        separatorBreakSize: {
-            type: 'string',
-            default: 'xl'
-            // Matches the ?? 'xl' fallback in render_callback_separator_block()
-            // so the editor preview and the frontend agree for blocks saved
-            // before this attribute existed.
-        },
-        separatorThickness: {
-            type: 'number',
-            default: 1
-        },
-        separatorWidth: {
-            type: 'string',
-            default: '0'
-        },
-        separatorColour: {
-            type: 'string',
-            default: 'rgb(177, 180, 182)'
-            // This is mid grey (GDS Mid Grey #b1b4b6)
-            // Use rgb notation so it is picked up by the WordPress colour picker
-        }
-    },
+registerBlockType(metadata.name, {
     edit: props => {
 
         const {

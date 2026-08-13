@@ -18,6 +18,8 @@ import {
 } from '@wordpress/block-editor';
 import { PanelBody, PanelRow, SelectControl } from '@wordpress/components';
 
+import metadata from './block.json';
+
 // Blocks an editor is allowed to place inside the hero overlay.
 const allowedBlocks = [ 'core/heading', 'core/list', 'core/paragraph', 'mojblocks/intro' ];
 
@@ -33,30 +35,7 @@ const optionList = [
     { label: "Bottom right", value: 'bottom right' },
 ];
 
-registerBlockType("mojblocks/hero", {
-    apiVersion: 3,
-    title: __("Hero", "mojblocks"),
-    description: __("Full width hero banner with title and text", "mojblocks"),
-    category: "mojblocks",
-    icon: "schedule",
-    attributes: {
-        backgroundImage: {
-            type: 'string'
-        },
-        /**
-         * Legacy. Older heroes persisted the editor's generated className here
-         * so the PHP could read it back. apiVersion 3 no longer passes
-         * className to edit(), so nothing writes to this any more — it stays
-         * registered only so the render callback can still fall back to it for
-         * content saved before this change.
-         */
-        heroClassName: {
-            type: 'string'
-        },
-        heroImagePosition: {
-            type: 'string'
-        }
-    },
+registerBlockType(metadata.name, {
     edit: props => {
         const {
             setAttributes,
