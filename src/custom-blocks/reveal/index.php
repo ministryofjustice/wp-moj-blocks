@@ -18,25 +18,18 @@ function render_callback_reveal_block($attributes, $content)
     $attribute_reveal_content = $attributes['revealContent'] ?? '';
     $attribute_reveal_revealTitle = $attributes['revealTitle'] ?? '';
 
-    // Wrapper classes.
+    // Wrapper attributes.
     //
-    // apiVersion 3 blocks no longer receive className in edit(), so the editor
-    // can't stash the generated class in revealClassName any more. Build the
-    // wrapper class here instead: the block's own class, plus whatever custom
-    // classes the user set (WordPress persists those in `className`).
+    // get_block_wrapper_attributes() is the PHP counterpart to useBlockProps()
+    // in edit(). It emits the generated wp-block-mojblocks-reveal class, any
+    // custom classes the user set (WordPress persists those in `className`),
+    // and anything block supports contribute — so this stays correct as
+    // supports are added, without duplicating the logic here.
     //
-    // revealClassName is the fallback for reveals saved before the apiVersion 3
-    // upgrade — those already contain the generated class, hence the dedupe.
-    $attribute_reveal_className = $attributes['className'] ?? $attributes['revealClassName'] ?? '';
-    $reveal_wrapper_classes = array_unique(
-        array_filter(
-            array_merge(
-                ['mojblocks-reveal', 'wp-block-mojblocks-reveal'],
-                preg_split('/\s+/', trim($attribute_reveal_className))
-            )
-        )
-    );
-    $attribute_reveal_className = implode(' ', $reveal_wrapper_classes);
+    // The legacy revealClassName attribute is deliberately not read: custom
+    // classes have always been saved separately in `className`, so nothing is
+    // lost for reveals saved before the apiVersion 3 upgrade.
+    $reveal_wrapper_attributes = get_block_wrapper_attributes(['class' => 'mojblocks-reveal']);
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -45,7 +38,7 @@ function render_callback_reveal_block($attributes, $content)
 
     ?>
 
-    <div class="<?php echo esc_attr($attribute_reveal_className); ?>">
+    <div <?php echo $reveal_wrapper_attributes; ?>>
         <details class="govuk-details" data-module="govuk-details">
             <summary class="govuk-details__summary">
                 <span class="mojblocks-reveal__title govuk-details__summary-text">

@@ -22,25 +22,29 @@ function render_callback_cta_block($attributes, $content)
     $attribute_cta_button_label = $attributes['buttonLabel'] ?? '';
     $attribute_cta_flush_bottom = $attributes['flushBottom'] ?? false;
 
-    // Wrapper classes.
+    // Wrapper attributes.
     //
-    // apiVersion 3 blocks no longer receive className in edit(), so the editor
-    // can't stash the generated class in ctaClassName any more. Build the
-    // wrapper class here instead: the block's own class, plus whatever custom
-    // classes the user set (WordPress persists those in `className`).
+    // get_block_wrapper_attributes() is the PHP counterpart to useBlockProps()
+    // in edit(). It emits the generated wp-block-mojblocks-cta class, any
+    // custom classes the user set (WordPress persists those in `className`),
+    // and anything block supports contribute — so this stays correct as
+    // supports are added, without duplicating the logic here.
     //
-    // ctaClassName is the fallback for CTAs saved before the apiVersion 3
-    // upgrade — those already contain the generated class, hence the dedupe.
-    $attribute_cta_className = $attributes['className'] ?? $attributes['ctaClassName'] ?? '';
-    $cta_wrapper_classes = array_unique(
-        array_filter(
-            array_merge(
-                ['wp-block-mojblocks-cta'],
-                preg_split('/\s+/', trim($attribute_cta_className))
-            )
-        )
-    );
-    $attribute_cta_className = implode(' ', $cta_wrapper_classes);
+    // The legacy ctaClassName attribute is deliberately not read: custom
+    // classes have always been saved separately in `className`, so nothing is
+    // lost for CTAs saved before the apiVersion 3 upgrade.
+    //
+    // The flush-bottom margin must be passed in rather than written as a
+    // separate style attribute on the element: this function returns a
+    // complete class="..." style="..." string, and a second style attribute on
+    // the same tag would be ignored by the browser.
+    $cta_wrapper_args = [];
+
+    if ($attribute_cta_flush_bottom) {
+        $cta_wrapper_args['style'] = 'margin-bottom:0';
+    }
+
+    $cta_wrapper_attributes = get_block_wrapper_attributes($cta_wrapper_args);
 
     // Link class
     if ($attribute_cta_button_link_style == "link") {
@@ -55,7 +59,7 @@ function render_callback_cta_block($attributes, $content)
     ob_start();
 
     ?>
-    <div class="<?php echo esc_attr($attribute_cta_className); ?>" <?php if ($attribute_cta_flush_bottom) echo "style='margin-bottom:0'"; ?>>
+    <div <?php echo $cta_wrapper_attributes; ?>>
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-three-quarters block-cancel-gds-width-if-flex-narrow">
