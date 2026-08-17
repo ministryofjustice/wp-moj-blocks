@@ -340,24 +340,9 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/auto-item-list',
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/auto-item-list',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_auto_item_list_block',
-            'attributes' => [
-                'listItemType' => [
-                    'type' => 'string'
-                ],
-                'listHasDate' => [
-                    'type' => 'boolean'
-                ],
-                'listEmptyText' => [
-                    'type' => 'string'
-                ],
-                'listClassName' => [
-                    'type' => 'string'
-                ]
-            ]
+            'render_callback' => 'render_callback_auto_item_list_block'
         ]
     );
     register_block_type(

@@ -1,83 +1,45 @@
+/**
+ * Auto-populated Item List
+ *
+ * Block metadata — name, title, icon, category, keywords, attributes — lives in
+ * block.json and is registered server-side from mojblocks.php. This file only
+ * supplies the editor behaviour.
+ *
+ * Note the listClassName attribute in block.json is legacy: older lists
+ * persisted the editor's generated className there so the PHP could read it
+ * back. apiVersion 3 no longer passes className to edit(), and the render
+ * callback now uses get_block_wrapper_attributes(), so nothing reads or writes
+ * it. It stays registered only so it isn't stripped from content saved before
+ * that change.
+ */
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { Fragment } from '@wordpress/element';
+import { useSelect, select } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
+import {
+  InspectorControls,
+  MediaUpload,
+  InnerBlocks,
+  PanelColorSettings,
+  getColorClassName,
+  getColorObjectByColorValue,
+  useBlockProps,
+} from '@wordpress/block-editor';
+import {
+  __experimentalText as Text,
+  PanelBody,
+  SelectControl,
+  Button,
+  TextControl,
+  ToggleControl,
+} from '@wordpress/components';
 
-const { __ } = wp.i18n;
-const { registerBlockType, registerBlockStyle } = wp.blocks;
-const { Fragment } = wp.element;
-const { useSelect, select } = wp.data;
-const { InspectorControls, MediaUpload, InnerBlocks, PanelColorSettings, getColorClassName, getColorObjectByColorValue } = wp.blockEditor;
-const { PanelBody, SelectControl, Button, TextControl, ToggleControl} = wp.components;
+import metadata from './block.json';
+
 const allowedMediaTypes = ['image'];
 
-import { __experimentalText as Text } from '@wordpress/components';
-
-registerBlockType("mojblocks/auto-item-list", {
-  title: __("Items List", "mojblocks"),
-  description: __('Auto-populates with most recent or next items based on a date'),
-  category: "mojblocks",
-  icon: "slides",
-  keywords: [__('latest item'), __('latest news'), __('recent items'), __('recent news'),  __('next items'), __('headlines')],
-
-  attributes: {
-    listHasDate: {
-      type: "boolean",
-      default: true
-    },
-    listHasSummary: {
-      type: "boolean",
-      default: false
-    },
-    listEmptyText: {
-      type: "string",
-      default: "No items to display."
-    },
-    listItemType: {
-      type: "string",
-      default: ""
-    },
-    listTaxonomy: {
-      type: "string",
-      default: ""
-    },
-    listTaxonomyOptions: {
-      type: "array",
-      default: []
-    },
-    listTaxonomyValueArray: {
-      type: "array",
-      default: []
-    },
-    listImage: {
-      type: "boolean",
-      default: false
-    },
-    listBackupImage: {
-      type: "string",
-      default: ""
-    },
-    listClassName: {
-      type: 'string'
-    },
-    backgroundColour: {
-      type: 'string',
-      default: ''
-    },
-    backgroundColourClass: {
-      type: 'string',
-      default: ''
-    },
-    borderColour: {
-      type: 'string',
-      default: ''
-    },
-    textColour: {
-      type: 'string',
-      default: ''
-    },
-    textColourClass: {
-      type: 'string',
-      default: ''
-    },
-  },
+registerBlockType(metadata.name, {
 
   edit: props => {
     const {
@@ -97,8 +59,7 @@ registerBlockType("mojblocks/auto-item-list", {
         borderColour,
         textColour,
         textColourClass
-      },
-      className
+      }
     } = props
 
     const {
@@ -244,8 +205,16 @@ registerBlockType("mojblocks/auto-item-list", {
       setAttributes({ listTaxonomyValueArray: newTaxonomyValue });
     };
 
-    // Set className attribute for PHP frontend to use
-    setAttributes({ listClassName: className });
+    // apiVersion 3: the wrapper element must carry the props returned by
+    // useBlockProps. className is no longer passed to edit() as a prop.
+    //
+    // edit() has three possible returns, so the list class is decided here
+    // rather than per branch — hooks must be called unconditionally, and only
+    // the populated branch renders the list itself.
+    const hasItemTypes = itemTypes.length > 1;
+    const blockProps = useBlockProps(
+      hasItemTypes ? { className: 'mojblocks-auto-item-list' } : {}
+    );
 
     const setItemType = newItemType => {
       setAttributes({ listItemType: newItemType });
@@ -333,12 +302,12 @@ registerBlockType("mojblocks/auto-item-list", {
             />
           </PanelBody>
         </InspectorControls>
-        <div class="govuk-error-summary" data-module="govuk-error-summary">
-          <h2 class="govuk-error-summary__title">
+        <div { ...blockProps } className={ `${ blockProps.className } govuk-error-summary`.trim() } data-module="govuk-error-summary">
+          <h2 className="govuk-error-summary__title">
             {listEmptyText}
           </h2>
-          <div class="govuk-error-summary__body">
-            <p class="govuk-body-l govuk-error-message">
+          <div className="govuk-error-summary__body">
+            <p className="govuk-body-l govuk-error-message">
               This website does not have any suitable post types for this block.
             </p>
           </div>
@@ -346,7 +315,7 @@ registerBlockType("mojblocks/auto-item-list", {
       </Fragment>
 
     );
-    if (itemTypes.length > 1) return (
+    if (hasItemTypes) return (
       <Fragment >
         <InspectorControls>
           <PanelColorSettings
@@ -491,10 +460,10 @@ registerBlockType("mojblocks/auto-item-list", {
           </PanelBody>
         </InspectorControls>
 
-        <div className={`mojblocks-auto-item-list ${className}`}>
+        <div { ...blockProps }>
             <div className={`mojblocks-auto-item-list__item ${itemClass}`} style={borderStyle}>
-            {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
-            {(listImage && !listBackupImage) && (<div class="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
+            {(listImage && listBackupImage) && (<div className="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
+            {(listImage && !listBackupImage) && (<div className="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
             <div className="mojblocks-auto-item-list__content">
               <div className={`mojblocks-auto-item-list__title-and-summary`}>
                 <p className="mojblocks-auto-item-list__headline"><a href="#">{title}</a></p>
@@ -506,8 +475,8 @@ registerBlockType("mojblocks/auto-item-list", {
             </div>
           </div>
           <div className={`mojblocks-auto-item-list__item ${itemClass}`} style={borderStyle}>
-            {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
-            {(listImage && !listBackupImage) && (<div class="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
+            {(listImage && listBackupImage) && (<div className="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
+            {(listImage && !listBackupImage) && (<div className="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
             <div className={"mojblocks-auto-item-list__content"}>
               <div className="mojblocks-auto-item-list__title-and-summary">
                 <p className="govuk-body mojblocks-auto-item-list__headline"><a href="#">{title}</a></p>
@@ -519,8 +488,8 @@ registerBlockType("mojblocks/auto-item-list", {
             </div>
           </div>
           <div className={`mojblocks-auto-item-list__item ${itemClass}`} style={borderStyle}>
-            {(listImage && listBackupImage) && (<div class="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
-            {(listImage && !listBackupImage) && (<div class="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
+            {(listImage && listBackupImage) && (<div className="mojblocks-auto-item-list__image" style={listImageStyle}></div>)}
+            {(listImage && !listBackupImage) && (<div className="mojblocks-auto-item-list__image mojblocks-auto-item-list__image--no-image" style={listImageStyle}><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 21C4.45 21 3.97917 20.8042 3.5875 20.4125C3.19583 20.0208 3 19.55 3 19V5C3 4.45 3.19583 3.97917 3.5875 3.5875C3.97917 3.19583 4.45 3 5 3H19C19.55 3 20.0208 3.19583 20.4125 3.5875C20.8042 3.97917 21 4.45 21 5V19C21 19.55 20.8042 20.0208 20.4125 20.4125C20.0208 20.8042 19.55 21 19 21H5ZM5 19H19V5H5V19ZM6 17H18L14.25 12L11.25 16L9 13L6 17Z"></path></svg></div>)}
             <div className="mojblocks-auto-item-list__content">
               <div className={`mojblocks-auto-item-list__title-and-summary`}>
                 <p className="govuk-body mojblocks-auto-item-list__headline" ><a href="#">{title}</a></p>
@@ -533,6 +502,17 @@ registerBlockType("mojblocks/auto-item-list", {
           </div>
         </div>
       </Fragment>
+    );
+
+    // Neither branch above applies while getPostTypes() is still resolving:
+    // itemTypes has only its placeholder entry and itemTypesFinishedParsing is
+    // still false. Returning undefined from a component throws in React and
+    // trips the editor's error boundary, so render a placeholder until the
+    // post type list arrives.
+    return (
+      <div { ...blockProps }>
+        <p>{ __( 'Loading item types…', 'mojblocks' ) }</p>
+      </div>
     );
   },
 
