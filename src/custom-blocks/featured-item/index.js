@@ -1,51 +1,27 @@
-const { registerBlockType, registerBlockStyle } = wp.blocks;
-const { __ } = wp.i18n;
-
-import { InnerBlocks } from "@wordpress/block-editor";
+/**
+ * Featured Item
+ *
+ * Block metadata — name, title, icon, category, keywords, attributes — lives in
+ * block.json and is registered server-side from mojblocks.php. This file only
+ * supplies the editor behaviour and the block styles.
+ */
+import { registerBlockType, registerBlockStyle } from '@wordpress/blocks';
+import { __ } from '@wordpress/i18n';
+import { InnerBlocks } from '@wordpress/block-editor';
 
 import edit from './edit';
+import metadata from './block.json';
 
-registerBlockType("mojblocks/featured-item", {
-  title: __("Featured Item", "mojblocks"),
-  description: __('Display featured Item'),
-  category: "mojblocks",
-  icon: "id-alt",
-  keywords: [__('featured item')],
-
-  attributes: {
-    featuredItemHasDate: {
-      type: "boolean",
-      default: true
-    },
-    featuredItemHasBar: {
-      type: "boolean",
-      default: true
-    },
-    featuredItemID: {
-      type: "string",
-      default: "0"
-    },
-    featuredItemType: {
-      type: "string",
-      default: ""
-    },
-    featuredImage: {
-      type: "boolean",
-      default: true
-    },
-    featuredCustomImage: {
-      type: "string",
-      default: ""
-    },
-    featuredLinkText: {
-      type: "string",
-      default: "Read full article"
-    },
-    className: {
-      type: "string"
-    }
-  },
-  edit, 
+registerBlockType(metadata.name, {
+  edit,
+  /**
+   * Deliberately does not call useBlockProps.save().
+   *
+   * This is a dynamic block: what save() returns is passed to
+   * render_callback_featured_item_block() as $content, and the PHP builds the
+   * outer wrapper itself. Adding a wrapper here would double-wrap the frontend
+   * markup and invalidate every featured item already saved in the database.
+   */
   save: () => { return <InnerBlocks.Content />; }
 });
 

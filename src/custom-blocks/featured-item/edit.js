@@ -10,12 +10,13 @@ import {
 	InnerBlocks,
 	MediaUpload,
 	InspectorControls,
+	useBlockProps,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
+import { Fragment } from '@wordpress/element';
 
-const { Fragment } = wp.element;
 const d = new Date();
 const allowedMediaTypes = ['image'];
 const templatefeaturedItemBlock = [
@@ -33,7 +34,6 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		featuredItemHasBar,
 		featuredLinkText,
 		featuredCustomImage,
-		className,
 	} = attributes;
 
 	const {
@@ -119,6 +119,17 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 
 		}
 	}
+
+	// apiVersion 3: the wrapper element must carry the props returned by
+	// useBlockProps. It supplies the generated block class, the user's custom
+	// classes and the is-style-* class from the registered block styles — all of
+	// which used to be applied by reading the className attribute by hand.
+	//
+	// Called bare rather than with a className because edit() returns early
+	// while items are loading, and that branch renders a spinner rather than the
+	// featured item itself. The block classes are merged in on the main branch
+	// below, where itemPreviewClass is also known.
+	const blockProps = useBlockProps();
 
 	const removeImage = () => {
 		setAttributes({
@@ -270,10 +281,10 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 	if (!Array.isArray( allItems ) && allItems !== false) {
 		// allItems is null (items from getEntityRecords not loaded yet)
 		return (
-			<Fragment >
-				<div class="mojblocks-spinner"></div>
-				<div class="mojblocks-spinner-text govuk-body">Loading</div>
-			</Fragment >
+			<div { ...blockProps }>
+				<div className="mojblocks-spinner"></div>
+				<div className="mojblocks-spinner-text govuk-body">Loading</div>
+			</div>
 		);
 	} else {
 		// allItems is array or is false (false = no post type selected)
@@ -306,13 +317,13 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		return (
 			<Fragment >
 				{ inspectorControls }
-				<div className={`mojblocks-featured-item ${className} ${itemPreviewClass}`}>
+				<div { ...blockProps } className={ `${ blockProps.className } mojblocks-featured-item ${ itemPreviewClass }`.trim() }>
 					<div className="govuk-width-container govuk-!-margin-0">
 						<InnerBlocks
 							template={ templatefeaturedItemBlock }
 							templateLock="all"
 						/>
-						<div class="mojblocks-featured-item__item">
+						<div className="mojblocks-featured-item__item">
 							<div className={ `mojblocks-featured-item__image ${itemImageExists && itemImage ? "" : "mojblocks-featured-item__image--none"}`} style={itemBackgroundImageStyle}>
 							</div>
 							<div className={ `mojblocks-featured-item__text ${featuredItemHasBar ? "" : "mojblocks-featured-item__text--no-bar"}`}>
