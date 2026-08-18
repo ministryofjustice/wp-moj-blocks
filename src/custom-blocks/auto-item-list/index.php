@@ -17,7 +17,21 @@ function render_callback_auto_item_list_block($attributes)
     $attribute_box_hasDate = $attributes['listHasDate'] ?? true;
     $attribute_box_hasSummary = $attributes['listHasSummary'] ?? false;
     $attribute_box_emptyText = $attributes['listEmptyText'] ?? 'No items to display.';
-    $attribute_box_className = $attributes['listClassName'] ?? '';
+
+    // Wrapper attributes.
+    //
+    // get_block_wrapper_attributes() is the PHP counterpart to useBlockProps()
+    // in edit(). It emits the generated wp-block-mojblocks-auto-item-list class,
+    // any custom classes the user set (WordPress persists those in `className`),
+    // and anything block supports contribute — so this stays correct as supports
+    // are added, without duplicating the logic here.
+    //
+    // The legacy listClassName attribute is deliberately not read: custom
+    // classes have always been saved separately in `className`, so nothing is
+    // lost for lists saved before the apiVersion 3 upgrade.
+    $auto_item_list_wrapper_attributes = get_block_wrapper_attributes(
+        ['class' => 'mojblocks-auto-item-list']
+    );
     $attribute_box_listPostType = $attributes['listItemType'] ?? '';
     $attribute_box_listTaxonomy = $attributes['listTaxonomy'] ?? '';
     $attribute_box_listTaxonomyOptions = $attributes['listTaxonomyOptions'] ?? [];
@@ -166,7 +180,7 @@ function render_callback_auto_item_list_block($attributes)
             }
     ?>
 
-    <div class="<?php _e(esc_html($attribute_box_className)); ?> mojblocks-auto-item-list">
+    <div <?php echo $auto_item_list_wrapper_attributes; ?>>
         <?php
             $i = 0;
             if ($number_of_items) {
