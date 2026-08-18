@@ -317,8 +317,18 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		return (
 			<Fragment >
 				{ inspectorControls }
-				<div { ...blockProps } className={ `${ blockProps.className } mojblocks-featured-item ${ itemPreviewClass }`.trim() }>
-					<div className="govuk-width-container govuk-!-margin-0">
+				<div { ...blockProps } className={ `${ blockProps.className } mojblocks-featured-item`.trim() }>
+					{ /*
+					  * itemPreviewClass (mojblocks-featured-item--empty) goes on this
+					  * inner element rather than the block wrapper above.
+					  *
+					  * Its "Nothing selected" banner is drawn with an ::after
+					  * pseudo-element. Under apiVersion 3 the wrapper above is the
+					  * block's own element, and Gutenberg draws the selection outline
+					  * with ::after and inset: 0 on it — so the two rules merge and the
+					  * banner stretches to fill the whole block when selected.
+					  */ }
+					<div className={ `govuk-width-container govuk-!-margin-0 ${ itemPreviewClass }`.trim() }>
 						<InnerBlocks
 							template={ templatefeaturedItemBlock }
 							templateLock="all"
