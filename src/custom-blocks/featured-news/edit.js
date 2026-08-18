@@ -8,13 +8,13 @@ import { __experimentalGetSettings } from '@wordpress/date';
 import {
 	InnerBlocks,
 	InspectorControls,
-	__experimentalImageSizeControl as ImageSizeControl,
+	useBlockProps,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
- 
-const { Fragment } = wp.element;
+import { Fragment } from '@wordpress/element';
+
 const d = new Date();
 const templateFeaturedNewsBlock = [
 	[ 'core/heading', { placeholder: 'Add featured news section title' } ]
@@ -25,8 +25,17 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 	const {
 		featuredNewsID,
 		featuredNewsHasDate,
-		className,
 	} = attributes;
+
+	// apiVersion 3: the wrapper element must carry the props returned by
+	// useBlockProps. It supplies the generated block class and the user's custom
+	// classes, which used to be applied by reading the className attribute here.
+	//
+	// Called bare rather than with a className because edit() returns early
+	// while news items are loading, and that branch renders a spinner rather
+	// than the featured news markup. The block classes are merged in on the main
+	// branch below, where featuredNewsID is also used to build a modifier class.
+	const blockProps = useBlockProps();
 
 	const {
 		latestNews,
@@ -149,24 +158,37 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 	);
 	if (!Array.isArray( latestNews ) || !Array.isArray(newsList)) {
 		return (
-			<Fragment >
-				<div class="mojblocks-spinner"></div>
-				<div class="mojblocks-spinner-text govuk-body">Loading</div>
-			</Fragment >
+			<div { ...blockProps }>
+				<div className="mojblocks-spinner"></div>
+				<div className="mojblocks-spinner-text govuk-body">Loading</div>
+			</div>
 		);
 	} else {
 		return (
 			<Fragment >
 				{ inspectorControls }
-				<div className={`mojblocks-featured-news mojblocks-featured-news--${featuredNewsID} ${className}`}>
-					<div className="govuk-width-container">
+				<div { ...blockProps } className={ `${ blockProps.className } mojblocks-featured-news`.trim() }>
+					{ /*
+					  * The mojblocks-featured-news--{id} modifier goes on this inner
+					  * element rather than the block wrapper above.
+					  *
+					  * Its --0 variant draws a "No article selected" banner with an
+					  * ::after pseudo-element. Under apiVersion 3 the wrapper above is
+					  * the block's own element, and Gutenberg draws the selection
+					  * outline with ::after and inset: 0 on it — so the two rules merge
+					  * and the banner stretches to fill the whole block when selected.
+					  *
+					  * The --0 styles reach the image via a descendant selector, which
+					  * still resolves from here.
+					  */ }
+					<div className={ `govuk-width-container mojblocks-featured-news--${ featuredNewsID }` }>
 						<InnerBlocks
 							template={ templateFeaturedNewsBlock }
 							templateLock="all"
 						/>
 						<div className={`govuk-grid-row ${featuredNewsHasDate ? '' : 'mojblocks-featured-news-hide-date'} ${(featuredNewsID!="0" && !newsList[featuredNewsID].image) ? 'mojblocks-featured-news--no-image' : ''} `}>
-							<div class="mojblocks-featured-news__item">
-								<div className="mojblocks-featured-news__image" styles={`background:url('${newsList[featuredNewsID].image}')`}>
+							<div className="mojblocks-featured-news__item">
+								<div className="mojblocks-featured-news__image" style={ { background: `url('${ newsList[featuredNewsID].image }')` } }>
 									<img src={newsList[featuredNewsID].image} alt="Feature image for news article" />
 								</div>
 								<div className="mojblocks-featured-news__text">
