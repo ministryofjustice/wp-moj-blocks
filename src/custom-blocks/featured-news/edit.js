@@ -189,21 +189,18 @@ export default function FeaturedNewsEdit({ attributes, setAttributes} ) {
 						<div className={`govuk-grid-row ${featuredNewsHasDate ? '' : 'mojblocks-featured-news-hide-date'} ${(featuredNewsID!="0" && !newsList[featuredNewsID].image) ? 'mojblocks-featured-news--no-image' : ''} `}>
 							<div className="mojblocks-featured-news__item">
 								{ /*
-								  * Only set the background when there is an image. With no
-								  * article selected the URL is empty, and an inline
-								  * background would override the placeholder gradient that
-								  * .mojblocks-featured-news--0 applies to this element.
+								  * No inline background here on purpose. The editor shows the
+								  * image with the <img> below — editor.scss styles
+								  * .mojblocks-featured-news__image img specifically — while
+								  * the frontend uses a CSS background instead and renders no
+								  * <img> at all.
 								  *
-								  * backgroundImage rather than the background shorthand, to
-								  * match the frontend and to avoid resetting other
-								  * background properties.
+								  * Adding a background here would show the image twice, and
+								  * would also cover the placeholder gradient that
+								  * .mojblocks-featured-news--0 applies to this element when
+								  * no article is selected (the <img> is hidden in that state).
 								  */ }
-								<div
-									className="mojblocks-featured-news__image"
-									style={ newsList[featuredNewsID].image
-										? { backgroundImage: `url('${ newsList[featuredNewsID].image }')` }
-										: undefined }
-								>
+								<div className="mojblocks-featured-news__image">
 									<img src={newsList[featuredNewsID].image} alt="Feature image for news article" />
 								</div>
 								<div className="mojblocks-featured-news__text">
