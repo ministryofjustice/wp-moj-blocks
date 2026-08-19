@@ -14,8 +14,19 @@
 function render_callback_laa_chatbot_block($attributes, $content)
 {
 
-    // Parse attributes found in index.js
-    $attribute_chatbot_className = $attributes['chatbotClassName'] ?? '';
+    // Wrapper attributes.
+    //
+    // get_block_wrapper_attributes() is the PHP counterpart to useBlockProps()
+    // in edit(). It emits the generated wp-block-mojblocks-laa-chatbot class and
+    // the user's custom classes, which WordPress persists in `className`.
+    //
+    // No extra class is passed: the editor's mojblocks-laa-chatbot marker has no
+    // styles and has never been on the frontend wrapper.
+    //
+    // The legacy chatbotClassName attribute is deliberately not read: custom
+    // classes have always been saved separately in `className`, so nothing is
+    // lost for chatbots saved before the apiVersion 3 upgrade.
+    $chatbot_wrapper_attributes = get_block_wrapper_attributes();
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -27,7 +38,7 @@ function render_callback_laa_chatbot_block($attributes, $content)
 
     ?>
 
-    <div class = "<?php echo $attribute_chatbot_className ?>" id="<?php echo $id_code; ?>"></div>
+    <div <?php echo $chatbot_wrapper_attributes; ?> id="<?php echo esc_attr($id_code); ?>"></div>
 
     <script type="text/javascript">
         window.__8x8Chat = {

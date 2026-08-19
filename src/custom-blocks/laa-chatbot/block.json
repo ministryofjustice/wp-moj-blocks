@@ -1,0 +1,16 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/laa-chatbot",
+	"title": "LAA Chatbot",
+	"description": "Embeds the LAA 8x8 web chat button",
+	"category": "mojblocks",
+	"icon": "format-chat",
+	"textdomain": "mojblocks",
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"chatbotClassName": {
+			"type": "string"
+		}
+	}
+}
