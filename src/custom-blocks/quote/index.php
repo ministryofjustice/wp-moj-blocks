@@ -15,11 +15,23 @@ function render_callback_quote_block($attributes, $content)
 {
 
     // Parse attributes found in index.js
-    $attribute_quote_className = $attributes['quoteClassName'] ?? '';
     $attribute_quote_imgURL = $attributes['quoteImgURL'] ?? '';
     $attribute_quote_quoteContent = $attributes['quoteContent'] ?? '';
     $attribute_quote_quoteName = $attributes['quoteName'] ?? '';
     $attribute_quote_quoteAlignment = $attributes['quoteAlignment'] ?? '';
+
+    // Wrapper attributes.
+    //
+    // get_block_wrapper_attributes() is the PHP counterpart to useBlockProps()
+    // in edit(). It emits the generated wp-block-mojblocks-quote class and the
+    // user's custom classes, which WordPress persists in `className`.
+    //
+    // The legacy quoteClassName attribute is deliberately not read: custom
+    // classes have always been saved separately in `className`, so nothing is
+    // lost for quotes saved before the apiVersion 3 upgrade.
+    $quote_wrapper_attributes = get_block_wrapper_attributes(
+        ['class' => 'mojblocks-quote']
+    );
 
     // Add data-src only if image has been added
     $data_src = !empty($attribute_quote_imgURL) ? 'data-src="' .
@@ -41,7 +53,7 @@ function render_callback_quote_block($attributes, $content)
 
     ?>
 
-    <div class="<?php _e(esc_html($attribute_quote_className)) ; ?> mojblocks-quote" <?php _e($data_src); ?> >
+    <div <?php echo $quote_wrapper_attributes; ?> <?php _e($data_src); ?> >
         <div <?php _e($img_class); ?> >
         </div>
         <div class="govuk-width-container">

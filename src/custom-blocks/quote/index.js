@@ -6,43 +6,17 @@
 import { __ } from '@wordpress/i18n';
 import { registerBlockType, unregisterBlockType } from '@wordpress/blocks';
 import { Fragment } from '@wordpress/element';
-import { RichText, MediaUpload, BlockControls, AlignmentToolbar } from '@wordpress/block-editor';
+import { RichText, MediaUpload, BlockControls, AlignmentToolbar, useBlockProps } from '@wordpress/block-editor';
 import { Button, Dashicon } from '@wordpress/components';
 import domReady from '@wordpress/dom-ready';
 import Icons from '../../../assets/svg/index';
 
+import metadata from './block.json';
+
 const ALLOWED_MEDIA_TYPES = ['image'];
 
-registerBlockType('mojblocks/quote', {
-    title: __('Quote', 'mojblocks'),
-    description: __('A user quote block with an optional image background, quote text and name', 'mojblocks'),
-    category: 'mojblocks',
-    icon: 'format-quote',
-    keywords: [
-        __('quote', 'mojblocks'),
-        __('testimonial', 'mojblocks'),
-        __('moj', 'mojblocks'),
-    ],
-    attributes: {
-        quoteImgURL: {
-            type: 'string'
-        },
-        quoteContent: {
-            type: 'string'
-        },
-        quoteName: {
-            type: 'string'
-        },
-        quoteAlignment: {
-            type: 'string',
-        },
-        quoteImgId: {
-            type: 'number',
-        },
-        quoteClassName: {
-            type: 'string'
-        }
-    },
+registerBlockType(metadata.name, {
+
     edit: props => {
 
         const {
@@ -53,12 +27,20 @@ registerBlockType('mojblocks/quote', {
                 quoteName,
                 quoteAlignment,
                 quoteImgId,
-            },
-            className
+            }
         } = props;
 
-        // Set className attribute for PHP frontend to use
-        setAttributes({ quoteClassName: className });
+        // apiVersion 3: the wrapper element must carry the props returned by
+        // useBlockProps. className is no longer passed to edit() as a prop.
+        //
+        // Note this moves the generated block class onto the outer wrapper. It
+        // was previously applied to the inner image div, which meant the editor
+        // and the frontend put it on different elements. Nothing targets
+        // .wp-block-mojblocks-quote in CSS, so this only makes the two agree.
+        const blockProps = useBlockProps({
+            className: 'mojblocks-quote',
+            'data-src': quoteImgURL,
+        });
 
         const onRemoveImage = () => {
             setAttributes({
@@ -67,19 +49,20 @@ registerBlockType('mojblocks/quote', {
             });
         };
 
-        return ([
-            // Show the alignment toolbar on focus
-            <BlockControls key="controls">
+        return (
+            <Fragment>
+            {/* Show the alignment toolbar on focus */}
+            <BlockControls>
                 <AlignmentToolbar
                     value={ quoteAlignment }
                     onChange={ (value) =>
                         setAttributes({ quoteAlignment: value })
                     }
                 />
-            </BlockControls>,
-            <div className={`mojblocks-quote`} data-src={ quoteImgURL }>
+            </BlockControls>
+            <div { ...blockProps }>
                 <div
-                    className={`${className} mojblocks-quote__image ` +
+                    className={`mojblocks-quote__image ` +
                     (quoteImgId
                             ? 'mojblocks-quote__image-selected'
                             : ''
@@ -165,7 +148,8 @@ registerBlockType('mojblocks/quote', {
                     </div>
                 </div>
             </div>
-        ]);
+            </Fragment>
+        );
     },
     // return null as frontend output is done via PHP
     save: () => null

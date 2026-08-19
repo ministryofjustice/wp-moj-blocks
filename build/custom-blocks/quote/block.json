@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/quote",
+	"title": "Quote",
+	"description": "A user quote block with an optional image background, quote text and name",
+	"category": "mojblocks",
+	"icon": "format-quote",
+	"textdomain": "mojblocks",
+	"keywords": ["quote", "testimonial", "moj"],
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"quoteImgURL": {
+			"type": "string"
+		},
+		"quoteContent": {
+			"type": "string"
+		},
+		"quoteName": {
+			"type": "string"
+		},
+		"quoteAlignment": {
+			"type": "string"
+		},
+		"quoteImgId": {
+			"type": "number"
+		},
+		"quoteClassName": {
+			"type": "string"
+		}
+	}
+}
