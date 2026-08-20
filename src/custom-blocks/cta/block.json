@@ -1,0 +1,44 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/cta",
+	"title": "Call to Action",
+	"description": "A stylised call to action displaying a title, text and cta button",
+	"category": "mojblocks",
+	"icon": "megaphone",
+	"textdomain": "mojblocks",
+	"keywords": ["cta", "Call to Action", "banner"],
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"ctaTitle": {
+			"type": "string"
+		},
+		"ctaText": {
+			"type": "string"
+		},
+		"buttonLabel": {
+			"type": "string"
+		},
+		"buttonLink": {
+			"type": "string"
+		},
+		"linkStyle": {
+			"type": "string"
+		},
+		"flushBottom": {
+			"type": "boolean"
+		},
+		"ctaClassName": {
+			"type": "string"
+		}
+	},
+	"example": {
+		"attributes": {
+			"ctaTitle": "Add a Call to Action banner to your site",
+			"ctaText": "Call To Action text",
+			"buttonLabel": "Click me now",
+			"buttonLink": "https://intranet.justice.gov.uk/",
+			"flushBottom": false
+		}
+	}
+}
