@@ -1,48 +1,46 @@
-const { __ } = wp.i18n;
-const { registerBlockType, registerBlockStyle } = wp.blocks;
-const { Fragment } = wp.element;
-const { RichText, MediaUpload, InspectorControls, URLInputButton } = wp.blockEditor;
+/**
+ * Staggered Box
+ *
+ * Block metadata — name, title, icon, category, keywords, attributes — lives in
+ * block.json and is registered server-side from mojblocks.php. This file only
+ * supplies the editor behaviour and the block styles.
+ *
+ * The staggeredBoxClassName attribute in block.json is legacy: older boxes
+ * persisted the editor's generated className there so the PHP could read it
+ * back. apiVersion 3 no longer passes className to edit(), and the render
+ * callback now uses get_block_wrapper_attributes(), so nothing reads or writes
+ * it. It stays registered only so it isn't stripped from content saved before
+ * that change.
+ */
+import { __ } from '@wordpress/i18n';
+import { registerBlockType, registerBlockStyle } from '@wordpress/blocks';
+import { Fragment } from '@wordpress/element';
+import {
+  RichText,
+  MediaUpload,
+  InspectorControls,
+  URLInputButton,
+  useBlockProps,
+} from '@wordpress/block-editor';
+
+import metadata from './block.json';
+
 const ALLOWED_MEDIA_TYPES = ['image'];
 
-registerBlockType("mojblocks/staggered-box", {
-  title: __("Staggered Box", "mojblocks"),
-  description: __('Display content on top of a staggered background image'),
-  category: "mojblocks",
-  icon: "admin-page",
-  keywords: [__('staggered box'), __('photo block')],
-
-  attributes: {
-    staggeredBoxTitle: {
-      type: "string"
-    },
-    staggeredBoxContent: {
-      type: "string"
-    },
-    staggeredBoxButtonText: {
-      type: "string"
-    },
-    staggeredBoxButtonLink: {
-      type: 'string'
-    },
-    staggeredBoxImageURL: {
-      type: "string"
-    },
-    staggeredBoxImageAltText: {
-      type: "string"
-    },
-    staggeredBoxClassName: {
-      type: "string"
-    }
-  },
+registerBlockType(metadata.name, {
 
   edit: props => {
     const {
       attributes: { staggeredBoxContent, staggeredBoxImageURL, staggeredBoxButtonText, staggeredBoxButtonLink, staggeredBoxTitle, staggeredBoxImageAltText },
-        className,
         setAttributes
     } = props
 
-    setAttributes({ staggeredBoxClassName: className });
+    // apiVersion 3: the wrapper element must carry the props returned by
+    // useBlockProps. className is no longer passed to edit() as a prop.
+    //
+    // This is also where the is-style-* class from the registered block styles
+    // lands, which style.scss relies on — see .is-style-staggered-box-image-right.
+    const blockProps = useBlockProps({ className: 'mojblocks-staggered-box' });
 
     const onChangeStaggeredBoxTitle = newStaggeredBoxTitle => {
       setAttributes({ staggeredBoxTitle: newStaggeredBoxTitle})
@@ -81,7 +79,7 @@ registerBlockType("mojblocks/staggered-box", {
           />
         </InspectorControls>
 
-        <div className={`${className} mojblocks-staggered-box`}>
+        <div { ...blockProps }>
           <div className="govuk-width-container">
             <div className="govuk-grid-row">
 
