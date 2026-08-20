@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/route-planner",
+	"title": "Route planner",
+	"description": "Opens a new tab with Google directions to the destination.",
+	"category": "mojblocks",
+	"icon": "car",
+	"textdomain": "mojblocks",
+	"keywords": ["postcode", "map", "drive"],
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"routeDestination": {
+			"type": "string",
+			"default": ""
+		},
+		"routeMethod": {
+			"type": "string",
+			"default": ""
+		},
+		"className": {
+			"type": "string"
+		}
+	}
+}
