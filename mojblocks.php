@@ -386,21 +386,19 @@ function mojblocks_register_blocks()
     );
     if (post_type_exists("news")) {
         register_block_type(
-            'mojblocks/featured-news',
+            /**
+             * Registered from block.json metadata rather than an inline array,
+             * so attributes are declared in one place instead of being
+             * duplicated here and in the JS.
+             *
+             * The path points at build/ rather than src/ because .distignore
+             * excludes /src — webpack.mix.js copies block.json files across.
+             * Only render_callback is passed here; everything else, including
+             * the editorScript handle, comes from block.json.
+             */
+            plugin_dir_path(__FILE__) . 'build/custom-blocks/featured-news',
             [
-                'editor_script' => 'mojblocks-editor-script',
-                'render_callback' => 'render_callback_featured_news_block',
-                'attributes' => [
-                    'featuredNewsHasDate' => [
-                        'type' => 'boolean'
-                    ],
-                    'featuredNewsID' => [
-                        'type' => 'string'
-                    ],
-                    'featuredNewsClassName' => [
-                        'type' => 'string'
-                    ]
-                ]
+                'render_callback' => 'render_callback_featured_news_block'
             ]
         );
     }
