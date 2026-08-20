@@ -16,10 +16,12 @@ Text Domain: mojblocks
 // which needs them. Verify the block-styles preview panel still renders styled
 // before removing.
 
-.edit-post-visual-editor,
-.block-editor-block-styles,
-.block-editor-inserter__menu-help-panel,
-.block-editor-iframe__body.editor-styles-wrapper
+:where(
+    .edit-post-visual-editor,
+    .block-editor-block-styles,
+    .block-editor-inserter__menu-help-panel,
+    .block-editor-iframe__body.editor-styles-wrapper
+)
 {
 
     @import 'node_modules/govuk-frontend/dist/govuk/base';

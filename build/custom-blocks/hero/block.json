@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/hero",
+	"title": "Hero",
+	"description": "Full width hero banner with title and text",
+	"category": "mojblocks",
+	"icon": "schedule",
+	"textdomain": "mojblocks",
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"backgroundImage": {
+			"type": "string"
+		},
+		"heroImagePosition": {
+			"type": "string"
+		},
+		"heroTitle": {
+			"type": "string"
+		},
+		"heroText": {
+			"type": "string"
+		},
+		"heroClassName": {
+			"type": "string"
+		}
+	}
+}

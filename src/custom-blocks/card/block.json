@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/card",
+	"title": "Card",
+	"description": "Add a card pattern to a default page",
+	"category": "mojblocks",
+	"icon": "table-row-after",
+	"textdomain": "mojblocks",
+	"keywords": ["card", "navigation"],
+	"editorScript": "mojblocks-editor-script",
+	"supports": {
+		"align": ["wide", "full"],
+		"html": false
+	},
+	"attributes": {
+		"cardTitle": {
+			"type": "string"
+		},
+		"cardExcerpt": {
+			"type": "string"
+		},
+		"cardImageURL": {
+			"type": "string"
+		},
+		"cardImageAlt": {
+			"type": "string"
+		},
+		"cardImageId": {
+			"type": "number"
+		},
+		"cardImagePosition": {
+			"type": "string"
+		},
+		"cardImageShape": {
+			"type": "string"
+		},
+		"className": {
+			"type": "string"
+		}
+	}
+}
