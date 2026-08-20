@@ -19,8 +19,8 @@ mix_.webpackConfig({
     },
     plugins: [
         // Copy every block.json into build/, preserving the block folder name,
-        // so src/custom-blocks/auto-item-list/block.json lands at
-        // build/custom-blocks/auto-item-list/block.json.
+        // so src/custom-blocks/cta/block.json lands at
+        // build/custom-blocks/cta/block.json.
         //
         // register_block_type() in mojblocks.php is pointed at the build/ copy
         // rather than at src/ because .distignore excludes /src, so src/ is
