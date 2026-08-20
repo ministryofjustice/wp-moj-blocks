@@ -1,51 +1,25 @@
 /**
  * CTA
  * A stylised call to action displaying a title, text and cta button
+ *
+ * Block metadata — name, title, icon, category, keywords, attributes, example —
+ * lives in block.json and is registered server-side from mojblocks.php. This
+ * file only supplies the editor behaviour.
+ *
+ * Note the ctaClassName attribute in block.json is legacy: older CTAs persisted
+ * the editor's generated className there so the PHP could read it back.
+ * apiVersion 3 no longer passes className to edit(), and the render callback now
+ * uses get_block_wrapper_attributes(), so nothing reads or writes it. It stays
+ * registered only so it isn't stripped from content saved before that change.
  */
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, URLInputButton } from '@wordpress/block-editor';
+import { RichText, URLInputButton, InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { PanelBody, PanelRow, ToggleControl, RadioControl } from '@wordpress/components';
 
-const { InspectorControls } = wp.blockEditor;
-const { PanelBody, PanelRow, ToggleControl, RadioControl } = wp.components;
+import metadata from './block.json';
 
-registerBlockType('mojblocks/cta', {
-    title: __('Call to Action', 'mojblocks'),
-    icon: 'megaphone',
-    category: 'mojblocks',
-    keywords: [ __( 'cta' ), __( 'Call to Action' ), __( 'banner' ) ],
-    example: {
-        attributes: {
-            ctaTitle: 'Add a Call to Action banner to your site',
-            ctaText: 'Call To Action text',
-            buttonLabel: 'Click me now',
-            buttonLink: 'https://intranet.justice.gov.uk/',
-            flushBottom: false
-        },
-    },
-    attributes: {
-        ctaTitle: {
-            type: 'string'
-        },
-        ctaText: {
-            type: 'string'
-        },
-        buttonLabel: {
-            type: 'string'
-        },
-        buttonLink: {
-            type: 'string'
-        },
-        linkStyle: {
-            type: 'string'
-        },
-        flushBottom: {
-            type: 'boolean'
-        },
-        ctaClassName: {
-            type: 'string'
-        }
-    },
+registerBlockType(metadata.name, {
 
     edit: props => {
         const {
@@ -57,12 +31,10 @@ registerBlockType('mojblocks/cta', {
                 buttonLink,
                 buttonLabel,
                 flushBottom
-            },
-            className
+            }
         } = props;
 
-        // Set className attribute for PHP frontend to use
-        setAttributes({ ctaClassName: className });
+        const blockProps = useBlockProps({ className: 'mojblocks-cta' });
 
         // Grab newCtaTitle, set the value of ctaTitle to newCtaTitle.
         const onChangeCtaTitle = newCtaTitle => {
@@ -90,7 +62,7 @@ registerBlockType('mojblocks/cta', {
         };
 
         return (
-            <div className={`${className}  mojblocks-cta`}>
+            <div { ...blockProps }>
                 <InspectorControls>
                     <PanelBody
                             title="Bottom Margin"
@@ -133,7 +105,7 @@ registerBlockType('mojblocks/cta', {
                 </InspectorControls>
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
-                        <div class="govuk-grid-column-three-quarters">
+                        <div className="govuk-grid-column-three-quarters">
                             <div className="mojblocks-cta__heading-container">
                                 <h2 className="mojblocks-cta__heading">
                                 <span role="text">

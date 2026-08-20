@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/separator",
+	"title": "Separator",
+	"description": "A section break",
+	"category": "mojblocks",
+	"icon": "minus",
+	"textdomain": "mojblocks",
+	"keywords": ["separator", "section", "break", "moj"],
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"separatorBreakSize": {
+			"type": "string",
+			"default": "xl"
+		},
+		"separatorThickness": {
+			"type": "number",
+			"default": 1
+		},
+		"separatorWidth": {
+			"type": "string",
+			"default": "0"
+		},
+		"separatorColour": {
+			"type": "string",
+			"default": "rgb(177, 180, 182)"
+		},
+		"className": {
+			"type": "string"
+		}
+	}
+}
