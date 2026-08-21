@@ -2,8 +2,8 @@
  * WordPress dependencies
  */
 import { __ } from "@wordpress/i18n";
-import { Fragment, useState } from "@wordpress/element";
-import { RichText, InspectorControls, InnerBlocks, MediaUpload } from "@wordpress/block-editor";
+import { Fragment } from "@wordpress/element";
+import { RichText, InspectorControls, InnerBlocks, MediaUpload, useBlockProps } from "@wordpress/block-editor";
 import { PanelBody, SelectControl, Button, Dashicon } from '@wordpress/components';
 
 /**
@@ -20,7 +20,6 @@ export default function CardBlockEdit( props ) {
 
         const {
             setAttributes,
-            className,
         } = props;
 
         const {
@@ -31,6 +30,13 @@ export default function CardBlockEdit( props ) {
             cardImageShape,
             cardImagePosition,
         } = props.attributes;
+
+        // apiVersion 3: the wrapper element must carry the props returned by
+        // useBlockProps. className is no longer passed to edit() as a prop.
+        const blockProps = useBlockProps({
+            className: 'mojblocks-card mojblocks-card-image',
+            'data-src': cardImageURL,
+        });
 
         const onRemoveImage = () => {
             setAttributes({
@@ -46,10 +52,8 @@ export default function CardBlockEdit( props ) {
             { label: "16:9 (widescreen)", value: 'widescreen' },
             { label: "21:9 (letterbox)", value: 'letterbox' },
         ]
-        const setShape = useState( 'square' );
         const onChangeImageShape = newImageShape => {
             setAttributes({ cardImageShape: newImageShape });
-            setShape( newImageShape );
         };
 
         const positionList = [
@@ -63,10 +67,8 @@ export default function CardBlockEdit( props ) {
             { label: "Bottom left", value: 'bottom left' },
             { label: "Bottom right", value: 'bottom right' },
         ]
-        const setPosition = useState( 'center' );
         const onChangeImagePosition = newImagePosition => {
             setAttributes({ cardImagePosition: newImagePosition });
-            setPosition( newImagePosition );
         };
 
         const inspectorControls = (
@@ -94,9 +96,9 @@ export default function CardBlockEdit( props ) {
         );
 
         return (
-            <div className={`${className} mojblocks-card mojblocks-card-image`} data-src={cardImageURL}>
+            <div { ...blockProps }>
             { inspectorControls }
-            <div className={`${className} mojblocks-card__image mojblocks-card__image--shape-${cardImageShape}` + ' ' + (cardImageId ? 'mojblocks-card__image-selected': '')}
+            <div className={`mojblocks-card__image mojblocks-card__image--shape-${cardImageShape}` + ' ' + (cardImageId ? 'mojblocks-card__image-selected': '')}
                 style={{
                     backgroundImage: `url(${cardImageURL})`,
                     backgroundPosition: cardImagePosition,

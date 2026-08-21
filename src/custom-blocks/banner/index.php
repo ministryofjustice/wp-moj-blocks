@@ -18,7 +18,19 @@ function render_callback_banner_block($attributes, $content)
     $attribute_banner_title = $attributes['bannerTitle'] ?? '';
     $attribute_button_link = $attributes['buttonLink'] ?? '';
     $attribute_button_label = $attributes['buttonLabel'] ?? '';
-    $attribute_banner_className = $attributes['bannerClassName'] ?? '';
+
+    // Wrapper attributes.
+    //
+    // get_block_wrapper_attributes() is the PHP counterpart to useBlockProps()
+    // in edit(). It emits the generated wp-block-mojblocks-banner class, any
+    // custom classes the user set (WordPress persists those in `className`),
+    // and anything block supports contribute — so this stays correct as
+    // supports are added, without duplicating the logic here.
+    //
+    // The legacy bannerClassName attribute is deliberately not read: custom
+    // classes have always been saved separately in `className`, so nothing is
+    // lost for banners saved before the apiVersion 3 upgrade.
+    $banner_wrapper_attributes = get_block_wrapper_attributes(['class' => 'mojblocks-banner']);
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -27,7 +39,7 @@ function render_callback_banner_block($attributes, $content)
 
     ?>
 
-    <div class="<?php _e(esc_html($attribute_banner_className)) ; ?> mojblocks-banner">
+    <div <?php echo $banner_wrapper_attributes; ?>>
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-two-thirds">
