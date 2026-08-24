@@ -27,6 +27,38 @@ function render_callback_card_block($attributes, $content)
 		$attribute_card_className .= " mojblocks-corner-$attribute_card_corner_roundyness";
 	}
 
+	/**
+	 * The wrapper class below is built by hand, unlike the other apiVersion 3
+	 * blocks in this plugin which use get_block_wrapper_attributes(). That is
+	 * deliberate — card has two problems the others do not.
+	 *
+	 * 1. cornerRoundyness is a custom attribute added by the
+	 *    shared-controls/rounded-corners filter, so core knows nothing about it
+	 *    and get_block_wrapper_attributes() will not emit mojblocks-corner-*.
+	 *    It has to be passed in explicitly via the 'class' key.
+	 *
+	 * 2. block.json declares supports.align (wide/full), but this callback
+	 *    ignores alignment entirely — it reads only className, and alignment is
+	 *    stored in a separate `align` attribute. So alignment set in the editor
+	 *    is currently NOT rendered on the frontend. Switching to
+	 *    get_block_wrapper_attributes() makes core start emitting alignwide and
+	 *    alignfull, which means any page where an editor set a card to wide or
+	 *    full will change layout on deploy.
+	 *
+	 * Before making that switch, find out how much content is affected:
+	 *
+	 *   SELECT COUNT(*) FROM wp_posts
+	 *   WHERE post_content LIKE '%wp:mojblocks/card%'
+	 *     AND post_content LIKE '%"align"%'
+	 *     AND post_status = 'publish';
+	 *
+	 * Run it per site — this plugin runs on multisite. Then the swap is:
+	 *
+	 *   echo get_block_wrapper_attributes([
+	 *       'class' => trim("mojblocks-card $corner_class"),
+	 *   ]);
+	 */
+
 	// Turn on buffering so we can collect all the html markup below and load it via the return
 	// This is an alternative method to using sprintf(). By using buffering you can write your
 	// code below as you would in any other PHP file rather then having to use the sprintf() syntax

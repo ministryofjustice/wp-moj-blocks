@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     3.19.7
+ * Version:     4.0.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Malcolm Butler, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -141,112 +141,41 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/banner',
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/banner',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_banner_block',
-            'attributes' => [
-                'bannerTitle' => [
-                    'type' => 'string'
-                ],
-                'buttonLink' => [
-                    'type' => 'string'
-                ],
-                'buttonLabel' => [
-                    'type' => 'string'
-                ],
-                'bannerClassName' => [
-                    'type' => 'string'
-
-                ]
-            ]
+            'render_callback' => 'render_callback_banner_block'
         ]
     );
 
     register_block_type(
-        'mojblocks/card',
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/card',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_card_block',
-            'attributes' => [
-                'className' => [
-                    'type' => 'string'
-                ],
-                'cardTitle' => [
-                    'type' => 'string'
-                ],
-                'cardExcerpt' => [
-                    'type' => 'string'
-                ],
-                'cardImageURL' => [
-                    'type' => 'string'
-                ],
-                'cardImageId' => [
-                    'type' => 'number'
-                ],
-                'cardImagePosition' => [
-                    'type' => 'string'
-                ],
-                'cardImageShape' => [
-                    'type' => 'string'
-                ]
-            ]
+            'render_callback' => 'render_callback_card_block'
         ]
     );
 
+    /**
+     * CTA is registered from its block.json metadata rather than from an inline
+     * array, so its attributes are declared in exactly one place instead of
+     * being duplicated here and in the JS.
+     *
+     * The path points at build/ rather than src/ because .distignore excludes
+     * /src — webpack.mix.js copies the file across. Only render_callback is
+     * passed here; everything else, including the editorScript handle, comes
+     * from block.json.
+     */
     register_block_type(
-        'mojblocks/cta',
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/cta',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_cta_block',
-            'attributes' => [
-                'ctaTitle' => [
-                    'type' => 'string'
-                ],
-                'ctaText' => [
-                    'type' => 'string'
-                ],
-                'buttonLink' => [
-                    'type' => 'string'
-                ],
-                'buttonLabel' => [
-                    'type' => 'string'
-                ],
-                'ctaFlushBottom' => [
-                    'type' => 'boolean'
-                ],
-                'ctaClassName' => [
-                    'type' => 'string'
-                ]
-            ]
+            'render_callback' => 'render_callback_cta_block'
         ]
     );
 
 
     register_block_type(
-        'mojblocks/hero',
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/hero',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_hero_block',
-            'attributes' => [
-                'backgroundImage' => [
-                    'type' => 'string'
-                ],
-                'heroTitle' => [
-                    'type' => 'string'
-                ],
-                [
-                'heroText' => [
-                    'type' => 'string'
-                ],
-                'heroClassName' => [
-                    'type' => 'string'
-                ],
-				'heroImagePosition' => [
-						'type' => 'string'
-				]
-                ]
-            ]
+            'render_callback' => 'render_callback_hero_block'
         ]
     );
 
@@ -350,22 +279,9 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/reveal',
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/reveal',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_reveal_block',
-            'attributes' => [
-                'revealClassName' => [
-                    'type' => 'string'
-                ],
-                'revealTitle' => [
-                    'type' => 'string'
-                ],
-                'revealContent' => [
-                    'type' => 'string'
-                ]
-
-            ]
+            'render_callback' => 'render_callback_reveal_block'
         ]
     );
 
@@ -387,15 +303,9 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/separator',
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/separator',
         [
-        'editor_script' => 'mojblocks-editor-script',
-        'render_callback' => 'render_callback_separator_block',
-        'attributes' => [
-            'size' => [
-                'type' => 'string'
-            ]
-          ]
+            'render_callback' => 'render_callback_separator_block'
         ]
     );
 
