@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/featured-document",
+	"title": "Featured Document",
+	"description": "Display featured document",
+	"category": "mojblocks",
+	"icon": "id-alt",
+	"textdomain": "mojblocks",
+	"keywords": ["featured document"],
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"featuredDocumentHasDate": {
+			"type": "boolean",
+			"default": true
+		},
+		"featuredDocumentID": {
+			"type": "string",
+			"default": "0"
+		},
+		"className": {
+			"type": "string"
+		}
+	}
+}

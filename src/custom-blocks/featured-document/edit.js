@@ -7,12 +7,13 @@ import { __ } from '@wordpress/i18n';
 import {
 	InnerBlocks,
 	InspectorControls,
+	useBlockProps,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
- 
-const { Fragment } = wp.element;
+import { Fragment } from '@wordpress/element';
+
 const d = new Date();
 const templateFeaturedDocumentBlock = [
 	[ 'core/heading', { placeholder: 'Add featured document section title' } ]
@@ -23,8 +24,17 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 	const {
         featuredDocumentID,
         featuredDocumentHasDate,
-		className,
 	} = attributes;
+
+	// apiVersion 3: the wrapper element must carry the props returned by
+	// useBlockProps. It supplies the generated block class and the user's custom
+	// classes, which used to be applied by reading the className attribute here.
+	//
+	// Called bare rather than with a className because edit() returns early
+	// while documents are loading, and that branch renders a spinner rather than
+	// the featured document markup. The block class is merged in on the main
+	// branch below.
+	const blockProps = useBlockProps();
 
     const {
         allDocuments,
@@ -105,23 +115,23 @@ export default function FeaturedDocumentEdit({ attributes, setAttributes} ) {
 	);
 	if (!Array.isArray( allDocuments ) || !Array.isArray(docList)) {
 		return (
-			<Fragment >
-				<div class="mojblocks-spinner"></div>
-				<div class="mojblocks-spinner-text govuk-body">Loading</div>
-			</Fragment >
+			<div { ...blockProps }>
+				<div className="mojblocks-spinner"></div>
+				<div className="mojblocks-spinner-text govuk-body">Loading</div>
+			</div>
 		);
 	} else {
 		return (
 			<Fragment >
 				{ inspectorControls }
-				<div className={`mojblocks-featured-document ${className}`}>
+				<div { ...blockProps } className={ `${ blockProps.className } mojblocks-featured-document`.trim() }>
 					<div className="govuk-width-container">
 						<InnerBlocks
 							template={ templateFeaturedDocumentBlock }
 							templateLock="all"
 						/>
 						<div className={`govuk-grid-row ${featuredDocumentHasDate ? '' : 'mojblocks-featured-document-hide-date'} `}>
-							<div class="mojblocks-featured-document__item">
+							<div className="mojblocks-featured-document__item">
 								<div className="mojblocks-featured-document__text">
 									<div className="mojblocks-featured-document__headline" >
 										<a href="#" className="govuk-link govuk-!-font-size-24 govuk-!-font-weight-bold mojblocks-featured-document__headline-link" >
