@@ -1,0 +1,22 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/accordion-section",
+	"title": "Accordion Section",
+	"description": "A single section within an accordion. Only available inside the Accordion block.",
+	"category": "mojblocks",
+	"textdomain": "mojblocks",
+	"parent": ["mojblocks/accordion"],
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"accordionSectionTitle": {
+			"type": "string"
+		},
+		"accordionSectionTextArea": {
+			"type": "string"
+		},
+		"accordionSectionClassName": {
+			"type": "string"
+		}
+	}
+}

@@ -1,37 +1,40 @@
-const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
-const { RichText } = wp.blockEditor;
-const { InnerBlocks } = wp.blockEditor;
-const { InspectorControls } = wp.blockEditor;
-const { PanelBody, PanelRow, ToggleControl } = wp.components;
-
 /**
  * MOJBLOCKS: Accordion
  *
  * Display content in accordion layout.
+ *
+ * Two blocks are registered from this file — mojblocks/accordion and its child
+ * mojblocks/accordion-section. Their metadata lives in block.json files, which
+ * are registered server-side from mojblocks.php:
+ *
+ *   src/custom-blocks/accordion/block.json
+ *   src/custom-blocks/accordion-section/block.json
+ *
+ * The section's metadata sits in its own folder because webpack.mix.js copies
+ * block.json files with a one-per-folder glob.
+ *
+ * The accordionClassName and accordionSectionClassName attributes are legacy:
+ * older accordions persisted the editor's generated className there so the PHP
+ * could read it back. apiVersion 3 no longer passes className to edit(), and the
+ * render callbacks now use get_block_wrapper_attributes(), so nothing reads or
+ * writes them. They stay registered only so they aren't stripped from content
+ * saved before that change.
  */
-registerBlockType('mojblocks/accordion', {
-    title: __('Accordion', 'mojblocks'),
-    description: __( 'Display content in an accordion component.' ),
-    icon: "list-view",
-    category: 'mojblocks',
-    keywords: [ __( 'accordion' ), __( 'sections' ), __( 'lists' ) ],
-    example: {
-        attributes: {
-            controlLanguageWelsh: false
-        },
-    },
-    attributes: {
-        controlLanguageWelsh: {
-            type: 'boolean'
-        },
-        wideContent: {
-            type: 'boolean'
-        },
-        accordionClassName: {
-            type: 'string'
-        }
-    },
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { Fragment } from '@wordpress/element';
+import {
+    RichText,
+    InnerBlocks,
+    InspectorControls,
+    useBlockProps,
+} from '@wordpress/block-editor';
+import { PanelBody, PanelRow, ToggleControl } from '@wordpress/components';
+
+import metadata from './block.json';
+import sectionMetadata from '../accordion-section/block.json';
+
+registerBlockType(metadata.name, {
 
     edit: props => {
         const {
@@ -39,12 +42,28 @@ registerBlockType('mojblocks/accordion', {
             attributes: {
                 controlLanguageWelsh,
                 wideContent
-            },
-            className
+            }
         } = props;
 
-        // Set className attribute for PHP frontend to use
-        setAttributes({ accordionClassName: className });
+        // apiVersion 3: the wrapper element must carry the props returned by
+        // useBlockProps. className is no longer passed to edit() as a prop.
+        //
+        // Deliberately a separate outer div, with .govuk-accordion kept inside.
+        //
+        // editor.scss draws "Accordion start" and "Accordion end" labels using
+        // :before and :after on .govuk-accordion. Under apiVersion 3 the element
+        // carrying blockProps is the block's own element, and Gutenberg draws
+        // its selection outline with ::after and inset: 0 on that element — so
+        // putting blockProps directly on .govuk-accordion would make the
+        // "Accordion end" label stretch to fill the whole block when selected.
+        //
+        // Keeping them on separate elements also leaves .govuk-accordion holding
+        // its data-module attribute and govuk-frontend styling untouched, and
+        // the mimicry script in edit.js still finds it by class.
+        //
+        // render_callback_accordion_block() emits the same two-element structure
+        // so the editor and the frontend agree.
+        const blockProps = useBlockProps();
 
         // Load allowed blocks on repeater
         const allowedBlocks = [ 'mojblocks/accordion-section' ];
@@ -54,7 +73,8 @@ registerBlockType('mojblocks/accordion', {
             [ 'mojblocks/accordion-section', {} ]
         ];
 
-        return ([
+        return (
+            <Fragment>
             <InspectorControls>
                 <PanelBody
                         title="Language"
@@ -90,14 +110,21 @@ registerBlockType('mojblocks/accordion', {
                         />
                     </PanelRow>
                 </PanelBody>
-            </InspectorControls>,
-            <div className={'govuk-accordion preview-welsh-' + controlLanguageWelsh + ' wide-content-' + wideContent + ' ' + className} data-module="govuk-accordion" id="accordion-default" key="accordion-block">
-                <InnerBlocks
-                    template={ templates }
-                    allowedBlocks={ allowedBlocks }
-                />
+            </InspectorControls>
+            <div { ...blockProps }>
+                <div
+                    className={'govuk-accordion preview-welsh-' + controlLanguageWelsh + ' wide-content-' + wideContent}
+                    data-module="govuk-accordion"
+                    id="accordion-default"
+                >
+                    <InnerBlocks
+                        template={ templates }
+                        allowedBlocks={ allowedBlocks }
+                    />
+                </div>
             </div>
-        ])
+            </Fragment>
+        )
       },
 
     // When using InnerBlocks with dynamic blocks, you need to return the content.
@@ -111,21 +138,7 @@ registerBlockType('mojblocks/accordion', {
  *
  * Inner-block. Displayed only in the parent accordion block.
  */
-registerBlockType("mojblocks/accordion-section", {
-    title: __("Accordion Section", "mojblocks"),
-    category: "mojblocks",
-    parent: [ 'mojblocks/accordion' ],
-    attributes: {
-        accordionSectionTitle: {
-            type: "string"
-        },
-        accordionSectionTextArea: {
-            type: "string"
-        },
-        accordionSectionClassName: {
-            type: "string"
-        }
-    },
+registerBlockType(sectionMetadata.name, {
 
     edit: props => {
 
@@ -134,12 +147,17 @@ registerBlockType("mojblocks/accordion-section", {
                 accordionSectionTitle,
                 accordionSectionTextArea
             },
-            className,
             setAttributes
         } = props
 
-        // Set className attribute for PHP frontend to use
-        setAttributes({ accordionSectionClassName: className });
+        // apiVersion 3: the wrapper element must carry the props returned by
+        // useBlockProps. className is no longer passed to edit() as a prop.
+        //
+        // Safe to put directly on .govuk-accordion__section: editor.scss only
+        // attaches pseudo-elements to its children (__section-header:before and
+        // __section-content:after), not to the section element itself, so there
+        // is nothing here to collide with Gutenberg's selection styles.
+        const blockProps = useBlockProps({ className: 'govuk-accordion__section' });
 
         // Load allowed blocks to be added to accordion section body
         const allowedBlocks = [ 'core/heading','core/list', 'core/paragraph', 'core/file' ];
@@ -152,8 +170,8 @@ registerBlockType("mojblocks/accordion-section", {
             setAttributes({ accordionSectionTextArea: newAccordionSectionTextArea })
         }
 
-        return ([
-            <div className={`${className} govuk-accordion__section`} key="accordion-block-section">
+        return (
+            <div { ...blockProps }>
                 <div className="govuk-accordion__section-header">
                 <h3 className="govuk-accordion__section-heading">
                     <span className="govuk-accordion__section-button" id="accordion-default-heading-1">
@@ -180,7 +198,7 @@ registerBlockType("mojblocks/accordion-section", {
                     </div>
                 </div>
             </div>
-        ]);
+        );
       },
 
     // When using InnerBlocks with dynamic blocks, you need to return the content.
@@ -191,5 +209,8 @@ registerBlockType("mojblocks/accordion-section", {
 
 /**
  * Internal dependencies
+ *
+ * Imported for its side effects: edit.js adds the show/hide controls that mimic
+ * the accordion's frontend behaviour inside the editor.
  */
 import edit from './edit';

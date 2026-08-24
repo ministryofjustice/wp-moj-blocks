@@ -1,0 +1,28 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/accordion",
+	"title": "Accordion",
+	"description": "Display content in an accordion component.",
+	"category": "mojblocks",
+	"icon": "list-view",
+	"textdomain": "mojblocks",
+	"keywords": ["accordion", "sections", "lists"],
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"controlLanguageWelsh": {
+			"type": "boolean"
+		},
+		"wideContent": {
+			"type": "boolean"
+		},
+		"accordionClassName": {
+			"type": "string"
+		}
+	},
+	"example": {
+		"attributes": {
+			"controlLanguageWelsh": false
+		}
+	}
+}

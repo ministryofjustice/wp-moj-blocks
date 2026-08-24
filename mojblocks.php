@@ -113,30 +113,32 @@ function mojblocks_register_blocks()
 
      // Register blocks
     register_block_type(
-        'mojblocks/accordion',
+        /**
+         * Registered from block.json metadata rather than an inline array, so
+         * attributes are declared in one place instead of being duplicated here
+         * and in the JS. The old array here was empty, so none of this block's
+         * attributes were declared server-side at all.
+         *
+         * The path points at build/ rather than src/ because .distignore
+         * excludes /src — webpack.mix.js copies block.json files across. Only
+         * render_callback is passed here; everything else, including the
+         * editorScript handle, comes from block.json.
+         */
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/accordion',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_accordion_block',
-            'attributes' => []
+            'render_callback' => 'render_callback_accordion_block'
         ]
     );
 
     register_block_type(
-        'mojblocks/accordion-section',
+        /**
+         * The accordion section's metadata sits in its own folder even though
+         * its JS lives in accordion/index.js, because webpack.mix.js copies
+         * block.json files with a one-per-folder glob.
+         */
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/accordion-section',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_accordion_block_section',
-            'attributes' => [
-                'accordionSectionClassName' => [
-                    'type' => 'string'
-                ],
-                'accordionSectionTitle' => [
-                    'type' => 'string'
-                ],
-                'accordionSectionTextArea' => [
-                    'type' => 'string'
-                ]
-            ]
+            'render_callback' => 'render_callback_accordion_block_section'
         ]
     );
 
