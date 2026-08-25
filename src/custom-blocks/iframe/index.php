@@ -19,7 +19,6 @@ function render_callback_iFrame_block($attributes, $content)
     $attribute_iFrame_height = $attributes['iFrameHeight'] ?? '';
     $attribute_iFrame_border = $attributes['iFrameBorder'] ?? false;
     $attribute_iFrame_centre = $attributes['iFrameCentre'] ?? false;
-    $attribute_iFrame_className = $attributes['iFrameClassName'] ?? '';
 
     if ($attribute_iFrame_url == "" || substr($attribute_iFrame_url,0,8) != "https://") {
         return "";
@@ -28,12 +27,34 @@ function render_callback_iFrame_block($attributes, $content)
     $attribute_iFrame_border = $attribute_iFrame_border ? "1" : "0";
 
     $attribute_iFrame_url = esc_url($attribute_iFrame_url);
-    $attribute_iFrame_width = $attribute_iFrame_width;
-    $attribute_iFrame_height = $attribute_iFrame_height;
-    $attribute_iFrame_className = esc_html($attribute_iFrame_className);
 
-    if ($attribute_iFrame_centre) $attribute_iFrame_className = "moj-block-iframe--centre ".$attribute_iFrame_className;
-    if ($attribute_iFrame_border) $attribute_iFrame_className = "moj-block-iframe--border ".$attribute_iFrame_className;
+    // Classes are split across two elements so the frontend markup matches what
+    // the editor produces:
+    //
+    //   wrapper <div> — the generated block class plus any custom classes the
+    //   user set. This mirrors the element carrying useBlockProps in edit(),
+    //   which needs a single wrapper because edit() renders the preview overlay
+    //   alongside the iframe.
+    //
+    //   inner <iframe> — the presentational moj-block-iframe classes and their
+    //   centre/border modifiers.
+    //
+    // The legacy iFrameClassName attribute is deliberately not read: custom
+    // classes have always been saved separately in `className`, so nothing is
+    // lost for iframes saved before the apiVersion 3 upgrade.
+    $iFrame_wrapper_attributes = get_block_wrapper_attributes();
+
+    $iFrame_classes = ['moj-block-iframe'];
+
+    if ($attribute_iFrame_centre) {
+        $iFrame_classes[] = 'moj-block-iframe--centre';
+    }
+
+    if ($attribute_iFrame_border !== "0") {
+        $iFrame_classes[] = 'moj-block-iframe--border';
+    }
+
+    $attribute_iFrame_className = implode(' ', $iFrame_classes);
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -41,13 +62,15 @@ function render_callback_iFrame_block($attributes, $content)
     ob_start();
 
     ?>
-    <iframe
-        class="moj-block-iframe <?php echo $attribute_iFrame_className; ?>"
-        src="<?php echo $attribute_iFrame_url; ?>"
-        width="<?php echo $attribute_iFrame_width; ?>"
-        height="<?php echo $attribute_iFrame_height; ?>"
-        frameborder="<?php echo $attribute_iFrame_border; ?>"
-    ></iframe>
+    <div <?php echo $iFrame_wrapper_attributes; ?>>
+        <iframe
+            class="<?php echo esc_attr($attribute_iFrame_className); ?>"
+            src="<?php echo $attribute_iFrame_url; ?>"
+            width="<?php echo esc_attr($attribute_iFrame_width); ?>"
+            height="<?php echo esc_attr($attribute_iFrame_height); ?>"
+            frameborder="<?php echo esc_attr($attribute_iFrame_border); ?>"
+        ></iframe>
+    </div>
 
     <?php
 
