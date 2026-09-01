@@ -252,27 +252,19 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/quote',
+        /**
+         * Registered from block.json metadata rather than an inline array, so
+         * attributes are declared in one place instead of being duplicated here
+         * and in the JS.
+         *
+         * The path points at build/ rather than src/ because .distignore
+         * excludes /src — webpack.mix.js copies block.json files across. Only
+         * render_callback is passed here; everything else, including the
+         * editorScript handle, comes from block.json.
+         */
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/quote',
         [
-        'editor_script' => 'mojblocks-editor-script',
-        'render_callback' => 'render_callback_quote_block',
-        'attributes' => [
-            'quoteImgURL' => [
-                'type' => 'string'
-            ],
-            'quoteContent' => [
-                'type' => 'string'
-            ],
-            'quoteName' => [
-                'type' => 'string'
-            ],
-            'quoteAlignment' => [
-                'type' => 'string'
-            ],
-            'quoteClassName' => [
-                'type' => 'string'
-            ]
-          ]
+            'render_callback' => 'render_callback_quote_block'
         ]
     );
 
