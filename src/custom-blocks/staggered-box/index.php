@@ -21,7 +21,23 @@ function render_callback_staggered_box_block($attributes, $content)
     $attribute_box_content = $attributes['staggeredBoxContent'] ?? '';
     $attribute_box_button_link = $attributes['staggeredBoxButtonLink'] ?? '';
     $attribute_box_button_text = $attributes['staggeredBoxButtonText'] ?? '';
-    $attribute_box_className = $attributes['staggeredBoxClassName'] ?? '';
+
+    // Wrapper attributes.
+    //
+    // get_block_wrapper_attributes() is the PHP counterpart to useBlockProps()
+    // in edit(). It emits the generated wp-block-mojblocks-staggered-box class,
+    // the user's custom classes and the is-style-* class from the registered
+    // block styles — WordPress persists all of those in `className`.
+    //
+    // The is-style-* class matters here: style.scss targets
+    // .is-style-staggered-box-image-right to flip the image alignment.
+    //
+    // The legacy staggeredBoxClassName attribute is deliberately not read:
+    // custom classes have always been saved separately in `className`, so
+    // nothing is lost for boxes saved before the apiVersion 3 upgrade.
+    $staggered_box_wrapper_attributes = get_block_wrapper_attributes(
+        ['class' => 'mojblocks-staggered-box']
+    );
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -30,7 +46,7 @@ function render_callback_staggered_box_block($attributes, $content)
 
     ?>
 
-    <div class="<?php _e(esc_html($attribute_box_className)) ; ?> mojblocks-staggered-box">
+    <div <?php echo $staggered_box_wrapper_attributes; ?>>
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="mojblocks-staggered-box__image-container govuk-grid-column-two-thirds ">

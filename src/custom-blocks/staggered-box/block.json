@@ -1,0 +1,35 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/staggered-box",
+	"title": "Staggered Box",
+	"description": "Display content on top of a staggered background image",
+	"category": "mojblocks",
+	"icon": "admin-page",
+	"textdomain": "mojblocks",
+	"keywords": ["staggered box", "photo block"],
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"staggeredBoxTitle": {
+			"type": "string"
+		},
+		"staggeredBoxContent": {
+			"type": "string"
+		},
+		"staggeredBoxButtonText": {
+			"type": "string"
+		},
+		"staggeredBoxButtonLink": {
+			"type": "string"
+		},
+		"staggeredBoxImageURL": {
+			"type": "string"
+		},
+		"staggeredBoxImageAltText": {
+			"type": "string"
+		},
+		"staggeredBoxClassName": {
+			"type": "string"
+		}
+	}
+}
