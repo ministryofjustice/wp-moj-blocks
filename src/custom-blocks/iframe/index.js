@@ -1,56 +1,43 @@
 /**
  * iFrame
  * A stylised iFrame section
+ *
+ * Block metadata — name, title, category, attributes — lives in block.json and
+ * is registered server-side from mojblocks.php. This file only supplies the
+ * editor behaviour.
+ *
+ * The iFrameClassName attribute in block.json is legacy: older iframes persisted
+ * the editor's generated className there so the PHP could read it back.
+ * apiVersion 3 no longer passes className to edit(), and the render callback now
+ * uses get_block_wrapper_attributes(), so nothing reads or writes it. It stays
+ * registered only so it isn't stripped from content saved before that change.
  */
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 import classnames from 'classnames';
-import { __experimentalText as Text } from '@wordpress/components';
-const { Fragment } = wp.element;
-const { InspectorControls } = wp.blockEditor;
-const { PanelBody } = wp.components;
+import { Fragment } from '@wordpress/element';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import {
+    __experimentalText as Text,
+    PanelBody,
+    RangeControl,
+    TextControl,
+    TextareaControl,
+    ToggleControl,
+    Button,
+} from '@wordpress/components';
 
-import { RangeControl } from '@wordpress/components';
-import { TextControl } from '@wordpress/components';
-import { TextareaControl } from '@wordpress/components';
-import { ToggleControl } from '@wordpress/components';
-import { Button } from '@wordpress/components'
+import metadata from './block.json';
 
-registerBlockType('mojblocks/iframe', {
-    title: __('Inline Frame (iframe)', 'mojblocks'),
-    icon: <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" focusable="false"><path d="M18.5 5.5h-13c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h13c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2zm.5 11c0 .3-.2.5-.5.5h-13c-.3 0-.5-.2-.5-.5v-9c0-.3.2-.5.5-.5h13c.3 0 .5.2.5.5v9zM6.5 12H8v-2h2V8.5H6.5V12zm9.5 2h-2v1.5h3.5V12H16v2z"></path></svg>,
-    category: 'mojblocks',
-    attributes: {
-        iFrameURL: {
-            type: "string",
-        },
-        iFrameClassName: {
-            type: "string",
-        },
-        iFrameWidth: {
-            type: "number",
-            default: 400
-        },
-        iFrameHeight: {
-            type: "number",
-            default: 300
-        },
-        iFrameBorder: {
-            type: "boolean",
-            default: false
-        },
-        iFrameCentre: {
-            type: "boolean",
-            default: false
-        },
-        iFrameCode: {
-            type: "string",
-        },
-        iFrameButton: {
-            type: "boolean",
-            default: false
-        },
-    },
+const blockIcon = (
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="48" height="48" aria-hidden="true" focusable="false"><path d="M18.5 5.5h-13c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h13c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2zm.5 11c0 .3-.2.5-.5.5h-13c-.3 0-.5-.2-.5-.5v-9c0-.3.2-.5.5-.5h13c.3 0 .5.2.5.5v9zM6.5 12H8v-2h2V8.5H6.5V12zm9.5 2h-2v1.5h3.5V12H16v2z"></path></svg>
+);
+
+registerBlockType(metadata.name, {
+
+    // The SVG icon stays here rather than in block.json, which can only carry a
+    // Dashicon name or a serialisable object.
+    icon: blockIcon,
 
     edit: props => {
 
@@ -62,15 +49,24 @@ registerBlockType('mojblocks/iframe', {
                 iFrameBorder,
                 iFrameCentre,
                 iFrameCode,
-                iFrameButton,
-                iFrameClassName
+                iFrameButton
             },
-            className,
             setAttributes
         } = props;
 
-        // Set className attribute for PHP frontend to use
-        setAttributes({ iFrameClassName: className });
+        // apiVersion 3: the wrapper element must carry the props returned by
+        // useBlockProps, and there has to be exactly one such element.
+        //
+        // edit() previously returned two siblings — the preview overlay and the
+        // iframe — with no wrapper, so a wrapping div is introduced here. That
+        // has a knock-on: .iframe-preview-overlay is absolutely positioned and
+        // was resolving against whichever ancestor happened to be positioned.
+        // editor.scss now gives this wrapper position: relative so the overlay
+        // covers the iframe, which is what it was always meant to do.
+        //
+        // render_callback_iFrame_block() emits the same wrapper so the editor
+        // and the frontend agree.
+        const blockProps = useBlockProps();
 
         const setIFrameURL = newIFrameURL => {
             setAttributes({ iFrameURL: newIFrameURL } );
@@ -98,18 +94,25 @@ registerBlockType('mojblocks/iframe', {
         };
         const readIFrameCode = x => {
             // This code sets the URL, Width and Height for the iFrame from the code copied in.
+            //
+            // Work on a local copy. iFrameCode is a const binding destructured
+            // from props.attributes, and modules are strict mode, so reassigning
+            // it directly threw "Assignment to constant variable" — but only when
+            // the pasted embed code happened to have spaces around its = signs,
+            // which is why it went unnoticed.
+            let code = iFrameCode;
             let i = 0;
-            while (iFrameCode.indexOf(" =") >= 0 || iFrameCode.indexOf("= ") >= 0) {
+            while (code.indexOf(" =") >= 0 || code.indexOf("= ") >= 0) {
                 // Remove any spaces around equals signs
-                iFrameCode = iFrameCode.replaceAll(" =","=")
-                iFrameCode = iFrameCode.replaceAll("= ","=")
+                code = code.replaceAll(" =","=")
+                code = code.replaceAll("= ","=")
                 i++;
                 if (i > 100) break;
             }
-            let src = iFrameCode.match(/src=..*?(?=[*"' ])/,"i");
-            let width = iFrameCode.match(/width=..*?(?=[*"' ])/,"i");
-            let height = iFrameCode.match(/height=..*?(?=[*"' ])/,"i");
-            let frameborder = iFrameCode.match(/frameborder=..*?(?=[*"' ])/,"i");
+            let src = code.match(/src=..*?(?=[*"' ])/,"i");
+            let width = code.match(/width=..*?(?=[*"' ])/,"i");
+            let height = code.match(/height=..*?(?=[*"' ])/,"i");
+            let frameborder = code.match(/frameborder=..*?(?=[*"' ])/,"i");
 
             if (src) {
                 // src is required
@@ -202,30 +205,30 @@ registerBlockType('mojblocks/iframe', {
                             onChange={ setIFrameBorder }
                         />
                     </PanelBody>
-                </InspectorControls>    
+                </InspectorControls>
 
-                <div
-                    className="iframe-preview-overlay"
-                    width={(iFrameWidth != null && iFrameWidth > 0) ? iFrameWidth :'400'}
-                    height={(iFrameHeight > 0) ? iFrameHeight :'300'}
-                >
+                <div { ...blockProps }>
+                    <div
+                        className="iframe-preview-overlay"
+                        width={(iFrameWidth != null && iFrameWidth > 0) ? iFrameWidth :'400'}
+                        height={(iFrameHeight > 0) ? iFrameHeight :'300'}
+                    >
 
+                    </div>
+                    <iframe
+                        className={ classnames(
+                            'moj-block-iframe',
+                            (iFrameBorder) ? "moj-block-iframe--border" : "",
+                            (iFrameCentre) ? "moj-block-iframe--centre" : ""
+                        )}
+                        src={(iFrameURL && iFrameURL.substring(0, 8) == "https://") ? iFrameURL : ""}
+                        width={(iFrameWidth != null && iFrameWidth > 0) ? iFrameWidth : "400"}
+                        height={(iFrameHeight > 0) ? iFrameHeight : "300"}
+                    ></iframe>
                 </div>
-                <iframe
-                    className={ classnames(
-                        'moj-block-iframe',
-                        (iFrameBorder) ? "moj-block-iframe--border" : "",
-                        (iFrameCentre) ? "moj-block-iframe--centre" : "",
-                        iFrameClassName
-                    )}
-                    src={(iFrameURL && iFrameURL.substring(0, 8) == "https://") ? iFrameURL : ""}
-                    width={(iFrameWidth != null && iFrameWidth > 0) ? iFrameWidth : "400"}
-                    height={(iFrameHeight > 0) ? iFrameHeight : "300"}
-                ></iframe>
             </Fragment>
         );
     },
     // return null as frontend output is done via PHP
     save: () => null
 });
-

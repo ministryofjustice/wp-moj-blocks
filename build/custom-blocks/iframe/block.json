@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/iframe",
+	"title": "Inline Frame (iframe)",
+	"description": "Embed an external page in an iframe",
+	"category": "mojblocks",
+	"textdomain": "mojblocks",
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"iFrameURL": {
+			"type": "string"
+		},
+		"iFrameWidth": {
+			"type": "number",
+			"default": 400
+		},
+		"iFrameHeight": {
+			"type": "number",
+			"default": 300
+		},
+		"iFrameBorder": {
+			"type": "boolean",
+			"default": false
+		},
+		"iFrameCentre": {
+			"type": "boolean",
+			"default": false
+		},
+		"iFrameCode": {
+			"type": "string"
+		},
+		"iFrameButton": {
+			"type": "boolean",
+			"default": false
+		},
+		"iFrameClassName": {
+			"type": "string"
+		}
+	}
+}

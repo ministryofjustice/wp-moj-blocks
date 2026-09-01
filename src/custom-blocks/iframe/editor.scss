@@ -7,6 +7,14 @@ Block: iFrame (Gutenberg editor styles)
 
 @import 'style.scss';
 
+// apiVersion 3 requires a single wrapper element carrying useBlockProps, so the
+// overlay and the iframe now sit inside one. Position the wrapper so the
+// absolutely positioned overlay resolves against it rather than against
+// whichever ancestor happened to be positioned.
+.wp-block-mojblocks-iframe {
+	position: relative;
+}
+
 .iframe-preview-overlay {
 	position: absolute;
     z-index: 100;
