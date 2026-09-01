@@ -1,0 +1,19 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/intro",
+	"title": "Intro Text",
+	"description": "A stylised intro section",
+	"category": "mojblocks",
+	"icon": "editor-paragraph",
+	"textdomain": "mojblocks",
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"introText": {
+			"type": "string"
+		},
+		"introClassName": {
+			"type": "string"
+		}
+	}
+}
