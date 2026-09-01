@@ -10,12 +10,13 @@ import {
 	InnerBlocks,
 	MediaUpload,
 	InspectorControls,
+	useBlockProps,
 	store as blockEditorStore,
 } from '@wordpress/block-editor';
 import { useSelect } from '@wordpress/data';
 import { store as coreStore } from '@wordpress/core-data';
+import { Fragment } from '@wordpress/element';
 
-const { Fragment } = wp.element;
 const d = new Date();
 const allowedMediaTypes = ['image'];
 const templatefeaturedItemBlock = [
@@ -33,7 +34,6 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		featuredItemHasBar,
 		featuredLinkText,
 		featuredCustomImage,
-		className,
 	} = attributes;
 
 	const {
@@ -82,6 +82,37 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		}
 	);
 
+	// getEntityRecords above only fetches the 24 most-recent posts of the type.
+	// A featured item older than that window would be absent from allItems, so
+	// the block would fall back to "No item selected" even though a valid item
+	// is saved (the frontend still renders it, because index.php looks the post
+	// up directly by ID). Fetch the saved item on its own so the selection
+	// always resolves regardless of how much newer content exists.
+	const {
+		selectedItem,
+	} = useSelect(
+		( select ) => {
+			if (featuredItemType != "" && featuredItemID && featuredItemID != "0") {
+
+				const { getEntityRecord } = select(
+					coreStore
+				);
+
+				return {
+					selectedItem: getEntityRecord(
+						'postType',
+						featuredItemType,
+						featuredItemID
+					)
+				};
+			} else {
+				return {
+					selectedItem: null
+				};
+			}
+		}
+	);
+
 	let itemTypes = [{
 		label: "-",
 		value: ""
@@ -119,6 +150,31 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 
 		}
 	}
+
+	// Merge in the separately-fetched saved item when it falls outside the 24
+	// records loaded above, so a valid selection still previews and stays listed
+	// in the "Select item" dropdown.
+	if (selectedItem && selectedItem.id && !docList[selectedItem.id]) {
+		docList[selectedItem.id] = {
+			title: selectedItem.title.rendered,
+			summary: selectedItem.post_meta.summary,
+			date: selectedItem.date,
+			imageID: selectedItem.featured_media,
+			image: selectedItem.featured_image_url,
+		}
+		docOptions.push({label: selectedItem.title.rendered, value: selectedItem.id});
+	}
+
+	// apiVersion 3: the wrapper element must carry the props returned by
+	// useBlockProps. It supplies the generated block class, the user's custom
+	// classes and the is-style-* class from the registered block styles — all of
+	// which used to be applied by reading the className attribute by hand.
+	//
+	// Called bare rather than with a className because edit() returns early
+	// while items are loading, and that branch renders a spinner rather than the
+	// featured item itself. The block classes are merged in on the main branch
+	// below, where itemPreviewClass is also known.
+	const blockProps = useBlockProps();
 
 	const removeImage = () => {
 		setAttributes({
@@ -270,10 +326,10 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 	if (!Array.isArray( allItems ) && allItems !== false) {
 		// allItems is null (items from getEntityRecords not loaded yet)
 		return (
-			<Fragment >
-				<div class="mojblocks-spinner"></div>
-				<div class="mojblocks-spinner-text govuk-body">Loading</div>
-			</Fragment >
+			<div { ...blockProps }>
+				<div className="mojblocks-spinner"></div>
+				<div className="mojblocks-spinner-text govuk-body">Loading</div>
+			</div>
 		);
 	} else {
 		// allItems is array or is false (false = no post type selected)
@@ -306,13 +362,23 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		return (
 			<Fragment >
 				{ inspectorControls }
-				<div className={`mojblocks-featured-item ${className} ${itemPreviewClass}`}>
-					<div className="govuk-width-container govuk-!-margin-0">
+				<div { ...blockProps } className={ `${ blockProps.className } mojblocks-featured-item`.trim() }>
+					{ /*
+					  * itemPreviewClass (mojblocks-featured-item--empty) goes on this
+					  * inner element rather than the block wrapper above.
+					  *
+					  * Its "Nothing selected" banner is drawn with an ::after
+					  * pseudo-element. Under apiVersion 3 the wrapper above is the
+					  * block's own element, and Gutenberg draws the selection outline
+					  * with ::after and inset: 0 on it — so the two rules merge and the
+					  * banner stretches to fill the whole block when selected.
+					  */ }
+					<div className={ `govuk-width-container govuk-!-margin-0 ${ itemPreviewClass }`.trim() }>
 						<InnerBlocks
 							template={ templatefeaturedItemBlock }
 							templateLock="all"
 						/>
-						<div class="mojblocks-featured-item__item">
+						<div className="mojblocks-featured-item__item">
 							<div className={ `mojblocks-featured-item__image ${itemImageExists && itemImage ? "" : "mojblocks-featured-item__image--none"}`} style={itemBackgroundImageStyle}>
 							</div>
 							<div className={ `mojblocks-featured-item__text ${featuredItemHasBar ? "" : "mojblocks-featured-item__text--no-bar"}`}>
@@ -325,7 +391,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 									{ itemSummary }
 								</p>
 								<p className="govuk-body-s mojblocks-featured-item__date" >
-									{ itemDate }
+									{featuredItemHasDate && itemDate}
 								</p>
 								<a href="#" className="govuk-link mojblocks-featured-item__link" >
 									{ featuredLinkText }

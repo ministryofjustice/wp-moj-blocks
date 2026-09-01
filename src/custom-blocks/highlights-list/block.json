@@ -1,0 +1,32 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/highlights-list",
+	"title": "Highlights List",
+	"description": "A stylised list displaying bullet points and a title",
+	"category": "mojblocks",
+	"icon": "list-view",
+	"textdomain": "mojblocks",
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"listTitle": {
+			"type": "string"
+		},
+		"listItems": {
+			"type": "string"
+		},
+		"flushBottom": {
+			"type": "boolean"
+		},
+		"listClassName": {
+			"type": "string"
+		}
+	},
+	"example": {
+		"attributes": {
+			"listTitle": "This is a highlights list title",
+			"listItems": "This is a list item",
+			"flushBottom": false
+		}
+	}
+}
