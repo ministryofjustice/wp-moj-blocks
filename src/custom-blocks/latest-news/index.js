@@ -1,9 +1,28 @@
-const { __ } = wp.i18n;
-const { registerBlockType, registerBlockStyle } = wp.blocks;
-const { Fragment } = wp.element;
-const { RichText, MediaUpload, InspectorControls, URLInputButton } = wp.blockEditor;
-const ALLOWED_MEDIA_TYPES = ['image'];
-const { PanelBody } = wp.components;
+/**
+ * Latest News
+ *
+ * Block metadata — name, title, icon, category, keywords, attributes — lives in
+ * block.json and is registered server-side from mojblocks.php. This file only
+ * supplies the editor behaviour.
+ */
+import { __ } from '@wordpress/i18n';
+import { registerBlockType } from '@wordpress/blocks';
+import { Fragment } from '@wordpress/element';
+import {
+  InnerBlocks,
+  InspectorControls,
+  useBlockProps,
+} from '@wordpress/block-editor';
+import {
+  PanelBody,
+  TextControl,
+  ToggleControl,
+  __experimentalNumberControl as NumberControl,
+  __experimentalText as Text,
+} from '@wordpress/components';
+
+import metadata from './block.json';
+
 const templateLatestNewsBlock = [
   [ 'core/heading', { placeholder: 'Add latest news section title' } ]
 ];
@@ -49,33 +68,7 @@ function datify(x,d) {
 
 }
 
-import { InnerBlocks } from "@wordpress/block-editor";
-import { TextControl } from '@wordpress/components';
-import { ToggleControl } from '@wordpress/components';
-import { __experimentalNumberControl as NumberControl } from '@wordpress/components';
-import { __experimentalText as Text } from '@wordpress/components';
-
-registerBlockType("mojblocks/latest-news", {
-  title: __("Latest News", "mojblocks"),
-  description: __('Display latest news items'),
-  category: "mojblocks",
-  icon: "slides",
-  keywords: [__('latest news'), __('recent news'), __('headlines')],
-
-  attributes: {
-    latestNewsHasDate: {
-      type: "boolean",
-      default: true
-    },
-    latestNewsExpiry: {
-      type: "numeric",
-      default: 0
-    },
-    latestNewsEmptyText: {
-      type: "string",
-      default: "No news to display."
-    }
-  },
+registerBlockType(metadata.name, {
 
   edit: props => {
     const {
@@ -84,9 +77,18 @@ registerBlockType("mojblocks/latest-news", {
         latestNewsExpiry,
         latestNewsEmptyText,
         latestNewsHasDate
-      },
-      className
+      }
     } = props
+
+    // apiVersion 3: the wrapper element must carry the props returned by
+    // useBlockProps. className is no longer passed to edit() as a prop.
+    //
+    // The expiry-weeks modifier is editor-only — nothing styles it and the
+    // frontend wrapper has never carried it — but it is kept so the editor
+    // markup is unchanged.
+    const blockProps = useBlockProps({
+      className: `mojblocks-latest-news mojblocks-latest-news--expiry-weeks-${latestNewsExpiry}`
+    });
 
     const setHasDate = newDateSetting => {
       setAttributes({ latestNewsHasDate: newDateSetting });
@@ -140,7 +142,7 @@ registerBlockType("mojblocks/latest-news", {
           </PanelBody>
         </InspectorControls>
 
-        <div className={`mojblocks-latest-news mojblocks-latest-news--expiry-weeks-${latestNewsExpiry} ${className}`}>
+        <div { ...blockProps }>
           <div className="govuk-width-container">
             <InnerBlocks
               template={ templateLatestNewsBlock }
