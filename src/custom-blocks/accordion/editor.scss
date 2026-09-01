@@ -179,19 +179,29 @@ SASS modifications to conform GovUK frontend to MoJ block styling
     .govuk-accordion__section-content {
         display: none;
     }
+}
 
-    &:after {
+// The "content hidden" warning is a real element rendered by the section
+// block's edit(), rather than .accordion-hidden:after as it used to be.
+//
+// .accordion-hidden sits on .govuk-accordion__section, which under apiVersion 3
+// is the section block's own wrapper element. Gutenberg draws its selection
+// outline with ::after and inset: 0 on that element, so the two rules would
+// merge and the warning would stretch to fill the block when selected.
+.accordion-hidden-notice {
+    padding: 10px;
+    display: block;
+    background-color: $mojblocks-color-light-grey;
+    margin: 20px 0;
+
+    &:before {
         content:'⚠️ Section content hidden - click "Show" to edit';
-        padding: 10px;
-        display: block;
-        background-color: $mojblocks-color-light-grey;
-        margin: 20px 0;
     }
 }
 
 .govuk-accordion.preview-welsh-true {
-    .accordion-hidden {
-        &:after {
+    .accordion-hidden-notice {
+        &:before {
             content:'⚠️ Section content hidden - click "Cuddio" to reveal and edit';
         }
     }
