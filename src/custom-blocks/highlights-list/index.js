@@ -1,39 +1,25 @@
 /**
  * Highlights List
  * A stylised list displaying bullet points and a title
+ *
+ * Block metadata — name, title, icon, category, attributes, example — lives in
+ * block.json and is registered server-side from mojblocks.php. This file only
+ * supplies the editor behaviour.
+ *
+ * The listClassName attribute in block.json is legacy: older lists persisted the
+ * editor's generated className there so the PHP could read it back. apiVersion 3
+ * no longer passes className to edit(), and the render callback now uses
+ * get_block_wrapper_attributes(), so nothing reads or writes it. It stays
+ * registered only so it isn't stripped from content saved before that change.
  */
 import { __ } from '@wordpress/i18n';
-import { registerBlockType, registerBlockStyle } from '@wordpress/blocks';
-import { RichText } from '@wordpress/block-editor';
+import { registerBlockType } from '@wordpress/blocks';
+import { RichText, InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { PanelBody, PanelRow, ToggleControl } from '@wordpress/components';
 
-const { InspectorControls } = wp.blockEditor;
-const { PanelBody, PanelRow, ToggleControl } = wp.components;
+import metadata from './block.json';
 
-registerBlockType('mojblocks/highlights-list', {
-    title: __('Highlights List', 'mojblocks'),
-    icon: 'list-view',
-    category: 'mojblocks',
-    example: {
-        attributes: {
-            listTitle: 'This is a highlights list title',
-            listItems: 'This is a list item',
-            flushBottom: false
-        },
-    },
-    attributes: {
-        listTitle: {
-            type: 'string',
-        },
-        listItems: {
-            type: 'string', //sting due to key error issue with array
-        },
-        flushBottom: {
-            type: 'boolean'
-        },
-        listClassName: {
-            type: 'string'
-        }
-    },
+registerBlockType(metadata.name, {
 
     edit: props => {
         const {
@@ -42,11 +28,12 @@ registerBlockType('mojblocks/highlights-list', {
                 listItems,
                 flushBottom
             },
-            className,
             setAttributes
         } = props;
 
-        setAttributes({ listClassName: className });
+        // apiVersion 3: the wrapper element must carry the props returned by
+        // useBlockProps. className is no longer passed to edit() as a prop.
+        const blockProps = useBlockProps({ className: 'mojblocks-highlights-list' });
 
         // Grab newListTitle, set the value of listTitle to newListTitle.
         const onChangeListTitle = newListTitle => {
@@ -59,7 +46,7 @@ registerBlockType('mojblocks/highlights-list', {
         };
 
         return (
-            <div className={`${className}  mojblocks-highlights-list`}>
+            <div { ...blockProps }>
                 <InspectorControls>
                     <PanelBody
                             title="Bottom Margin"
