@@ -15,9 +15,22 @@ function render_callback_route_planner_block($attributes, $content)
 {
 
     // Parse attributes found in index.js
-    $attribute_route_destination = trim(str_replace("\n",", ",$attributes['routeDestination'])) ?? '';
+    //
+    // The null coalesce belongs inside str_replace(), not after trim(): with it
+    // on the outside, a missing routeDestination reached str_replace() as null,
+    // which is deprecated in PHP 8.1+. block.json now declares a "" default so
+    // the attribute is always present, but the guard is corrected regardless.
+    $attribute_route_destination = trim(str_replace("\n", ", ", $attributes['routeDestination'] ?? ''));
     $attribute_route_method = $attributes['routeMethod'] ?? '';
-    $attribute_class_name = $attributes['className'] ?? '';
+
+    // Wrapper attributes.
+    //
+    // get_block_wrapper_attributes() is the PHP counterpart to useBlockProps()
+    // in edit(). It emits the generated wp-block-mojblocks-route-planner class
+    // and the user's custom classes, which WordPress persists in `className`.
+    $route_planner_wrapper_attributes = get_block_wrapper_attributes(
+        ['class' => 'mojblocks-route-planner']
+    );
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -28,7 +41,7 @@ function render_callback_route_planner_block($attributes, $content)
         // only show block if destination set
         $rand_num = rand();
     ?>
-        <form class="<?php _e(esc_html($attribute_class_name)); ?> mojblocks-route-planner">
+        <form <?php echo $route_planner_wrapper_attributes; ?>>
             <label class="govuk-label" for="<?php echo $rand_num;?>-postcodeInput"><?php _e("Enter a postcode or location","hale"); ?></label>
             <div id="<?php echo $rand_num;?>-postcodeInput-hint" class="govuk-hint">
             <?php _e("For example, SW1A 1AA","hale"); ?>

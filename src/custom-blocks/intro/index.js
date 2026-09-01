@@ -1,23 +1,24 @@
 /**
  * Intro
  * A stylised intro section
+ *
+ * Block metadata — name, title, icon, category, attributes — lives in block.json
+ * and is registered server-side from mojblocks.php. This file only supplies the
+ * editor behaviour.
+ *
+ * The introClassName attribute in block.json is legacy: older intros persisted
+ * the editor's generated className there so the PHP could read it back.
+ * apiVersion 3 no longer passes className to edit(), and the render callback now
+ * uses get_block_wrapper_attributes(), so nothing reads or writes it. It stays
+ * registered only so it isn't stripped from content saved before that change.
  */
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText } from '@wordpress/block-editor';
+import { RichText, useBlockProps } from '@wordpress/block-editor';
 
-registerBlockType('mojblocks/intro', {
-    title: __('Intro Text', 'mojblocks'),
-    icon: 'editor-paragraph',
-    category: 'mojblocks',
-    attributes: {
-        introText: {
-            type: 'string',
-        },
-        introClassName: {
-            type: 'string'
-        }
-    },
+import metadata from './block.json';
+
+registerBlockType(metadata.name, {
 
     edit: props => {
 
@@ -25,12 +26,12 @@ registerBlockType('mojblocks/intro', {
             attributes: {
                 introText
             },
-            className,
             setAttributes
         } = props;
 
-        // Set className attribute for PHP frontend to use
-        setAttributes({ introClassName: className });
+        // apiVersion 3: the wrapper element must carry the props returned by
+        // useBlockProps. className is no longer passed to edit() as a prop.
+        const blockProps = useBlockProps({ className: 'mojblocks-intro' });
 
         // Grab newIntroText, set the value of introText to newIntroText.
         const onChangeIntroText = newIntroText => {
@@ -38,7 +39,7 @@ registerBlockType('mojblocks/intro', {
         };
 
         return (
-            <div className={`${className} mojblocks-intro`}>
+            <div { ...blockProps }>
                 <div className={'govuk-width-container'}>
                     <div className={'govuk-grid-row'}>
                         <div className="govuk-grid-column-three-quarters">
