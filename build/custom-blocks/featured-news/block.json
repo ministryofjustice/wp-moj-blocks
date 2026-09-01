@@ -1,0 +1,25 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/featured-news",
+	"title": "Featured News",
+	"description": "Display featured news item",
+	"category": "mojblocks",
+	"icon": "id-alt",
+	"textdomain": "mojblocks",
+	"keywords": ["featured news", "headline news", "headlines"],
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"featuredNewsHasDate": {
+			"type": "boolean",
+			"default": true
+		},
+		"featuredNewsID": {
+			"type": "string",
+			"default": "0"
+		},
+		"className": {
+			"type": "string"
+		}
+	}
+}

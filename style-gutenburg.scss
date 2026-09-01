@@ -15,6 +15,20 @@ Text Domain: mojblocks
 // on 7.0 a v1/v2 block from ANY plugin on the page forces the classic editor,
 // which needs them. Verify the block-styles preview panel still renders styled
 // before removing.
+//
+// :where() so this scoping contributes NOTHING to specificity.
+//
+// Without it, every rule in this file carries an extra class compared with its
+// frontend counterpart in style.scss. That means a theme override written to
+// beat the frontend rule — for example
+// `body .mojblocks-highlights-list ... li:before` — loses inside the editor, so
+// blocks render with plugin defaults in the editor and theme colours on the
+// frontend. :where() makes editor and frontend specificity identical, so one
+// theme override works in both.
+//
+// NB :is() will NOT do this. :is() takes the specificity of its most specific
+// argument, so swapping this list for :is() leaves the weight unchanged — which
+// is why an earlier attempt at that did not fix theme colour overrides.
 
 :where(
     .edit-post-visual-editor,
