@@ -5,31 +5,14 @@
 
 import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
-import classnames from 'classnames';
-const { InspectorControls } = wp.blockEditor;
-const { PanelBody } = wp.components;
-import { TextareaControl, RadioControl } from '@wordpress/components';
+import { Fragment } from '@wordpress/element';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import { PanelBody, TextareaControl, RadioControl } from '@wordpress/components';
 
-registerBlockType('mojblocks/route-planner', {
-    title: __('Route planner', 'mojblocks'),
-    description: __('Opens a new tab with Google directions to the destination.', 'mojblocks'),
-    category: 'mojblocks',
-    icon: 'car',
-    keywords: [
-        __('postcode', 'mojblocks'),
-        __('map', 'mojblocks'),
-        __('drive', 'mojblocks'),
-    ],
-    attributes: {
-        routeDestination: {
-            type: 'string',
-            default: ""
-        },
-        routeMethod: {
-            type: 'string',
-            default: ""
-        }
-    },
+import metadata from './block.json';
+
+registerBlockType(metadata.name, {
+
     edit: props => {
 
         const {
@@ -37,11 +20,16 @@ registerBlockType('mojblocks/route-planner', {
             attributes: {
                 routeDestination,
                 routeMethod
-            },
-            className
+            }
         } = props;
 
-        // Set className attribute for PHP frontend to use
+        // apiVersion 3: the wrapper element must carry the props returned by
+        // useBlockProps. className is no longer passed to edit() as a prop.
+        const blockProps = useBlockProps({
+            className: 'mojblocks-route-planner'
+                + (routeDestination.trim() ? '' : ' mojblocks-route-planner--empty')
+        });
+
         const onChangeDestination = newDestination => {
             setAttributes( { routeDestination: newDestination } );
         };
@@ -49,7 +37,8 @@ registerBlockType('mojblocks/route-planner', {
             setAttributes( { routeMethod: newMethod } );
         };
 
-        return ([
+        return (
+            <Fragment>
             <InspectorControls>
                 <PanelBody
                         title={__('Destination details')}
@@ -74,19 +63,16 @@ registerBlockType('mojblocks/route-planner', {
                     />
 
                 </PanelBody>
-            </InspectorControls>,
-            <form className={ classnames(
-                'mojblocks-route-planner',
-                (routeDestination.trim()) ? "" : "mojblocks-route-planner--empty",
-                className
-            )}>
-                <label class="govuk-label" for="postcodeInput">Enter a postcode or location</label>
-                <div id="postcodeInput-hint" class="govuk-hint">For example, SW1A 1AA</div>
-                <input class="govuk-input govuk-input--width-10 govuk-!-margin-bottom-4" type="text" id="postcodeInput" aria-describedby="postcodeInput-hint"/>
+            </InspectorControls>
+            <form { ...blockProps }>
+                <label className="govuk-label" htmlFor="postcodeInput">Enter a postcode or location</label>
+                <div id="postcodeInput-hint" className="govuk-hint">For example, SW1A 1AA</div>
+                <input className="govuk-input govuk-input--width-10 govuk-!-margin-bottom-4" type="text" id="postcodeInput" aria-describedby="postcodeInput-hint"/>
                 <br />
-                <button class="govuk-button">Submit</button>
+                <button className="govuk-button">Submit</button>
             </form>
-        ]);
+            </Fragment>
+        );
     },
     // return null as frontend output is done via PHP
     save: () => null
