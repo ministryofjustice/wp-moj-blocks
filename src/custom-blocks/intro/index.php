@@ -16,7 +16,19 @@ function render_callback_intro_block($attributes, $content)
 
     // Parse attributes found in index.js
     $attribute_intro_content = $attributes['introText'] ?? '';
-    $attribute_intro_className = $attributes['introClassName'] ?? '';
+
+    // Wrapper attributes.
+    //
+    // get_block_wrapper_attributes() is the PHP counterpart to useBlockProps()
+    // in edit(). It emits the generated wp-block-mojblocks-intro class and the
+    // user's custom classes, which WordPress persists in `className`.
+    //
+    // The legacy introClassName attribute is deliberately not read: custom
+    // classes have always been saved separately in `className`, so nothing is
+    // lost for intros saved before the apiVersion 3 upgrade.
+    $intro_wrapper_attributes = get_block_wrapper_attributes(
+        ['class' => 'mojblocks-intro']
+    );
 
     // Turn on buffering so we can collect all the html markup below and load it via the return
     // This is an alternative method to using sprintf(). By using buffering you can write your
@@ -25,7 +37,7 @@ function render_callback_intro_block($attributes, $content)
 
     ?>
 
-    <div class="<?php _e(esc_html($attribute_intro_className)); ?> mojblocks-intro">
+    <div <?php echo $intro_wrapper_attributes; ?>>
         <div class="govuk-width-container">
             <div class="govuk-grid-row">
                 <div class="govuk-grid-column-three-quarters">

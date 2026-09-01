@@ -1,0 +1,80 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/auto-item-list",
+	"title": "Items List",
+	"description": "Auto-populates with most recent or next items based on a date",
+	"category": "mojblocks",
+	"icon": "slides",
+	"textdomain": "mojblocks",
+	"keywords": [
+		"latest item",
+		"latest news",
+		"recent items",
+		"recent news",
+		"next items",
+		"headlines"
+	],
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"listHasDate": {
+			"type": "boolean",
+			"default": true
+		},
+		"listHasSummary": {
+			"type": "boolean",
+			"default": false
+		},
+		"listEmptyText": {
+			"type": "string",
+			"default": "No items to display."
+		},
+		"listItemType": {
+			"type": "string",
+			"default": ""
+		},
+		"listTaxonomy": {
+			"type": "string",
+			"default": ""
+		},
+		"listTaxonomyOptions": {
+			"type": "array",
+			"default": []
+		},
+		"listTaxonomyValueArray": {
+			"type": "array",
+			"default": []
+		},
+		"listImage": {
+			"type": "boolean",
+			"default": false
+		},
+		"listBackupImage": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundColour": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundColourClass": {
+			"type": "string",
+			"default": ""
+		},
+		"borderColour": {
+			"type": "string",
+			"default": ""
+		},
+		"textColour": {
+			"type": "string",
+			"default": ""
+		},
+		"textColourClass": {
+			"type": "string",
+			"default": ""
+		},
+		"listClassName": {
+			"type": "string"
+		}
+	}
+}

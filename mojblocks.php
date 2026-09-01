@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     4.0.0
+ * Version:     4.1.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Malcolm Butler, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -180,22 +180,19 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/highlights-list',
+        /**
+         * Registered from block.json metadata rather than an inline array, so
+         * attributes are declared in one place instead of being duplicated here
+         * and in the JS.
+         *
+         * The path points at build/ rather than src/ because .distignore
+         * excludes /src — webpack.mix.js copies block.json files across. Only
+         * render_callback is passed here; everything else, including the
+         * editorScript handle, comes from block.json.
+         */
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/highlights-list',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_highlights_list_block',
-            'attributes' => [
-                'listTitle' => [
-                    'type' => 'string'
-                ],
-                'listItems' => [
-                        'type' => 'string'
-                ],
-                'listClassName' => [
-                    'type' => 'string'
-                ]
-            ]
-
+            'render_callback' => 'render_callback_highlights_list_block'
         ]
     );
 
@@ -225,18 +222,19 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/intro',
+        /**
+         * Registered from block.json metadata rather than an inline array, so
+         * attributes are declared in one place instead of being duplicated here
+         * and in the JS.
+         *
+         * The path points at build/ rather than src/ because .distignore
+         * excludes /src — webpack.mix.js copies block.json files across. Only
+         * render_callback is passed here; everything else, including the
+         * editorScript handle, comes from block.json.
+         */
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/intro',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_intro_block',
-            'attributes' => [
-                'introClassName' => [
-                    'type' => 'string'
-                ],
-                'introText' => [
-                    'type' => 'string'
-                ]
-            ]
+            'render_callback' => 'render_callback_intro_block'
         ]
     );
 
@@ -278,18 +276,19 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/route-planner',
+        /**
+         * Registered from block.json metadata rather than an inline array, so
+         * attributes are declared in one place instead of being duplicated here
+         * and in the JS.
+         *
+         * The path points at build/ rather than src/ because .distignore
+         * excludes /src — webpack.mix.js copies block.json files across. Only
+         * render_callback is passed here; everything else, including the
+         * editorScript handle, comes from block.json.
+         */
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/route-planner',
         [
-        'editor_script' => 'mojblocks-editor-script',
-        'render_callback' => 'render_callback_route_planner_block',
-        'attributes' => [
-            'routeDestination' => [
-                'type' => 'string'
-            ],
-            'routeMethod' => [
-                'type' => 'string'
-            ]
-          ]
+            'render_callback' => 'render_callback_route_planner_block'
         ]
     );
 
@@ -332,67 +331,52 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/auto-item-list',
+        /**
+         * Registered from block.json metadata rather than an inline array, so
+         * attributes are declared in one place instead of being duplicated here
+         * and in the JS.
+         *
+         * The path points at build/ rather than src/ because .distignore
+         * excludes /src — webpack.mix.js copies the file across. Only
+         * render_callback is passed here; everything else, including the
+         * editorScript handle, comes from block.json.
+         */
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/auto-item-list',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_auto_item_list_block',
-            'attributes' => [
-                'listItemType' => [
-                    'type' => 'string'
-                ],
-                'listHasDate' => [
-                    'type' => 'boolean'
-                ],
-                'listEmptyText' => [
-                    'type' => 'string'
-                ],
-                'listClassName' => [
-                    'type' => 'string'
-                ]
-            ]
+            'render_callback' => 'render_callback_auto_item_list_block'
         ]
     );
     register_block_type(
-        'mojblocks/latest-news',
+        /**
+         * Registered from block.json metadata rather than an inline array, so
+         * attributes are declared in one place instead of being duplicated here
+         * and in the JS.
+         *
+         * The path points at build/ rather than src/ because .distignore
+         * excludes /src — webpack.mix.js copies block.json files across. Only
+         * render_callback is passed here; everything else, including the
+         * editorScript handle, comes from block.json.
+         */
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/latest-news',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_latest_news_block',
-            'attributes' => [
-                'latestNewsNumber' => [
-                    'type' => 'integer'
-                ],
-                'latestNewsHasDate' => [
-                    'type' => 'boolean'
-                ],
-                'latestNewsExpiry' => [
-                    'type' => 'integer'
-                ],
-                'latestNewsEmptyText' => [
-                    'type' => 'string'
-                ],
-                'latestNewsClassName' => [
-                    'type' => 'string'
-                ]
-            ]
+            'render_callback' => 'render_callback_latest_news_block'
         ]
     );
     if (post_type_exists("news")) {
         register_block_type(
-            'mojblocks/featured-news',
+            /**
+             * Registered from block.json metadata rather than an inline array,
+             * so attributes are declared in one place instead of being
+             * duplicated here and in the JS.
+             *
+             * The path points at build/ rather than src/ because .distignore
+             * excludes /src — webpack.mix.js copies block.json files across.
+             * Only render_callback is passed here; everything else, including
+             * the editorScript handle, comes from block.json.
+             */
+            plugin_dir_path(__FILE__) . 'build/custom-blocks/featured-news',
             [
-                'editor_script' => 'mojblocks-editor-script',
-                'render_callback' => 'render_callback_featured_news_block',
-                'attributes' => [
-                    'featuredNewsHasDate' => [
-                        'type' => 'boolean'
-                    ],
-                    'featuredNewsID' => [
-                        'type' => 'string'
-                    ],
-                    'featuredNewsClassName' => [
-                        'type' => 'string'
-                    ]
-                ]
+                'render_callback' => 'render_callback_featured_news_block'
             ]
         );
     }
@@ -419,21 +403,19 @@ function mojblocks_register_blocks()
 	}
 
     register_block_type(
-        'mojblocks/featured-item',
+        /**
+         * Registered from block.json metadata rather than an inline array, so
+         * attributes are declared in one place instead of being duplicated here
+         * and in the JS.
+         *
+         * The path points at build/ rather than src/ because .distignore
+         * excludes /src — webpack.mix.js copies block.json files across. Only
+         * render_callback is passed here; everything else, including the
+         * editorScript handle, comes from block.json.
+         */
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/featured-item',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_featured_item_block',
-            'attributes' => [
-                'featuredItemHasDate' => [
-                    'type' => 'boolean'
-                ],
-                'featuredItemID' => [
-                    'type' => 'string'
-                ],
-                'featuredItemClassName' => [
-                    'type' => 'string'
-                ]
-            ]
+            'render_callback' => 'render_callback_featured_item_block'
         ]
     );
 }

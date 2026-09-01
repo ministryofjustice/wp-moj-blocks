@@ -1,0 +1,45 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "mojblocks/featured-item",
+	"title": "Featured Item",
+	"description": "Display featured Item",
+	"category": "mojblocks",
+	"icon": "id-alt",
+	"textdomain": "mojblocks",
+	"keywords": ["featured item"],
+	"editorScript": "mojblocks-editor-script",
+	"attributes": {
+		"featuredItemHasDate": {
+			"type": "boolean",
+			"default": true
+		},
+		"featuredItemHasBar": {
+			"type": "boolean",
+			"default": true
+		},
+		"featuredItemID": {
+			"type": "string",
+			"default": "0"
+		},
+		"featuredItemType": {
+			"type": "string",
+			"default": ""
+		},
+		"featuredImage": {
+			"type": "boolean",
+			"default": true
+		},
+		"featuredCustomImage": {
+			"type": "string",
+			"default": ""
+		},
+		"featuredLinkText": {
+			"type": "string",
+			"default": "Read full article"
+		},
+		"className": {
+			"type": "string"
+		}
+	}
+}
