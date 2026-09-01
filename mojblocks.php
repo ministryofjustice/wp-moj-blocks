@@ -340,24 +340,19 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/auto-item-list',
+        /**
+         * Registered from block.json metadata rather than an inline array, so
+         * attributes are declared in one place instead of being duplicated here
+         * and in the JS.
+         *
+         * The path points at build/ rather than src/ because .distignore
+         * excludes /src — webpack.mix.js copies the file across. Only
+         * render_callback is passed here; everything else, including the
+         * editorScript handle, comes from block.json.
+         */
+        plugin_dir_path(__FILE__) . 'build/custom-blocks/auto-item-list',
         [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_auto_item_list_block',
-            'attributes' => [
-                'listItemType' => [
-                    'type' => 'string'
-                ],
-                'listHasDate' => [
-                    'type' => 'boolean'
-                ],
-                'listEmptyText' => [
-                    'type' => 'string'
-                ],
-                'listClassName' => [
-                    'type' => 'string'
-                ]
-            ]
+            'render_callback' => 'render_callback_auto_item_list_block'
         ]
     );
     register_block_type(
