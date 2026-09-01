@@ -82,6 +82,37 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 		}
 	);
 
+	// getEntityRecords above only fetches the 24 most-recent posts of the type.
+	// A featured item older than that window would be absent from allItems, so
+	// the block would fall back to "No item selected" even though a valid item
+	// is saved (the frontend still renders it, because index.php looks the post
+	// up directly by ID). Fetch the saved item on its own so the selection
+	// always resolves regardless of how much newer content exists.
+	const {
+		selectedItem,
+	} = useSelect(
+		( select ) => {
+			if (featuredItemType != "" && featuredItemID && featuredItemID != "0") {
+
+				const { getEntityRecord } = select(
+					coreStore
+				);
+
+				return {
+					selectedItem: getEntityRecord(
+						'postType',
+						featuredItemType,
+						featuredItemID
+					)
+				};
+			} else {
+				return {
+					selectedItem: null
+				};
+			}
+		}
+	);
+
 	let itemTypes = [{
 		label: "-",
 		value: ""
@@ -118,6 +149,20 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 			docOptions.push({label: allItems[i].title.rendered, value: allItems[i].id});
 
 		}
+	}
+
+	// Merge in the separately-fetched saved item when it falls outside the 24
+	// records loaded above, so a valid selection still previews and stays listed
+	// in the "Select item" dropdown.
+	if (selectedItem && selectedItem.id && !docList[selectedItem.id]) {
+		docList[selectedItem.id] = {
+			title: selectedItem.title.rendered,
+			summary: selectedItem.post_meta.summary,
+			date: selectedItem.date,
+			imageID: selectedItem.featured_media,
+			image: selectedItem.featured_image_url,
+		}
+		docOptions.push({label: selectedItem.title.rendered, value: selectedItem.id});
 	}
 
 	// apiVersion 3: the wrapper element must carry the props returned by
@@ -346,7 +391,7 @@ export default function featuredItemEdit({ attributes, setAttributes} ) {
 									{ itemSummary }
 								</p>
 								<p className="govuk-body-s mojblocks-featured-item__date" >
-									{ itemDate }
+									{featuredItemHasDate && itemDate}
 								</p>
 								<a href="#" className="govuk-link mojblocks-featured-item__link" >
 									{ featuredLinkText }
