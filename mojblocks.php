@@ -234,19 +234,6 @@ function mojblocks_register_blocks()
     );
 
     register_block_type(
-        'mojblocks/laa-chatbot',
-        [
-            'editor_script' => 'mojblocks-editor-script',
-            'render_callback' => 'render_callback_laa_chatbot_block',
-            'attributes' => [
-                'chatbotClassName' => [
-                    'type' => 'string'
-                ]
-            ]
-        ]
-    );
-
-    register_block_type(
         /**
          * Registered from block.json metadata rather than an inline array, so
          * attributes are declared in one place instead of being duplicated here
@@ -362,27 +349,6 @@ function mojblocks_register_blocks()
         );
     }
 
-	if (post_type_exists("document")) {
-		register_block_type(
-			'mojblocks/featured-document',
-			[
-				'editor_script' => 'mojblocks-editor-script',
-				'render_callback' => 'render_callback_featured_document_block',
-				'attributes' => [
-					'featuredDocumentHasDate' => [
-						'type' => 'boolean'
-					],
-					'featuredDocumentID' => [
-						'type' => 'string'
-					],
-					'featuredDocumentClassName' => [
-						'type' => 'string'
-					]
-				]
-			]
-		);
-	}
-
     register_block_type(
         /**
          * Registered from block.json metadata rather than an inline array, so
@@ -420,10 +386,8 @@ include plugin_dir_path(__FILE__) . 'src/custom-blocks/separator/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/staggered-box/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/latest-news/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-news/index.php';
-include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-document/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/featured-item/index.php';
 include plugin_dir_path(__FILE__) . 'src/custom-blocks/auto-item-list/index.php';
-include plugin_dir_path(__FILE__) . 'src/custom-blocks/laa-chatbot/index.php';
 
 /**
  * Load PHP extended core blocks
