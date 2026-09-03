@@ -8,7 +8,6 @@ This plugin adds the following custom blocks,
 * Banner
 * Card
 * CTA
-* Featured Document
 * Featured News
 * Hero
 * Highlights List
