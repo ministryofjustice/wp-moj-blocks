@@ -11,3 +11,22 @@
 		}
 	}
 }
+
+ol.wp-block-list[style] {
+	margin-left: var(--bullet-prefix-width);
+	li::marker {
+		content: var(--bullet-prefix) counter(list-item, decimal) ". ";
+	}
+	&[style*="lower-alpha"] li::marker {
+		content: var(--bullet-prefix) counter(list-item, lower-alpha) ". ";
+	}
+	&[style*="upper-alpha"] li::marker {
+		content: var(--bullet-prefix) counter(list-item, upper-alpha) ". ";
+	}
+	&[style*="lower-roman"] li::marker {
+		content: var(--bullet-prefix) counter(list-item, lower-roman) ". ";
+	}
+	&[style*="upper-roman"] li::marker {
+		content: var(--bullet-prefix) counter(list-item, upper-roman) ". ";
+	}
+}
