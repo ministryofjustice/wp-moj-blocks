@@ -1,3 +1,23 @@
+@mixin list-markers($type: marker) {
+	> li::#{$type} {
+		content: var(--bullet-prefix) counter(list-item, decimal) ". ";
+	}
+
+	$counters: (
+		lower-alpha: lower-alpha,
+		upper-alpha: upper-alpha,
+		lower-roman: lower-roman,
+		upper-roman: upper-roman
+	);
+
+	@each $name, $counter in $counters {
+		&[style*="list-style-type:#{$name}"] > li::#{$type},
+		&[style*="list-style-type: #{$name}"] > li::#{$type} {
+		content: var(--bullet-prefix) counter(list-item, #{$counter}) ". ";
+		}
+	}
+}
+
 @include govuk-media-query($from: "tablet", $media-type: screen) {
 	ul, ol {
 		max-width: 666px;
@@ -14,19 +34,21 @@
 
 ol.wp-block-list[style*="--bullet-prefix:"] {
 	margin-left: var(--bullet-prefix-width);
-	> li::marker {
-		content: var(--bullet-prefix) counter(list-item, decimal) ". ";
-	}
-	&[style*="list-style-type:lower-alpha"] > li::marker {
-		content: var(--bullet-prefix) counter(list-item, lower-alpha) ". ";
-	}
-	&[style*="list-style-type:upper-alpha"] > li::marker {
-		content: var(--bullet-prefix) counter(list-item, upper-alpha) ". ";
-	}
-	&[style*="list-style-type:lower-roman"] > li::marker {
-		content: var(--bullet-prefix) counter(list-item, lower-roman) ". ";
-	}
-	&[style*="list-style-type:upper-roman"] > li::marker {
-		content: var(--bullet-prefix) counter(list-item, upper-roman) ". ";
+	@include list-markers();
+
+	/******** Safari fallback ********
+	* For Safari, we hide the markers, so they are still read out by screen readers and other AT.
+	* We then run the same code as normal, but replacing "marker" with "before".
+	* That creates a visible marker of (e.g.) 1.1, whilst the actual marker is still there for accessibility
+	* Then we remove the margin and padding, so it is aligned as needed.  
+	*/
+
+	@supports (-webkit-hyphens: none) {
+		margin-left: 0;
+		padding-left: 0;
+		> li::marker {
+			color: transparent;
+		}
+		@include list-markers(before);
 	}
 }
