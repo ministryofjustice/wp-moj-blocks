@@ -12,21 +12,21 @@
 	}
 }
 
-ol.wp-block-list[style] {
+ol.wp-block-list[style*="--bullet-prefix:"] {
 	margin-left: var(--bullet-prefix-width);
-	li::marker {
+	> li::marker {
 		content: var(--bullet-prefix) counter(list-item, decimal) ". ";
 	}
-	&[style*="lower-alpha"] li::marker {
+	&[style*="list-style-type:lower-alpha"] > li::marker {
 		content: var(--bullet-prefix) counter(list-item, lower-alpha) ". ";
 	}
-	&[style*="upper-alpha"] li::marker {
+	&[style*="list-style-type:upper-alpha"] > li::marker {
 		content: var(--bullet-prefix) counter(list-item, upper-alpha) ". ";
 	}
-	&[style*="lower-roman"] li::marker {
+	&[style*="list-style-type:lower-roman"] > li::marker {
 		content: var(--bullet-prefix) counter(list-item, lower-roman) ". ";
 	}
-	&[style*="upper-roman"] li::marker {
+	&[style*="list-style-type:upper-roman"] > li::marker {
 		content: var(--bullet-prefix) counter(list-item, upper-roman) ". ";
 	}
 }
