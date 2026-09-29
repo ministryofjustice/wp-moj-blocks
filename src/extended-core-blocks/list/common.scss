@@ -33,7 +33,10 @@
 }
 
 ol.wp-block-list[style*="--bullet-prefix:"] {
-	margin-left: var(--bullet-prefix-width);
+	&:not(li>ol) {
+		// only adjust the indentation for a top-level list
+		margin-left: var(--bullet-prefix-width);
+	}
 	@include list-markers();
 
 	/******** Safari fallback ********
@@ -44,7 +47,10 @@ ol.wp-block-list[style*="--bullet-prefix:"] {
 	*/
 
 	@supports (-webkit-hyphens: none) {
-		margin-left: 0;
+		&:not(li>ol) {
+			// only remove indentation adjustment for a top-level list
+			margin-left: 0;
+		}
 		padding-left: 0;
 		> li::marker {
 			color: transparent;
