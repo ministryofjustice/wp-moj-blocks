@@ -11,9 +11,9 @@
 	);
 
 	@each $name, $counter in $counters {
-		&[style*="list-style-type:#{$name}"] > li::#{$type},
+		&[style*="list-style-type: #{$name}"] > li::#{$type},
 		&[style*="list-style-type: #{$name}"] > li::#{$type} {
-		content: var(--bullet-prefix) counter(list-item, #{$counter}) ". ";
+			content: var(--bullet-prefix) counter(list-item, #{$counter}) ". ";
 		}
 	}
 }
