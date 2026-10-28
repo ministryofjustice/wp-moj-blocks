@@ -60,3 +60,61 @@
 		margin-bottom: 5px;
 	}
 }
+
+
+@mixin add-numbering() {
+
+	/********
+		Creates the styles for all the types of numbering
+		--moj-number-prefix is the prefix string set in the backend
+		--moj-number-suffix is the suffix string set in the backend
+
+	********/
+
+	$types: (
+		decimal,
+		decimal-leading-zero,
+		lower-alpha,
+		upper-alpha,
+		lower-roman,
+		upper-roman,
+		lower-greek
+	);
+
+	.has-numbered-paragraphs {
+		counter-reset: paragraph;
+
+		// If nothing is set, we use decimal (decimal should be set as it is the default)
+		> p:before {
+			content: var(--moj-number-prefix) counter(paragraph, decimal) var(--moj-number-suffix);
+		}
+
+		@each $type in $types {
+			&[data-moj-number-style="#{$type}"] {
+
+				> p {
+					display:flex;
+					counter-increment: paragraph;
+	
+					&:before {
+						content: var(--moj-number-prefix) counter(paragraph, $type) var(--moj-number-suffix);
+						padding-right:1rem;
+						white-space:nowrap;
+					}
+				}
+				> p.moj-skip {
+					// Paragraphs marked with this class will be skipped
+					// Do not increment and hide bullet
+					// visibility: hidden preserves spacing
+					counter-increment: paragraph 0;
+					
+					&:before {
+						visibility: hidden;
+					}
+				}
+			}
+		}
+	}
+}
+
+@include add-numbering();
