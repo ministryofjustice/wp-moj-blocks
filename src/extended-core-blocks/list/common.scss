@@ -1,7 +1,13 @@
-@mixin list-markers($type: marker) {
+@mixin list-markers($type: before) {
 	> li::#{$type} {
 		content: var(--bullet-prefix) counter(list-item, decimal) ". ";
+		position: absolute;
+		left: calc(var(--bullet-prefix-width) * -1);
 	}
+
+	// Wordpress adds an inline style for non-arabic numbers & any letters
+	// e.g. list-style-type: lower-alpha
+	// So we look for that to retain the chosen style in our pseudo element
 
 	$counters: (
 		lower-alpha: lower-alpha,
@@ -37,24 +43,12 @@ ol.wp-block-list[style*="--bullet-prefix:"] {
 		// only adjust the indentation for a top-level list
 		margin-left: var(--bullet-prefix-width);
 	}
-	@include list-markers();
-
-	/******** Safari fallback ********
-	* For Safari, we hide the markers, so they are still read out by screen readers and other AT.
-	* We then run the same code as normal, but replacing "marker" with "before".
-	* That creates a visible marker of (e.g.) 1.1, whilst the actual marker is still there for accessibility
-	* Then we remove the margin and padding, so it is aligned as needed.  
-	*/
-
-	@supports (-webkit-hyphens: none) {
-		&:not(li>ol) {
-			// only remove indentation adjustment for a top-level list
-			margin-left: 0;
-		}
-		padding-left: 0;
-		> li::marker {
+	> li {
+		position: static;
+		&::marker {
 			color: transparent;
 		}
-		@include list-markers(before);
 	}
+	position: relative;
+	@include list-markers();
 }
