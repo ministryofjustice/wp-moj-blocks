@@ -306,6 +306,7 @@ function addSaveProps(
 		...(extraProps.style ?? {}),
 		'--moj-number-prefix': JSON.stringify(attributes.numberPrefix ?? ""),
 		'--moj-number-suffix': JSON.stringify(attributes.numberSuffix ?? ""),
+		// JSON stringify is used here to avoid quotation marks in the string causing issues
 	};
 
 	extraProps['data-moj-number-style'] = getValidStyle( attributes.numberStyle );
