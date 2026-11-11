@@ -22,5 +22,16 @@ Text Domain: mojblocks
 @import 'node_modules/govuk-frontend/dist/govuk/utilities/all';
 @import 'node_modules/govuk-frontend/dist/govuk/overrides/all';
 
+// GOV.UK Frontend draws the footer's Crown copyright crest from
+// /assets/images/govuk-crest.svg, a path no site serves, so every page with a
+// footer logo requests it and gets a 404. No footer is built here and the image
+// never loads, so remove its URLs. background: none also stops the mask's
+// fallback background: currentcolor from filling the space as a solid block.
+.govuk-footer__copyright-logo::before {
+    background: none;
+    -webkit-mask-image: none;
+    mask-image: none;
+}
+
 @import "assets/scss/variables.scss";
 @import 'src/**/style.scss';

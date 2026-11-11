@@ -47,6 +47,9 @@ mix_.webpackConfig({
 .sass('style-gutenburg.scss', 'style-gutenburg.css')
 .sass('assets/scss/ie.scss', 'ie.min.css');
 
+mix_.options({ terser: { extractComments: false } });
+mix_.js('src/**/mojblocks.js', 'build/mojblocks.min.js');
+
 if (mix_.inProduction()) {
     mix_.version();
 } else {
