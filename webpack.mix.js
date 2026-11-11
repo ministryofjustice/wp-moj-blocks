@@ -48,7 +48,7 @@ mix_.webpackConfig({
 .sass('assets/scss/ie.scss', 'ie.min.css');
 
 mix_.options({ terser: { extractComments: false } });
-mix_.js('src/**/mojblocks.js', 'build/mojblocks.min.js');
+mix_.js('src/mojblocks.js', 'build/mojblocks.min.js');
 
 if (mix_.inProduction()) {
     mix_.version();
