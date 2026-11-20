@@ -2,7 +2,7 @@
 Tags: gutenberg, blocks, moj
 Plugin Name:: MOJ Blocks
 Plugin URI: https://github.com/ministryofjustice/wp-moj-blocks
-Requires at least: 5.3
+Requires at least: 6.6
 Tested up to: 7.0.2
 Stable tag: 1.1.6
 Requires PHP: 5.6

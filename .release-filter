@@ -1,0 +1,15 @@
+# Files shipped in the release and preview zips.
+# rsync filter rules: checked top to bottom, first match wins.
+# "***" means the folder and everything in it; "- *" drops anything not listed.
++ /mojblocks.php
++ /composer.json
++ /README.md
++ /readme.txt
++ /LICENSE.md
++ /build/***
+# mojblocks.php includes the PHP in src/; everything else there is build input.
+# assets/ is build input too (SVG icons are bundled, Sass is compiled).
++ /src/
++ /src/**/
++ /src/**.php
+- *

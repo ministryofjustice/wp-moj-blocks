@@ -1,0 +1,20 @@
+name: Release
+
+# Releases when a merge to main bumps the Version header in mojblocks.php.
+# See https://github.com/ministryofjustice/wb-workflows for details.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+  pull-requests: read # to title the release after the merged PR
+
+jobs:
+  release:
+    # TODO: pin to a commit SHA once the shared workflow is settled.
+    uses: ministryofjustice/wb-workflows/.github/workflows/wb-package.yml@main
+    with:
+      mode: release
+      version-file: mojblocks.php
+      package-name: wp-moj-blocks

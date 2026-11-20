@@ -12,7 +12,7 @@
  * Plugin name: MoJ Blocks
  * Plugin URI:  https://github.com/ministryofjustice/wp-moj-blocks
  * Description: Introduces various functions that are commonly used across the MoJ network of sites
- * Version:     4.3.1
+ * Version:     4.4.0
  * Author:      Ministry of Justice - Adam Brown, Beverley Newing, Malcolm Butler, Damien Wilson & Robert Lowe
  * Text domain: mojblocks
  * Author URI:  https://github.com/ministryofjustice
@@ -426,7 +426,12 @@ add_action('enqueue_block_assets', 'mojblocks_gutenberg_editor_styles');
 function mojblocks_register_style()
 {
     if (!is_admin()) {
-        wp_register_style('mojblocks', plugins_url('build/style.min.css', __FILE__));
+        wp_register_style(
+            'mojblocks',
+            plugins_url('build/style.min.css', __FILE__),
+            [],
+            filemtime(plugin_dir_path(__FILE__) . 'build/style.min.css')
+        );
     }
 }
 
@@ -444,9 +449,9 @@ function mojblocks_enqueue_style()
     wp_enqueue_script(
         'mojblocks-govuk-js',
         plugins_url('build/mojblocks.min.js', __FILE__),
-        false,
-        '1.0',
-        'all'
+        [],
+        filemtime(plugin_dir_path(__FILE__) . 'build/mojblocks.min.js'),
+        true
     );
 }
 
